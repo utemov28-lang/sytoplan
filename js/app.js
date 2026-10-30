@@ -33,9 +33,9 @@ const SALAD_RE=/^(тёплый )?салат|винегрет|оливье|под
 function rcat(r){ if(r._cat) return r._cat; let c;
   if(SOUP_RE.test(r.t)) c='soup'; else if(SALAD_RE.test(r.t)) c='salad'; else if(r.m[0]==='b') c='breakfast'; else if(r.m[0]==='s') c='snack'; else c='hot';
   return r._cat=c; }
-const CATS=[['all','Все'],['breakfast','Завтраки'],['soup','Супы'],['hot','Горячее'],['salad','Салаты'],['snack','Перекусы'],['kids','Детям'],['lean','Постное'],['veg','Вегетарианское'],['hp','Белковое']];
+const CATS=[['all','Все'],['ff','Фастфуд'],['breakfast','Завтраки'],['soup','Супы'],['hot','Горячее'],['salad','Салаты'],['snack','Перекусы'],['kids','Детям'],['lean','Постное'],['veg','Вегетарианское'],['hp','Белковое']];
 const CATNAME=Object.fromEntries(CATS);
-function inCat(r,c){ if(c==='all') return true; if(['kids','lean','veg','hp'].includes(c)) return DIETCHK[c](r); return rcat(r)===c; }
+function inCat(r,c){ if(c==='all') return true; if(c==='ff') return isFF(r); if(['kids','lean','veg','hp'].includes(c)) return DIETCHK[c](r); return rcat(r)===c; }
 /* ====== ИЗОБРАЖЕНИЯ ====== */
 const HAS_R=new Set(typeof IMG_R!=='undefined'?IMG_R:[]), HAS_I=new Set(typeof IMG_I!=='undefined'?IMG_I:[]);
 function ilu(n){ return HAS_I.has(n)?'img/i/'+n+'.webp':null; }
@@ -116,7 +116,7 @@ const CK = '<span class="ck">'+ICON.check+'</span>';
 /* ====== СОСТОЯНИЕ ====== */
 function fresh(){ return {screen:'intro', city:'Москва',
   A:{store:null, adults:2, kids:0, meals:['b','l','d'], days:[0,1,2,3,4,5,6], equip:['stove','oven','micro'],
-     diets:['none'], cuisines:[], styles:[], allergies:['none'], dislikes:[], pantry:[], budget:null, budgetManual:false, people:null},
+     diets:['none'], cuisines:[], styles:[], ff:'some', allergies:['none'], dislikes:[], pantry:[], budget:null, budgetManual:false, people:null},
   plan:null, ticks:{}, favs:[], extras:[], tab:'week', recipe:null, rtab:'ing', serv:2, rfilter:'fit', ptab:'all'}; }
 function load(){ try{ const s=JSON.parse(localStorage.getItem(LS_KEY)); if(s&&s.A){ const f=fresh(); const o=Object.assign(f,s); o.A=Object.assign(fresh().A,s.A); if(STORE_ALIAS[o.A.store]) o.A.store=STORE_ALIAS[o.A.store]; if(o.A.store&&!STORES.some(x=>x.id===o.A.store)) o.A.store='p5'; return o; } }catch(e){} return null; }
 let S = load() || fresh();
@@ -248,7 +248,14 @@ function mealOk(r,m){ if(!m||r.m.includes(m)) return true;
   if(m==='d') return r.m.includes('l') && (r.kind==='main'||r.kind==='salad');
   return false; }
 function fits(r,m){ return mealOk(r,m) && !whyNot(r); }
-function candidates(m){ applySides(); return RECIPES.filter(r=>fits(r,m)); }
+/* Домашний фастфуд: не больше ffCap() блюд с тегом fastfood в неделю (по умолчанию «иногда» = 2); соусы в план не ставим */
+const FF_CAP={none:0,some:2,often:4};
+const FF_OPTS=[['none','Не нужен'],['some','Иногда (до 2)'],['often','Часто (до 4)']];
+function ffCap(){ const v=FF_CAP[S.A.ff||'some']; return v==null?2:v; }
+function isFF(r){ return !!r && r.tags.includes('fastfood'); }
+function ffCount(skip){ return S.plan?S.plan.slots.filter((s,j)=>j!==skip&&s.r&&!s.hidden&&isFF(RMAP[s.r])).length:0; }
+function ffOk(r,skip){ return !isFF(r)||ffCount(skip)<ffCap(); }
+function candidates(m){ applySides(); return RECIPES.filter(r=>fits(r,m)&&!r.tags.includes('sauce')&&(ffCap()>0||!isFF(r))); }
 function priceOf(g,st){ st=st||store(); return g.sp&&g.sp[st.id]!=null ? g.sp[st.id] : g.price*st.mult; }
 function portionCost(r){ const st=store(); return recipeIngs(r).reduce((s,i)=>{const g=ING[i.k]; return s+i.q/r.sv/g.pack*priceOf(g,st);},0); }
 function totalTime(r){ return r.prep+r.cook; }
@@ -263,6 +270,7 @@ function recipeScore(r,ctx,slotKey){
   const a=S.A; let s=hash((S.plan&&S.plan.seed||'x')+r.id+slotKey)*2.2;
   a.styles.forEach(st=>{ if(styleMatch(r,st)) s+=2.5; });
   if(a.cuisines.includes(r.c)) s+=1.6;
+  if(isFF(r) && a.ff==='often') s+=1.5;
   if(a.kids>0 && r.tags.includes('kids')) s+=0.8;
   const batchSt=a.styles.includes('batch');
   const u=(ctx.uses[r.id]||0); s-= u*(batchSt?1.5:4); if(u>=(batchSt?3:2)) s-=12;
@@ -325,7 +333,7 @@ function generatePlan(seed,trial){ applySides();
         if(r && r.tags.includes('batch') && mealOk(r,'l') && !slots.some(x=>x.src===prevDinner)){ take(r,{src:prevDinner,left:true}); return; } }
       const list=cands[m]; if(!list.length){ slots.push({d,m,r:null}); return; }
       ctx.m=m; let best=null,bs=-1e9;
-      list.forEach(r=>{ const sc=recipeScore(r,ctx,d+m); if(sc>bs){bs=sc;best=r;} });
+      list.forEach(r=>{ if(!ffOk(r)) return; const sc=recipeScore(r,ctx,d+m); if(sc>bs){bs=sc;best=r;} });
       take(best); ctx.uses[best.id]=(ctx.uses[best.id]||0)+1;
       recipeIngs(best).forEach(i=>ctx.ings.add(i.k));
       if(m==='d') prevDinner=slots.length-1;
@@ -351,7 +359,7 @@ function balanceDays(cands){
     for(let g=0; g<4 && dayP(d)<T.pmin; g++){
       const t=dayTotals(d); let best=null;
       slots.forEach((s,i)=>{ if(s.d!==d||!s.r||s.left||s.auto||slots.some(x=>x.src===i)) return; const cur=RMAP[s.r]; const ids=inDay();
-        (cands[s.m]||candidates(s.m)).forEach(r=>{ if(ids.has(r.id)||(used[r.id]||0)>=maxUse) return; const dp=r.p-cur.p; if(dp<5) return;
+        (cands[s.m]||candidates(s.m)).forEach(r=>{ if(ids.has(r.id)||(used[r.id]||0)>=maxUse||!ffOk(r,i)) return; const dp=r.p-cur.p; if(dp<5) return;
           const nk=t.k-cur.k+r.k; if(full && nk>T.k*1.1) return;
           const sc=dp - Math.max(0,portionCost(r)-portionCost(cur))*0.15 - Math.abs(nk-T.k)/80;
           if(!best||sc>best.sc) best={i,r,sc,cur}; }); });
@@ -360,13 +368,13 @@ function balanceDays(cands){
     if(!full) return;
     // 2) белковый перекус, если белка всё ещё мало
     for(let n=0;n<2 && dayP(d)<T.pmin;n++){ const ids=inDay();
-      const pick=psn.filter(r=>!ids.has(r.id)&&(used[r.id]||0)<maxUse).map(r=>({r,sc:Math.min(r.p,T.pmin-dayP(d)+5)/Math.max(10,portionCost(r))-Math.max(0,dayTotals(d).k+r.k-T.k*1.1)/50}))
+      const pick=psn.filter(r=>!ids.has(r.id)&&(used[r.id]||0)<maxUse&&ffOk(r)).map(r=>({r,sc:Math.min(r.p,T.pmin-dayP(d)+5)/Math.max(10,portionCost(r))-Math.max(0,dayTotals(d).k+r.k-T.k*1.1)/50}))
         .sort((a,b)=>b.sc-a.sc)[0];
       if(!pick) break; slots.push({d,m:'s',r:pick.r.id,auto:true,prot:true}); used[pick.r.id]=(used[pick.r.id]||0)+1; }
     // 3) калории: добираем до −10 % перекусами (не больше 2 авто-перекусов в день)
     for(let n=0;n<2;n++){ const k=dayTotals(d).k; if(k>=T.k*0.9) break; if(slots.filter(x=>x.d===d&&x.auto).length>=2) break;
       const need=T.k-k, ids=inDay();
-      const pick=snacks.filter(r=>!ids.has(r.id)&&(used[r.id]||0)<2)
+      const pick=snacks.filter(r=>!ids.has(r.id)&&(used[r.id]||0)<2&&ffOk(r))
         .map(r=>({r,sc:Math.min(r.k,need+100)/Math.max(15,portionCost(r))-Math.max(0,r.k-need-150)/40+hash(S.plan.seed+r.id+d)*0.5}))
         .sort((a,b)=>b.sc-a.sc)[0];
       if(!pick) break; slots.push({d,m:'s',r:pick.r.id,auto:true}); used[pick.r.id]=(used[pick.r.id]||0)+1; }
@@ -375,7 +383,7 @@ function balanceDays(cands){
       const t=dayTotals(d); let best=null; const ids=inDay();
       const au=slots.findIndex(x=>x.d===d&&x.auto&&!x.prot&&x.r); if(au>=0){ const r=RMAP[slots[au].r]; if(t.k-r.k>=T.k*0.9){ slots[au].r=null; slots[au].hidden=true; continue; } }
       slots.forEach((s,i)=>{ if(s.d!==d||!s.r||s.left||s.auto||slots.some(x=>x.src===i)) return; const cur=RMAP[s.r];
-        (cands[s.m]||candidates(s.m)).forEach(r=>{ if(ids.has(r.id)||(used[r.id]||0)>=maxUse) return; const nk=t.k-cur.k+r.k, np=t.p-cur.p+r.p;
+        (cands[s.m]||candidates(s.m)).forEach(r=>{ if(ids.has(r.id)||(used[r.id]||0)>=maxUse||!ffOk(r,i)) return; const nk=t.k-cur.k+r.k, np=t.p-cur.p+r.p;
           if(nk>=t.k-40||np<Math.min(T.pmin,t.p)) return; const sc=-Math.abs(nk-T.k)-Math.max(0,portionCost(r)-portionCost(cur))*2; if(!best||sc>best.sc) best={i,r,sc,cur}; }); });
       if(!best) break; used[best.cur.id]--; used[best.r.id]=(used[best.r.id]||0)+1; replaceSlot(best.i,best.r.id);
     }
@@ -391,7 +399,7 @@ function fitBudget(cands){
       const curC=portionCost(cur); if(dt[s.d]==null) dt[s.d]=dayTotals(s.d);
       const t=dt[s.d], same=new Set(slots.filter(x=>x.d===s.d).map(x=>x.r));
       const pool=s.auto?candidates('s'):(cands[s.m]||candidates(s.m));
-      const alts=pool.filter(r=>r.id!==s.r && !same.has(r.id) && (u[r.id]||0)<maxUse && portionCost(r)<curC*0.9)
+      const alts=pool.filter(r=>r.id!==s.r && !same.has(r.id) && (u[r.id]||0)<maxUse && ffOk(r,i) && portionCost(r)<curC*0.9)
         .filter(r=>{ const np=t.p-cur.p+r.p; const ok=np>=Math.min(T.pmin,t.p)||np>=T.pmin; if(!ok) S.plan.pBlocked++; return ok; })
         .sort((x,y)=>portionCost(x)-portionCost(y)).slice(0,3).sort((x,y)=>(u[x.id]||0)-(u[y.id]||0));
       if(!alts.length) return; const sav=curC-portionCost(alts[0]);
@@ -528,10 +536,12 @@ function renderStep(sc){
     `<button class="btn" data-act="next" ${a.equip.length?'':'disabled'}>Далее</button>`);
   case 'q6': return stepShell(sc,'Как питаетесь?','Выберите тип питания и любимые кухни.',
     `<div class="grid2">${DIETS.map(d=>optCard('diet',d.id,a.diets.includes(d.id),`${ill('diet_'+d.id,'<div class="em">'+d.e+'</div>')}<div class="t">${d.name}</div><div class="s">${d.sub}</div>`,'diet')).join('')}</div>
-    <h2>Любимые кухни</h2><div class="chips">${CUISINES.map(c=>`<button class="chip ${a.cuisines.includes(c.id)?'sel':''}" data-act="cuis" data-id="${c.id}">${c.e} ${c.name}</button>`).join('')}</div>`,
+    <h2>Любимые кухни</h2><div class="chips">${CUISINES.filter(c=>!c.hidden).map(c=>`<button class="chip ${a.cuisines.includes(c.id)?'sel':''}" data-act="cuis" data-id="${c.id}">${c.e} ${c.name}</button>`).join('')}</div>`,
     `<button class="btn" data-act="next">Далее</button>`);
   case 'q7': return stepShell(sc,'Сколько времени на готовку?','Выберите удобный формат — можно несколько.',
-    `<div class="list">${STYLES.map(s=>optCard('style',s.id,a.styles.includes(s.id),`<span class="em">${ill('st_'+s.id,s.e,'')}</span><div><div class="t">${s.name}</div><div class="s">${s.sub}</div></div>`,'row')).join('')}</div>`,
+    `<div class="list">${STYLES.map(s=>optCard('style',s.id,a.styles.includes(s.id),`<span class="em">${ill('st_'+s.id,s.e,'')}</span><div><div class="t">${s.name}</div><div class="s">${s.sub}</div></div>`,'row')).join('')}</div>
+    <h2>🍔 Домашний фастфуд</h2><p class="sub" style="margin-top:-4px">Бургеры, шаурма, пицца, наггетсы — приготовленные дома. Сколько раз в неделю ставить в план?</p>
+    <div class="chips">${FF_OPTS.map(o=>`<button class="chip ${(a.ff||'some')===o[0]?'sel':''}" data-act="ffm" data-id="${o[0]}">${o[1]}</button>`).join('')}</div>`,
     `<button class="btn" data-act="next">Далее</button>`);
   case 'q8': return stepShell(sc,'Есть аллергии?','Блюда с этими продуктами исключим полностью.',
     `<div class="chips">${ALLERGENS.map(x=>`<button class="chip ${a.allergies.includes(x.id)?'sel':''}" data-act="allergy" data-id="${x.id}">${x.e} ${x.name}</button>`).join('')}</div>`,
@@ -702,7 +712,7 @@ function renderProfile(){
   const rows=[['Магазин',store().name,'q1'],['Город',S.city,'city'],['Едоки',`${a.adults} взр. · ${a.kids} дет. · ${dec(portions())} порц./приём`,'q2'],
    ['Нормы КБЖУ',T.set?T.ad.map(t=>fmt(t.k)+' ккал / Б '+t.pmin+' г').join('; '):'по среднему взрослому','q2b'],
    ['Приёмы пищи',listNames(a.meals,MEALS),'q3'],['Дни',dayOrder().map(d=>DAYS[d]).join(', '),'q4'],['Техника',listNames(a.equip,EQUIP),'q5'],
-   ['Питание',a.diets.includes('none')?'Без ограничений':listNames(a.diets,DIETS),'q6'],['Любимые кухни',listNames(a.cuisines,CUISINES),'q6'],['Формат',listNames(a.styles,STYLES),'q7'],
+   ['Питание',a.diets.includes('none')?'Без ограничений':listNames(a.diets,DIETS),'q6'],['Любимые кухни',listNames(a.cuisines,CUISINES),'q6'],['Формат',listNames(a.styles,STYLES),'q7'],['Домашний фастфуд',(FF_OPTS.find(o=>o[0]===(a.ff||'some'))||FF_OPTS[1])[1],'q7'],
    ['Аллергии',a.allergies.includes('none')?'Нет':listNames(a.allergies,ALLERGENS),'q8'],['Не любите',a.dislikes.map(id=>DISLIKES.find(d=>d[0]===id)[1]).join(', ')||'—','q9'],
    ['Есть дома',a.pantry.length?a.pantry.map(k=>shortName(ING[k].name).toLowerCase()).join(', '):'—','q10'],['Бюджет',rub(a.budget)+' / неделя','q11']];
   return `<h1>Профиль</h1><p class="sub">Ваши ответы. Нажмите на строку, измените и нажмите «Сохранить» — план пересоберётся.</p>
@@ -803,6 +813,7 @@ document.addEventListener('click',e=>{
   case 'diet': if(id==='none') a.diets=['none']; else { a.diets=a.diets.filter(x=>x!=='none'); toggle(a.diets,id); if(!a.diets.length) a.diets=['none']; } save(); render(); break;
   case 'cuis': toggle(a.cuisines,id); save(); render(); break;
   case 'style': toggle(a.styles,id); save(); render(); break;
+  case 'ffm': a.ff=id; save(); render(); break;
   case 'allergy': if(id==='none') a.allergies=['none']; else { a.allergies=a.allergies.filter(x=>x!=='none'); toggle(a.allergies,id); if(!a.allergies.length) a.allergies=['none']; } save(); render(); break;
   case 'dislike': toggle(a.dislikes,id); save(); render(); reapplySearch(); break;
   case 'pantry': toggle(a.pantry,id); save(); render(); reapplySearch(); break;

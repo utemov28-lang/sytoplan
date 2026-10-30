@@ -33,7 +33,7 @@ const DAYS = ['Пн','Вт','Ср','Чт','Пт','Сб','Вс'];
 const DAYS_FULL = ['Понедельник','Вторник','Среда','Четверг','Пятница','Суббота','Воскресенье'];
 const EQUIP = [
   {id:'stove',name:'Плита',e:'🔥'},{id:'oven',name:'Духовка',e:'♨️'},{id:'micro',name:'Микроволновка',e:'⏲️'},
-  {id:'multi',name:'Мультиварка',e:'🍲'},{id:'air',name:'Аэрогриль',e:'🌪️'},{id:'blender',name:'Блендер',e:'🥤'},{id:'toaster',name:'Тостер',e:'🍞'}
+  {id:'multi',name:'Мультиварка',e:'🍲'},{id:'air',name:'Аэрогриль',e:'🌪️'},{id:'blender',name:'Блендер',e:'🥤'},{id:'toaster',name:'Тостер',e:'🍞'},{id:'fryer',name:'Фритюрница',e:'🍟'}
 ];
 const DIETS = [
   {id:'none',name:'Без ограничений',sub:'едим всё',e:'🍽️'},
@@ -48,7 +48,8 @@ const CUISINES = [
   {id:'cau',name:'Кавказская',e:'🍢',g:['#FFE4E6','#FECDD3']},
   {id:'asia',name:'Азиатская',e:'🍜',g:['#FFEDD5','#FED7AA']},
   {id:'it',name:'Итальянская',e:'🍝',g:['#FEE2E2','#FECACA']},
-  {id:'med',name:'Средиземноморская',e:'🫒',g:['#DCFCE7','#BBF7D0']}
+  {id:'med',name:'Средиземноморская',e:'🫒',g:['#DCFCE7','#BBF7D0']},
+  {id:'ff',name:'Фастфуд',e:'🍔',g:['#FEF9C3','#FDE68A'],hidden:true} /* домашний фастфуд: в анкете отдельный переключатель, не «любимая кухня» */
 ];
 const STYLES = [
   {id:'fast',name:'Быстро',sub:'около 20 минут',e:'⚡'},
@@ -172,10 +173,14 @@ const ING_RAW = {
   pasta:['Макароны (рожки)','groc',450,'г',80,'🍝','gluten',[337,10.4,1.1,69.7]],
   spaghetti:['Спагетти','groc',450,'г',100,'🍝','gluten',[337,10.4,1.1,69.7]],
   noodles:['Лапша пшеничная яичная','groc',300,'г',110,'🍜','gluten,eggs',[340,11,1.2,70]],
+  yeast:['Дрожжи сухие быстродействующие','groc',11,'г',25,'🧫','',[325,40,7.6,41]],
   flour:['Мука пшеничная','groc',1000,'г',70,'🌾','gluten',[334,10.3,1.1,68.9]],
   starch:['Крахмал картофельный','groc',200,'г',55,'🌾','',[313,0.1,0,78.2]],
   baking_powder:['Разрыхлитель теста','groc',10,'г',15,'🧁','',[0,0,0,0]],
   rice_cakes:['Хлебцы рисовые (без глютена)','bread',100,'г',95,'🍘','',[380,8,3,80]],
+  burger_bun:['Булочки для бургеров с кунжутом','bread',4,'шт',110,'🍔','gluten,sesame',[275,9,5,48],75],
+  hotdog_bun:['Булочки для хот-догов','bread',4,'шт',85,'🌭','gluten',[265,8.5,4,48],55],
+  baguette:['Багет','bread',1,'шт',65,'🥖','gluten',[262,8,2.5,52],250],
   breadcrumbs:['Сухари панировочные','groc',200,'г',50,'🍞','gluten',[347,9.7,1.9,77.6]],
   sugar:['Сахар','groc',1000,'г',85,'🍬','',[398,0,0,99.7]],
   salt:['Соль','groc',1000,'г',25,'🧂','opt',[0,0,0,0]],
@@ -270,7 +275,7 @@ function calcNutrition(r){let k=0,p=0,f=0,c=0,fi=0,su=0;
 const FIBER = {potato:2.2,onion:1.7,carrot:2.8,garlic:2.1,cabbage:2.5,beet:2.8,tomato:1.2,cucumber:0.7,pepper:1.9,zucchini:1,eggplant:3,
   pumpkin:2,radish:1.6,lettuce:1.2,ginger:2,greens:3,cilantro:2.8,green_onion:2.6,mushrooms:1,celery:1.6,apple:2.4,banana:2.6,pear:3.1,
   orange:2.4,lemon:2.8,avocado:6.7,pelmeni:1,vareniki:1.5,puff_pastry:1,frozen_veg:3,broccoli:2.6,cauliflower:2,green_beans:2.7,peas:5,
-  berries:3.5,bread:2.5,bread_whole:6.5,lavash:2,tortilla:3,buckwheat:10,rice:1.3,millet:3.5,semolina:3.6,barley:15,bulgur:12,oats:10,
+  berries:3.5,bread:2.5,burger_bun:2.3,hotdog_bun:2.2,baguette:2.4,bread_whole:6.5,lavash:2,tortilla:3,buckwheat:10,rice:1.3,millet:3.5,semolina:3.6,barley:15,bulgur:12,oats:10,
   pasta:3,spaghetti:3,noodles:3,flour:3,breadcrumbs:4,tomato_paste:4,canned_tomatoes:1.5,ketchup:0.5,mustard:4,soy_sauce:0.8,jam:1,
   nuts:6.7,peanut_butter:6,sesame:12,raisins:3.7,prunes:7,dried_apricots:7.3,lentils:11,split_peas:15,chickpeas:12,canned_beans:6,
   corn:2.4,green_peas:4.5,pickles:1,sauerkraut:2.9,olives:3.3,lasagna:3,black_pepper:25,bay_leaf:26,cinnamon:53,khmeli:20,coriander:42,
@@ -296,7 +301,9 @@ const REST = {hummus_veg:[720,'замачивания нута'],chickpea_curry:
   gazpacho:[30,'охлаждения'],honey_wings:[20,'маринования'],chicken_skewers:[30,'маринования'],shuba:[120,'настаивания'],crab_salad:[15,'охлаждения'],
   mimosa:[60,'пропитки'],korean_carrot:[180,'настаивания'],lean_overnight_oats:[480,'настаивания'],pork_shashlik_oven:[60,'маринования'],
   chicken_thighs_soy:[30,'маринования'],air_pork_neck_veg:[30,'маринования'],lavash_roll:[20,'охлаждения'],
-  chickpea_potato_stew:[720,'замачивания нута'],chickpea_pilaf_lean:[720,'замачивания нута'],buckwheat_kefir:[480,'настаивания']};
+  chickpea_potato_stew:[720,'замачивания нута'],
+  ff_pizza_margherita:[60,'подъёма теста'],ff_pizza_ham_mushroom:[60,'подъёма теста'],ff_pizza_chicken:[60,'подъёма теста'],ff_pizza_kids:[60,'подъёма теста'],
+  ff_belyashi:[60,'подъёма теста'],ff_sausage_rolls:[75,'подъёма теста'],ff_chebureki:[30,'отдыха теста'],chickpea_pilaf_lean:[720,'замачивания нута'],buckwheat_kefir:[480,'настаивания']};
 function restText(r){ if(!r.rest) return ''; const m=r.rest[0]; return '+'+(m>=480?'ночь':m>=60?(Math.round(m/60))+'\u00A0ч':m+'\u00A0мин')+' '+r.rest[1]; }
 
 /* ====== НОРМЫ ПОРЦИЙ ======
@@ -305,7 +312,7 @@ function restText(r){ if(!r.rest) return ''; const m=r.rest[0]; return '+'+(m>=4
    2) Затем масштабируем остальное не больше чем ×1,3 (гарнир не масштабируется) — реалистичные порции.
    3) Числа с единицами в тексте шагов пересчитываются тем же множителем, чтобы совпадать со списком. */
 const STARCH = new Set(['potato','rice','buckwheat','pasta','spaghetti','noodles','bulgur','millet','barley','semolina','oats','flour',
-  'bread','bread_whole','lavash','tortilla','pelmeni','vareniki','puff_pastry','lentils','chickpeas','split_peas','canned_beans','lasagna']);
+  'bread','bread_whole','lavash','tortilla','burger_bun','hotdog_bun','baguette','pelmeni','vareniki','puff_pastry','lentils','chickpeas','split_peas','canned_beans','lasagna']);
 const KCAL_MIN = {b:420, main:560, soup:350, salad:330, s:150};
 const KCAL_TGT = {b:450, main:600, soup:380, salad:360, s:180};
 const SCALE_MAX = 1.3;
@@ -327,7 +334,7 @@ function scaleStepText(t,f){
 function normalizePortion(r){
   enrichIngredients(r);
   if(REST[r.id]) r.rest=REST[r.id];
-  const kind=mealKind(r); r.kind=kind; let k=kcalOf(r); if(k>=KCAL_MIN[kind]) return;
+  const kind=mealKind(r); r.kind=kind; if(r.tags.includes('sauce')) return; let k=kcalOf(r); if(k>=KCAL_MIN[kind]) return;
   const has=k2=>r.ing.some(i=>i.k===k2), starch=r.ing.some(i=>STARCH.has(i.k));
   const stove=r.eq.includes('stove')||r.eq.includes('multi');
   let side=null;
