@@ -813,8 +813,8 @@ function renderWeek(){
   if(T.cov<1) html+=`<div class="note">ℹ️ В плане только ${S.A.meals.map(m=>MEALMAP[m].name.toLowerCase()).join(' и ')} — это часть дневного рациона (~${Math.round(T.cov*100)} %). Калории и белок сравниваем с этой долей нормы, перекусы до полной нормы не добавляем.</div>`;
   const autoN=plan.slots.filter(s=>s.auto&&s.r).length;
   if(autoN) html+=`<div class="note">🍎 Добавили ${autoN} ${plural(autoN,'перекус','перекуса','перекусов')}, чтобы дотянуть дни до нормы калорий и белка. Каждый можно заменить или убрать кнопкой «Убрать» — тогда день будет менее сытным.</div>`;
-  const eMin=sh.total>S.A.budget?estimate().min:0;
-  if(sh.total>S.A.budget && eMin>S.A.budget*1.02) html+=`<div class="warn">⚖️ Даже самый экономный план с вашими ответами ≈ ${rub(Math.round(eMin/100)*100)} (бюджет ${rub(S.A.budget)}). Сейчас корзина ~${rub(sh.total)}: ${plan.tradeoff?'оставили блюда, чтобы закрыть норму белка. ':''}Увеличьте бюджет, уберите перекусы/дни или отметьте продукты, которые есть дома.</div>`;
+  const eMin=sh.total>S.A.budget?Math.min(estimate().min,sh.total):0;
+  if(sh.total>S.A.budget && eMin>S.A.budget*1.02) html+=`<div class="warn">⚖️ Даже самый экономный план с вашими ответами ≈ ${rub(Math.round(eMin/100)*100)} (бюджет ${rub(S.A.budget)}). ${Math.abs(sh.total-eMin)>=100?`Сейчас корзина ~${rub(sh.total)}: `:''}${plan.tradeoff?'оставили блюда, чтобы закрыть норму белка. ':''}Увеличьте бюджет, уберите перекусы/дни или отметьте продукты, которые есть дома.</div>`;
   else if(plan.tradeoff) html+=`<div class="warn">⚖️ Бюджета не хватает, чтобы закрыть норму белка: оставили белковые блюда, поэтому корзина дороже бюджета на ~${rub(Math.max(0,sh.total-S.A.budget))}. Увеличьте бюджет или отметьте продукты, которые есть дома.</div>`;
   else if(sh.total>S.A.budget) html+=`<div class="warn">Подходящие блюда дороже бюджета на ~${rub(sh.total-S.A.budget)}. Попробуйте увеличить бюджет или отметить продукты, которые есть дома.</div>`;
   if(S.A.styles.includes('fast')){ const slow=plan.slots.filter(s=>s.r&&!s.hidden&&!s.left&&!quickOk(RMAP[s.r])).length;
@@ -994,7 +994,7 @@ document.addEventListener('click',e=>{
   case 'lazy': lazyDay(+id); break;
   case 'lazyundo': { const t=document.querySelector('.toast'); if(t) t.remove(); lazyUndo(); break; }
   case 'compare': compareModal(); break;
-  case 'setstore': { a.store=id; closeModal(); save(); render(); toast('Цены пересчитаны: '+store().loc); break; }
+  case 'setstore': { a.store=id; closeModal(); save(); render(); toast('Цены пересчитаны: '+store().name); break; }
   case 'tglist': shareTG(listText()); break;
   case 'rmode': searchQ=''; set({rmode:id}); break;
   case 'fridge': toggle(S.fridge,id); save(); render(); reapplySearch(); break;
