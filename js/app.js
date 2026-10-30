@@ -6,6 +6,7 @@ const LACT_OK=new Set(['cheese','butter','feta','cheese_sticks']), LACT_SUB=new 
 Object.keys(ING).forEach(k=>{ const g=ING[k]; if(g.flags.includes('dairy')&&!LACT_OK.has(k)&&!LACT_SUB.has(k)&&!g.flags.includes('lactose')) g.flags.push('lactose'); });
 RECIPES.forEach(r=>{
   if(r.ing.every(i=>ING[i.k])) normalizePortion(r);
+  if(typeof STEPS_DETAIL!=='undefined'&&STEPS_DETAIL[r.id]){ const sd=r.steps.filter(t=>SIDE_STEP_SET.has(t)); r.steps=STEPS_DETAIL[r.id].map(t=>r.scaled?scaleStepText(t,r.scaled):t).concat(sd); r.det=1; }
   const fl = new Set(); r.ing.forEach(i=>{ if(!ING[i.k]) console.error('Нет ингредиента', i.k, r.id); else ING[i.k].flags.forEach(f=>fl.add(f)); });
   r.meat = fl.has('meat'); r.fish = fl.has('fish')||fl.has('seafood');
   r.al = ['nuts','peanut','dairy','lactose','eggs','gluten','fish','seafood','soy','sesame','honey','mustard'].filter(a=>fl.has(a));
@@ -54,6 +55,23 @@ function photo(r,cls,big,extra){ const c=CUISMAP[r.c]; let inner; const ri=typeo
   else { const u=ilu(fbName(r)); inner=u?`<img class="fb" src="${u}" alt="" loading="lazy" decoding="async">`:`<span>${r.e}</span>`; }
   return `<div class="ph ${cls}" style="background:linear-gradient(135deg,${c.g[0]},${c.g[1]})">${inner}${extra||''}</div>`; }
 const READY_BADGE='<span class="rdyb">🛒 готовое</span>';
+/* Шаги: количества пересчитываются на выбранные порции; ингредиенты шага — чипами; ⏱ таймер; «Совет:» — отдельной плашкой */
+function stemRx(nm){ let w=nm.toLowerCase().replace(/ё/g,'е').split(/[\s(,«]/)[0]; const st=w.length>5?w.slice(0,-2):(w.length>3?w.slice(0,-1):w); return new RegExp('(^|[^а-я])'+st,'i'); }
+function stepsHTML(r,n){ const f=n/r.sv, used=new Set(), ii=recipeIngs(r); let tip='';
+  const li=r.steps.filter(s=>{ if(/^Совет:/.test(s)){ tip=s.slice(6).trim(); return false; } return true; }).map((s,j)=>{
+    const side=SIDE_STEP_SET.has(s), t=side?s:scaleStepText(s,f), low=s.toLowerCase().replace(/ё/g,'е');
+    const hasQ=/\d\s*(кг|г|мл|л|шт)(?![а-яё])/i.test(s);
+    const ch=side||hasQ||r.det?[]:ii.filter(i=>!used.has(i.k)&&ING[i.k].n.k>0&&stemRx(ING[i.k].name).test(low)).map(i=>{ used.add(i.k); const g=ING[i.k]; return `<span>${g.e} ${esc(g.name)} · ${fmtIngQty(i.k,i.q*f,g.unit)}</span>`; });
+    const m=s.match(/(\d+)(?:[–-](\d+))?\s*мин/); const mn=m?+(m[2]||m[1]):0;
+    return `<li><div><span>${esc(t)}</span>${ch.length?`<div class="sting">${ch.join('')}</div>`:''}${mn>=1&&mn<=180?`<button class="tmr" data-act="tmr" data-id="${mn*60}" data-l="Шаг ${j+1}">⏱ ${mn} мин</button>`:''}</div></li>`; }).join('');
+  return `${f!==1?`<p class="mut small">Количества в шагах пересчитаны на ${dec(n)} ${plural(Math.ceil(n),'порцию','порции','порций')}.</p>`:''}<ol class="steps">${li}</ol>${tip?`<div class="tip">💡 <b>Совет:</b> ${esc(tip)}</div>`:''}`; }
+let TMR=null;
+function startTimer(sec,label){ if(TMR) clearInterval(TMR); const end=Date.now()+sec*1000; let el=document.getElementById('tmrbar');
+  if(!el){ el=document.createElement('div'); el.id='tmrbar'; document.body.appendChild(el); }
+  const tick=()=>{ const l=Math.max(0,Math.round((end-Date.now())/1000));
+    el.innerHTML=l>0?`⏱ ${esc(label)} · ${Math.floor(l/60)}:${String(l%60).padStart(2,'0')} <button data-act="tmrx" aria-label="Остановить">✕</button>`:`⏰ ${esc(label)}: время вышло! <button data-act="tmrx" aria-label="Закрыть">✕</button>`;
+    if(l<=0){ clearInterval(TMR); TMR=null; try{ navigator.vibrate&&navigator.vibrate([300,150,300]); }catch(e){} try{ const a=new (window.AudioContext||window.webkitAudioContext)(), o=a.createOscillator(); o.connect(a.destination); o.frequency.value=880; o.start(); o.stop(a.currentTime+0.7); }catch(e){} } };
+  TMR=setInterval(tick,1000); tick(); }
 /* Запасная иллюстрация — нейтральная по категории, чтобы не показывать мясо на овощном блюде */
 function fbName(r){ const c=rcat(r);
   if(c==='hot') return r.meat?'cat_hot':(r.fish?'empty':'diet_veg');
@@ -927,11 +945,11 @@ function renderRecipe(){
   <div class="times"><div><b>${r.prep} мин</b>подготовка</div><div><b>${r.cook} мин</b>готовка${r.side&&r.side!=='хлеб'?' с гарниром':''}</div><div><b>~${fmt(portionCost(r))} ₽</b>за порцию${(()=>{const ii=recipeIngs(r), n=ii.filter(i=>realOf(ING[i.k])).length; return n?` · <span class="ptag real">цена магазина</span> ${n}/${ii.length}`:` · <span class="ptag est">оценка</span>`;})()}</div></div>
   ${r.rest?`<div class="note" style="margin-top:8px">⏳ Плюс ${r.rest[0]>=480?'ночь':(r.rest[0]>=60?Math.round(r.rest[0]/60)+' ч':r.rest[0]+' мин')} ${r.rest[1]} — заложите время заранее.</div>`:''}
   <h2>Нужна техника</h2><div class="chips">${r.eq.length?r.eq.map(e=>{const q=EQUIP.find(x=>x.id===e); return `<span class="chip ${S.A.equip.includes(e)?'sel':''}">${q.e} ${q.name}</span>`;}).join(''):'<span class="chip">🙌 Без техники</span>'}</div>
-  <div class="seg"><button class="${S.rtab==='ing'?'on':''}" data-act="rtab" data-id="ing">Ингредиенты</button><button class="${S.rtab==='steps'?'on':''}" data-act="rtab" data-id="steps">Приготовление · ${r.steps.length} ${plural(r.steps.length,'шаг','шага','шагов')}</button></div>
+  <div class="seg"><button class="${S.rtab==='ing'?'on':''}" data-act="rtab" data-id="ing">Ингредиенты</button><button class="${S.rtab==='steps'?'on':''}" data-act="rtab" data-id="steps">Приготовление · ${(()=>{const c=r.steps.filter(x=>!/^Совет:/.test(x)).length; return c+' '+plural(c,'шаг','шага','шагов');})()}</button></div>
   ${S.rtab==='ing'?`<div class="stepper-card" style="margin-bottom:8px"><div><div class="t">Порции</div><div class="s">${n===portions()?'на вашу семью, как в плане':'количества пересчитаются'}</div></div><div class="stepper"><button data-act="serv" data-d="-0.5" ${n<=0.5?'disabled':''}>−</button><span class="v">${dec(n)}</span><button data-act="serv" data-d="0.5" ${n>=12?'disabled':''}>+</button></div></div>${r.side||r.scaled?`<p class="mut small" style="margin:0 0 8px">🍽 Порция рассчитана на сытного взрослого (~${fmt(Math.round(r.k/10)*10)}${NB}ккал)${r.side?`, с гарниром: ${r.side}`:''}.</p>`:''}
    ${recipeIngs(r).map(i=>{const g=ING[i.k]; const home=S.A.pantry.includes(i.k); return `<div class="ing"><span class="e">${g.e}</span><span class="n">${esc(g.name)}${lactSub(i.k)?' <small class="mut">безлактозное</small>':''} ${home?'<span class="homepill">есть дома</span>':''}</span><span class="q">${fmtIngQty(i.k,i.q*n/r.sv,g.unit)}</span></div>`;}).join('')}
    ${rem.length?`<p class="mut small" style="margin-top:10px">Убрали, т.к. вы не любите: ${rem.map(i=>ING[i.k].name.toLowerCase()).join(', ')}</p>`:''}`
-  :`<ol class="steps">${r.steps.map(s=>`<li><span>${esc(s)}</span></li>`).join('')}</ol>`}
+  :stepsHTML(r,n)}
   <p class="foot">Стоимость порции для ${store().name}. ${priceNote()}</p></div>`;
 }
 /* --- модалки и тосты --- */
@@ -1000,6 +1018,8 @@ document.addEventListener('click',e=>{
   case 'style': toggle(a.styles,id); save(); render(); break;
   case 'ffm': a.ff=id; save(); render(); break;
   case 'c2m': a.cook2=id==='1'; save(); render(); break;
+  case 'tmr': startTimer(+id,el.dataset.l||'Таймер'); break;
+  case 'tmrx': { if(TMR) clearInterval(TMR); TMR=null; const b=document.getElementById('tmrbar'); if(b) b.remove(); break; }
   case 'rdym': a.ready=id==='1'; save(); render(); break;
   case 'lazy': lazyDay(+id); break;
   case 'lazyundo': { const t=document.querySelector('.toast'); if(t) t.remove(); lazyUndo(); break; }
