@@ -345,3 +345,10 @@ html.dark .pm.g{background:#12301F;color:#4ADE80}html.dark .pm.y{background:#2E2
 .cmplogo{flex:0 0 auto;display:flex;align-items:center;margin-right:8px}
 .cmplogo .badge{width:30px;height:30px;font-size:11px;border-radius:8px;min-width:0}
 .cmplogo img{width:30px;height:30px}
+.rdyb{position:absolute;left:6px;bottom:6px;background:rgba(255,255,255,.92);color:#1f2937;font-size:11px;font-weight:700;padding:2px 7px;border-radius:999px;line-height:1.4}
+.steps li>div{flex:1;min-width:0}
+.sting{display:flex;flex-wrap:wrap;gap:4px;margin-top:6px}.sting span{font-size:12.5px;background:#F3F4F6;border-radius:8px;padding:2px 7px;color:#374151}
+.tmr{margin-top:6px;border:1px solid var(--g);background:#fff;color:var(--g);border-radius:999px;padding:3px 10px;font-size:13px;font-weight:700}
+.tip{background:#FEF9C3;border-radius:12px;padding:10px 12px;font-size:14.5px;margin:8px 0}
+#tmrbar{position:fixed;left:50%;transform:translateX(-50%);bottom:84px;z-index:60;background:#111827;color:#fff;border-radius:999px;padding:8px 14px;font-weight:700;display:flex;gap:10px;align-items:center}
+#tmrbar button{background:none;border:0;color:#9CA3AF;font-size:15px}

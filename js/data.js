@@ -332,6 +332,7 @@ function scaleStepText(t,f){
       const fmtN=v=>String(v).replace('.',','); return fmtN(A)+(B!=null?d+fmtN(B):'')+sp+u; });
 }
 function normalizePortion(r){
+  if(r.tags.includes('ready')){ r.kind=mealKind(r); return; }
   enrichIngredients(r);
   if(REST[r.id]) r.rest=REST[r.id];
   const kind=mealKind(r); r.kind=kind; if(r.tags.includes('sauce')) return; let k=kcalOf(r); if(k>=KCAL_MIN[kind]) return;
