@@ -2,3 +2,5 @@ tools/node_modules
 node_modules
 __pycache__/
 tools/_probe*.mjs
+tools/_dump.mjs
+tools/_chk.mjs
