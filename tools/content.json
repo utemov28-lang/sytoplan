@@ -1,0 +1,2146 @@
+[
+ {
+  "id": "syrniki",
+  "t": "Сырники со сметаной",
+  "miss": [],
+  "stepMin": 4,
+  "cook": 25,
+  "ch": 0
+ },
+ {
+  "id": "oatmeal_apple",
+  "t": "Овсянка с яблоком и корицей",
+  "miss": [],
+  "stepMin": 7,
+  "cook": 15,
+  "ch": 0
+ },
+ {
+  "id": "omelet_tomato",
+  "t": "Омлет с помидорами и зеленью",
+  "miss": [],
+  "stepMin": 7,
+  "cook": 15,
+  "ch": 0
+ },
+ {
+  "id": "bliny",
+  "t": "Блины на молоке со сметаной",
+  "miss": [],
+  "stepMin": 11,
+  "cook": 40,
+  "ch": 0
+ },
+ {
+  "id": "buckwheat_milk",
+  "t": "Гречка с молоком",
+  "miss": [],
+  "stepMin": 15,
+  "cook": 23,
+  "ch": 0
+ },
+ {
+  "id": "sandwich_cheese",
+  "t": "Бутерброды с сыром и огурцом",
+  "miss": [],
+  "stepMin": 0,
+  "cook": 5,
+  "ch": 0
+ },
+ {
+  "id": "egg_toast",
+  "t": "Тосты с яйцом и зеленью",
+  "miss": [],
+  "stepMin": 0,
+  "cook": 13,
+  "ch": 0
+ },
+ {
+  "id": "rice_porridge",
+  "t": "Рисовая каша на молоке",
+  "miss": [],
+  "stepMin": 27,
+  "cook": 30,
+  "ch": 0
+ },
+ {
+  "id": "tvorog_banana",
+  "t": "Творог с бананом и мёдом",
+  "miss": [],
+  "stepMin": 0,
+  "cook": 5,
+  "ch": 0
+ },
+ {
+  "id": "eggs_sausages",
+  "t": "Яичница с сосисками",
+  "miss": [],
+  "stepMin": 8,
+  "cook": 13,
+  "ch": 0
+ },
+ {
+  "id": "smoothie_bowl",
+  "t": "Ягодный смузи-боул",
+  "miss": [],
+  "stepMin": 0,
+  "cook": 5,
+  "ch": 0
+ },
+ {
+  "id": "shakshuka",
+  "t": "Шакшука",
+  "miss": [],
+  "stepMin": 19,
+  "cook": 30,
+  "ch": 0
+ },
+ {
+  "id": "oat_pancake",
+  "t": "Овсяноблин с сыром",
+  "miss": [],
+  "stepMin": 8,
+  "cook": 15,
+  "ch": 0
+ },
+ {
+  "id": "lean_oatmeal",
+  "t": "Постная овсянка с бананом и изюмом",
+  "miss": [],
+  "stepMin": 7,
+  "cook": 13,
+  "ch": 0
+ },
+ {
+  "id": "zapekanka",
+  "t": "Творожная запеканка",
+  "miss": [],
+  "stepMin": 50,
+  "cook": 50,
+  "ch": 0
+ },
+ {
+  "id": "hot_sandwich",
+  "t": "Горячие бутерброды с ветчиной",
+  "miss": [],
+  "stepMin": 2,
+  "cook": 7,
+  "ch": 0
+ },
+ {
+  "id": "draniki",
+  "t": "Драники со сметаной",
+  "miss": [],
+  "stepMin": 4,
+  "cook": 35,
+  "ch": 0
+ },
+ {
+  "id": "pb_toast",
+  "t": "Тост с арахисовой пастой и бананом",
+  "miss": [],
+  "stepMin": 0,
+  "cook": 3,
+  "ch": 0
+ },
+ {
+  "id": "borsch",
+  "t": "Борщ со сметаной",
+  "miss": [
+   "бульон"
+  ],
+  "stepMin": 20,
+  "cook": 110,
+  "ch": 1
+ },
+ {
+  "id": "schi",
+  "t": "Щи из свежей капусты",
+  "miss": [
+   "бульон"
+  ],
+  "stepMin": 40,
+  "cook": 60,
+  "ch": 0
+ },
+ {
+  "id": "meatball_soup",
+  "t": "Суп с фрикадельками",
+  "miss": [],
+  "stepMin": 15,
+  "cook": 50,
+  "ch": 0
+ },
+ {
+  "id": "chicken_noodle",
+  "t": "Куриный суп с вермишелью",
+  "miss": [
+   "бульон"
+  ],
+  "stepMin": 45,
+  "cook": 50,
+  "ch": 0
+ },
+ {
+  "id": "lentil_soup",
+  "t": "Чечевичный суп",
+  "miss": [],
+  "stepMin": 25,
+  "cook": 45,
+  "ch": 0
+ },
+ {
+  "id": "bean_soup",
+  "t": "Овощной суп с фасолью",
+  "miss": [],
+  "stepMin": 25,
+  "cook": 40,
+  "ch": 0
+ },
+ {
+  "id": "okroshka",
+  "t": "Окрошка на кефире",
+  "miss": [],
+  "stepMin": 0,
+  "cook": 40,
+  "ch": 0
+ },
+ {
+  "id": "greek_salad",
+  "t": "Греческий салат с брынзой",
+  "miss": [],
+  "stepMin": 0,
+  "cook": 10,
+  "ch": 0
+ },
+ {
+  "id": "tuna_salad",
+  "t": "Салат с тунцом и яйцом",
+  "miss": [],
+  "stepMin": 10,
+  "cook": 20,
+  "ch": 0
+ },
+ {
+  "id": "hummus_veg",
+  "t": "Домашний хумус с овощными палочками",
+  "miss": [],
+  "stepMin": 60,
+  "cook": 70,
+  "ch": 0
+ },
+ {
+  "id": "buckwheat_chicken",
+  "t": "Гречка по-купечески с курицей",
+  "miss": [],
+  "stepMin": 30,
+  "cook": 45,
+  "ch": 0
+ },
+ {
+  "id": "plov",
+  "t": "Плов с курицей",
+  "miss": [],
+  "stepMin": 50,
+  "cook": 75,
+  "ch": 0
+ },
+ {
+  "id": "navy_pasta",
+  "t": "Макароны по-флотски",
+  "miss": [],
+  "stepMin": 15,
+  "cook": 30,
+  "ch": 0
+ },
+ {
+  "id": "cutlets_mash",
+  "t": "Котлеты с картофельным пюре",
+  "miss": [],
+  "stepMin": 15,
+  "cook": 60,
+  "ch": 0
+ },
+ {
+  "id": "chicken_oven",
+  "t": "Курица в духовке с картофелем",
+  "miss": [],
+  "stepMin": 50,
+  "cook": 65,
+  "ch": 0
+ },
+ {
+  "id": "pollock_veg",
+  "t": "Минтай с овощами в духовке",
+  "miss": [],
+  "stepMin": 30,
+  "cook": 40,
+  "ch": 0
+ },
+ {
+  "id": "lazy_golubtsy",
+  "t": "Ленивые голубцы",
+  "miss": [],
+  "stepMin": 30,
+  "cook": 60,
+  "ch": 0
+ },
+ {
+  "id": "veg_stew",
+  "t": "Овощное рагу с кабачками",
+  "miss": [],
+  "stepMin": 30,
+  "cook": 55,
+  "ch": 0
+ },
+ {
+  "id": "creamy_pasta",
+  "t": "Паста с курицей в сливочном соусе",
+  "miss": [],
+  "stepMin": 10,
+  "cook": 30,
+  "ch": 0
+ },
+ {
+  "id": "fried_rice",
+  "t": "Жареный рис с овощами и яйцом",
+  "miss": [],
+  "stepMin": 8,
+  "cook": 30,
+  "ch": 0
+ },
+ {
+  "id": "lagman",
+  "t": "Лагман",
+  "miss": [],
+  "stepMin": 30,
+  "cook": 70,
+  "ch": 0
+ },
+ {
+  "id": "lazy_khinkali",
+  "t": "Ленивые хинкали",
+  "miss": [],
+  "stepMin": 25,
+  "cook": 55,
+  "ch": 0
+ },
+ {
+  "id": "lentil_buckwheat_mush",
+  "t": "Гречка с грибами и луком",
+  "miss": [],
+  "stepMin": 10,
+  "cook": 35,
+  "ch": 0
+ },
+ {
+  "id": "air_nuggets",
+  "t": "Куриные наггетсы в аэрогриле",
+  "miss": [],
+  "stepMin": 15,
+  "cook": 25,
+  "ch": 0
+ },
+ {
+  "id": "stewed_cabbage",
+  "t": "Тушёная капуста с курицей",
+  "miss": [],
+  "stepMin": 65,
+  "cook": 65,
+  "ch": 0
+ },
+ {
+  "id": "stuffed_peppers",
+  "t": "Фаршированные перцы",
+  "miss": [],
+  "stepMin": 45,
+  "cook": 75,
+  "ch": 0
+ },
+ {
+  "id": "liver_stroganoff",
+  "t": "Печень по-строгановски с гречкой",
+  "miss": [],
+  "stepMin": 10,
+  "cook": 35,
+  "ch": 0
+ },
+ {
+  "id": "pelmeni",
+  "t": "Пельмени со сметаной",
+  "miss": [],
+  "stepMin": 8,
+  "cook": 12,
+  "ch": 0
+ },
+ {
+  "id": "chakhokhbili",
+  "t": "Чахохбили из курицы",
+  "miss": [],
+  "stepMin": 55,
+  "cook": 60,
+  "ch": 2
+ },
+ {
+  "id": "ajapsandali",
+  "t": "Аджапсандали",
+  "miss": [],
+  "stepMin": 60,
+  "cook": 60,
+  "ch": 2
+ },
+ {
+  "id": "teriyaki",
+  "t": "Курица терияки с рисом",
+  "miss": [],
+  "stepMin": 10,
+  "cook": 30,
+  "ch": 0
+ },
+ {
+  "id": "wok_shrimp",
+  "t": "Лапша с креветками и овощами",
+  "miss": [],
+  "stepMin": 7,
+  "cook": 25,
+  "ch": 0
+ },
+ {
+  "id": "lavash_lasagna",
+  "t": "Лазанья из лаваша",
+  "miss": [],
+  "stepMin": 30,
+  "cook": 60,
+  "ch": 0
+ },
+ {
+  "id": "tomato_spaghetti",
+  "t": "Спагетти с томатным соусом",
+  "miss": [
+   "Томат"
+  ],
+  "stepMin": 10,
+  "cook": 25,
+  "ch": 0
+ },
+ {
+  "id": "baked_salmon",
+  "t": "Горбуша запечённая с рисом",
+  "miss": [
+   "рыб"
+  ],
+  "stepMin": 25,
+  "cook": 40,
+  "ch": 0
+ },
+ {
+  "id": "chickpea_curry",
+  "t": "Карри из нута с рисом",
+  "miss": [],
+  "stepMin": 65,
+  "cook": 50,
+  "ch": 0
+ },
+ {
+  "id": "meatballs_multi",
+  "t": "Тефтели в томатном соусе",
+  "miss": [],
+  "stepMin": 45,
+  "cook": 55,
+  "ch": 0
+ },
+ {
+  "id": "shawarma",
+  "t": "Домашняя шаурма в лаваше",
+  "miss": [],
+  "stepMin": 1,
+  "cook": 25,
+  "ch": 0
+ },
+ {
+  "id": "yogurt_fruit",
+  "t": "Йогурт с фруктами и мёдом",
+  "miss": [],
+  "stepMin": 0,
+  "cook": 5,
+  "ch": 0
+ },
+ {
+  "id": "tvorog_berries",
+  "t": "Творог с ягодами",
+  "miss": [],
+  "stepMin": 1,
+  "cook": 5,
+  "ch": 0
+ },
+ {
+  "id": "fruit_plate",
+  "t": "Фрукты нарезкой: яблоко, апельсин, банан",
+  "miss": [
+   "Лук"
+  ],
+  "stepMin": 0,
+  "cook": 5,
+  "ch": 0
+ },
+ {
+  "id": "kefir_smoothie",
+  "t": "Смузи из кефира с бананом",
+  "miss": [],
+  "stepMin": 0,
+  "cook": 3,
+  "ch": 0
+ },
+ {
+  "id": "nuts_raisins",
+  "t": "Орехи с изюмом",
+  "miss": [],
+  "stepMin": 4,
+  "cook": 1,
+  "ch": 0
+ },
+ {
+  "id": "baked_apples",
+  "t": "Печёные яблоки с творогом",
+  "miss": [],
+  "stepMin": 6,
+  "cook": 11,
+  "ch": 0
+ },
+ {
+  "id": "cucumber_sandwich_lean",
+  "t": "Хлеб с овощами и зеленью",
+  "miss": [],
+  "stepMin": 0,
+  "cook": 5,
+  "ch": 0
+ },
+ {
+  "id": "rice_apple_lean",
+  "t": "Рисовая каша с яблоком на воде",
+  "miss": [],
+  "stepMin": 22,
+  "cook": 30,
+  "ch": 0
+ },
+ {
+  "id": "micro_oatmeal",
+  "t": "Овсянка в микроволновке с ягодами",
+  "miss": [],
+  "stepMin": 5,
+  "cook": 6,
+  "ch": 0
+ },
+ {
+  "id": "cabbage_salad",
+  "t": "Салат из капусты с морковью",
+  "miss": [],
+  "stepMin": 10,
+  "cook": 10,
+  "ch": 0
+ },
+ {
+  "id": "micro_potato",
+  "t": "Картофель в микроволновке с зеленью",
+  "miss": [],
+  "stepMin": 12,
+  "cook": 17,
+  "ch": 0
+ },
+ {
+  "id": "semolina",
+  "t": "Манная каша с вареньем",
+  "miss": [],
+  "stepMin": 6,
+  "cook": 12,
+  "ch": 0
+ },
+ {
+  "id": "millet_pumpkin",
+  "t": "Пшённая каша с тыквой",
+  "miss": [],
+  "stepMin": 40,
+  "cook": 45,
+  "ch": 0
+ },
+ {
+  "id": "oladyi",
+  "t": "Оладьи на кефире",
+  "miss": [],
+  "stepMin": 12,
+  "cook": 30,
+  "ch": 0
+ },
+ {
+  "id": "omelet_oven",
+  "t": "Пышный омлет в духовке",
+  "miss": [],
+  "stepMin": 43,
+  "cook": 30,
+  "ch": 0
+ },
+ {
+  "id": "scramble_toast",
+  "t": "Скрэмбл с сыром на тосте",
+  "miss": [],
+  "stepMin": 3,
+  "cook": 12,
+  "ch": 0
+ },
+ {
+  "id": "overnight_oats",
+  "t": "Ленивая овсянка в банке",
+  "miss": [],
+  "stepMin": 0,
+  "cook": 5,
+  "ch": 0
+ },
+ {
+  "id": "buckwheat_egg",
+  "t": "Гречка с яйцом и зелёным луком",
+  "miss": [],
+  "stepMin": 27,
+  "cook": 23,
+  "ch": 0
+ },
+ {
+  "id": "frittata",
+  "t": "Фриттата с кабачком и перцем",
+  "miss": [],
+  "stepMin": 16,
+  "cook": 25,
+  "ch": 0
+ },
+ {
+  "id": "avocado_toast",
+  "t": "Тост с авокадо и яйцом",
+  "miss": [],
+  "stepMin": 4,
+  "cook": 13,
+  "ch": 0
+ },
+ {
+  "id": "lazy_khachapuri",
+  "t": "Ленивые хачапури на сковороде",
+  "miss": [],
+  "stepMin": 12,
+  "cook": 25,
+  "ch": 0
+ },
+ {
+  "id": "banana_pancakes",
+  "t": "Банановые панкейки",
+  "miss": [],
+  "stepMin": 5,
+  "cook": 20,
+  "ch": 0
+ },
+ {
+  "id": "lean_millet",
+  "t": "Пшённая каша с изюмом на воде",
+  "miss": [],
+  "stepMin": 20,
+  "cook": 30,
+  "ch": 0
+ },
+ {
+  "id": "french_toast",
+  "t": "Сладкие гренки на молоке",
+  "miss": [],
+  "stepMin": 2,
+  "cook": 15,
+  "ch": 0
+ },
+ {
+  "id": "tvorog_greens",
+  "t": "Творог со сметаной, огурцом и зеленью",
+  "miss": [
+   "Хлеб"
+  ],
+  "stepMin": 0,
+  "cook": 7,
+  "ch": 0
+ },
+ {
+  "id": "omelet_ham",
+  "t": "Омлет с ветчиной и сыром",
+  "miss": [],
+  "stepMin": 6,
+  "cook": 13,
+  "ch": 0
+ },
+ {
+  "id": "druzhba",
+  "t": "Каша «Дружба» в мультиварке",
+  "miss": [],
+  "stepMin": 50,
+  "cook": 45,
+  "ch": 0
+ },
+ {
+  "id": "pb_oatmeal",
+  "t": "Овсянка с арахисовой пастой и бананом",
+  "miss": [],
+  "stepMin": 5,
+  "cook": 11,
+  "ch": 0
+ },
+ {
+  "id": "egg_muffins",
+  "t": "Яичные маффины с овощами",
+  "miss": [],
+  "stepMin": 20,
+  "cook": 30,
+  "ch": 0
+ },
+ {
+  "id": "chicken_sandwich",
+  "t": "Сэндвич с курицей и овощами",
+  "miss": [],
+  "stepMin": 15,
+  "cook": 25,
+  "ch": 0
+ },
+ {
+  "id": "pumpkin_rice_multi",
+  "t": "Рисовая каша с тыквой в мультиварке",
+  "miss": [],
+  "stepMin": 40,
+  "cook": 50,
+  "ch": 0
+ },
+ {
+  "id": "mug_omelet",
+  "t": "Омлет в кружке за 3 минуты",
+  "miss": [],
+  "stepMin": 1,
+  "cook": 5,
+  "ch": 0
+ },
+ {
+  "id": "micro_zapekanka",
+  "t": "Творожная запеканка в микроволновке",
+  "miss": [],
+  "stepMin": 14,
+  "cook": 11,
+  "ch": 0
+ },
+ {
+  "id": "lazy_vareniki",
+  "t": "Ленивые вареники",
+  "miss": [],
+  "stepMin": 3,
+  "cook": 25,
+  "ch": 0
+ },
+ {
+  "id": "lapshevnik",
+  "t": "Лапшевник с творогом",
+  "miss": [],
+  "stepMin": 30,
+  "cook": 45,
+  "ch": 0
+ },
+ {
+  "id": "solyanka",
+  "t": "Солянка сборная",
+  "miss": [],
+  "stepMin": 25,
+  "cook": 55,
+  "ch": 0
+ },
+ {
+  "id": "rassolnik",
+  "t": "Рассольник с перловкой",
+  "miss": [],
+  "stepMin": 60,
+  "cook": 75,
+  "ch": 1
+ },
+ {
+  "id": "ukha",
+  "t": "Уха из горбуши",
+  "miss": [
+   "Перец"
+  ],
+  "stepMin": 30,
+  "cook": 40,
+  "ch": 0
+ },
+ {
+  "id": "pea_soup",
+  "t": "Гороховый суп со свининой",
+  "miss": [],
+  "stepMin": 85,
+  "cook": 100,
+  "ch": 1
+ },
+ {
+  "id": "mushroom_soup",
+  "t": "Грибной суп с картофелем",
+  "miss": [],
+  "stepMin": 27,
+  "cook": 40,
+  "ch": 0
+ },
+ {
+  "id": "pumpkin_cream",
+  "t": "Тыквенный крем-суп",
+  "miss": [],
+  "stepMin": 23,
+  "cook": 40,
+  "ch": 0
+ },
+ {
+  "id": "broccoli_cream",
+  "t": "Крем-суп из брокколи с сыром",
+  "miss": [],
+  "stepMin": 18,
+  "cook": 30,
+  "ch": 0
+ },
+ {
+  "id": "cheese_soup",
+  "t": "Сырный суп с курицей",
+  "miss": [
+   "бульон"
+  ],
+  "stepMin": 20,
+  "cook": 40,
+  "ch": 0
+ },
+ {
+  "id": "kharcho",
+  "t": "Суп харчо",
+  "miss": [
+   "бульон"
+  ],
+  "stepMin": 15,
+  "cook": 95,
+  "ch": 1
+ },
+ {
+  "id": "sour_schi",
+  "t": "Щи из квашеной капусты",
+  "miss": [
+   "бульон"
+  ],
+  "stepMin": 70,
+  "cook": 85,
+  "ch": 0
+ },
+ {
+  "id": "svekolnik",
+  "t": "Холодный свекольник на кефире",
+  "miss": [],
+  "stepMin": 70,
+  "cook": 60,
+  "ch": 0
+ },
+ {
+  "id": "dumpling_soup",
+  "t": "Суп с клёцками",
+  "miss": [
+   "бульон"
+  ],
+  "stepMin": 35,
+  "cook": 60,
+  "ch": 0
+ },
+ {
+  "id": "minestrone",
+  "t": "Минестроне с фасолью",
+  "miss": [],
+  "stepMin": 28,
+  "cook": 45,
+  "ch": 0
+ },
+ {
+  "id": "shurpa",
+  "t": "Шурпа с говядиной",
+  "miss": [
+   "бульон"
+  ],
+  "stepMin": 25,
+  "cook": 110,
+  "ch": 1
+ },
+ {
+  "id": "lean_borsch",
+  "t": "Постный борщ с фасолью",
+  "miss": [],
+  "stepMin": 35,
+  "cook": 60,
+  "ch": 0
+ },
+ {
+  "id": "egg_broth",
+  "t": "Куриный бульон с яйцом и гренками",
+  "miss": [
+   "бульон"
+  ],
+  "stepMin": 40,
+  "cook": 55,
+  "ch": 0
+ },
+ {
+  "id": "gazpacho",
+  "t": "Гаспачо",
+  "miss": [],
+  "stepMin": 30,
+  "cook": 15,
+  "ch": 0
+ },
+ {
+  "id": "zharkoe",
+  "t": "Жаркое по-домашнему",
+  "miss": [],
+  "stepMin": 55,
+  "cook": 75,
+  "ch": 0
+ },
+ {
+  "id": "goulash",
+  "t": "Гуляш из говядины с гречкой",
+  "miss": [],
+  "stepMin": 75,
+  "cook": 95,
+  "ch": 0
+ },
+ {
+  "id": "stroganoff",
+  "t": "Бефстроганов с пюре",
+  "miss": [],
+  "stepMin": 20,
+  "cook": 60,
+  "ch": 0
+ },
+ {
+  "id": "pork_chops",
+  "t": "Отбивные из свинины с овощами",
+  "miss": [],
+  "stepMin": 5,
+  "cook": 30,
+  "ch": 0
+ },
+ {
+  "id": "chicken_chops",
+  "t": "Куриные отбивные в кляре",
+  "miss": [],
+  "stepMin": 4,
+  "cook": 30,
+  "ch": 0
+ },
+ {
+  "id": "fish_cutlets",
+  "t": "Рыбные котлеты с пюре",
+  "miss": [
+   "рыб"
+  ],
+  "stepMin": 4,
+  "cook": 55,
+  "ch": 0
+ },
+ {
+  "id": "hake_tomato",
+  "t": "Хек в томатном соусе с рисом",
+  "miss": [
+   "рыб"
+  ],
+  "stepMin": 20,
+  "cook": 40,
+  "ch": 0
+ },
+ {
+  "id": "mackerel_oven",
+  "t": "Скумбрия, запечённая с картофелем",
+  "miss": [
+   "рыб"
+  ],
+  "stepMin": 40,
+  "cook": 55,
+  "ch": 0
+ },
+ {
+  "id": "squid_smetana",
+  "t": "Кальмары в сметане с рисом",
+  "miss": [],
+  "stepMin": 4,
+  "cook": 35,
+  "ch": 0
+ },
+ {
+  "id": "turkey_steam",
+  "t": "Паровые котлеты из индейки с гречкой",
+  "miss": [],
+  "stepMin": 30,
+  "cook": 45,
+  "ch": 0
+ },
+ {
+  "id": "turkey_broccoli",
+  "t": "Индейка с брокколи в сливочном соусе",
+  "miss": [],
+  "stepMin": 15,
+  "cook": 30,
+  "ch": 0
+ },
+ {
+  "id": "honey_wings",
+  "t": "Крылышки в медово-соевом соусе с рисом",
+  "miss": [],
+  "stepMin": 60,
+  "cook": 50,
+  "ch": 0
+ },
+ {
+  "id": "drumsticks_veg",
+  "t": "Голени с овощами в духовке",
+  "miss": [],
+  "stepMin": 50,
+  "cook": 65,
+  "ch": 0
+ },
+ {
+  "id": "chicken_curry",
+  "t": "Курица карри с рисом",
+  "miss": [],
+  "stepMin": 20,
+  "cook": 45,
+  "ch": 0
+ },
+ {
+  "id": "julienne",
+  "t": "Жюльен с курицей и грибами",
+  "miss": [],
+  "stepMin": 40,
+  "cook": 45,
+  "ch": 0
+ },
+ {
+  "id": "carbonara",
+  "t": "Паста карбонара с ветчиной",
+  "miss": [],
+  "stepMin": 3,
+  "cook": 25,
+  "ch": 0
+ },
+ {
+  "id": "bolognese",
+  "t": "Спагетти болоньезе",
+  "miss": [],
+  "stepMin": 35,
+  "cook": 50,
+  "ch": 0
+ },
+ {
+  "id": "tuna_pasta",
+  "t": "Паста с тунцом и томатами",
+  "miss": [],
+  "stepMin": 10,
+  "cook": 20,
+  "ch": 0
+ },
+ {
+  "id": "lavash_pizza",
+  "t": "Пицца на лаваше",
+  "miss": [],
+  "stepMin": 10,
+  "cook": 20,
+  "ch": 0
+ },
+ {
+  "id": "risotto",
+  "t": "Ризотто с грибами",
+  "miss": [],
+  "stepMin": 31,
+  "cook": 40,
+  "ch": 0
+ },
+ {
+  "id": "pasta_broccoli",
+  "t": "Паста с курицей и брокколи",
+  "miss": [],
+  "stepMin": 10,
+  "cook": 30,
+  "ch": 0
+ },
+ {
+  "id": "beef_plov",
+  "t": "Плов с говядиной",
+  "miss": [],
+  "stepMin": 62,
+  "cook": 100,
+  "ch": 0
+ },
+ {
+  "id": "lean_plov",
+  "t": "Постный плов с грибами",
+  "miss": [],
+  "stepMin": 37,
+  "cook": 55,
+  "ch": 0
+ },
+ {
+  "id": "chicken_skewers",
+  "t": "Куриные шашлычки в духовке",
+  "miss": [],
+  "stepMin": 55,
+  "cook": 45,
+  "ch": 0
+ },
+ {
+  "id": "lobio",
+  "t": "Лобио из красной фасоли",
+  "miss": [],
+  "stepMin": 10,
+  "cook": 30,
+  "ch": 0
+ },
+ {
+  "id": "chkmeruli",
+  "t": "Чкмерули — курица в сливочно-чесночном соусе",
+  "miss": [],
+  "stepMin": 45,
+  "cook": 55,
+  "ch": 0
+ },
+ {
+  "id": "zrazy",
+  "t": "Картофельные зразы с грибами",
+  "miss": [],
+  "stepMin": 14,
+  "cook": 55,
+  "ch": 0
+ },
+ {
+  "id": "golubtsy",
+  "t": "Голубцы классические",
+  "miss": [],
+  "stepMin": 50,
+  "cook": 80,
+  "ch": 0
+ },
+ {
+  "id": "chicken_potato_stew",
+  "t": "Тушёная картошка с курицей",
+  "miss": [],
+  "stepMin": 42,
+  "cook": 60,
+  "ch": 0
+ },
+ {
+  "id": "potato_casserole",
+  "t": "Картофельная запеканка с фаршем",
+  "miss": [],
+  "stepMin": 35,
+  "cook": 60,
+  "ch": 0
+ },
+ {
+  "id": "mac_cheese",
+  "t": "Запечённые макароны с сыром",
+  "miss": [],
+  "stepMin": 15,
+  "cook": 40,
+  "ch": 0
+ },
+ {
+  "id": "multi_chicken_rice",
+  "t": "Курица с рисом в мультиварке",
+  "miss": [],
+  "stepMin": 45,
+  "cook": 55,
+  "ch": 0
+ },
+ {
+  "id": "chicken_cutlets_pasta",
+  "t": "Куриные котлеты с макаронами",
+  "miss": [],
+  "stepMin": 12,
+  "cook": 45,
+  "ch": 0
+ },
+ {
+  "id": "pork_potato_oven",
+  "t": "Свинина с картофелем в духовке",
+  "miss": [],
+  "stepMin": 50,
+  "cook": 65,
+  "ch": 0
+ },
+ {
+  "id": "udon_chicken",
+  "t": "Удон с курицей и овощами",
+  "miss": [],
+  "stepMin": 11,
+  "cook": 25,
+  "ch": 0
+ },
+ {
+  "id": "sweet_sour_pork",
+  "t": "Свинина в кисло-сладком соусе",
+  "miss": [],
+  "stepMin": 12,
+  "cook": 40,
+  "ch": 0
+ },
+ {
+  "id": "paella",
+  "t": "Паэлья с курицей и креветками",
+  "miss": [],
+  "stepMin": 34,
+  "cook": 55,
+  "ch": 0
+ },
+ {
+  "id": "hake_med",
+  "t": "Хек по-средиземноморски",
+  "miss": [
+   "рыб"
+  ],
+  "stepMin": 25,
+  "cook": 35,
+  "ch": 0
+ },
+ {
+  "id": "bulgur_chicken",
+  "t": "Булгур с курицей и овощами",
+  "miss": [],
+  "stepMin": 25,
+  "cook": 35,
+  "ch": 0
+ },
+ {
+  "id": "greek_chicken",
+  "t": "Курица по-гречески с картофелем и лимоном",
+  "miss": [],
+  "stepMin": 50,
+  "cook": 65,
+  "ch": 0
+ },
+ {
+  "id": "moussaka",
+  "t": "Мусака",
+  "miss": [],
+  "stepMin": 70,
+  "cook": 80,
+  "ch": 0
+ },
+ {
+  "id": "falafel",
+  "t": "Фалафель в духовке с салатом",
+  "miss": [],
+  "stepMin": 25,
+  "cook": 45,
+  "ch": 0
+ },
+ {
+  "id": "chicken_wrap",
+  "t": "Ролл в тортилье с курицей",
+  "miss": [],
+  "stepMin": 7,
+  "cook": 20,
+  "ch": 0
+ },
+ {
+  "id": "vareniki_onion",
+  "t": "Вареники с картофелем и жареным луком",
+  "miss": [],
+  "stepMin": 7,
+  "cook": 20,
+  "ch": 0
+ },
+ {
+  "id": "bliny_chicken",
+  "t": "Блины с курицей и грибами",
+  "miss": [],
+  "stepMin": 1,
+  "cook": 60,
+  "ch": 0
+ },
+ {
+  "id": "turkey_pumpkin",
+  "t": "Индейка, тушённая с тыквой",
+  "miss": [],
+  "stepMin": 25,
+  "cook": 45,
+  "ch": 0
+ },
+ {
+  "id": "cauliflower_batter",
+  "t": "Цветная капуста в кляре",
+  "miss": [],
+  "stepMin": 5,
+  "cook": 30,
+  "ch": 0
+ },
+ {
+  "id": "zucchini_fritters",
+  "t": "Кабачковые оладьи",
+  "miss": [],
+  "stepMin": 13,
+  "cook": 35,
+  "ch": 0
+ },
+ {
+  "id": "cabbage_sausages",
+  "t": "Тушёная капуста с сосисками",
+  "miss": [],
+  "stepMin": 45,
+  "cook": 40,
+  "ch": 0
+ },
+ {
+  "id": "veg_casserole",
+  "t": "Овощная запеканка с брокколи и сыром",
+  "miss": [],
+  "stepMin": 34,
+  "cook": 40,
+  "ch": 0
+ },
+ {
+  "id": "stuffed_zucchini",
+  "t": "Кабачки, фаршированные курицей",
+  "miss": [],
+  "stepMin": 45,
+  "cook": 60,
+  "ch": 0
+ },
+ {
+  "id": "herring_potato",
+  "t": "Селёдка с картошкой и луком",
+  "miss": [],
+  "stepMin": 0,
+  "cook": 35,
+  "ch": 0
+ },
+ {
+  "id": "shrimp_pasta",
+  "t": "Паста с креветками в сливочно-чесночном соусе",
+  "miss": [],
+  "stepMin": 6,
+  "cook": 25,
+  "ch": 0
+ },
+ {
+  "id": "lentil_stew",
+  "t": "Рагу из чечевицы с овощами",
+  "miss": [],
+  "stepMin": 35,
+  "cook": 40,
+  "ch": 0
+ },
+ {
+  "id": "barley_mushrooms",
+  "t": "Перловка с грибами",
+  "miss": [],
+  "stepMin": 55,
+  "cook": 60,
+  "ch": 1
+ },
+ {
+  "id": "country_potato",
+  "t": "Картофель по-деревенски с грибами",
+  "miss": [],
+  "stepMin": 40,
+  "cook": 55,
+  "ch": 0
+ },
+ {
+  "id": "pumpkin_bulgur",
+  "t": "Запечённая тыква с булгуром и брынзой",
+  "miss": [],
+  "stepMin": 45,
+  "cook": 50,
+  "ch": 0
+ },
+ {
+  "id": "air_fries",
+  "t": "Картофель фри в аэрогриле",
+  "miss": [],
+  "stepMin": 25,
+  "cook": 30,
+  "ch": 0
+ },
+ {
+  "id": "air_drumsticks",
+  "t": "Голени в аэрогриле",
+  "miss": [],
+  "stepMin": 40,
+  "cook": 35,
+  "ch": 0
+ },
+ {
+  "id": "air_fish",
+  "t": "Рыба с овощами в аэрогриле",
+  "miss": [
+   "рыб"
+  ],
+  "stepMin": 17,
+  "cook": 25,
+  "ch": 0
+ },
+ {
+  "id": "multi_turkey_stew",
+  "t": "Рагу с индейкой в мультиварке",
+  "miss": [],
+  "stepMin": 47,
+  "cook": 60,
+  "ch": 0
+ },
+ {
+  "id": "lean_cabbage_mush",
+  "t": "Тушёная капуста с грибами",
+  "miss": [],
+  "stepMin": 58,
+  "cook": 55,
+  "ch": 0
+ },
+ {
+  "id": "buckwheat_veg",
+  "t": "Гречка с овощами по-азиатски",
+  "miss": [],
+  "stepMin": 8,
+  "cook": 30,
+  "ch": 0
+ },
+ {
+  "id": "olivier",
+  "t": "Оливье с ветчиной",
+  "miss": [],
+  "stepMin": 40,
+  "cook": 50,
+  "ch": 0
+ },
+ {
+  "id": "vinegret",
+  "t": "Винегрет",
+  "miss": [],
+  "stepMin": 80,
+  "cook": 55,
+  "ch": 0
+ },
+ {
+  "id": "shuba",
+  "t": "Сельдь под шубой",
+  "miss": [],
+  "stepMin": 0,
+  "cook": 65,
+  "ch": 1
+ },
+ {
+  "id": "crab_salad",
+  "t": "Крабовый салат",
+  "miss": [],
+  "stepMin": 15,
+  "cook": 35,
+  "ch": 0
+ },
+ {
+  "id": "mimosa",
+  "t": "Салат «Мимоза»",
+  "miss": [
+   "рыб"
+  ],
+  "stepMin": 0,
+  "cook": 50,
+  "ch": 1
+ },
+ {
+  "id": "caesar",
+  "t": "Цезарь с курицей",
+  "miss": [
+   "вино"
+  ],
+  "stepMin": 5,
+  "cook": 30,
+  "ch": 0
+ },
+ {
+  "id": "beet_prunes",
+  "t": "Свёкла с черносливом и чесноком",
+  "miss": [],
+  "stepMin": 50,
+  "cook": 50,
+  "ch": 0
+ },
+ {
+  "id": "korean_carrot",
+  "t": "Морковь по-корейски",
+  "miss": [],
+  "stepMin": 0,
+  "cook": 15,
+  "ch": 1
+ },
+ {
+  "id": "veg_smetana",
+  "t": "Салат из свежих овощей со сметаной",
+  "miss": [],
+  "stepMin": 0,
+  "cook": 10,
+  "ch": 0
+ },
+ {
+  "id": "bean_chicken_salad",
+  "t": "Салат с фасолью и курицей",
+  "miss": [],
+  "stepMin": 15,
+  "cook": 25,
+  "ch": 0
+ },
+ {
+  "id": "tabbouleh",
+  "t": "Табуле с булгуром",
+  "miss": [],
+  "stepMin": 12,
+  "cook": 30,
+  "ch": 0
+ },
+ {
+  "id": "squid_salad",
+  "t": "Салат с кальмарами и яйцом",
+  "miss": [],
+  "stepMin": 2,
+  "cook": 25,
+  "ch": 0
+ },
+ {
+  "id": "warm_chicken_salad",
+  "t": "Тёплый салат с курицей",
+  "miss": [],
+  "stepMin": 8,
+  "cook": 20,
+  "ch": 0
+ },
+ {
+  "id": "radish_salad",
+  "t": "Салат из редиса с огурцом и яйцом",
+  "miss": [],
+  "stepMin": 0,
+  "cook": 20,
+  "ch": 0
+ },
+ {
+  "id": "herring_sandwich",
+  "t": "Бутерброды с сельдью",
+  "miss": [],
+  "stepMin": 0,
+  "cook": 7,
+  "ch": 0
+ },
+ {
+  "id": "lavash_roll",
+  "t": "Рулет из лаваша с ветчиной и сыром",
+  "miss": [],
+  "stepMin": 20,
+  "cook": 10,
+  "ch": 0
+ },
+ {
+  "id": "stuffed_eggs",
+  "t": "Яйца, фаршированные сыром",
+  "miss": [
+   "Фарш"
+  ],
+  "stepMin": 10,
+  "cook": 25,
+  "ch": 0
+ },
+ {
+  "id": "garlic_croutons",
+  "t": "Гренки с чесноком",
+  "miss": [],
+  "stepMin": 7,
+  "cook": 13,
+  "ch": 0
+ },
+ {
+  "id": "banana_muffins",
+  "t": "Банановые маффины",
+  "miss": [],
+  "stepMin": 25,
+  "cook": 35,
+  "ch": 0
+ },
+ {
+  "id": "oat_cookies",
+  "t": "Овсяное печенье с бананом",
+  "miss": [],
+  "stepMin": 30,
+  "cook": 30,
+  "ch": 0
+ },
+ {
+  "id": "veg_sticks",
+  "t": "Овощные палочки с йогуртовым соусом",
+  "miss": [],
+  "stepMin": 0,
+  "cook": 10,
+  "ch": 0
+ },
+ {
+  "id": "pear_tvorog",
+  "t": "Груша с творогом и мёдом",
+  "miss": [],
+  "stepMin": 0,
+  "cook": 5,
+  "ch": 0
+ },
+ {
+  "id": "fruit_salad",
+  "t": "Фруктовый салат с йогуртом",
+  "miss": [],
+  "stepMin": 0,
+  "cook": 10,
+  "ch": 0
+ },
+ {
+  "id": "dried_fruit_mix",
+  "t": "Курага, чернослив и орехи",
+  "miss": [],
+  "stepMin": 0,
+  "cook": 2,
+  "ch": 0
+ },
+ {
+  "id": "ryazhenka_banana",
+  "t": "Ряженка с бананом",
+  "miss": [],
+  "stepMin": 0,
+  "cook": 2,
+  "ch": 0
+ },
+ {
+  "id": "charlotte",
+  "t": "Шарлотка с яблоками",
+  "miss": [],
+  "stepMin": 57,
+  "cook": 55,
+  "ch": 0
+ },
+ {
+  "id": "puff_ham",
+  "t": "Слойки с ветчиной и сыром",
+  "miss": [],
+  "stepMin": 25,
+  "cook": 40,
+  "ch": 0
+ },
+ {
+  "id": "tvorog_bliny",
+  "t": "Блинчики с творогом",
+  "miss": [],
+  "stepMin": 1,
+  "cook": 50,
+  "ch": 0
+ },
+ {
+  "id": "chicken_thighs_soy",
+  "t": "Куриные бёдра в соевом соусе с рисом",
+  "miss": [],
+  "stepMin": 88,
+  "cook": 50,
+  "ch": 0
+ },
+ {
+  "id": "chicken_potato_french",
+  "t": "Картофель по-французски с курицей",
+  "miss": [],
+  "stepMin": 50,
+  "cook": 70,
+  "ch": 0
+ },
+ {
+  "id": "chicken_mushroom_pasta",
+  "t": "Курица с грибами в сливочном соусе с макаронами",
+  "miss": [],
+  "stepMin": 20,
+  "cook": 35,
+  "ch": 0
+ },
+ {
+  "id": "chicken_rice_multi",
+  "t": "Курица с рисом и овощами в мультиварке",
+  "miss": [],
+  "stepMin": 45,
+  "cook": 55,
+  "ch": 0
+ },
+ {
+  "id": "chicken_garlic_mash",
+  "t": "Курица, жаренная с чесноком, с картофельным пюре",
+  "miss": [],
+  "stepMin": 45,
+  "cook": 55,
+  "ch": 0
+ },
+ {
+  "id": "chicken_cutlets_buckwheat",
+  "t": "Рубленые куриные котлеты с гречкой",
+  "miss": [],
+  "stepMin": 25,
+  "cook": 50,
+  "ch": 0
+ },
+ {
+  "id": "chicken_rice_soup",
+  "t": "Куриный суп с рисом",
+  "miss": [],
+  "stepMin": 45,
+  "cook": 55,
+  "ch": 0
+ },
+ {
+  "id": "chicken_zrazy",
+  "t": "Куриные зразы с яйцом и пюре",
+  "miss": [],
+  "stepMin": 7,
+  "cook": 60,
+  "ch": 0
+ },
+ {
+  "id": "chicken_veg_stew_rice",
+  "t": "Курица, тушённая с кабачком и перцем, с рисом",
+  "miss": [],
+  "stepMin": 22,
+  "cook": 50,
+  "ch": 0
+ },
+ {
+  "id": "air_chicken_thighs_potato",
+  "t": "Куриные бёдра с картофелем в аэрогриле",
+  "miss": [
+   "вино"
+  ],
+  "stepMin": 30,
+  "cook": 40,
+  "ch": 0
+ },
+ {
+  "id": "chicken_tomato_pasta",
+  "t": "Макароны с курицей в томатном соусе",
+  "miss": [],
+  "stepMin": 17,
+  "cook": 35,
+  "ch": 0
+ },
+ {
+  "id": "chicken_drum_multi",
+  "t": "Голени с картошкой в мультиварке",
+  "miss": [],
+  "stepMin": 50,
+  "cook": 60,
+  "ch": 0
+ },
+ {
+  "id": "chicken_potato_casserole",
+  "t": "Запеканка из курицы с картофелем и сыром",
+  "miss": [],
+  "stepMin": 45,
+  "cook": 65,
+  "ch": 0
+ },
+ {
+  "id": "chicken_buckwheat_soup",
+  "t": "Куриный суп с гречкой",
+  "miss": [],
+  "stepMin": 37,
+  "cook": 50,
+  "ch": 0
+ },
+ {
+  "id": "chicken_smetana_buckwheat",
+  "t": "Курица в сметане с чесноком и гречкой",
+  "miss": [],
+  "stepMin": 22,
+  "cook": 40,
+  "ch": 0
+ },
+ {
+  "id": "turkey_meatballs_cream",
+  "t": "Фрикадельки из индейки в сливочном соусе с макаронами",
+  "miss": [],
+  "stepMin": 17,
+  "cook": 50,
+  "ch": 0
+ },
+ {
+  "id": "turkey_mushroom_cream",
+  "t": "Индейка в сливочном соусе с грибами и рисом",
+  "miss": [],
+  "stepMin": 22,
+  "cook": 40,
+  "ch": 0
+ },
+ {
+  "id": "turkey_cutlets_oven",
+  "t": "Котлеты из индейки в духовке с пюре",
+  "miss": [],
+  "stepMin": 25,
+  "cook": 55,
+  "ch": 0
+ },
+ {
+  "id": "turkey_thigh_oven_veg",
+  "t": "Бедро индейки, запечённое с овощами",
+  "miss": [],
+  "stepMin": 50,
+  "cook": 65,
+  "ch": 0
+ },
+ {
+  "id": "turkey_noodle_soup",
+  "t": "Суп с индейкой и вермишелью",
+  "miss": [
+   "бульон"
+  ],
+  "stepMin": 40,
+  "cook": 50,
+  "ch": 0
+ },
+ {
+  "id": "turkey_buckwheat_multi",
+  "t": "Индейка с гречкой в мультиварке",
+  "miss": [],
+  "stepMin": 45,
+  "cook": 55,
+  "ch": 0
+ },
+ {
+  "id": "turkey_goulash_pasta",
+  "t": "Гуляш из индейки с макаронами",
+  "miss": [],
+  "stepMin": 38,
+  "cook": 50,
+  "ch": 0
+ },
+ {
+  "id": "turkey_plov",
+  "t": "Плов с индейкой",
+  "miss": [],
+  "stepMin": 48,
+  "cook": 65,
+  "ch": 0
+ },
+ {
+  "id": "turkey_stroganoff",
+  "t": "Индейка по-строгановски с пюре",
+  "miss": [],
+  "stepMin": 15,
+  "cook": 45,
+  "ch": 0
+ },
+ {
+  "id": "air_turkey_steaks",
+  "t": "Стейки из бедра индейки в аэрогриле с рисом и овощами",
+  "miss": [],
+  "stepMin": 25,
+  "cook": 35,
+  "ch": 0
+ },
+ {
+  "id": "beef_stew_veg",
+  "t": "Тушёная говядина с овощами",
+  "miss": [],
+  "stepMin": 105,
+  "cook": 115,
+  "ch": 0
+ },
+ {
+  "id": "beef_pots",
+  "t": "Жаркое в горшочках с говядиной",
+  "miss": [],
+  "stepMin": 90,
+  "cook": 115,
+  "ch": 0
+ },
+ {
+  "id": "ezhiki",
+  "t": "Ёжики с рисом в сметанно-томатном соусе",
+  "miss": [],
+  "stepMin": 40,
+  "cook": 65,
+  "ch": 0
+ },
+ {
+  "id": "beef_cutlets_buckwheat",
+  "t": "Котлеты из говядины с гречкой",
+  "miss": [
+   "Говядина"
+  ],
+  "stepMin": 14,
+  "cook": 50,
+  "ch": 0
+ },
+ {
+  "id": "beef_buckwheat_multi",
+  "t": "Гречка с тушёной говядиной в мультиварке",
+  "miss": [],
+  "stepMin": 90,
+  "cook": 100,
+  "ch": 0
+ },
+ {
+  "id": "beef_veg_soup",
+  "t": "Суп с говядиной и овощами",
+  "miss": [],
+  "stepMin": 90,
+  "cook": 115,
+  "ch": 0
+ },
+ {
+  "id": "beef_bean_soup",
+  "t": "Суп с говядиной и фасолью",
+  "miss": [],
+  "stepMin": 80,
+  "cook": 105,
+  "ch": 0
+ },
+ {
+  "id": "beef_pasta_casserole",
+  "t": "Запеканка из макарон с говяжьим фаршем",
+  "miss": [],
+  "stepMin": 35,
+  "cook": 55,
+  "ch": 0
+ },
+ {
+  "id": "beef_tefteli_oven",
+  "t": "Тефтели из говядины в сметанном соусе в духовке с рисом",
+  "miss": [
+   "Говядина"
+  ],
+  "stepMin": 35,
+  "cook": 60,
+  "ch": 0
+ },
+ {
+  "id": "beef_azu",
+  "t": "Азу по-татарски",
+  "miss": [],
+  "stepMin": 70,
+  "cook": 100,
+  "ch": 0
+ },
+ {
+  "id": "beef_potato_multi",
+  "t": "Говядина с картошкой в мультиварке",
+  "miss": [],
+  "stepMin": 95,
+  "cook": 105,
+  "ch": 0
+ },
+ {
+  "id": "beef_lasagna",
+  "t": "Лазанья с говяжьим фаршем",
+  "miss": [],
+  "stepMin": 60,
+  "cook": 75,
+  "ch": 0
+ },
+ {
+  "id": "meat_french",
+  "t": "Мясо по-французски",
+  "miss": [],
+  "stepMin": 45,
+  "cook": 65,
+  "ch": 0
+ },
+ {
+  "id": "pork_neck_steaks",
+  "t": "Стейки из свиной шеи с жареным картофелем",
+  "miss": [
+   "вино"
+  ],
+  "stepMin": 30,
+  "cook": 40,
+  "ch": 0
+ },
+ {
+  "id": "pork_plov",
+  "t": "Плов со свининой",
+  "miss": [],
+  "stepMin": 55,
+  "cook": 75,
+  "ch": 0
+ },
+ {
+  "id": "pork_shashlik_oven",
+  "t": "Шашлык из свинины в духовке с овощами",
+  "miss": [
+   "Свинина"
+  ],
+  "stepMin": 40,
+  "cook": 60,
+  "ch": 0
+ },
+ {
+  "id": "pork_goulash_mash",
+  "t": "Гуляш из свинины с пюре",
+  "miss": [],
+  "stepMin": 55,
+  "cook": 75,
+  "ch": 0
+ },
+ {
+  "id": "pork_ribs_potato",
+  "t": "Свиные рёбра с картошкой в духовке",
+  "miss": [],
+  "stepMin": 70,
+  "cook": 85,
+  "ch": 0
+ },
+ {
+  "id": "pork_cutlets_buckwheat",
+  "t": "Домашние котлеты из свиного фарша с гречкой",
+  "miss": [],
+  "stepMin": 15,
+  "cook": 50,
+  "ch": 0
+ },
+ {
+  "id": "pork_cabbage_stew",
+  "t": "Капуста, тушённая со свининой",
+  "miss": [],
+  "stepMin": 50,
+  "cook": 65,
+  "ch": 0
+ },
+ {
+  "id": "pork_potato_soup",
+  "t": "Картофельный суп со свининой",
+  "miss": [],
+  "stepMin": 55,
+  "cook": 75,
+  "ch": 0
+ },
+ {
+  "id": "pork_buckwheat_multi",
+  "t": "Свинина с гречкой в мультиварке",
+  "miss": [],
+  "stepMin": 55,
+  "cook": 70,
+  "ch": 0
+ },
+ {
+  "id": "air_pork_neck_veg",
+  "t": "Свиная шея в аэрогриле с овощами",
+  "miss": [],
+  "stepMin": 58,
+  "cook": 35,
+  "ch": 0
+ },
+ {
+  "id": "pork_pasta_stew",
+  "t": "Макароны с тушёной свининой",
+  "miss": [],
+  "stepMin": 40,
+  "cook": 55,
+  "ch": 0
+ },
+ {
+  "id": "pork_beans_tomato",
+  "t": "Свинина с фасолью в томатном соусе",
+  "miss": [],
+  "stepMin": 45,
+  "cook": 60,
+  "ch": 0
+ },
+ {
+  "id": "lean_oat_apple_nuts",
+  "t": "Овсянка на воде с яблоком и орехами",
+  "miss": [],
+  "stepMin": 7,
+  "cook": 15,
+  "ch": 0
+ },
+ {
+  "id": "bean_toast",
+  "t": "Тосты с фасолевой пастой и помидорами",
+  "miss": [],
+  "stepMin": 0,
+  "cook": 10,
+  "ch": 0
+ },
+ {
+  "id": "lean_banana_pancakes",
+  "t": "Постные банановые оладьи",
+  "miss": [],
+  "stepMin": 2,
+  "cook": 25,
+  "ch": 0
+ },
+ {
+  "id": "buckwheat_veg_breakfast",
+  "t": "Гречка с овощами на завтрак",
+  "miss": [],
+  "stepMin": 27,
+  "cook": 25,
+  "ch": 0
+ },
+ {
+  "id": "lean_overnight_oats",
+  "t": "Ленивая овсянка на соке с бананом",
+  "miss": [],
+  "stepMin": 0,
+  "cook": 5,
+  "ch": 0
+ },
+ {
+  "id": "micro_buckwheat_veg",
+  "t": "Гречка с овощами в микроволновке",
+  "miss": [],
+  "stepMin": 14,
+  "cook": 20,
+  "ch": 0
+ },
+ {
+  "id": "micro_chicken_rice",
+  "t": "Курица с рисом и овощами в микроволновке",
+  "miss": [],
+  "stepMin": 22,
+  "cook": 30,
+  "ch": 0
+ },
+ {
+  "id": "lavash_tuna_roll",
+  "t": "Ролл из лаваша с тунцом и овощами",
+  "miss": [],
+  "stepMin": 0,
+  "cook": 10,
+  "ch": 0
+ },
+ {
+  "id": "bean_corn_salad",
+  "t": "Салат с фасолью, кукурузой и сухариками",
+  "miss": [],
+  "stepMin": 0,
+  "cook": 10,
+  "ch": 0
+ },
+ {
+  "id": "micro_potato_tuna",
+  "t": "Картофель в микроволновке с тунцом и сметаной",
+  "miss": [],
+  "stepMin": 12,
+  "cook": 20,
+  "ch": 0
+ },
+ {
+  "id": "eggs_cucumber",
+  "t": "Варёные яйца с огурцом",
+  "miss": [],
+  "stepMin": 9,
+  "cook": 12,
+  "ch": 0
+ },
+ {
+  "id": "kefir_tvorog",
+  "t": "Кефир и творог с ягодами",
+  "miss": [],
+  "stepMin": 0,
+  "cook": 3,
+  "ch": 0
+ }
+]

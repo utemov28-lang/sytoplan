@@ -272,3 +272,43 @@ html.dark .kb div{filter:brightness(.9)}
 .kcalsum b{color:#C2410C}
 .note{background:#ECFDF5;color:#065F46;border-radius:14px;padding:10px 12px;font-size:13px;margin:8px 0;line-height:1.35}
 .dayh .kcf{font-weight:600;color:var(--mut,#6B7280);font-size:12px}
+/* ===== Фаза 3: QA-правки ===== */
+.nav button{color:#6B7280}html.dark .nav button{color:#9CA3AF}
+.linkbtn{min-height:44px;padding:10px 4px;display:inline-flex;align-items:center}
+.restart{min-height:44px;padding:12px 16px}
+.cb{width:30px;height:30px;flex:0 0 30px;position:relative}.cb:after{content:"";position:absolute;inset:-8px}
+.eq .t{white-space:normal;overflow:visible;text-overflow:clip;line-height:1.15;word-break:break-word;hyphens:auto;font-size:12.5px}
+.opt .t,.opt .s{overflow-wrap:anywhere}
+.mleg{flex-wrap:wrap;row-gap:2px}.mleg .lg-fi:before{background:#A3A3A3}
+.mbtns{display:flex;flex-direction:column;gap:6px;flex:0 0 58px}
+.swap{min-height:44px}.swap.rm svg{color:#B91C1C}
+.toast{z-index:120;display:flex;align-items:center;gap:10px;bottom:calc(96px + var(--sab))}
+.tbtn{border:0;background:none;color:#4ADE80;font-weight:800;font-size:14px;min-height:36px;padding:0 4px}
+.nores{background:var(--bg);border-radius:14px;padding:12px 14px;font-size:14px;color:var(--mut);margin:0 0 12px}
+.nores[hidden]{display:none}
+.swlist{display:flex;flex-direction:column;gap:8px;margin-top:10px;max-height:52vh;overflow:auto}
+.swopt{display:flex;align-items:center;gap:12px;text-align:left;border:1px solid var(--line);background:var(--surface);border-radius:18px;padding:8px;min-height:64px;color:var(--txt)}
+.swopt .mt{font-weight:800;font-size:14px;line-height:1.25}.swopt .mm{font-size:12px;color:var(--mut);margin-top:3px}
+.tabs.tight{margin:0 0 10px;padding:0}
+.tplist{max-height:50vh;overflow:auto;margin-top:6px}
+.tpday{font-size:12px;font-weight:800;color:var(--mut);text-transform:uppercase;letter-spacing:.03em;margin:10px 0 4px}
+.tprow{display:flex;align-items:center;gap:10px;width:100%;min-height:48px;border:0;background:var(--bg);border-radius:14px;padding:8px 14px;margin-bottom:6px;text-align:left;color:var(--txt);font-size:14px}
+.tprow .tpm{font-weight:800;flex:0 0 auto}.tprow .tpc{color:var(--mut);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0}
+.progbox{margin-top:8px;display:flex;flex-direction:column;gap:5px}
+.prog-row{display:flex;flex-wrap:wrap;gap:4px 6px;align-items:center;font-size:11.5px;font-weight:700}
+.prog-row .pn{color:var(--txt2);min-width:74px}.prog-row .pn i{font-style:normal;color:var(--mut)}
+.pm{border-radius:999px;padding:2px 7px}.pm.g{background:#DCFCE7;color:#166534}.pm.y{background:#FEF3C7;color:#92400E}.pm.r{background:#FEE2E2;color:#991B1B}
+html.dark .pm.g{background:#12301F;color:#4ADE80}html.dark .pm.y{background:#2E2510;color:#FCD34D}html.dark .pm.r{background:#3A1717;color:#FCA5A5}
+.pcard{padding:14px}.pcard .pt{font-weight:800;margin-bottom:10px}
+.seg2{display:grid;grid-template-columns:1fr 1fr;gap:6px;background:var(--bg);border-radius:14px;padding:4px;margin-bottom:10px}
+.seg2.three{grid-template-columns:repeat(3,1fr);margin:10px 0 0}
+.seg2 button{border:0;background:none;border-radius:11px;min-height:44px;font-weight:700;font-size:13px;color:var(--mut);padding:4px}
+.seg2 button.on{background:var(--surface);color:var(--txt);box-shadow:0 1px 4px rgba(0,0,0,.08)}
+.pgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.pf{display:flex;flex-direction:column;gap:4px;font-size:12px;font-weight:700;color:var(--mut)}
+.pf input,.pf select{min-height:44px;border:2px solid var(--bd);border-radius:12px;padding:8px 10px;font-size:16px;background:var(--surface);color:var(--txt);width:100%;box-sizing:border-box}
+.pf.wide{margin-top:8px}.pf select{font-size:14px}
+.ptgt{margin-top:10px;font-size:13px;color:var(--txt2);background:var(--gl);border-radius:12px;padding:8px 10px}
+.howcalc{margin-top:14px;font-size:13px;color:var(--txt2);line-height:1.4}.howcalc summary{font-weight:800;color:var(--gt);min-height:44px;display:flex;align-items:center;cursor:pointer}
+.row2{display:grid;grid-template-columns:1fr 1.4fr;gap:10px}
+@media (max-width:370px){.grid3 .eq .t{font-size:11.5px}.mleg{gap:8px}.hdr-right{font-size:12px}}

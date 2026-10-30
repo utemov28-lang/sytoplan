@@ -10,7 +10,7 @@ await page.evaluate(()=>{ S.A=Object.assign(S.A||{}, {adults:2,kids:0,meals:['b'
 const scen=await page.evaluate(()=>{ const res=[]; const base=JSON.parse(JSON.stringify(S.A));
  const run=(name,patch)=>{ S.A=Object.assign(JSON.parse(JSON.stringify(base)),patch); if(S.A.budget==null) S.A.budget=defaultBudget(); generatePlan('t'+name); const sh=shopping();
    const empty=S.plan.slots.filter(s=>!s.r).length; const bad=S.plan.slots.filter(s=>s.r && whyNot(RMAP[s.r])).length;
-   res.push({name,budget:S.A.budget,typical:Math.round(typicalCost()),total:sh.total,slots:S.plan.slots.length,empty,bad,uniq:new Set(S.plan.slots.map(s=>s.r)).size,kcal:Math.round(dayOrder().reduce((a,d)=>a+dayTotals(d).k,0)/dayOrder().length),minDay:Math.min(...dayOrder().map(d=>dayTotals(d).k)),meals:S.A.meals.join('')}); };
+   res.push({name,budget:S.A.budget,typical:Math.round(typicalCost()),total:sh.total,slots:S.plan.slots.length,empty,bad,uniq:new Set(S.plan.slots.map(s=>s.r)).size,kcal:Math.round(dayOrder().reduce((a,d)=>a+dayTotals(d).k,0)/dayOrder().length),minDay:Math.min(...dayOrder().map(d=>dayTotals(d).k)),meals:S.A.meals.join(''),meat:(()=>{const ld=S.plan.slots.filter(x=>x.r&&(x.m==='l'||x.m==='d'));return ld.length?Math.round(100*ld.filter(x=>RMAP[x.r].meat).length/ld.length):0})(),pOk10:(()=>{const T=targets();return dayOrder().filter(d=>dayTotals(d).p>=70*T.cov*1.0-0.5).length})(),pOk12:dayOrder().filter(d=>dayTotals(d).p>=targets().ref.pmin-0.5).length,kOk:dayOrder().filter(d=>Math.abs(dayTotals(d).k-targets().ref.k)<=targets().ref.k*0.1).length,nd:dayOrder().length,fib:Math.round(dayOrder().reduce((a,d)=>a+dayTotals(d).fi,0)/dayOrder().length),prot:Math.round(dayOrder().reduce((a,d)=>a+dayTotals(d).p,0)/dayOrder().length),est:defaultBudget(),maxRep:Math.max(0,...Object.values(S.plan.slots.reduce((a,x)=>{if(x.r&&!x.left)a[x.r]=(a[x.r]||0)+1;return a},{})))}); };
  run('default2ad',{adults:2,kids:0,meals:['b','l','d','s'],budget:null,styles:[],dislikes:[],pantry:[],allergies:['none'],diets:['none'],equip:['stove','oven','micro']});
  run('tight',{adults:2,kids:0,meals:['b','l','d','s'],budget:4500,styles:[],pantry:[]});
  run('verytight',{adults:2,kids:0,meals:['b','l','d'],budget:2500});
@@ -23,4 +23,5 @@ const scen=await page.evaluate(()=>{ const res=[]; const base=JSON.parse(JSON.st
  S.A=base; return res; });
 console.table(scen);
 console.table(scen); const avg=Math.round(scen.reduce((s,x)=>s+x.kcal,0)/scen.length); console.log('avg kcal/adult/day',avg,'errors',errs);
+const sum=k=>scen.reduce((s,x)=>s+x[k],0); console.log('protein>=1.0g/kg days',sum('pOk10')+'/'+sum('nd'),'protein>=1.2g/kg(target) days',sum('pOk12')+'/'+sum('nd'),'kcal±10% days',sum('kOk')+'/'+sum('nd'));
 await b.close();

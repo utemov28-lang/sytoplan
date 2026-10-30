@@ -5,13 +5,13 @@ RECIPES.forEach(r=>{
   if(r.ing.every(i=>ING[i.k])) normalizePortion(r);
   const fl = new Set(); r.ing.forEach(i=>{ if(!ING[i.k]) console.error('Нет ингредиента', i.k, r.id); else ING[i.k].flags.forEach(f=>fl.add(f)); });
   r.meat = fl.has('meat'); r.fish = fl.has('fish')||fl.has('seafood');
-  r.al = ['nuts','peanut','dairy','eggs','gluten','fish','seafood','soy','sesame','honey'].filter(a=>fl.has(a));
+  r.al = ['nuts','peanut','dairy','eggs','gluten','fish','seafood','soy','sesame','honey','mustard'].filter(a=>fl.has(a));
   calcNutrition(r);
   RMAP[r.id] = r;
 });
 const MEALMAP = Object.fromEntries(MEALS.map(m=>[m.id,m]));
 const CUISMAP = Object.fromEntries(CUISINES.map(c=>[c.id,c]));
-const STEPS = ['q1','q2','q3','q4','q5','q6','q7','q8','q9','q10','q11'];
+const STEPS = ['q1','q2','q2b','q3','q4','q5','q6','q7','q8','q9','q10','q11'];
 /* категории блюд — выводятся из названия и приёма пищи */
 const SOUP_RE=/суп|борщ|(^|\s)щи(\s|$)|окрошка|солянка|рассольник|^уха(\s|$)|харчо|шурпа|свекольник|гаспачо|минестроне|бульон/i;
 const SALAD_RE=/^(тёплый )?салат|винегрет|оливье|под шубой|мимоза|табуле|цезарь|по-корейски|^свёкла с/i;
@@ -27,8 +27,15 @@ function ilu(n){ return HAS_I.has(n)?'img/i/'+n+'.webp':null; }
 function ill(n,fb,cls){ const u=ilu(n); return u?`<img class="${cls||'ill'}" src="${u}" alt="" loading="lazy" decoding="async">`:fb; }
 function photo(r,cls,big,extra){ const c=CUISMAP[r.c]; let inner;
   if(HAS_R.has(r.id)) inner=`<img src="img/r/${big?'':'s/'}${r.id}.webp" alt="${esc(r.t)}" ${big?'':'loading="lazy"'} decoding="async" onerror="this.remove()">`;
-  else { const u=ilu('cat_'+rcat(r)); inner=u?`<img class="fb" src="${u}" alt="" loading="lazy" decoding="async">`:`<span>${r.e}</span>`; }
+  else { const u=ilu(fbName(r)); inner=u?`<img class="fb" src="${u}" alt="" loading="lazy" decoding="async">`:`<span>${r.e}</span>`; }
   return `<div class="ph ${cls}" style="background:linear-gradient(135deg,${c.g[0]},${c.g[1]})">${inner}${extra||''}</div>`; }
+/* Запасная иллюстрация — нейтральная по категории, чтобы не показывать мясо на овощном блюде */
+function fbName(r){ const c=rcat(r);
+  if(c==='hot') return r.meat?'cat_hot':(r.fish?'empty':'diet_veg');
+  if(c==='soup') return r.meat||r.fish||!ilu('diet_veg')?'cat_soup':'diet_veg';
+  if(c==='breakfast') return (r.al.includes('eggs')||r.al.includes('dairy'))?'cat_breakfast':'diet_lean';
+  if(c==='snack') return /фрукт|яблок|банан|груш|ягод/i.test(r.t)?'cat_snack':'empty';
+  return 'cat_'+c; }
 /* ====== TELEGRAM ====== */
 const TG=(window.Telegram&&window.Telegram.WebApp)||null;
 const inTG=!!(TG&&TG.initData);
@@ -45,7 +52,11 @@ function goBack(){ navDir='back';
   if(S.recipe){ set({recipe:null}); return; }
   if(STEPS.includes(S.screen)){ prevStep(); return; }
   if(S.screen==='app'&&S.tab!=='week'){ S.tab='week'; set({}); } }
-function prevStep(){ const i=STEPS.indexOf(S.screen); navDir='back'; if(S.editing && S.plan && S.screen===S.editing){ S.editing=false; set({screen:'app'}); } else go(i>0?STEPS[i-1]:'intro'); }
+function prevStep(){ const i=STEPS.indexOf(S.screen); navDir='back'; if(S.editing && S.plan && S.screen===S.editing){ finishEdit(); } else go(i>0?STEPS[i-1]:'intro'); }
+/* Редактирование одного ответа из профиля: «Сохранить» → если что-то изменилось, план пересобирается (быстрая загрузка) */
+function startEdit(id){ S.editing=id; S.editSnap=JSON.stringify(S.A); go(id); }
+function finishEdit(){ const changed=S.editSnap!==JSON.stringify(S.A); S.editing=false; S.editSnap=null; navDir='back';
+  if(changed && S.plan){ if(S.A.budget==null) S.A.budget=defaultBudget(); S.quick=true; S.tab='week'; set({screen:'loading',ticks:{}}); } else { S.tab='profile'; set({screen:'app'}); } }
 /* ====== УТИЛИТЫ ====== */
 const NB = '\u00A0';
 function fmt(n){ n = Math.round(n||0); return String(n).replace(/\B(?=(\d{3})+(?!\d))/g, NB); }
@@ -62,8 +73,9 @@ function fmtAmount(q,unit){ // для списка «нужно»
   return r+NB+unit;
 }
 function fmtPack(p,unit){ if(unit==='шт') return p+NB+'шт'; if(p>=1000) return dec(p/1000)+NB+(unit==='г'?'кг':'л'); return p+NB+unit; }
+const TO_TASTE=new Set(['salt','spices','black_pepper','paprika','cumin','coriander','khmeli','curry','cinnamon']);
 function fmtIngQty(k,q,unit){ // для рецепта
-  if(k==='salt'||k==='spices') return 'по вкусу';
+  if(TO_TASTE.has(k)) return 'по вкусу'; if(k==='bay_leaf') return '1–2 листа';
   if(k==='eggs') return Math.max(1,Math.round(q))+NB+'шт';
   if(unit==='шт'){ const h=Math.max(0.5,Math.round(q*2)/2); return half(h)+NB+'шт'; }
   return fmtAmount(q,unit);
@@ -89,7 +101,7 @@ const CK = '<span class="ck">'+ICON.check+'</span>';
 /* ====== СОСТОЯНИЕ ====== */
 function fresh(){ return {screen:'intro', city:'Москва',
   A:{store:null, adults:2, kids:0, meals:['b','l','d'], days:[0,1,2,3,4,5,6], equip:['stove','oven','micro'],
-     diets:['none'], cuisines:[], styles:[], allergies:['none'], dislikes:[], pantry:[], budget:null},
+     diets:['none'], cuisines:[], styles:[], allergies:['none'], dislikes:[], pantry:[], budget:null, budgetManual:false, people:null},
   plan:null, ticks:{}, favs:[], extras:[], tab:'week', recipe:null, rtab:'ing', serv:2, rfilter:'fit', ptab:'all'}; }
 function load(){ try{ const s=JSON.parse(localStorage.getItem(LS_KEY)); if(s&&s.A){ const f=fresh(); const o=Object.assign(f,s); o.A=Object.assign(fresh().A,s.A); return o; } }catch(e){} return null; }
 let S = load() || fresh();
@@ -106,28 +118,82 @@ function applyPrices(P){ if(!P||!P._meta) return; Object.keys(P).forEach(k=>{ co
 function loadPrices(){ const t=new Promise(res=>setTimeout(res,3000));
   const f=fetch('data/prices.json',{cache:'no-cache'}).then(r=>r.ok?r.json():null).then(applyPrices).catch(()=>{});
   return Promise.race([f,t]); }
-function priceNote(){ if(!PRICES_META) return 'Цены: примерные запасные данные, ориентировочно';
-  const [y,mo,da]=(PRICES_META.weekly_date||PRICES_META.updated||'').split('-'); const d=`${+da} ${['января','февраля','марта','апреля','мая','июня','июля','августа','сентября','октября','ноября','декабря'][+mo-1]} ${y}`; return `Цены: Росстат/магазин, обновлено ${d}, ориентировочно`; }
+function priceDate(){ if(!PRICES_META) return ''; const [y,mo,da]=(PRICES_META.weekly_date||PRICES_META.updated||'').split('-'); return `${+da} ${['января','февраля','марта','апреля','мая','июня','июля','августа','сентября','октября','ноября','декабря'][+mo-1]} ${y}`; }
+/* Честная подпись: цены магазинов напрямую не берём — средняя цена Росстата × уровень цен сети */
+function priceNote(){ if(!PRICES_META) return 'Цены: примерные запасные данные, ориентировочно.';
+  return `Цены: Росстат × уровень цен сети, ориентировочно (данные на ${priceDate()}).`; }
 
 /* ====== РАСЧЁТЫ ====== */
-function portions(){ return S.A.adults + S.A.kids*0.5; }
+/* Порции: взрослый = 1, ребёнок = 0,5 (или по его норме калорий, если заполнены параметры КБЖУ) */
+function kidFactors(){ return targets().kd.map(k=>k.factor); }
+function portions(){ if(!S.A.people) return S.A.adults+S.A.kids*0.5; const T=targets(); return Math.round((T.ad.concat(T.kd).reduce((a,t)=>a+t.factor,0))*10)/10; }
 function mealOrder(){ return MEALS.filter(m=>S.A.meals.includes(m.id)).map(m=>m.id); }
 function dayOrder(){ return S.A.days.slice().sort((a,b)=>a-b); }
 function portionsPerWeek(){ return portions()*S.A.meals.length*S.A.days.length; }
-/* Типичная стоимость взрослой порции по приёму пищи = медиана portionCost рецептов этого приёма
-   в выбранном магазине (с новыми сытными порциями и ценами) — бюджет по умолчанию следует за ценами. */
 let _baseCache={};
 function mealBase(m){ const key=S.A.store+'|'+(PRICES_META?PRICES_META.updated:'')+'|'+S.A.dislikes.join(); if(!_baseCache[key]) _baseCache={[key]:{}};
   const c=_baseCache[key]; if(c[m]==null){ const v=RECIPES.filter(r=>r.m.includes(m)).map(portionCost).sort((a,b)=>a-b); c[m]=v.length?v[Math.floor(v.length/2)]:MEALMAP[m].base; } return c[m]; }
-function typicalCost(){ let perDay=S.A.meals.reduce((s,m)=>s+mealBase(m),0); if(!S.A.meals.includes('s')) perDay+=mealBase('s')*0.5; /* ≈ авто-перекусы для сытости */
-  return perDay*portions()*S.A.days.length*1.2; } /* ×1.2 — покупка целыми упаковками и остатки (по прогону 9 профилей) */
-function budgetRange(){ const t=typicalCost(); return {min:Math.max(500,Math.round(t*0.3/100)*100), max:Math.max(1000,Math.round(t*2/100)*100)}; }
-function defaultBudget(){ return Math.max(500, Math.ceil(typicalCost()*1.2/500)*500); }
+
+/* ====== НОРМЫ КБЖУ ======
+   Источники:
+   • Энергия: уравнение Миффлина — Сан Жеора (Mifflin MD, St Jeor ST et al., Am J Clin Nutr 1990;51:241–7) × коэффициент активности
+     1,2 / 1,375 / 1,55 / 1,725 / 1,9 (FAO/WHO/UNU 2004, Human energy requirements). Снижение веса — дефицит ≈18 %, набор — +10 %
+     (Academy of Nutrition and Dietetics; ISSN position stand on diets and body composition, 2017).
+   • Белок: ≥1,2–1,6 г/кг при поддержании, 1,6–2,0 г/кг при снижении веса/наборе; никогда <1,0 г/кг
+     (ISSN position stand: protein and exercise, Jäger 2017; Morton 2018 BJSM meta-analysis; PROT-AGE 2013 для взрослых старше 65 — ≥1,0–1,2 г/кг).
+   • Жиры 25–35 % ккал (не менее ~0,8 г/кг), углеводы — остальное (MR 2.3.1.0253-21 Роспотребнадзора; EFSA DRV 2017; WHO 2023 fat guideline).
+   • Клетчатка ≥25–30 г/сут (WHO 2023 carbohydrate guideline; EFSA). Добавленный сахар <10 % ккал (WHO 2015 sugars guideline).
+   • Дети: энергия и белок по возрасту — MR 2.3.1.0253-21 «Нормы физиологических потребностей…» (усреднено по полу);
+     клетчатка ≈ возраст + 5 г (правило AAP/Williams 1995), сахар <10 % ккал (WHO).
+   Если шаг пропущен — средний взрослый: ≈2200 ккал (среднее 2000 для женщин и 2400 для мужчин), белок 1,2 г/кг × 70 кг ≈ 85 г.
+   Это ориентир для планирования, а не медицинская рекомендация. */
+const ACT=[[1.2,'Минимальная','сидячая работа, без спорта'],[1.375,'Низкая','1–3 тренировки в неделю'],[1.55,'Средняя','3–5 тренировок'],[1.725,'Высокая','6–7 тренировок'],[1.9,'Очень высокая','физический труд + спорт']];
+const GOALS=[['keep','Поддержание'],['lose','Снижение веса'],['gain','Набор массы']];
+const KID_NORM=[[3,1300,39],[7,1800,54],[11,2100,63],[14,2400,72],[18,2700,81]]; // до N лет: ккал, белок г (MR 2.3.1.0253-21, среднее м/ж)
+function adultTarget(x){
+  if(!x||!(x.w>0&&x.h>0&&x.age>0)) { const w=70; const k=x&&x.sex==='m'?2400:x&&x.sex==='f'?2000:2200;
+    return {k, pmin:Math.round(w*1.2), pgood:Math.round(w*1.4), w, fat:[k*.25/9,k*.35/9], fib:k>=2200?30:25, sug:k*.1/4, def:true}; }
+  const bmr=10*x.w+6.25*x.h-5*x.age+(x.sex==='m'?5:-161); let k=bmr*ACT[x.act==null?1:+x.act][0];
+  if(x.goal==='lose') k*=0.82; else if(x.goal==='gain') k*=1.10; k=Math.round(k/10)*10;
+  const keep=!x.goal||x.goal==='keep', pk=keep?(x.age>=65?1.2:1.2):1.6, pg=keep?1.5:1.8;
+  return {k, pmin:Math.round(x.w*pk), pgood:Math.round(x.w*pg), w:x.w, fat:[Math.max(k*.25/9,0.8*x.w),k*.35/9], fib:k>=2200?30:25, sug:k*.1/4};
+}
+function kidTarget(age){ const a=age>0?age:6; const n=KID_NORM.find(z=>a<z[0])||KID_NORM[KID_NORM.length-1];
+  return {k:n[1], pmin:n[2], pgood:n[2], w:null, fat:[n[1]*.25/9,n[1]*.35/9], fib:Math.min(25,Math.round(a)+5), sug:n[1]*.1/4, age:a}; }
+let _tCache={};
+function targets(){ const cov=coverage(); const key=JSON.stringify([S.A.adults,S.A.kids,S.A.people,cov]); if(_tCache.key===key) return _tCache.v;
+  const P=S.A.people||{}; const ad=[], kd=[]; const STD=2200; /* стандартная взрослая порция плана ≈ 2200 ккал/день */
+  const set=!!(P.ad&&P.ad.some(x=>x&&x.w>0&&x.h>0&&x.age>0));
+  for(let i=0;i<S.A.adults;i++){ const t=adultTarget(P.ad&&P.ad[i]); t.factor=set&&!t.def?Math.max(0.6,Math.min(1.8,Math.round(t.k/STD*10)/10)):1; ad.push(t); }
+  for(let i=0;i<S.A.kids;i++){ const age=P.kd&&P.kd[i]&&P.kd[i].age; const t=kidTarget(age); t.factor=age>0?Math.max(0.4,Math.min(1.2,Math.round(t.k/STD*10)/10)):0.5; kd.push(t); }
+  /* Норма на «стандартную порцию»: ккал — средняя, белок — максимальная среди едоков (белок — жёсткий порог для каждого) */
+  const all=ad.concat(kd.filter((t,i)=>P.kd&&P.kd[i]&&P.kd[i].age>0));
+  const ref={k:all.reduce((a,t)=>a+t.k/t.factor,0)/all.length, pmin:Math.max(...all.map(t=>t.pmin/t.factor)), pgood:Math.max(...all.map(t=>t.pgood/t.factor))};
+  const v={ad,kd,ref:{k:ref.k*cov,pmin:ref.pmin*cov,pgood:ref.pgood*cov},cov,set};
+  _tCache={key,v}; return v; }
+const MEAL_SHARE={b:.25,l:.35,d:.3,s:.1};
+function mainMeals(){ return S.A.meals.filter(m=>m!=='s').length; }
+function coverage(){ return mainMeals()>=2?1:Math.min(1,S.A.meals.reduce((a,m)=>a+MEAL_SHARE[m],0)); }
+
+/* ====== БЮДЖЕТ: оценка по пробному плану ======
+   Типичная сумма = корзина плана, собранного без ограничения бюджета (с вашими фильтрами, упаковками и авто-перекусами);
+   минимум = корзина самого экономного плана. Кэшируется по ответам. */
+let _estCache={};
+function trialTotal(budget){ const sp=S.plan, sb=S.A.budget; S.A.budget=budget; let t=0;
+  try{ generatePlan('est',true); t=shopping().total; }catch(e){ console.error(e); } S.plan=sp; S.A.budget=sb; return t; }
+function estimate(){ const a=Object.assign({},S.A); delete a.budget; delete a.budgetManual;
+  const key=JSON.stringify(a)+(PRICES_META?PRICES_META.updated:'');
+  if(_estCache.key!==key){ const typ=trialTotal(1e7), min=trialTotal(1); _estCache={key,v:{typ,min:Math.min(min,typ)}}; } return _estCache.v; }
+function typicalCost(){ return estimate().typ; }
+const BUDGET_CAP=200000;
+function budgetRange(){ const e=estimate(); return {min:Math.max(300,Math.floor(e.min*0.9/100)*100), max:Math.max(1000,Math.ceil(e.typ*2.5/100)*100)}; }
+function defaultBudget(){ return Math.max(500, Math.ceil(typicalCost()*1.05/500)*500); }
 function budgetStatus(b){
-  const t=typicalCost(), r=b/t, st=store();
-  if(r>=1) return {cls:'ok',ic:'✅',title:'Укладываемся',text:`Типичная корзина для вашей семьи в ${st.loc} — около ${rub(Math.round(t/100)*100)}. Запас ~${rub(Math.max(0,Math.round((b-t)/100)*100))} на непредвиденное.`};
-  if(r>=0.8) return {cls:'tight',ic:'⚠️',title:'Впритык — экономная неделя',text:`Типичная корзина — около ${rub(Math.round(t/100)*100)}. Соберём план из недорогих блюд: крупы, курица, сезонные овощи, готовка впрок.`};
-  return {cls:'bad',ic:'⛔',title:'Не хватит',text:`Даже экономная неделя в ${st.loc} обойдётся примерно в ${rub(Math.round(t*0.8/100)*100)}. Увеличьте бюджет или уберите перекусы/дни — план будет превышать сумму.`};
+  const e=estimate(), t=e.typ, st=store();
+  if(b>=t*3) return {cls:'tight',ic:'💡',title:'Бюджет с большим запасом',text:`Типичная корзина для вашей семьи в ${st.loc} — около ${rub(Math.round(t/100)*100)}. План не станет дороже: лишние деньги просто останутся. Проверьте, не лишний ли ноль.`};
+  if(b>=t) return {cls:'ok',ic:'✅',title:'Укладываемся',text:`Типичная корзина для вашей семьи в ${st.loc} — около ${rub(Math.round(t/100)*100)}. Запас ~${rub(Math.max(0,Math.round((b-t)/100)*100))} на непредвиденное.`};
+  if(b>=e.min) return {cls:'tight',ic:'⚠️',title:'Впритык — экономная неделя',text:`Типичная корзина — около ${rub(Math.round(t/100)*100)}. Соберём план из недорогих блюд (самый экономный вариант ≈ ${rub(Math.round(e.min/100)*100)}): крупы, курица, сезонные овощи.`};
+  return {cls:'bad',ic:'⛔',title:'Не хватит',text:`Даже самая экономная неделя с вашими ответами в ${st.loc} обойдётся примерно в ${rub(Math.round(e.min/100)*100)}. Увеличьте бюджет или уберите перекусы/дни — иначе план будет дороже суммы.`};
 }
 function dislikedKeys(){ const s=new Set(); S.A.dislikes.forEach(id=>{ const d=DISLIKES.find(x=>x[0]===id); if(d) d[3].forEach(k=>s.add(k)); }); return s; }
 function recipeIngs(r){ const dk=dislikedKeys(); return r.ing.filter(i=>!(ING[i.k].opt && dk.has(i.k))); }
@@ -135,7 +201,7 @@ function removedIngs(r){ const dk=dislikedKeys(); return r.ing.filter(i=>ING[i.k
 const DIETCHK = {
   veg:r=>!r.meat&&!r.fish,
   lean:r=>!r.meat&&!r.fish&&!r.al.includes('dairy')&&!r.al.includes('eggs'),
-  pp:r=>r.tags.includes('light')||(r.f*9/r.k<=0.35 && r.k<=(r.m.includes('s')?300:700)),
+  pp:r=>r.tags.includes('light')||(r.f*9/r.k<=0.35 && r.k<=(r.kind==='s'?300:700)),
   hp:r=>r.tags.includes('highprotein')||r.p*4/r.k>=0.2,
   kids:r=>r.tags.includes('kids')
 };
@@ -150,25 +216,37 @@ function whyNot(r){ // null если рецепт подходит
   if(nd) return 'не подходит: '+DIETS.find(x=>x.id===nd).name;
   return null;
 }
-function fits(r,m){ return (!m||r.m.includes(m)) && !whyNot(r); }
+/* Обед ↔ ужин: основное блюдо ужина подходит на обед, а не-суп с обеда — на ужин */
+function mealOk(r,m){ if(!m||r.m.includes(m)) return true;
+  if(m==='l') return r.m.includes('d') && r.kind==='main';
+  if(m==='d') return r.m.includes('l') && (r.kind==='main'||r.kind==='salad');
+  return false; }
+function fits(r,m){ return mealOk(r,m) && !whyNot(r); }
 function candidates(m){ return RECIPES.filter(r=>fits(r,m)); }
-/* Цена упаковки в выбранном магазине: из data/prices.json (Росстат × коэффициент сети), иначе запасная × mult */
 function priceOf(g,st){ st=st||store(); return g.sp&&g.sp[st.id]!=null ? g.sp[st.id] : g.price*st.mult; }
 function portionCost(r){ const st=store(); return recipeIngs(r).reduce((s,i)=>{const g=ING[i.k]; return s+i.q/r.sv/g.pack*priceOf(g,st);},0); }
+function totalTime(r){ return r.prep+r.cook; }
 function styleMatch(r,st){
-  if(st==='fast') return r.tags.includes('fast')||r.prep+r.cook<=25;
+  if(st==='fast') return !r.rest && (r.tags.includes('fast')||totalTime(r)<=25);
   if(st==='light') return r.tags.includes('light')||r.k<=380;
   return r.tags.includes(st);
 }
+function meatAllowed(){ return !S.A.diets.some(d=>d==='veg'||d==='lean'); }
+const MEAT_SHARE=0.65; // доля обедов/ужинов с мясом или птицей для профилей без ограничений
 function recipeScore(r,ctx,slotKey){
   const a=S.A; let s=hash((S.plan&&S.plan.seed||'x')+r.id+slotKey)*2.2;
   a.styles.forEach(st=>{ if(styleMatch(r,st)) s+=2.5; });
   if(a.cuisines.includes(r.c)) s+=1.6;
   if(a.kids>0 && r.tags.includes('kids')) s+=0.8;
-  const u=(ctx.uses[r.id]||0); s-= u*(a.styles.includes('batch')?1.5:4); if(u>=3) s-=8;
+  const batchSt=a.styles.includes('batch');
+  const u=(ctx.uses[r.id]||0); s-= u*(batchSt?1.5:4); if(u>=(batchSt?3:2)) s-=12;
   if(ctx.dayRecipes && ctx.dayRecipes.has(r.id)) s-=10;
-  let shared=0; recipeIngs(r).forEach(i=>{ if(ctx.ings.has(i.k) && !['salt','spices','oil','sugar'].includes(i.k)) shared++; }); s+=Math.min(shared,4)*0.25;
+  let shared=0; recipeIngs(r).forEach(i=>{ if(ctx.ings.has(i.k) && !['salt','spices','oil','sugar','black_pepper'].includes(i.k)) shared++; }); s+=Math.min(shared,4)*0.25;
   if(ctx.target){ const pc=portionCost(r); s-=Math.max(-1,Math.min(3,(pc/ctx.target[r.m.includes(ctx.m)?ctx.m:'d']-1)*2)); }
+  if((ctx.m==='l'||ctx.m==='d') && meatAllowed() && ctx.ld!=null){ const sh=ctx.meatN/Math.max(1,ctx.ld);
+    if(r.meat) s+= sh<MEAT_SHARE?2.2:-1.4; else s-= sh<MEAT_SHARE-0.05?0.8:0; }
+  s+=Math.min(r.fi||0,10)*0.08;
+  if(ctx.pNeed && r.kind!=='s'){ s+=Math.max(-1.5,Math.min(2,(r.p-ctx.pNeed)/12)); }
   return s;
 }
 function slotRecipe(plan,i){ const s=plan.slots[i]; return s && s.r ? RMAP[s.r] : null; }
@@ -192,67 +270,105 @@ function shopping(){
 function shopTotalFor(slots){ const save=S.plan; S.plan=Object.assign({},save||{},{slots}); const t=shopping().total; S.plan=save; return t; }
 
 /* ====== ПЛАНИРОВЩИК ======
-   1) фильтр по приёму пищи, диете, аллергенам, нелюбимому, технике;
-   2) жадный выбор по баллам (стиль, кухня, разнообразие, общие ингредиенты, цена порции относительно цели);
+   1) фильтр по приёму пищи (обед↔ужин взаимозаменяемы), диете, аллергенам, нелюбимому, технике;
+   2) жадный выбор по баллам (стиль, кухня, разнообразие — не больше 2 повторов за неделю, общие ингредиенты,
+      цена порции относительно цели, ~65 % обедов/ужинов с мясом, белок);
    3) «готовка впрок»: обед следующего дня = остатки ужина (если рецепт batch);
-   4) подгонка под бюджет: пока корзина (целыми упаковками) дороже бюджета — меняем самое дорогое блюдо на более дешёвое подходящее. */
-function generatePlan(seed){
-  const a=S.A; const days=dayOrder(), meals=mealOrder(); const p=portions();
+   4) баланс дней под нормы: белок ≥ нормы (жёстко: замена блюда или белковый перекус), ккал в пределах ±10 %;
+   5) подгонка под бюджет без потери белка; если не выходит — предупреждение о компромиссе. */
+function generatePlan(seed,trial){
+  const a=S.A; const days=dayOrder(), meals=mealOrder();
   const perPortion=a.budget/(Math.max(1,portionsPerWeek()));
   const baseSum=meals.reduce((s,m)=>s+mealBase(m),0)/meals.length;
   const target={}; MEALS.forEach(m=>target[m.id]=perPortion*mealBase(m.id)/baseSum);
-  S.plan={seed:seed||String(Date.now()),slots:[]};
-  const ctx={uses:{},ings:new Set(),target};
+  const T=targets().ref;
+  S.plan={seed:seed||String(Date.now()),slots:[],noTop:{}};
+  const ctx={uses:{},ings:new Set(),target,meatN:0,ld:0};
   const cands={}; meals.forEach(m=>cands[m]=candidates(m));
   const batch=a.styles.includes('batch')&&meals.includes('l')&&meals.includes('d');
   let prevDinner=-1;
   days.forEach((d,di)=>{
-    ctx.dayRecipes=new Set();
-    meals.forEach(m=>{
+    ctx.dayRecipes=new Set(); let dayP=0;
+    meals.forEach((m,mi)=>{
       const slots=S.plan.slots;
+      const left=meals.slice(mi).reduce((x,y)=>x+MEAL_SHARE[y],0)||1;
+      ctx.pNeed=Math.max(0,(T.pmin-dayP))*MEAL_SHARE[m]/left;
+      const take=(r,extra)=>{ slots.push(Object.assign({d,m,r:r.id},extra||{})); dayP+=r.p; ctx.dayRecipes.add(r.id);
+        if((m==='l'||m==='d')){ ctx.ld++; if(r.meat) ctx.meatN++; } };
       if(m==='l' && batch && prevDinner>=0){ const src=slots[prevDinner]; const r=src.r&&RMAP[src.r];
-        if(r && r.tags.includes('batch') && r.m.includes('l') && !slots.some(x=>x.src===prevDinner)){
-          slots.push({d,m,r:src.r,src:prevDinner,left:true}); ctx.dayRecipes.add(src.r); return; } }
+        if(r && r.tags.includes('batch') && mealOk(r,'l') && !slots.some(x=>x.src===prevDinner)){ take(r,{src:prevDinner,left:true}); return; } }
       const list=cands[m]; if(!list.length){ slots.push({d,m,r:null}); return; }
       ctx.m=m; let best=null,bs=-1e9;
       list.forEach(r=>{ const sc=recipeScore(r,ctx,d+m); if(sc>bs){bs=sc;best=r;} });
-      slots.push({d,m,r:best.id}); ctx.uses[best.id]=(ctx.uses[best.id]||0)+1; ctx.dayRecipes.add(best.id);
+      take(best); ctx.uses[best.id]=(ctx.uses[best.id]||0)+1;
       recipeIngs(best).forEach(i=>ctx.ings.add(i.k));
       if(m==='d') prevDinner=slots.length-1;
     });
   });
   fitBudget(cands);
-  topUpKcal();
+  balanceDays(cands);
   fitBudget(cands);
-  save();
+  const sh=shopping();
+  S.plan.tradeoff = sh.total>a.budget && S.plan.pBlocked>0;
+  if(!trial) save();
 }
-/* ====== СЫТОСТЬ ======
-   Если в день на взрослого < KCAL_DAY_MIN (например, выбраны не все приёмы пищи) —
-   добавляем перекус (до 2 в день): сытный и недорогой. Помечается auto:true, в плане — подсказка. */
-const KCAL_DAY_MIN=1700;
-function topUpKcal(){
-  const slots=S.plan.slots; const snacks=candidates('s'); if(!snacks.length) return;
+function dayP(d){ return dayTotals(d).p; }
+/* Перекусы и баланс дня. Авто-перекусы добавляются, только если выбрано ≥2 основных приёмов пищи. */
+function balanceDays(cands){
+  const T=targets().ref, slots=S.plan.slots; const full=mainMeals()>=2;
   const used={}; slots.forEach(x=>{ if(x.r) used[x.r]=(used[x.r]||0)+1; });
+  const maxUse=S.A.styles.includes('batch')?3:2;
+  const snacks=candidates('s'); const psn=snacks.filter(r=>r.tags.includes('psnack')||r.p*4/r.k>=0.25);
   dayOrder().forEach(d=>{
-    for(let n=0;n<2;n++){ const k=dayTotals(d).k; if(k>=KCAL_DAY_MIN) break;
-      const need=KCAL_DAY_MIN-k, inDay=new Set(slots.filter(x=>x.d===d).map(x=>x.r));
-      const pick=snacks.filter(r=>!inDay.has(r.id)&&(used[r.id]||0)<2)
-        .map(r=>({r,sc:Math.min(r.k,need+150)/Math.max(15,portionCost(r))+hash(S.plan.seed+r.id+d)*0.5}))
+    const inDay=()=>new Set(slots.filter(x=>x.d===d).map(x=>x.r));
+    // 1) белок: меняем блюдо дня на более белковое того же приёма (без лишних ккал)
+    for(let g=0; g<4 && dayP(d)<T.pmin; g++){
+      const t=dayTotals(d); let best=null;
+      slots.forEach((s,i)=>{ if(s.d!==d||!s.r||s.left||s.auto||slots.some(x=>x.src===i)) return; const cur=RMAP[s.r]; const ids=inDay();
+        (cands[s.m]||candidates(s.m)).forEach(r=>{ if(ids.has(r.id)||(used[r.id]||0)>=maxUse) return; const dp=r.p-cur.p; if(dp<5) return;
+          const nk=t.k-cur.k+r.k; if(full && nk>T.k*1.1) return;
+          const sc=dp - Math.max(0,portionCost(r)-portionCost(cur))*0.15 - Math.abs(nk-T.k)/80;
+          if(!best||sc>best.sc) best={i,r,sc,cur}; }); });
+      if(!best) break; used[best.cur.id]--; used[best.r.id]=(used[best.r.id]||0)+1; replaceSlot(best.i,best.r.id);
+    }
+    if(!full) return;
+    // 2) белковый перекус, если белка всё ещё мало
+    for(let n=0;n<2 && dayP(d)<T.pmin;n++){ const ids=inDay();
+      const pick=psn.filter(r=>!ids.has(r.id)&&(used[r.id]||0)<maxUse).map(r=>({r,sc:Math.min(r.p,T.pmin-dayP(d)+5)/Math.max(10,portionCost(r))-Math.max(0,dayTotals(d).k+r.k-T.k*1.1)/50}))
+        .sort((a,b)=>b.sc-a.sc)[0];
+      if(!pick) break; slots.push({d,m:'s',r:pick.r.id,auto:true,prot:true}); used[pick.r.id]=(used[pick.r.id]||0)+1; }
+    // 3) калории: добираем до −10 % перекусами (не больше 2 авто-перекусов в день)
+    for(let n=0;n<2;n++){ const k=dayTotals(d).k; if(k>=T.k*0.9) break; if(slots.filter(x=>x.d===d&&x.auto).length>=2) break;
+      const need=T.k-k, ids=inDay();
+      const pick=snacks.filter(r=>!ids.has(r.id)&&(used[r.id]||0)<2)
+        .map(r=>({r,sc:Math.min(r.k,need+100)/Math.max(15,portionCost(r))-Math.max(0,r.k-need-150)/40+hash(S.plan.seed+r.id+d)*0.5}))
         .sort((a,b)=>b.sc-a.sc)[0];
       if(!pick) break; slots.push({d,m:'s',r:pick.r.id,auto:true}); used[pick.r.id]=(used[pick.r.id]||0)+1; }
+    // 4) перебор ккал > +10 %: меняем самое калорийное блюдо на более лёгкое, не роняя белок ниже нормы
+    for(let g=0; g<3 && dayTotals(d).k>T.k*1.1; g++){
+      const t=dayTotals(d); let best=null; const ids=inDay();
+      const au=slots.findIndex(x=>x.d===d&&x.auto&&!x.prot&&x.r); if(au>=0){ const r=RMAP[slots[au].r]; if(t.k-r.k>=T.k*0.9){ slots[au].r=null; slots[au].hidden=true; continue; } }
+      slots.forEach((s,i)=>{ if(s.d!==d||!s.r||s.left||s.auto||slots.some(x=>x.src===i)) return; const cur=RMAP[s.r];
+        (cands[s.m]||candidates(s.m)).forEach(r=>{ if(ids.has(r.id)||(used[r.id]||0)>=maxUse) return; const nk=t.k-cur.k+r.k, np=t.p-cur.p+r.p;
+          if(nk>=t.k-40||np<Math.min(T.pmin,t.p)) return; const sc=-Math.abs(nk-T.k)-Math.max(0,portionCost(r)-portionCost(cur))*2; if(!best||sc>best.sc) best={i,r,sc,cur}; }); });
+      if(!best) break; used[best.cur.id]--; used[best.r.id]=(used[best.r.id]||0)+1; replaceSlot(best.i,best.r.id);
+    }
   });
 }
 function fitBudget(cands){
-  const slots=S.plan.slots; const maxUse=S.A.styles.includes('batch')?3:2;
+  const slots=S.plan.slots; const maxUse=S.A.styles.includes('batch')?3:2; const T=targets().ref;
   const uses=()=>{const u={}; slots.forEach(s=>{ if(s.r&&!s.left) u[s.r]=(u[s.r]||0)+1; }); return u;};
-  let total=shopping().total, guard=0;
+  let total=shopping().total, guard=0; S.plan.pBlocked=S.plan.pBlocked||0;
   while(total>S.A.budget && guard++<150){
-    const u=uses(); let best=null;
-    slots.forEach((s,i)=>{ if(!s.r||s.left) return; const cur=portionCost(RMAP[s.r]);
-      const same=new Set(slots.filter(x=>x.d===s.d).map(x=>x.r));
-      const alts=(cands[s.m]||candidates(s.m)).filter(r=>r.id!==s.r && !same.has(r.id) && (u[r.id]||0)<maxUse && portionCost(r)<cur*0.9)
+    const u=uses(); let best=null; const dt={};
+    slots.forEach((s,i)=>{ if(!s.r||s.left) return; const cur=RMAP[s.r];
+      const curC=portionCost(cur); if(dt[s.d]==null) dt[s.d]=dayTotals(s.d);
+      const t=dt[s.d], same=new Set(slots.filter(x=>x.d===s.d).map(x=>x.r));
+      const pool=s.auto?candidates('s'):(cands[s.m]||candidates(s.m));
+      const alts=pool.filter(r=>r.id!==s.r && !same.has(r.id) && (u[r.id]||0)<maxUse && portionCost(r)<curC*0.9)
+        .filter(r=>{ const np=t.p-cur.p+r.p; const ok=np>=Math.min(T.pmin,t.p)||np>=T.pmin; if(!ok) S.plan.pBlocked++; return ok; })
         .sort((x,y)=>portionCost(x)-portionCost(y)).slice(0,3).sort((x,y)=>(u[x.id]||0)-(u[y.id]||0));
-      if(!alts.length) return; const sav=cur-portionCost(alts[0]);
+      if(!alts.length) return; const sav=curC-portionCost(alts[0]);
       if(!best||sav>best.sav) best={i,r:alts[0].id,sav}; });
     if(!best) break;
     replaceSlot(best.i,best.r);
@@ -261,16 +377,27 @@ function fitBudget(cands){
 }
 function replaceSlot(i,rid){ const slots=S.plan.slots; slots[i].r=rid; slots[i].left=false; delete slots[i].src;
   slots.forEach(x=>{ if(x.src===i) x.r=rid; }); }
-function swapMeal(i){
-  const s=S.plan.slots[i]; if(!s) return;
+/* Замена: шторка с 4 вариантами + «Отменить» */
+function swapOptions(i){
+  const s=S.plan.slots[i]; const pool=s.auto?candidates('s'):candidates(s.m);
   const ctx={uses:{},ings:new Set(),m:s.m}; S.plan.slots.forEach(x=>{ if(x.r) ctx.uses[x.r]=(ctx.uses[x.r]||0)+1; });
   ctx.dayRecipes=new Set(S.plan.slots.filter(x=>x.d===s.d&&x!==s).map(x=>x.r));
-  const alts=candidates(s.m).filter(r=>r.id!==s.r).map(r=>({r,sc:recipeScore(r,ctx,'swap'+s.d+s.m)})).sort((a,b)=>b.sc-a.sc);
-  if(!alts.length){ toast('Других подходящих рецептов нет'); return; }
-  s.sw=(s.sw||0)+1; const pick=alts[(s.sw-1)%Math.min(alts.length,8)].r;
-  replaceSlot(i,pick.id); save(); render(); toast('Заменили на «'+pick.t+'»');
+  return pool.filter(r=>r.id!==s.r).map(r=>({r,sc:recipeScore(r,ctx,'swap'+(s.sw||0)+s.d+s.m)})).sort((a,b)=>b.sc-a.sc).map(x=>x.r);
 }
-function dayTotals(d){ const t={k:0,p:0,f:0,c:0}; S.plan.slots.filter(s=>s.d===d&&s.r).forEach(s=>{const r=RMAP[s.r]; t.k+=r.k;t.p+=r.p;t.f+=r.f;t.c+=r.cb;}); return t; }
+function swapMeal(i){
+  const s=S.plan.slots[i]; if(!s) return; const alts=swapOptions(i);
+  if(!alts.length){ toast('Других подходящих рецептов нет'); return; }
+  const cur=RMAP[s.r]; const list=alts.slice(0,4);
+  modal(`<h3>Заменить ${MEALMAP[s.m].name.toLowerCase()} · ${DAYS_FULL[s.d]}</h3><p>Сейчас: «${esc(cur?cur.t:'—')}»${cur?` · ${cur.k}${NB}ккал · белок ${cur.p}${NB}г`:''}</p>
+  <div class="swlist">${list.map(r=>`<button class="swopt" data-act="doswap" data-i="${i}" data-id="${r.id}">${photo(r,'thumb')}<div class="mi"><div class="mt">${esc(r.t)}</div><div class="mm">${totalTime(r)}${NB}мин · ${r.k}${NB}ккал · Б${NB}${r.p}${NB}г · ~${fmt(portionCost(r))}${NB}₽</div></div></button>`).join('')}</div>
+  <div class="stack" style="margin-top:10px">${alts.length>4?`<button class="btn sec sm" data-act="swapmore" data-i="${i}">Другие варианты</button>`:''}<button class="btn sec sm" data-act="closemodal">Отмена</button></div>`);
+}
+let undoState=null;
+function doSwap(i,rid){ const s=S.plan.slots[i]; undoState={i,r:s.r,left:s.left,src:s.src,deps:S.plan.slots.map((x,j)=>x.src===i?j:-1).filter(j=>j>=0)};
+  replaceSlot(i,rid); closeModal(); save(); render(); toast('Заменили на «'+RMAP[rid].t+'»',{act:'undo',label:'Отменить'}); }
+function undoSwap(){ if(!undoState) return; const u=undoState, s=S.plan.slots[u.i]; s.r=u.r; s.left=u.left; if(u.src!=null) s.src=u.src;
+  u.deps.forEach(j=>{ S.plan.slots[j].r=u.r; }); undoState=null; save(); render(); toast('Замена отменена'); }
+function dayTotals(d){ const t={k:0,p:0,f:0,c:0,fi:0,su:0}; S.plan.slots.filter(s=>s.d===d&&s.r).forEach(s=>{const r=RMAP[s.r]; t.k+=r.k;t.p+=r.p;t.f+=r.f;t.c+=r.cb;t.fi+=r.fi||0;t.su+=r.su||0;}); return t; }
 
 /* ====== РЕНДЕР ====== */
 const app=document.getElementById('app');
@@ -313,11 +440,36 @@ function renderIntro(){
    has?`<button class="btn" data-act="continue">Продолжить</button><button class="btn sec sm" data-act="restart">Начать заново</button>`:`<button class="btn" data-act="go" data-to="q1">Составить план за 2 минуты</button>`}</div>`;
 }
 function stepShell(sc,title,sub,body,btn,opts={}){
-  const n=STEPS.indexOf(sc)+1;
-  return header({back:'prev',title:APP_NAME,right:opts.right||`<span>${n} из ${STEPS.length}</span>`,prog:Math.round(n/STEPS.length*100)})+
+  const n=STEPS.indexOf(sc)+1, ed=S.editing===sc&&S.plan;
+  if(ed) btn=`<button class="btn" data-act="saveedit">${sc==='q11'?'Сохранить и пересобрать':'Сохранить'}</button>`;
+  return header({back:'prev',title:APP_NAME,right:ed?'<span>Изменение ответа</span>':(opts.right||`<span>${n} из ${STEPS.length}</span>`),prog:ed?null:Math.round(n/STEPS.length*100)})+
    `<div class="content"><h1>${title}</h1>${sub?`<p class="sub">${sub}</p>`:''}${body}
-   <button class="restart" data-act="restart">Начать заново</button></div>
+   ${ed?'<p class="foot">После сохранения план пересоберётся с учётом изменений.</p>':'<button class="restart" data-act="restart">Начать заново</button>'}</div>
    <div class="bottom">${btn}</div>`;
+}
+/* --- шаг «Параметры для расчёта КБЖУ» (необязательный) --- */
+function peopleObj(){ const a=S.A; const P=a.people?JSON.parse(JSON.stringify(a.people)):{ad:[],kd:[]};
+  P.ad=P.ad||[]; P.kd=P.kd||[]; while(P.ad.length<a.adults) P.ad.push({sex:P.ad.length%2?'m':'f',age:null,h:null,w:null,act:1,goal:'keep'}); P.ad.length=a.adults;
+  while(P.kd.length<a.kids) P.kd.push({age:null}); P.kd.length=a.kids; return P; }
+function ptgtHtml(i,kid){ if(!S.A.people) return 'Пока не заполнено — посчитаем по среднему взрослому.'; const T=targets();
+  if(kid){ const t=T.kd[i]; return S.A.people.kd&&S.A.people.kd[i]&&S.A.people.kd[i].age?`Норма: <b>${fmt(t.k)} ккал</b> · белок <b>${t.pmin} г</b> · порция ×${dec(t.factor)} от взрослой`:'Укажите возраст.'; }
+  const t=T.ad[i]; return `${t.def?'Заполните возраст, рост и вес — пока по среднему: ':'Норма: '}<b>${fmt(t.k)} ккал</b> · белок <b>${t.pmin}–${t.pgood} г</b>${t.w&&!t.def?` (${dec(t.pmin/t.w)}–${dec(t.pgood/t.w)} г/кг)`:''}`; }
+function renderQ2b(){
+  const P=peopleObj();
+  const num=(f,i,v,ph,min,max)=>`<label class="pf"><span>${ph}</span><input type="number" inputmode="numeric" min="${min}" max="${max}" data-pf="${f}" data-i="${i}" value="${v==null?'':v}"></label>`;
+  const ad=P.ad.map((x,i)=>{
+    return `<div class="card pcard"><div class="pt">👤 Взрослый ${P.ad.length>1?i+1:''}</div>
+    <div class="seg2">${[['f','Женщина'],['m','Мужчина']].map(o=>`<button class="${x.sex===o[0]?'on':''}" data-act="pset" data-f="sex" data-i="${i}" data-id="${o[0]}">${o[1]}</button>`).join('')}</div>
+    <div class="pgrid">${num('age',i,x.age,'Возраст, лет',14,100)}${num('h',i,x.h,'Рост, см',120,230)}${num('w',i,x.w,'Вес, кг',35,250)}</div>
+    <label class="pf wide"><span>Активность</span><select data-pf="act" data-i="${i}">${ACT.map((a,j)=>`<option value="${j}" ${(x.act==null?1:+x.act)===j?'selected':''}>${a[1]} — ${a[2]}</option>`).join('')}</select></label>
+    <div class="seg2 three">${GOALS.map(o=>`<button class="${x.goal===o[0]?'on':''}" data-act="pset" data-f="goal" data-i="${i}" data-id="${o[0]}">${o[1]}</button>`).join('')}</div>
+    <div class="ptgt" id="ptgt${i}">${ptgtHtml(i)}</div></div>`; }).join('');
+  const kd=P.kd.map((x,i)=>`<div class="card pcard"><div class="pt">🧒 Ребёнок ${P.kd.length>1?i+1:''}</div><div class="pgrid">${num('kage',i,x.age,'Возраст, лет',1,17)}</div>
+    <div class="ptgt" id="ptgtk${i}">${ptgtHtml(i,true)}</div></div>`).join('');
+  return stepShell('q2b','Параметры для расчёта КБЖУ','Необязательно. Подберём калории и белок под каждого — или пропустите, тогда посчитаем по среднему взрослому.',
+    `<div class="stack">${ad}${kd}</div>
+    <details class="howcalc"><summary>Как считаем</summary><p>Калории — по формуле Миффлина — Сан Жеора с учётом активности; для снижения веса −18 %, для набора +10 %. Белок — 1,2–1,6 г на кг веса (1,6–2,0 г/кг при снижении веса или наборе), не меньше 1,0 г/кг. Жиры — 25–35 % калорий, клетчатка — от 25–30 г в день, добавленный сахар — меньше 10 % калорий (ВОЗ). Детям — по возрастным нормам Роспотребнадзора (МР 2.3.1.0253-21). Без параметров: ~2000 ккал для женщины, ~2400 для мужчины, белок ~85 г.</p><p><b>Это ориентир для планирования меню, а не медицинская рекомендация.</b> При заболеваниях, беременности или специальной диете посоветуйтесь с врачом.</p></details>`,
+    `<div class="row2"><button class="btn sec" data-act="pskip">Пропустить</button><button class="btn" data-act="next">Далее</button></div>`);
 }
 function optCard(act,id,sel,inner,cls=''){ return `<button class="opt ${cls} ${sel?'sel':''}" data-act="${act}" data-id="${id}">${CK}${inner}</button>`; }
 function renderStep(sc){
@@ -335,8 +487,10 @@ function renderStep(sc){
      <div class="stepper-card"><div><div class="t">🧒 Дети</div><div class="s">половина порции</div></div><div class="stepper"><button data-act="cnt" data-id="kids" data-d="-1" ${a.kids<=0?'disabled':''}>−</button><span class="v">${a.kids}</span><button data-act="cnt" data-id="kids" data-d="1" ${a.kids>=10?'disabled':''}>+</button></div></div>
      <div class="sect center" style="margin-top:8px"><div class="mut small" style="font-weight:700">Порций за приём</div><div class="bignum" style="margin-top:6px">${dec(p)}</div></div></div>`,
     `<button class="btn" data-act="next">Далее</button>`); }
+  case 'q2b': return renderQ2b();
   case 'q3': return stepShell(sc,'Какие приёмы пищи планируем?','Можно выбрать несколько.',
-    `<div class="list">${MEALS.map(m=>optCard('meal',m.id,a.meals.includes(m.id),`<span class="em">${ill('meal_'+m.id,m.e,'')}</span><div><div class="t">${m.name}</div><div class="s">${m.sub}</div></div>`,'row')).join('')}</div>`,
+    `<div class="list">${MEALS.map(m=>optCard('meal',m.id,a.meals.includes(m.id),`<span class="em">${ill('meal_'+m.id,m.e,'')}</span><div><div class="t">${m.name}</div><div class="s">${m.sub}</div></div>`,'row')).join('')}</div>
+    ${a.meals.length&&mainMeals()<2?`<div class="warn">План покроет только ${a.meals.map(m=>MEALMAP[m].name.toLowerCase()).join(' и ')} — это не полный рацион на день. Перекусы до дневной нормы добавлять не будем; калории и белок посчитаем для этой части дня.</div>`:''}`,
     `<button class="btn" data-act="next" ${a.meals.length?'':'disabled'}>Далее</button>`);
   case 'q4': return stepShell(sc,'В какие дни готовим?','Отметьте дни, на которые нужен план.',
     `<div class="daychips">${DAYS.map((d,i)=>`<button class="chip ${a.days.includes(i)?'sel':''}" data-act="day" data-id="${i}">${d}</button>`).join('')}</div>
@@ -358,26 +512,27 @@ function renderStep(sc){
     `<button class="btn" data-act="next">Подтвердить</button>`);
   case 'q9': return stepShell(sc,'Что не любите?','Такие продукты не попадут в план. Лук, чеснок, зелень и специи просто уберём из рецепта.',
     `<div class="search">${ICON.search}<input type="search" placeholder="Найти продукт" data-search="chips" autocomplete="off"></div>
-    <div class="chips" id="flt">${DISLIKES.map(d=>`<button class="chip ${a.dislikes.includes(d[0])?'sel':''}" data-act="dislike" data-id="${d[0]}" data-name="${d[1]}">${d[2]} ${d[1]}${a.dislikes.includes(d[0])?' <span class="x">×</span>':''}</button>`).join('')}</div>`,
+    <div class="nores" id="nores" hidden>Ничего не найдено. Попробуйте другое слово.</div><div class="chips" id="flt">${DISLIKES.map(d=>`<button class="chip ${a.dislikes.includes(d[0])?'sel':''}" data-act="dislike" data-id="${d[0]}" data-name="${d[1]}">${d[2]} ${d[1]}${a.dislikes.includes(d[0])?' <span class="x">×</span>':''}</button>`).join('')}</div>`,
     `<button class="btn ${a.dislikes.length?'':'sec'}" data-act="next">${a.dislikes.length?'Далее':'Пропустить'}</button>`);
   case 'q10': { const tabs=[['all','Все'],['fresh','Свежее'],['meat','Мясо'],['fridge','Холодильник'],['groc','Бакалея']];
     const keys=PANTRY_FIRST.concat(Object.keys(ING).filter(k=>!PANTRY_FIRST.includes(k)));
     return stepShell(sc,'Что уже есть дома?','Эти продукты отметим «есть дома» и не будем считать в корзине.',
     `<div class="search">${ICON.search}<input type="search" placeholder="Поиск продуктов" data-search="tiles" autocomplete="off"></div>
     <div class="tabs">${tabs.map(t=>`<button class="tab ${S.ptab===t[0]?'on':''}" data-act="ptab" data-id="${t[0]}">${t[1]}</button>`).join('')}</div>
-    <div class="grid3" id="flt">${keys.filter(k=>S.ptab==='all'||pantryCat(k)===S.ptab).map(k=>{const g=ING[k];
+    <div class="nores" id="nores" hidden>Ничего не найдено. Попробуйте другое слово.</div><div class="grid3" id="flt">${keys.filter(k=>S.ptab==='all'||pantryCat(k)===S.ptab).map(k=>{const g=ING[k];
       return `<button class="tile ${a.pantry.includes(k)?'sel':''}" data-act="pantry" data-id="${k}" data-name="${esc(g.name.toLowerCase())}">${CK}<span class="em">${ill('p_'+k,g.e,'')}</span>${esc(shortName(g.name))}</button>`;}).join('')}</div>`,
-    `<button class="btn" data-act="next">Продолжить · ${a.pantry.length} ${plural(a.pantry.length,'выбран','выбрано','выбрано')}</button>`); }
-  case 'q11': { if(a.budget==null){ a.budget=defaultBudget(); save(); } const rg=budgetRange(); const p=portions();
+    `<button class="btn" data-act="next">${a.pantry.length?`Продолжить · ${a.pantry.length} ${plural(a.pantry.length,'продукт','продукта','продуктов')}`:'Пропустить'}</button>`); }
+  case 'q11': { if(a.budget==null){ a.budget=defaultBudget(); a.budgetManual=false; save(); } const rg=budgetRange(); const p=portions(); const rec=defaultBudget();
     return stepShell(sc,'Бюджет на неделю','',
     `<p class="sub" style="margin-top:-4px">${a.adults} ${plural(a.adults,'взрослый','взрослых','взрослых')} · ${a.kids} ${plural(a.kids,'ребёнок','ребёнка','детей')} · ${a.meals.length} ${plural(a.meals.length,'приём','приёма','приёмов')}/день · ${dec(p)} ${plural(Math.ceil(p),'порция','порции','порций')}</p>
     <div class="budget-box"><label class="budget-input"><span>₽</span><input id="bin" inputmode="numeric" pattern="[0-9]*" value="${fmt(a.budget)}" aria-label="Бюджет на неделю"></label>
-    <div class="mut small" style="margin-top:6px">нажмите на сумму, чтобы ввести</div></div>
+    <div class="mut small" style="margin-top:6px">нажмите на сумму, чтобы ввести</div>
+    ${a.budgetManual&&Math.abs(a.budget-rec)/rec>0.15?`<button class="linkbtn" data-act="budrec">Рекомендуем ${rub(rec)} — применить</button>`:''}</div>
     <input type="range" id="brange" min="${rg.min}" max="${rg.max}" step="100" value="${Math.min(rg.max,Math.max(rg.min,a.budget))}">
     <div class="range-l"><span>${rub(rg.min)}</span><span>${rub(rg.max)}</span></div>
     <div id="bstatus"></div>
     <div class="metrics"><div class="metric"><div class="v" id="m1"></div><div class="l">₽ / неделя</div></div><div class="metric"><div class="v" id="m2"></div><div class="l">₽ / порция</div></div><div class="metric"><div class="v" id="m3"></div><div class="l">порций / неделя</div></div></div>
-    <p class="foot">Оценка: ${priceNote()}.</p>`,
+    <p class="foot">Оценка по пробному плану с вашими ответами (целые упаковки, перекусы). ${priceNote()}</p>`,
     `<button class="btn" data-act="build">Собрать план</button>`); }
   }
   return '';
@@ -393,7 +548,7 @@ function updateBudgetUI(){
   document.getElementById('m3').textContent=dec(ppw);
   const r=document.getElementById('brange'); const rg=budgetRange();
   r.style.setProperty('--p',((Math.min(rg.max,Math.max(rg.min,b))-rg.min)/(rg.max-rg.min)*100)+'%');
-  const btn=document.querySelector('[data-act=build]'); if(btn) btn.disabled=b<300;
+  const btn=document.querySelector('[data-act=build],[data-act=saveedit]'); if(btn) btn.disabled=b<300;
 }
 /* --- загрузка --- */
 let loadingRun=false;
@@ -407,12 +562,14 @@ function renderLoading(){
 }
 function runLoading(){
   if(loadingRun) return; loadingRun=true;
+  if(S.A.budget==null) S.A.budget=defaultBudget();
   try{ generatePlan(); }catch(e){ console.error(e); }
+  const step=S.quick?230:600; S.quick=false;
   let i=0; const tick=()=>{ const prev=document.getElementById('cl'+(i-1)); if(prev){prev.classList.remove('cur');prev.classList.add('done');}
     const lb=document.getElementById('lbar'); if(lb) lb.style.width=Math.round(i/LSTEPS.length*100)+'%';
-    if(i>=LSTEPS.length){ setTimeout(()=>{ loadingRun=false; S.tab='week'; hap('ok'); set({screen:'app'}); },450); return; }
-    const c=document.getElementById('cl'+i); if(c) c.classList.add('cur'); i++; setTimeout(tick, 600); };
-  setTimeout(tick,250);
+    if(i>=LSTEPS.length){ setTimeout(()=>{ loadingRun=false; S.tab='week'; hap('ok'); set({screen:'app'}); },step===600?450:200); return; }
+    const c=document.getElementById('cl'+i); if(c) c.classList.add('cur'); i++; setTimeout(tick, step); };
+  setTimeout(tick,step===600?250:100);
 }
 /* --- основное приложение --- */
 function renderApp(){
@@ -426,31 +583,55 @@ function renderApp(){
   <nav class="nav">${tabs.map(t=>`<button class="${S.tab===t[0]?'on':''}" data-act="tab" data-id="${t[0]}">${t[2]}${t[1]}</button>`).join('')}</nav>`;
 }
 function budgetPill(total){ const b=S.A.budget; return total<=b?`<span class="pill ok">✓ В бюджете</span>`:`<span class="pill bad">+${rub(total-b)}</span>`; }
-function mealMeta(r){ return `${r.prep+r.cook}${NB}мин · ${r.k}${NB}ккал · ${fmt(portionCost(r))}${NB}₽/порц`; }
+function mealMeta(r){ return `${totalTime(r)}${NB}мин${r.rest?' '+restText(r):''} · ${r.k}${NB}ккал · ${fmt(portionCost(r))}${NB}₽/порц`; }
 function macroBar(t){ const p=t.p*4,f=t.f*9,c=t.c*4,s=p+f+c||1;
   return `<div class="mbar"><i class="p" style="width:${(p/s*100).toFixed(1)}%"></i><i class="f" style="width:${(f/s*100).toFixed(1)}%"></i><i class="c" style="width:${(c/s*100).toFixed(1)}%"></i></div>
-  <div class="mleg"><span class="lg-p">Б ${fmt(t.p)}${NB}г</span><span class="lg-f">Ж ${fmt(t.f)}${NB}г</span><span class="lg-c">У ${fmt(t.c)}${NB}г</span></div>`; }
+  <div class="mleg"><span class="lg-p">Б ${fmt(t.p)}${NB}г</span><span class="lg-f">Ж ${fmt(t.f)}${NB}г</span><span class="lg-c">У ${fmt(t.c)}${NB}г</span><span class="lg-fi">Клетч. ${fmt(t.fi)}${NB}г</span></div>`; }
+/* Прогресс дня к нормам для каждого едока: зелёный — в норме, жёлтый — рядом/вне диапазона */
+function mk(ok,warn){ return ok?'g':(warn?'y':'r'); }
+function personRows(t){
+  const T=targets(); const cov=T.cov; const rows=[];
+  const one=(name,tg,f)=>{ const k=t.k*f, p=t.p*f, fa=t.f*f, c=t.c*f, fi=t.fi*f, K=tg.k*cov, Pm=tg.pmin*cov;
+    const kOk=Math.abs(k-K)<=K*0.1, pOk=p>=Pm, faOk=fa>=tg.fat[0]*cov*0.9&&fa<=tg.fat[1]*cov*1.1, fiOk=fi>=tg.fib*cov*0.8;
+    const cMin=(K-Pm*4-tg.fat[1]*cov*9)/4;
+    return `<div class="prog-row"><span class="pn">${name}${f!==1?` <i>×${dec(f)}</i>`:''}</span>
+     <span class="pm ${mk(kOk,Math.abs(k-K)<=K*0.2)}">${fmt(Math.round(k/10)*10)}/${fmt(Math.round(K/10)*10)} ккал</span>
+     <span class="pm ${mk(pOk,p>=Pm*0.9)}">Б ${Math.round(p)}/${Math.round(Pm)}${NB}г${tg.w?` · ${dec(p/tg.w)}${NB}г/кг`:''}</span>
+     <span class="pm ${mk(faOk,true)}">Ж ${Math.round(fa)}</span><span class="pm ${mk(c>=cMin*0.8,true)}">У ${Math.round(c)}</span><span class="pm ${mk(fiOk,fi>=tg.fib*cov*0.5)}">Кл ${Math.round(fi)}/${Math.round(tg.fib*cov)}</span></div>`; };
+  T.ad.forEach((tg,i)=>rows.push(one(T.ad.length>1?(T.set?`Взрослый ${i+1}`:`Взрослый ${i+1}`):'Взрослый',tg,tg.factor||1)));
+  T.kd.forEach((tg,i)=>rows.push(one(T.kd.length>1?`Ребёнок ${i+1}`:'Ребёнок',tg,tg.factor)));
+  return `<div class="progbox">${rows.join('')}</div>`; }
 function renderWeek(){
-  const sh=shopping(); const plan=S.plan; const n=plan.slots.filter(s=>s.r).length;
+  const sh=shopping(); const plan=S.plan; const n=plan.slots.filter(s=>s.r).length; const T=targets();
   let html=`<h1>Ваша неделя готова!</h1><p class="sub">${n} ${plural(n,'блюдо','блюда','блюд')} · ${store().name} · ${dec(portions())} ${plural(Math.ceil(portions()),'порция','порции','порций')} за приём</p>
   <button class="shopcard" data-act="tab" data-id="shop"><span class="ic">🛒</span><div style="flex:1;min-width:0"><div class="t">Список покупок</div><div class="s">${sh.items.length} ${plural(sh.items.length,'позиция','позиции','позиций')} · ~${rub(sh.total)} из ${rub(S.A.budget)}</div></div>${budgetPill(sh.total)}</button>`;
   const days=dayOrder(); const pp=portions();
+  const bad=plan.slots.filter(s=>s.r&&whyNot(RMAP[s.r]));
+  if(bad.length) html+=`<div class="warn">${bad.length} ${plural(bad.length,'блюдо','блюда','блюд')} в плане не подходят под ваши ответы (например, «${esc(RMAP[bad[0].r].t)}»: ${esc(whyNot(RMAP[bad[0].r]))}). <button class="linkbtn" data-act="regen">Пересобрать план</button></div>`;
   const avgK=days.length?days.reduce((a,d)=>a+dayTotals(d).k,0)/days.length:0;
-  html+=`<div class="kcalsum">🔥 В среднем <b>${fmt(Math.round(avgK/10)*10)}${NB}ккал</b> в день на взрослого${pp!==1?` · ${fmt(Math.round(avgK*pp/10)*10)} на семью`:''}${S.A.kids?` <span class="mut">(детская порция — половина)</span>`:''}</div>`;
-  const autoN=plan.slots.filter(s=>s.auto).length;
-  if(autoN) html+=`<div class="note">🍎 Добавили ${autoN} ${plural(autoN,'перекус','перекуса','перекусов')} в дни, где выбранных приёмов пищи меньше ${fmt(KCAL_DAY_MIN)}${NB}ккал на взрослого. Можно заменить или убрать перекусы в профиле — тогда день будет менее сытным.</div>`;
+  const pDays=days.filter(d=>dayTotals(d).p>=T.ref.pmin-0.5).length, kDays=days.filter(d=>Math.abs(dayTotals(d).k-T.ref.k)<=T.ref.k*0.1).length;
+  html+=`<div class="kcalsum">🔥 В среднем <b>${fmt(Math.round(avgK/10)*10)}${NB}ккал</b> в день на взрослого${pp!==1?` · ${fmt(Math.round(avgK*pp/10)*10)} на семью`:''}
+   <div class="small" style="margin-top:4px">Цель ${fmt(Math.round(T.ref.k/10)*10)}${NB}ккал ±10 % — ${kDays} из ${days.length} дн. · белок ≥${Math.round(T.ref.pmin)}${NB}г — ${pDays} из ${days.length} дн.${T.set?'':' · <button class="linkbtn" data-act="edit" data-id="q2b">указать параметры</button>'}</div></div>`;
+  if(T.cov<1) html+=`<div class="note">ℹ️ В плане только ${S.A.meals.map(m=>MEALMAP[m].name.toLowerCase()).join(' и ')} — это часть дневного рациона (~${Math.round(T.cov*100)} %). Калории и белок сравниваем с этой долей нормы, перекусы до полной нормы не добавляем.</div>`;
+  const autoN=plan.slots.filter(s=>s.auto&&s.r).length;
+  if(autoN) html+=`<div class="note">🍎 Добавили ${autoN} ${plural(autoN,'перекус','перекуса','перекусов')}, чтобы дотянуть дни до нормы калорий и белка. Каждый можно заменить или убрать кнопкой «Убрать» — тогда день будет менее сытным.</div>`;
+  if(plan.tradeoff) html+=`<div class="warn">⚖️ Бюджета не хватает, чтобы закрыть норму белка: оставили белковые блюда, поэтому корзина дороже бюджета на ~${rub(Math.max(0,sh.total-S.A.budget))}. Увеличьте бюджет или отметьте продукты, которые есть дома.</div>`;
+  else if(sh.total>S.A.budget) html+=`<div class="warn">Даже самые экономные подходящие блюда дороже бюджета на ~${rub(sh.total-S.A.budget)}. Попробуйте увеличить бюджет или отметить продукты, которые есть дома.</div>`;
+  const lowP=days.filter(d=>dayTotals(d).p<T.ref.pmin*0.95).length;
+  if(lowP&&!plan.tradeoff) html+=`<div class="note">💪 В ${lowP} ${plural(lowP,'день','дня','дней')} белка меньше нормы — подходящих белковых блюд с вашими фильтрами мало.</div>`;
   if(days.length>1) html+=`<div class="daystrip">${days.map(d=>`<button data-act="jumpday" data-id="${d}">${DAYS[d]}<span>${fmt(dayTotals(d).k)}</span></button>`).join('')}</div>`;
   const missing=mealOrder().filter(m=>!candidates(m).length);
   if(missing.length) html+=`<div class="warn">Нет подходящих рецептов для: ${missing.map(m=>MEALMAP[m].name.toLowerCase()).join(', ')}. Ослабьте фильтры в профиле.</div>`;
-  if(sh.total>S.A.budget) html+=`<div class="warn">Даже самые экономные подходящие блюда дороже бюджета на ~${rub(sh.total-S.A.budget)}. Попробуйте увеличить бюджет или отметить продукты, которые есть дома.</div>`;
+  const few=mealOrder().filter(m=>{ const c=candidates(m).length; return c>0 && c<Math.ceil(days.length/2)+1; });
+  if(few.length) html+=`<div class="note">📚 Мало рецептов под ваши ответы для: ${few.map(m=>MEALMAP[m].name.toLowerCase()+' ('+candidates(m).length+')').join(', ')} — блюда будут повторяться. Можно ослабить фильтры в профиле.</div>`;
   days.forEach(d=>{ const t=dayTotals(d);
-    html+=`<div class="dayh" id="day${d}"><div class="row"><div class="n">${DAYS_FULL[d]}</div><div class="kc">${fmt(Math.round(t.k))}${NB}ккал<span class="kcf">${pp!==1?` · ${fmt(Math.round(t.k*pp))} на семью`:''}</span></div></div>${macroBar(t)}</div>`;
-    plan.slots.forEach((s,i)=>{ if(s.d!==d) return; const r=s.r&&RMAP[s.r]; const lbl=MEALMAP[s.m].short;
+    html+=`<div class="dayh" id="day${d}"><div class="row"><div class="n">${DAYS_FULL[d]}</div><div class="kc">${fmt(Math.round(t.k))}${NB}ккал<span class="kcf">${pp!==1?` · ${fmt(Math.round(t.k*pp))} на семью`:''}</span></div></div>${macroBar(t)}${personRows(t)}</div>`;
+    plan.slots.forEach((s,i)=>{ if(s.d!==d||s.hidden) return; const r=s.r&&RMAP[s.r]; const lbl=MEALMAP[s.m].short;
       if(!r){ html+=`<div class="meal empty-meal"><div class="ph thumb" style="background:var(--bg)">🤷</div><div class="mi"><div class="mlabel">${lbl}</div><div class="mt">Нет подходящих рецептов</div><div class="mm">Ослабьте фильтры в профиле</div></div></div>`; return; }
-      html+=`<div class="meal" data-act="open" data-id="${r.id}">${photo(r,'thumb')}<div class="mi"><div class="mlabel">${lbl}</div><div class="mt">${esc(r.t)}</div><div class="mm">${mealMeta(r)}</div>${s.left?'<span class="lefttag">📦 из остатков ужина</span>':''}${s.auto?'<span class="lefttag">🍎 добавлено для сытости</span>':''}</div>
-      <button class="swap" data-act="swap" data-i="${i}" aria-label="Заменить">${ICON.swap}Заменить</button></div>`; });
+      html+=`<div class="meal" data-act="open" data-id="${r.id}">${photo(r,'thumb')}<div class="mi"><div class="mlabel">${lbl}</div><div class="mt">${esc(r.t)}</div><div class="mm">${mealMeta(r)}</div>${s.left?'<span class="lefttag">📦 из остатков ужина</span>':''}${s.auto?`<span class="lefttag">${s.prot?'💪 добавлено для белка':'🍎 добавлено для сытости'}</span>`:''}</div>
+      <div class="mbtns"><button class="swap" data-act="swap" data-i="${i}" aria-label="Заменить">${ICON.swap}Заменить</button>${s.auto?`<button class="swap rm" data-act="rmauto" data-i="${i}" aria-label="Убрать перекус">${ICON.close}Убрать</button>`:''}</div></div>`; });
   });
-  html+=`<p class="foot">КБЖУ — на одну взрослую порцию (детская — половина), по таблицам состава продуктов. ${priceNote()}</p>`;
+  html+=`<p class="foot">КБЖУ — на одну взрослую порцию (×N — рекомендуемая порция едока), по таблицам состава продуктов. Нормы — ориентир, не медицинская рекомендация. ${priceNote()}</p>`;
   return html;
 }
 function renderShop(){
@@ -459,7 +640,7 @@ function renderShop(){
   <div class="sumcard"><div class="sumrow"><div><div class="mut small" style="font-weight:700">Итого примерно</div><div class="v">${rub(sh.total)}</div></div><div style="text-align:right"><div class="mut small" style="font-weight:700">Бюджет</div><div style="font-weight:800;font-size:18px">${rub(b)}</div></div></div>
   <div class="bar"><i style="width:${pct}%;background:${sh.total<=b?'var(--g)':'var(--red)'}"></i></div>
   <div class="small" style="font-weight:700;color:${sh.total<=b?'var(--gt)':'#B91C1C'}">${sh.total<=b?'✓ Укладываемся, остаётся '+rub(b-sh.total):'Превышение на '+rub(sh.total-b)}</div></div>`;
-  if(S.extras.length) html+=`<div class="chips" style="margin-top:12px">${S.extras.map((x,i)=>`<button class="chip sel" data-act="rmextra" data-i="${i}">➕ ${esc(RMAP[x.r].t)} · ${x.serv} порц. <span class="x">×</span></button>`).join('')}</div>`;
+  if(S.extras.length) html+=`<div class="chips" style="margin-top:12px">${S.extras.map((x,i)=>`<button class="chip sel" data-act="rmextra" data-i="${i}">➕ ${esc(RMAP[x.r].t)} · ${dec(x.serv)} порц. <span class="x">×</span></button>`).join('')}</div>`;
   AISLES.forEach(a=>{ const it=sh.items.filter(x=>x.g.aisle===a.id); if(!it.length) return;
     html+=`<div class="aisle">${a.e} ${a.name} <span class="c">${it.length}</span></div>`;
     it.forEach(x=>{ const done=S.ticks[x.k];
@@ -467,8 +648,9 @@ function renderShop(){
       <div class="nm"><b>${esc(x.g.name)} · ${fmtPack(x.g.pack,x.g.unit)} × ${x.packs}</b><span>нужно ≈ ${fmtAmount(x.q,x.g.unit)}</span></div><div class="pr">~${rub(x.price)}</div></div>`; }); });
   if(sh.home.length){ html+=`<div class="aisle">🏠 Есть дома <span class="c">${sh.home.length}</span></div>`;
     sh.home.forEach(x=>{ html+=`<div class="li"><span class="e">${x.g.e}</span><div class="nm"><b>${esc(x.g.name)}</b><span>понадобится ≈ ${fmtAmount(x.q,x.g.unit)}</span></div><span class="homepill">есть дома</span></div>`; }); }
-  html+=`<div class="stack" style="margin-top:22px"><button class="btn out sm" data-act="copylist">Скопировать список</button></div>
-  <p class="foot">Количество округлено до реальных упаковок. ${priceNote()} — для ${store().name}; это ориентир, не цена на полке.</p>`;
+  const left=sh.items.filter(x=>!S.ticks[x.k]).length;
+  html+=`<div class="stack" style="margin-top:22px"><button class="btn out sm" data-act="copylist">Скопировать список</button>${left&&left<sh.items.length?`<button class="btn sec sm" data-act="copyleft">Скопировать только некупленное (${left})</button>`:''}</div>
+  <p class="foot">Количество округлено до реальных упаковок. ${priceNote()} Для ${store().name} — это ориентир, не цена на полке.</p>`;
   return html;
 }
 function renderRecipes(){
@@ -489,15 +671,17 @@ function renderRecipes(){
 function listNames(arr,src){ const n=arr.filter(x=>x!=='none').map(id=>{const o=src.find(s=>s.id===id); return o?o.name:id;}); return n.length?n.join(', '):'—'; }
 function renderProfile(){
   const a=S.A;
+  const T=targets();
   const rows=[['Магазин',store().name,'q1'],['Город',S.city,'city'],['Едоки',`${a.adults} взр. · ${a.kids} дет. · ${dec(portions())} порц./приём`,'q2'],
+   ['Нормы КБЖУ',T.set?T.ad.map(t=>fmt(t.k)+' ккал / Б '+t.pmin+' г').join('; '):'по среднему взрослому','q2b'],
    ['Приёмы пищи',listNames(a.meals,MEALS),'q3'],['Дни',dayOrder().map(d=>DAYS[d]).join(', '),'q4'],['Техника',listNames(a.equip,EQUIP),'q5'],
    ['Питание',a.diets.includes('none')?'Без ограничений':listNames(a.diets,DIETS),'q6'],['Любимые кухни',listNames(a.cuisines,CUISINES),'q6'],['Формат',listNames(a.styles,STYLES),'q7'],
    ['Аллергии',a.allergies.includes('none')?'Нет':listNames(a.allergies,ALLERGENS),'q8'],['Не любите',a.dislikes.map(id=>DISLIKES.find(d=>d[0]===id)[1]).join(', ')||'—','q9'],
    ['Есть дома',a.pantry.length?a.pantry.map(k=>shortName(ING[k].name).toLowerCase()).join(', '):'—','q10'],['Бюджет',rub(a.budget)+' / неделя','q11']];
-  return `<h1>Профиль</h1><p class="sub">Ваши ответы. Нажмите на строку, чтобы изменить — план пересоберётся.</p>
+  return `<h1>Профиль</h1><p class="sub">Ваши ответы. Нажмите на строку, измените и нажмите «Сохранить» — план пересоберётся.</p>
   <div class="card" style="padding:4px 16px">${rows.map(r=>`<div class="prow" data-act="${r[2]==='city'?'city':'edit'}" data-id="${r[2]}" style="cursor:pointer"><span class="k">${r[0]}</span><span class="v">${esc(r[1])} <span class="mut">›</span></span></div>`).join('')}</div>
   <div class="stack" style="margin-top:20px"><button class="btn" data-act="regen">${ICON.swap} Пересобрать план</button><button class="btn sec" data-act="edit" data-id="q1">Изменить ответы</button><button class="btn sec" data-act="restart" style="color:#B91C1C">Начать заново</button></div>
-  <p class="foot">${APP_NAME} · прототип. ${priceNote()}: средние цены Росстата × уровень цен сети. Интеграции с магазинами пока нет.</p>`;
+  <p class="foot">${APP_NAME} · прототип. ${priceNote()} Интеграции с магазинами пока нет. Нормы КБЖУ — ориентир, не медицинская рекомендация.</p>`;
 }
 /* --- рецепт --- */
 function renderRecipe(){
@@ -505,7 +689,7 @@ function renderRecipe(){
   const btns=(inTG?'':`<button class="icon-btn" style="left:14px" data-act="closerecipe" aria-label="Назад">${ICON.back}</button>`)+
    `<button class="icon-btn" style="right:14px;color:${fav?'#EF4444':'#111827'}" data-act="fav" aria-label="В избранное">${fav?ICON.heartf:ICON.heart}</button>`;
   const tags=[`<span class="rtag g">${CATNAME[rcat(r)]}</span>`].concat(['lean','veg','hp','kids'].filter(x=>DIETCHK[x](r)).map(x=>`<span class="rtag">${({lean:'🌾 Постное',veg:'🥦 Вегетарианское',hp:'💪 Много белка',kids:'🧸 Детям'})[x]}</span>`));
-  if(r.prep+r.cook<=25) tags.push('<span class="rtag">⚡ Быстро</span>');
+  if(totalTime(r)<=25 && !r.rest) tags.push('<span class="rtag">⚡ Быстро</span>');
   return `${photo(r,'hero',true,btns)}
   <div class="rbody"><div class="rmeta">${c.e} ${c.name} кухня · ${r.m.map(m=>MEALMAP[m].name).join(', ')}</div>
   <h1 style="margin-top:6px">${esc(r.t)}</h1><div class="rtags">${tags.join('')}</div>
@@ -517,24 +701,26 @@ function renderRecipe(){
    <button class="act" data-act="sharerecipe"><span class="c">${ICON.share}</span>Поделиться</button></div>
   <h2>КБЖУ на порцию</h2>
   <div class="kb"><div class="k"><b>${r.k}</b><span>ккал</span></div><div class="p"><b>${r.p}</b><span>белки, г</span></div><div class="f"><b>${r.f}</b><span>жиры, г</span></div><div class="c"><b>${r.cb}</b><span>углеводы, г</span></div></div>
-  <div class="kbnote">Рассчитано по составу ингредиентов (таблицы Скурихина/USDA), на 1 из ${r.sv} ${plural(r.sv,'порции','порций','порций')}.</div>
-  <div class="times"><div><b>${r.prep} мин</b>подготовка</div><div><b>${r.cook} мин</b>готовка</div><div><b>~${fmt(portionCost(r))} ₽</b>за порцию</div></div>
+  <div class="kbnote">Клетчатка ${dec(r.fi||0)}${NB}г${r.su?` · добавленный сахар ${r.su}${NB}г`:''}. Рассчитано по составу ингредиентов (таблицы Скурихина/USDA), на одну взрослую порцию.</div>
+  <div class="times"><div><b>${r.prep} мин</b>подготовка</div><div><b>${r.cook} мин</b>готовка${r.side&&r.side!=='хлеб'?' с гарниром':''}</div><div><b>~${fmt(portionCost(r))} ₽</b>за порцию</div></div>
+  ${r.rest?`<div class="note" style="margin-top:8px">⏳ Плюс ${r.rest[0]>=480?'ночь':(r.rest[0]>=60?Math.round(r.rest[0]/60)+' ч':r.rest[0]+' мин')} ${r.rest[1]} — заложите время заранее.</div>`:''}
   <h2>Нужна техника</h2><div class="chips">${r.eq.length?r.eq.map(e=>{const q=EQUIP.find(x=>x.id===e); return `<span class="chip ${S.A.equip.includes(e)?'sel':''}">${q.e} ${q.name}</span>`;}).join(''):'<span class="chip">🙌 Без техники</span>'}</div>
   <div class="seg"><button class="${S.rtab==='ing'?'on':''}" data-act="rtab" data-id="ing">Ингредиенты</button><button class="${S.rtab==='steps'?'on':''}" data-act="rtab" data-id="steps">Приготовление · ${r.steps.length} ${plural(r.steps.length,'шаг','шага','шагов')}</button></div>
-  ${S.rtab==='ing'?`<div class="stepper-card" style="margin-bottom:8px"><div><div class="t">Порции</div><div class="s">количества пересчитаются</div></div><div class="stepper"><button data-act="serv" data-d="-1" ${n<=1?'disabled':''}>−</button><span class="v">${n}</span><button data-act="serv" data-d="1" ${n>=12?'disabled':''}>+</button></div></div>${r.side||r.scaled?`<p class="mut small" style="margin:0 0 8px">🍽 Порция рассчитана на сытного взрослого (~${fmt(Math.round(r.k/10)*10)}${NB}ккал)${r.side?`, с гарниром: ${r.side}`:''}.</p>`:''}
+  ${S.rtab==='ing'?`<div class="stepper-card" style="margin-bottom:8px"><div><div class="t">Порции</div><div class="s">${n===portions()?'на вашу семью, как в плане':'количества пересчитаются'}</div></div><div class="stepper"><button data-act="serv" data-d="-0.5" ${n<=0.5?'disabled':''}>−</button><span class="v">${dec(n)}</span><button data-act="serv" data-d="0.5" ${n>=12?'disabled':''}>+</button></div></div>${r.side||r.scaled?`<p class="mut small" style="margin:0 0 8px">🍽 Порция рассчитана на сытного взрослого (~${fmt(Math.round(r.k/10)*10)}${NB}ккал)${r.side?`, с гарниром: ${r.side}`:''}.</p>`:''}
    ${recipeIngs(r).map(i=>{const g=ING[i.k]; const home=S.A.pantry.includes(i.k); return `<div class="ing"><span class="e">${g.e}</span><span class="n">${esc(g.name)} ${home?'<span class="homepill">есть дома</span>':''}</span><span class="q">${fmtIngQty(i.k,i.q*n/r.sv,g.unit)}</span></div>`;}).join('')}
    ${rem.length?`<p class="mut small" style="margin-top:10px">Убрали, т.к. вы не любите: ${rem.map(i=>ING[i.k].name.toLowerCase()).join(', ')}</p>`:''}`
   :`<ol class="steps">${r.steps.map(s=>`<li><span>${esc(s)}</span></li>`).join('')}</ol>`}
-  <p class="foot">Стоимость — ${priceNote().toLowerCase()}, ${store().name}.</p></div>`;
+  <p class="foot">Стоимость порции для ${store().name}. ${priceNote()}</p></div>`;
 }
 /* --- модалки и тосты --- */
 function modal(html){ closeModal(); const d=document.createElement('div'); d.className='mback'; d.id='modal'; d.innerHTML=`<div class="modal">${html}</div>`;
   d.addEventListener('click',e=>{ if(e.target===d) closeModal(); }); document.body.appendChild(d); syncTG(); }
 function closeModal(){ const m=document.getElementById('modal'); if(m){ m.remove(); syncTG(); } }
-let toastT; function toast(t){ let el=document.querySelector('.toast'); if(!el){ el=document.createElement('div'); el.className='toast'; document.body.appendChild(el);} el.textContent=t; clearTimeout(toastT); toastT=setTimeout(()=>el.remove(),2200); }
-function listText(){
-  const sh=shopping(); let t=`Список покупок — ${APP_NAME} (${store().name})\n`;
-  AISLES.forEach(a=>{ const it=sh.items.filter(x=>x.g.aisle===a.id); if(!it.length) return; t+=`\n${a.name}:\n`;
+let toastT; function toast(t,o){ let el=document.querySelector('.toast'); if(!el){ el=document.createElement('div'); el.className='toast'; document.body.appendChild(el);}
+  el.innerHTML=esc(t)+(o?` <button class="tbtn" data-act="${o.act}">${o.label}</button>`:''); clearTimeout(toastT); toastT=setTimeout(()=>el.remove(),o?4500:2200); }
+function listText(onlyLeft){
+  const sh=shopping(); let t=`Список покупок — ${APP_NAME} (${store().name})${onlyLeft?' · только некупленное':''}\n`;
+  AISLES.forEach(a=>{ const it=sh.items.filter(x=>x.g.aisle===a.id&&!(onlyLeft&&S.ticks[x.k])); if(!it.length) return; t+=`\n${a.name}:\n`;
     it.forEach(x=>{ t+=`${S.ticks[x.k]?'✓':'•'} ${x.g.name} ${fmtPack(x.g.pack,x.g.unit)} × ${x.packs} — ~${rub(x.price)}\n`; }); });
   t+=`\nИтого: ~${rub(sh.total)} (бюджет ${rub(S.A.budget)})\n`;
   if(sh.home.length) t+=`\nЕсть дома: ${sh.home.map(x=>x.g.name.toLowerCase()).join(', ')}\n`;
@@ -574,9 +760,18 @@ document.addEventListener('click',e=>{
   case 'city': cityModal(); break;
   case 'savecity': { const v=(document.getElementById('cityin').value||'').trim(); closeModal(); if(v) set({city:v}); break; }
   case 'store': a.store=id; save(); render(); break;
-  case 'cnt': { const d=+el.dataset.d; a[id]=Math.max(id==='adults'?1:0,Math.min(10,a[id]+d)); a.budget=null; save(); render(); break; }
-  case 'meal': toggle(a.meals,id); a.budget=null; save(); render(); break;
-  case 'day': toggle(a.days,+id); a.budget=null; save(); render(); break;
+  case 'cnt': { const d=+el.dataset.d; a[id]=Math.max(id==='adults'?1:0,Math.min(10,a[id]+d)); if(!a.budgetManual) a.budget=null; save(); render(); break; }
+  case 'meal': toggle(a.meals,id); if(!a.budgetManual) a.budget=null; save(); render(); break;
+  case 'day': toggle(a.days,+id); if(!a.budgetManual) a.budget=null; save(); render(); break;
+  case 'pset': { const P=peopleObj(); P.ad[+el.dataset.i][el.dataset.f]=id; a.people=P; save(); render(); break; }
+  case 'pskip': a.people=null; save(); if(S.editing==='q2b'&&S.plan) finishEdit(); else go('q3'); break;
+  case 'saveedit': finishEdit(); break;
+  case 'budrec': a.budget=defaultBudget(); a.budgetManual=false; save(); render(); break;
+  case 'rmauto': { e.stopPropagation(); const s=S.plan.slots[+el.dataset.i]; if(s){ s.r=null; s.hidden=true; } save(); render(); toast('Перекус убран'); break; }
+  case 'doswap': doSwap(+el.dataset.i,id); break;
+  case 'swapmore': { const i=+el.dataset.i; const s=S.plan.slots[i]; s.sw=(s.sw||0)+1; swapMeal(i); break; }
+  case 'undo': { const t=document.querySelector('.toast'); if(t) t.remove(); undoSwap(); break; }
+  case 'copyleft': copyText(listText(true)); break;
   case 'equip': toggle(a.equip,id); save(); render(); break;
   case 'diet': if(id==='none') a.diets=['none']; else { a.diets=a.diets.filter(x=>x!=='none'); toggle(a.diets,id); if(!a.diets.length) a.diets=['none']; } save(); render(); break;
   case 'cuis': toggle(a.cuisines,id); save(); render(); break;
@@ -586,18 +781,22 @@ document.addEventListener('click',e=>{
   case 'pantry': toggle(a.pantry,id); save(); render(); reapplySearch(); break;
   case 'ptab': S.ptab=id; save(); render(); reapplySearch(); break;
   case 'build': if(!(a.budget>0)) return; S.editing=false; set({screen:'loading',ticks:{}}); break;
+  case 'regenq': closeModal(); S.quick=true; set({screen:'loading',ticks:{}}); break;
   case 'tab': S.tab=id; set({recipe:null}); break;
   case 'swap': e.stopPropagation(); swapMeal(+el.dataset.i); break;
-  case 'open': S.serv=Math.max(1,Math.ceil(portions())); S.rtab='ing'; set({recipe:id}); break;
+  case 'open': S.serv=portions(); S.rtab='ing'; set({recipe:id}); break;
   case 'closerecipe': navDir='back'; set({recipe:null}); break;
   case 'rtab': set({rtab:id}); break;
-  case 'serv': S.serv=Math.max(1,Math.min(12,S.serv+(+el.dataset.d))); save(); render(); break;
+  case 'serv': S.serv=Math.max(0.5,Math.min(12,Math.round((S.serv+(+el.dataset.d))*2)/2)); save(); render(); break;
   case 'fav': toggle(S.favs,S.recipe); save(); render(); toast(S.favs.includes(S.recipe)?'Добавлено в избранное':'Убрано из избранного'); break;
   case 'toplan': toPlanModal(); break;
-  case 'putplan': { replaceSlot(+el.dataset.i,S.recipe); closeModal(); save(); render(); toast('Добавлено в план'); break; }
-  case 'toshop': S.extras.push({r:S.recipe,serv:S.serv}); save(); toast(`Ингредиенты на ${S.serv} порц. добавлены в покупки`); break;
+  case 'putplan': { const i=+el.dataset.i, s=S.plan.slots[i]; undoState={i,r:s.r,left:s.left,src:s.src,deps:S.plan.slots.map((x,j)=>x.src===i?j:-1).filter(j=>j>=0)};
+    replaceSlot(i,S.recipe); closeModal(); save(); render(); toast(`Добавлено: ${DAYS[s.d]}, ${MEALMAP[s.m].name.toLowerCase()}`,{act:'undo',label:'Отменить'}); break; }
+  case 'tpf': S.tpf=id; toPlanModal(); break;
+  case 'toshop': { const ex=S.extras.find(x=>x.r===S.recipe); if(ex) ex.serv+=S.serv; else S.extras.push({r:S.recipe,serv:S.serv}); save();
+    toast(ex?`Добавили ещё ${dec(S.serv)} порц. — всего ${dec(ex.serv)} порц. в покупках`:`Ингредиенты на ${dec(S.serv)} порц. добавлены в покупки`); break; }
   case 'rmextra': S.extras.splice(+el.dataset.i,1); save(); render(); break;
-  case 'sharerecipe': { const r=RMAP[S.recipe]; const t=`${r.t}\n\nИнгредиенты (${S.serv} порц.):\n`+recipeIngs(r).map(i=>`• ${ING[i.k].name} — ${fmtIngQty(i.k,i.q*S.serv/r.sv,ING[i.k].unit)}`).join('\n')+`\n\nПриготовление:\n`+r.steps.map((s,i)=>`${i+1}. ${s}`).join('\n')+`\n\n— ${APP_NAME}`;
+  case 'sharerecipe': { const r=RMAP[S.recipe]; const t=`${r.t}\n\nИнгредиенты (${dec(S.serv)} порц.):\n`+recipeIngs(r).map(i=>`• ${ING[i.k].name} — ${fmtIngQty(i.k,i.q*S.serv/r.sv,ING[i.k].unit)}`).join('\n')+`\n\nПриготовление:\n`+r.steps.map((s,i)=>`${i+1}. ${s}`).join('\n')+`\n\n— ${APP_NAME}`;
     shareText(r.t,t.replace(/\u00A0/g,' ')); break; }
   case 'rfilter': set({rfilter:id}); break;
   case 'rcat': set({rcat:id}); break;
@@ -607,26 +806,37 @@ document.addEventListener('click',e=>{
     <div class="stack"><button class="btn" data-act="copylist">Скопировать список</button><button class="btn out" data-act="sharelist">${ICON.share} Поделиться</button><button class="btn sec sm" data-act="closemodal">Закрыть</button></div>`); break;
   case 'copylist': closeModal(); copyText(listText()); break;
   case 'sharelist': closeModal(); shareText('Список покупок',listText()); break;
-  case 'edit': S.editing=id; go(id); break;
-  case 'regen': set({screen:'loading',ticks:{}}); break;
+  case 'edit': if(id==='q1'&&el.classList.contains('btn')){ S.editing=false; go('q1'); } else startEdit(id); break;
+  case 'regen': S.quick=true; set({screen:'loading',ticks:{}}); break;
   }
 });
 function toPlanModal(){
-  const r=RMAP[S.recipe];
-  const opts=S.plan.slots.map((s,i)=>({s,i})).filter(o=>r.m.includes(o.s.m));
+  const r=RMAP[S.recipe]; const f=S.tpf||'all';
+  const all=S.plan.slots.map((s,i)=>({s,i})).filter(o=>!o.s.hidden&&!o.s.left&&mealOk(r,o.s.m));
+  const ms=[...new Set(all.map(o=>o.s.m))]; const opts=all.filter(o=>f==='all'||o.s.m===f);
+  const byDay={}; opts.forEach(o=>{ (byDay[o.s.d]=byDay[o.s.d]||[]).push(o); });
   modal(`<h3>Добавить в план</h3><p>Выберите, какое блюдо заменить на «${esc(r.t)}».</p>
-  ${opts.length?`<div class="stack">${opts.map(o=>{const cur=o.s.r?RMAP[o.s.r].t:'пусто'; return `<button class="btn sec sm" style="justify-content:flex-start;padding:0 18px;font-size:14px" data-act="putplan" data-i="${o.i}">${DAYS[o.s.d]} · ${MEALMAP[o.s.m].name}: <span class="mut" style="font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${esc(cur)}</span></button>`;}).join('')}</div>`
+  ${ms.length>1?`<div class="tabs tight">${[['all','Все']].concat(ms.map(m=>[m,MEALMAP[m].name])).map(t=>`<button class="tab ${f===t[0]?'on':''}" data-act="tpf" data-id="${t[0]}">${t[1]}</button>`).join('')}</div>`:''}
+  ${opts.length?`<div class="tplist">${Object.keys(byDay).map(d=>`<div class="tpday">${DAYS_FULL[d]}</div>${byDay[d].map(o=>{const cur=o.s.r?RMAP[o.s.r].t:'пусто'; return `<button class="tprow" data-act="putplan" data-i="${o.i}"><span class="tpm">${MEALMAP[o.s.m].name}</span><span class="tpc">${esc(cur)}</span></button>`;}).join('')}`).join('')}</div>`
   :`<div class="warn">В плане нет подходящих приёмов пищи (${r.m.map(m=>MEALMAP[m].name.toLowerCase()).join(', ')}).</div>`}
   <div style="height:10px"></div><button class="btn sec" data-act="closemodal">Отмена</button>`);
 }
 let searchQ='';
 function reapplySearch(){ const inp=document.querySelector('[data-search]'); if(!inp) return; inp.value=searchQ; filterTiles(searchQ); }
-function filterTiles(q){ q=q.trim().toLowerCase(); document.querySelectorAll('#flt [data-name]').forEach(b=>{ b.style.display=!q||b.dataset.name.includes(q)?'':'none'; }); }
+function filterTiles(q){ q=q.trim().toLowerCase(); let n=0; document.querySelectorAll('#flt [data-name]').forEach(b=>{ const v=!q||b.dataset.name.includes(q); b.style.display=v?'':'none'; if(v) n++; });
+  const nr=document.getElementById('nores'); if(nr) nr.hidden=n>0; }
 document.addEventListener('input',e=>{
   const t=e.target;
   if(t.dataset.search){ searchQ=t.value; filterTiles(searchQ); return; }
-  if(t.id==='bin'){ const v=parseInt(t.value.replace(/\D/g,''),10)||0; S.A.budget=Math.min(999999,v); t.value=v?fmt(S.A.budget):''; const r=document.getElementById('brange'); const rg=budgetRange(); r.value=Math.min(rg.max,Math.max(rg.min,v)); save(); updateBudgetUI(); return; }
-  if(t.id==='brange'){ S.A.budget=+t.value; const b=document.getElementById('bin'); if(b) b.value=fmt(S.A.budget); save(); updateBudgetUI(); return; }
+  if(t.id==='bin'){ /* сохраняем позицию курсора: считаем цифры слева от него */
+    const pos=t.selectionStart||0, dl=t.value.slice(0,pos).replace(/\D/g,'').length;
+    let v=parseInt(t.value.replace(/\D/g,''),10)||0; const capped=v>BUDGET_CAP; v=Math.min(BUDGET_CAP,v); S.A.budget=v; S.A.budgetManual=true;
+    const nv=v?fmt(v):''; t.value=nv; let np=0, c=0; while(np<nv.length && c<dl){ if(/\d/.test(nv[np])) c++; np++; } try{ t.setSelectionRange(np,np); }catch(_){}
+    if(capped) toast('Максимум — '+rub(BUDGET_CAP)+' в неделю');
+    const r=document.getElementById('brange'); const rg=budgetRange(); r.value=Math.min(rg.max,Math.max(rg.min,v)); save(); updateBudgetUI(); return; }
+  if(t.id==='brange'){ S.A.budget=+t.value; S.A.budgetManual=true; const b=document.getElementById('bin'); if(b) b.value=fmt(S.A.budget); save(); updateBudgetUI(); return; }
+  if(t.dataset.pf){ const P=peopleObj(), i=+t.dataset.i, f=t.dataset.pf; const v=t.value===''?null:+t.value;
+    if(f==='kage') P.kd[i].age=v; else P.ad[i][f]=v; S.A.people=P; save(); const el=document.getElementById(f==='kage'?'ptgtk'+i:'ptgt'+i); if(el) el.innerHTML=ptgtHtml(i,f==='kage'); return; }
 });
 document.addEventListener('focusin',e=>{ if(e.target.id==='bin') setTimeout(()=>{ try{e.target.select();}catch(_){} },0); });
 document.addEventListener('keydown',e=>{ if(e.key==='Enter'&&e.target.id==='cityin'){ const btn=document.querySelector('[data-act=savecity]'); if(btn) btn.click(); } if(e.key==='Escape') closeModal(); });

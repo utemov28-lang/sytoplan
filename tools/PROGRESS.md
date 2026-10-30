@@ -21,3 +21,9 @@ Steps: [ ] data+recipes  [ ] app refactor/design  [ ] illustrations  [ ] recipe 
   × коэффициент сети (STORE_COEF, источники в коде). 96/117 ингредиентов (82%) — от Росстата (66 прямо, 30 производно), 21 — запасные.
   Сайты сетей (5ka, Перекрёсток, Магнит, Лента, Ашан, Дикси) анонимно не отдают каталоги — прямых цен магазинов нет.
 - Бюджет по умолчанию: медиана стоимости порции по приёму пищи × 1,2 (упаковки), + авто-перекусы.
+
+## Phase 3 — QA fixes + meat recipes + КБЖУ targets (2026-10-30)
+- QA items 1–27 addressed (edit→rebuild, Сохранить/edit mode, budget from trial plan, portion cap 1.3, sides only for mains, variety ≤2 repeats, honest low-meal texts, specific spices, rest time, fallback photos, caret, В план modal, 360px, tap targets, allergens incl. mustard, contrast, price note, aisles fish/canned, swap sheet+undo, dedupe, servings, budget cap 200 000, empty search, copy unbought, ~1.5s rebuild, plurals).
+- js/recipes_meat.js: 50 meat (chicken 15, turkey 10, beef 12, pork 13) + 10 lean/no-stove + 2 protein snacks. New ingredients priced via Rosstat mapping.
+- New optional step q2b «Параметры для расчёта КБЖУ» (Mifflin-St Jeor × activity, goal, protein g/kg floor, kids by age MR 2.3.1.0253-21); per-person portion factor vs 2200 kcal standard portion; protein floor hard (swap/protein snack), kcal ±10%, fiber/added sugar tracked.
+- 9 profiles: avg 2076 kcal/adult/day; protein ≥1.0 g/kg 56/63 days, ≥target 52/63, kcal ±10% 57/63; meat share 64% in unrestricted profiles.
