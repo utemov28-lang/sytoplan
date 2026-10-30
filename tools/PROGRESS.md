@@ -36,3 +36,6 @@ Steps: [ ] data+recipes  [ ] app refactor/design  [ ] illustrations  [ ] recipe 
   p5, magnit, perek, auchan, samokat, lavka, vkusvill; Лента — official sunflower mark (Wikimedia Commons «New logo of Lenta.svg») on brand blue.
   Files: img/stores/<id>.webp|svg; single config = STORES[].logo in js/data.js. If logo is empty or fails to load, a brand-coloured tile (bg/color/ini) is shown.
   To replace with licensed artwork: drop a file into img/stores/ and change the path in STORES.
+### (b) +39 recipes → 300 total (js/recipes_more5.js)
+- 9 fish (минтай ×5, хек, скумбрия, сельдь ×2, тунец, сайра), 14 veg/lean high-protein (чечевица, нут, фасоль, яйца, творог), 10 budget GF dishes (сосиски, фарш, голени, печень), 4 no-stove.
+- 9 profiles after: avg 2107 kcal; protein ≥1.0 g/kg 61/63 days, ≥target 55/63; kcal ±10% 55/63; veg+gluten maxRep 3→2, lean kcal 7/7.

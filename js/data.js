@@ -294,7 +294,8 @@ const REST = {hummus_veg:[720,'замачивания нута'],chickpea_curry:
   rassolnik:[120,'замачивания перловки'],barley_mushrooms:[120,'замачивания перловки'],pea_soup:[180,'замачивания гороха'],svekolnik:[30,'охлаждения'],
   gazpacho:[30,'охлаждения'],honey_wings:[20,'маринования'],chicken_skewers:[30,'маринования'],shuba:[120,'настаивания'],crab_salad:[15,'охлаждения'],
   mimosa:[60,'пропитки'],korean_carrot:[180,'настаивания'],lean_overnight_oats:[480,'настаивания'],pork_shashlik_oven:[60,'маринования'],
-  chicken_thighs_soy:[30,'маринования'],air_pork_neck_veg:[30,'маринования'],lavash_roll:[20,'охлаждения']};
+  chicken_thighs_soy:[30,'маринования'],air_pork_neck_veg:[30,'маринования'],lavash_roll:[20,'охлаждения'],
+  chickpea_potato_stew:[720,'замачивания нута'],chickpea_pilaf_lean:[720,'замачивания нута'],buckwheat_kefir:[480,'настаивания']};
 function restText(r){ if(!r.rest) return ''; const m=r.rest[0]; return '+'+(m>=480?'ночь':m>=60?(Math.round(m/60))+'\u00A0ч':m+'\u00A0мин')+' '+r.rest[1]; }
 
 /* ====== НОРМЫ ПОРЦИЙ ======
