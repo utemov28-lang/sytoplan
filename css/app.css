@@ -312,3 +312,5 @@ html.dark .pm.g{background:#12301F;color:#4ADE80}html.dark .pm.y{background:#2E2
 .howcalc{margin-top:14px;font-size:13px;color:var(--txt2);line-height:1.4}.howcalc summary{font-weight:800;color:var(--gt);min-height:44px;display:flex;align-items:center;cursor:pointer}
 .row2{display:grid;grid-template-columns:1fr 1.4fr;gap:10px}
 @media (max-width:370px){.grid3 .eq .t{font-size:11.5px}.mleg{gap:8px}.hdr-right{font-size:12px}}
+.badge.logo{overflow:hidden;padding:0;box-shadow:0 1px 3px rgba(0,0,0,.12)}.badge.logo img{width:100%;height:100%;object-fit:cover;display:block}
+.store .t{white-space:normal;overflow:visible;line-height:1.2;font-size:12.5px;min-height:30px;display:flex;align-items:center;justify-content:center}

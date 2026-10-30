@@ -103,12 +103,14 @@ function fresh(){ return {screen:'intro', city:'Москва',
   A:{store:null, adults:2, kids:0, meals:['b','l','d'], days:[0,1,2,3,4,5,6], equip:['stove','oven','micro'],
      diets:['none'], cuisines:[], styles:[], allergies:['none'], dislikes:[], pantry:[], budget:null, budgetManual:false, people:null},
   plan:null, ticks:{}, favs:[], extras:[], tab:'week', recipe:null, rtab:'ing', serv:2, rfilter:'fit', ptab:'all'}; }
-function load(){ try{ const s=JSON.parse(localStorage.getItem(LS_KEY)); if(s&&s.A){ const f=fresh(); const o=Object.assign(f,s); o.A=Object.assign(fresh().A,s.A); return o; } }catch(e){} return null; }
+function load(){ try{ const s=JSON.parse(localStorage.getItem(LS_KEY)); if(s&&s.A){ const f=fresh(); const o=Object.assign(f,s); o.A=Object.assign(fresh().A,s.A); if(STORE_ALIAS[o.A.store]) o.A.store=STORE_ALIAS[o.A.store]; if(o.A.store&&!STORES.some(x=>x.id===o.A.store)) o.A.store='p5'; return o; } }catch(e){} return null; }
 let S = load() || fresh();
 function save(){ try{ localStorage.setItem(LS_KEY, JSON.stringify(S)); }catch(e){} }
 function set(p){ Object.assign(S,p); save(); render(); }
 function setA(p){ Object.assign(S.A,p); save(); render(); }
 const A = ()=>S.A;
+function storeLogo(s){ const fb=`<div class="badge" style="background:${s.bg};color:${s.color}">${s.ini}</div>`;
+  return s.logo?`<div class="badge logo"><img src="${s.logo}" alt="${s.name}" width="52" height="52" decoding="async" onerror="this.parentNode.outerHTML=this.parentNode.dataset.fb"></div>`.replace('<div class="badge logo">',`<div class="badge logo" data-fb='${fb.replace(/'/g,'&#39;')}'>`):fb; }
 function store(){ return STORES.find(s=>s.id===S.A.store) || STORES[0]; }
 
 /* ====== ЦЕНЫ ====== data/prices.json: {ингредиент: {p5,magnit,…: ₽ за упаковку, source, date}, _meta} */
@@ -476,7 +478,7 @@ function renderStep(sc){
   const a=S.A;
   switch(sc){
   case 'q1': return stepShell(sc,'Где покупаете продукты?','Посчитаем примерную стоимость корзины по ценам магазина.',
-    `<div class="grid3">${STORES.map(s=>optCard('store',s.id,a.store===s.id,`<div class="badge" style="background:${s.bg};color:${s.color}">${s.ini}</div><div class="t">${s.name}</div><div class="s">цены ${s.lvl}</div>`,'store')).join('')}</div>
+    `<div class="grid3">${STORES.map(s=>optCard('store',s.id,a.store===s.id,`${storeLogo(s)}<div class="t">${s.name}</div><div class="s">цены ${s.lvl}${s.delivery?' · доставка':''}</div>`,'store')).join('')}</div>
     <p class="foot">Названия магазинов — только для расчёта цен. ${APP_NAME} не связан с торговыми сетями.</p>`,
     `<button class="btn" data-act="next" ${a.store?'':'disabled'}>Выбрать магазин</button>`,
     {right:`<button class="linkbtn" data-act="city">📍 ${esc(S.city)} · Изменить</button>`});

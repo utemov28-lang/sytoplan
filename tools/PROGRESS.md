@@ -19,7 +19,7 @@ Steps: [ ] data+recipes  [ ] app refactor/design  [ ] illustrations  [ ] recipe 
   неделя показывает «ккал на взрослого · на семью». 9 профилей: среднее 1274 → ~1870 ккал/взрослый/день (tools/profiles.mjs).
 - Цены: tools/update_prices.py → data/prices.json (Росстат: еженедельные цены РФ на 26.10.2026 + ежемесячные за 09.2026),
   × коэффициент сети (STORE_COEF, источники в коде). 96/117 ингредиентов (82%) — от Росстата (66 прямо, 30 производно), 21 — запасные.
-  Сайты сетей (5ka, Перекрёсток, Магнит, Лента, Ашан, Дикси) анонимно не отдают каталоги — прямых цен магазинов нет.
+  Сайты сетей (5ka, Перекрёсток, Магнит, Лента, Ашан) анонимно не отдают каталоги — прямых цен магазинов нет.
 - Бюджет по умолчанию: медиана стоимости порции по приёму пищи × 1,2 (упаковки), + авто-перекусы.
 
 ## Phase 3 — QA fixes + meat recipes + КБЖУ targets (2026-10-30)
@@ -27,3 +27,12 @@ Steps: [ ] data+recipes  [ ] app refactor/design  [ ] illustrations  [ ] recipe 
 - js/recipes_meat.js: 50 meat (chicken 15, turkey 10, beef 12, pork 13) + 10 lean/no-stove + 2 protein snacks. New ingredients priced via Rosstat mapping.
 - New optional step q2b «Параметры для расчёта КБЖУ» (Mifflin-St Jeor × activity, goal, protein g/kg floor, kids by age MR 2.3.1.0253-21); per-person portion factor vs 2200 kcal standard portion; protein floor hard (swap/protein snack), kcal ±10%, fiber/added sugar tracked.
 - 9 profiles: avg 2076 kcal/adult/day; protein ≥1.0 g/kg 56/63 days, ≥target 52/63, kcal ±10% 57/63; meat share 64% in unrestricted profiles.
+
+## Phase 4 — stores, +recipes, photos
+### (a) Stores
+- Дикси removed; saved state with store 'dixy' migrates to Пятёрочка (STORE_ALIAS in js/data.js).
+- Added Самокат (×1.14), Яндекс Лавка (×1.18), ВкусВилл (×1.20) — estimates from public basket comparisons (sources in tools/update_prices.py).
+- Store logos (by user request, the user accepted the trademark risk): official app icons from the App Store (itunes search API, 160px WebP) for
+  p5, magnit, perek, auchan, samokat, lavka, vkusvill; Лента — official sunflower mark (Wikimedia Commons «New logo of Lenta.svg») on brand blue.
+  Files: img/stores/<id>.webp|svg; single config = STORES[].logo in js/data.js. If logo is empty or fails to load, a brand-coloured tile (bg/color/ini) is shown.
+  To replace with licensed artwork: drop a file into img/stores/ and change the path in STORES.

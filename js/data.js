@@ -9,14 +9,19 @@ const LS_KEY = 'sytoplan_state_v1';
    поэтому отклонение от 1 по prosto.ru уменьшено вдвое. Те же коэффициенты — в tools/update_prices.py (STORE_COEF).
    Основные цены берутся из data/prices.json (обновляет tools/update_prices.py); mult применяется к ним уже там,
    а здесь — только к запасным ценам каталога ниже, если prices.json не загрузился. */
+/* logo: путь к картинке магазина (img/stores/<id>.webp|svg) — иконки приложений из App Store / знак с Wikimedia Commons.
+   Если logo пустой или файл не загрузился — рисуется фирменная плашка (bg/color/ini). Заменить логотип = положить файл и поправить путь здесь. */
 const STORES = [
-  {id:'p5',     name:'Пятёрочка',   loc:'Пятёрочке',   ini:'5', color:'#E31E24', bg:'#FDECEC', mult:1.04, lvl:'₽'},
-  {id:'magnit', name:'Магнит',      loc:'Магните',     ini:'М', color:'#D7262B', bg:'#FFEFF0', mult:0.97, lvl:'₽'},
-  {id:'perek',  name:'Перекрёсток', loc:'Перекрёстке', ini:'П', color:'#0B7A3B', bg:'#E7F5EC', mult:1.05, lvl:'₽₽₽'},
-  {id:'lenta',  name:'Лента',       loc:'Ленте',       ini:'Л', color:'#1C3F94', bg:'#EAF0FB', mult:1.02, lvl:'₽₽'},
-  {id:'dixy',   name:'Дикси',       loc:'Дикси',       ini:'Д', color:'#F37021', bg:'#FEF1E8', mult:1.00, lvl:'₽'},
-  {id:'auchan', name:'Ашан',        loc:'Ашане',       ini:'А', color:'#E2001A', bg:'#FDE8EA', mult:0.92, lvl:'₽₽'}
+  {id:'p5',      name:'Пятёрочка',    loc:'Пятёрочке',    ini:'5', color:'#E31E24', bg:'#FDECEC', mult:1.04, lvl:'₽',   logo:'img/stores/p5.webp'},
+  {id:'magnit',  name:'Магнит',       loc:'Магните',      ini:'М', color:'#D7262B', bg:'#FFEFF0', mult:0.97, lvl:'₽',   logo:'img/stores/magnit.webp'},
+  {id:'perek',   name:'Перекрёсток',  loc:'Перекрёстке',  ini:'П', color:'#0B7A3B', bg:'#E7F5EC', mult:1.05, lvl:'₽₽',  logo:'img/stores/perek.webp'},
+  {id:'lenta',   name:'Лента',        loc:'Ленте',        ini:'Л', color:'#003C96', bg:'#EAF0FB', mult:1.02, lvl:'₽₽',  logo:'img/stores/lenta.svg'},
+  {id:'auchan',  name:'Ашан',         loc:'Ашане',        ini:'А', color:'#E2001A', bg:'#FDE8EA', mult:0.92, lvl:'₽',   logo:'img/stores/auchan.webp'},
+  {id:'samokat', name:'Самокат',      loc:'Самокате',     ini:'С', color:'#FF335F', bg:'#FFEAF0', mult:1.14, lvl:'₽₽₽', logo:'img/stores/samokat.webp', delivery:true},
+  {id:'lavka',   name:'Яндекс Лавка', loc:'Яндекс Лавке', ini:'Л', color:'#00A3FF', bg:'#E6F6FF', mult:1.18, lvl:'₽₽₽', logo:'img/stores/lavka.webp', delivery:true},
+  {id:'vkusvill',name:'ВкусВилл',     loc:'ВкусВилле',    ini:'В', color:'#2DBE64', bg:'#E8F8EE', mult:1.20, lvl:'₽₽₽', logo:'img/stores/vkusvill.webp'}
 ];
+const STORE_ALIAS = {dixy:'p5'}; /* Дикси убрали — сохранённые профили переводим на Пятёрочку */
 /* base — типичная стоимость одной взрослой порции, ₽ (для оценки бюджета) */
 const MEALS = [
   {id:'b', name:'Завтрак',  short:'ЗАВТРАК', sub:'быстро и просто',   e:'🍳', base:65},

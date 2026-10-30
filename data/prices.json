@@ -10,8 +10,10 @@
   "magnit": 49,
   "perek": 53,
   "lenta": 51,
-  "dixy": 50,
-  "auchan": 46
+  "auchan": 46,
+  "samokat": 57,
+  "lavka": 59,
+  "vkusvill": 60
  },
  "onion": {
   "base": 49.19,
@@ -24,8 +26,10 @@
   "magnit": 48,
   "perek": 52,
   "lenta": 50,
-  "dixy": 49,
-  "auchan": 45
+  "auchan": 45,
+  "samokat": 56,
+  "lavka": 58,
+  "vkusvill": 59
  },
  "carrot": {
   "base": 48.85,
@@ -38,8 +42,10 @@
   "magnit": 47,
   "perek": 51,
   "lenta": 50,
-  "dixy": 49,
-  "auchan": 45
+  "auchan": 45,
+  "samokat": 56,
+  "lavka": 58,
+  "vkusvill": 59
  },
  "garlic": {
   "base": 32.9,
@@ -52,8 +58,10 @@
   "magnit": 32,
   "perek": 35,
   "lenta": 34,
-  "dixy": 33,
-  "auchan": 30
+  "auchan": 30,
+  "samokat": 38,
+  "lavka": 39,
+  "vkusvill": 39
  },
  "cabbage": {
   "base": 38.5,
@@ -66,8 +74,10 @@
   "magnit": 37,
   "perek": 40,
   "lenta": 39,
-  "dixy": 38,
-  "auchan": 35
+  "auchan": 35,
+  "samokat": 44,
+  "lavka": 45,
+  "vkusvill": 46
  },
  "beet": {
   "base": 46.78,
@@ -80,8 +90,10 @@
   "magnit": 45,
   "perek": 49,
   "lenta": 48,
-  "dixy": 47,
-  "auchan": 43
+  "auchan": 43,
+  "samokat": 53,
+  "lavka": 55,
+  "vkusvill": 56
  },
  "tomato": {
   "base": 106.85,
@@ -94,8 +106,10 @@
   "magnit": 104,
   "perek": 112,
   "lenta": 109,
-  "dixy": 107,
-  "auchan": 98
+  "auchan": 98,
+  "samokat": 122,
+  "lavka": 126,
+  "vkusvill": 128
  },
  "cucumber": {
   "base": 63.55,
@@ -108,8 +122,10 @@
   "magnit": 62,
   "perek": 67,
   "lenta": 65,
-  "dixy": 64,
-  "auchan": 58
+  "auchan": 58,
+  "samokat": 72,
+  "lavka": 75,
+  "vkusvill": 76
  },
  "pepper": {
   "base": 132.03,
@@ -122,8 +138,10 @@
   "magnit": 128,
   "perek": 139,
   "lenta": 135,
-  "dixy": 132,
-  "auchan": 121
+  "auchan": 121,
+  "samokat": 151,
+  "lavka": 156,
+  "vkusvill": 158
  },
  "zucchini": {
   "base": 120,
@@ -134,8 +152,10 @@
   "magnit": 116,
   "perek": 126,
   "lenta": 122,
-  "dixy": 120,
-  "auchan": 110
+  "auchan": 110,
+  "samokat": 137,
+  "lavka": 142,
+  "vkusvill": 144
  },
  "eggplant": {
   "base": 130,
@@ -146,8 +166,10 @@
   "magnit": 126,
   "perek": 136,
   "lenta": 133,
-  "dixy": 130,
-  "auchan": 120
+  "auchan": 120,
+  "samokat": 148,
+  "lavka": 153,
+  "vkusvill": 156
  },
  "pumpkin": {
   "base": 60,
@@ -158,8 +180,10 @@
   "magnit": 58,
   "perek": 63,
   "lenta": 61,
-  "dixy": 60,
-  "auchan": 55
+  "auchan": 55,
+  "samokat": 68,
+  "lavka": 71,
+  "vkusvill": 72
  },
  "radish": {
   "base": 70,
@@ -170,8 +194,10 @@
   "magnit": 68,
   "perek": 74,
   "lenta": 71,
-  "dixy": 70,
-  "auchan": 64
+  "auchan": 64,
+  "samokat": 80,
+  "lavka": 83,
+  "vkusvill": 84
  },
  "lettuce": {
   "base": 130,
@@ -182,8 +208,10 @@
   "magnit": 126,
   "perek": 136,
   "lenta": 133,
-  "dixy": 130,
-  "auchan": 120
+  "auchan": 120,
+  "samokat": 148,
+  "lavka": 153,
+  "vkusvill": 156
  },
  "ginger": {
   "base": 45,
@@ -194,8 +222,10 @@
   "magnit": 44,
   "perek": 47,
   "lenta": 46,
-  "dixy": 45,
-  "auchan": 41
+  "auchan": 41,
+  "samokat": 51,
+  "lavka": 53,
+  "vkusvill": 54
  },
  "greens": {
   "base": 45.03,
@@ -208,8 +238,10 @@
   "magnit": 44,
   "perek": 47,
   "lenta": 46,
-  "dixy": 45,
-  "auchan": 41
+  "auchan": 41,
+  "samokat": 51,
+  "lavka": 53,
+  "vkusvill": 54
  },
  "cilantro": {
   "base": 49.53,
@@ -222,8 +254,10 @@
   "magnit": 48,
   "perek": 52,
   "lenta": 51,
-  "dixy": 50,
-  "auchan": 46
+  "auchan": 46,
+  "samokat": 56,
+  "lavka": 58,
+  "vkusvill": 59
  },
  "green_onion": {
   "base": 40.53,
@@ -236,8 +270,10 @@
   "magnit": 39,
   "perek": 43,
   "lenta": 41,
-  "dixy": 41,
-  "auchan": 37
+  "auchan": 37,
+  "samokat": 46,
+  "lavka": 48,
+  "vkusvill": 49
  },
  "mushrooms": {
   "base": 161.28,
@@ -250,8 +286,10 @@
   "magnit": 156,
   "perek": 169,
   "lenta": 165,
-  "dixy": 161,
-  "auchan": 148
+  "auchan": 148,
+  "samokat": 184,
+  "lavka": 190,
+  "vkusvill": 194
  },
  "celery": {
   "base": 120,
@@ -262,8 +300,10 @@
   "magnit": 116,
   "perek": 126,
   "lenta": 122,
-  "dixy": 120,
-  "auchan": 110
+  "auchan": 110,
+  "samokat": 137,
+  "lavka": 142,
+  "vkusvill": 144
  },
  "apple": {
   "base": 141.78,
@@ -276,8 +316,10 @@
   "magnit": 138,
   "perek": 149,
   "lenta": 145,
-  "dixy": 142,
-  "auchan": 130
+  "auchan": 130,
+  "samokat": 162,
+  "lavka": 167,
+  "vkusvill": 170
  },
  "banana": {
   "base": 157.76,
@@ -290,8 +332,10 @@
   "magnit": 153,
   "perek": 166,
   "lenta": 161,
-  "dixy": 158,
-  "auchan": 145
+  "auchan": 145,
+  "samokat": 180,
+  "lavka": 186,
+  "vkusvill": 189
  },
  "pear": {
   "base": 263.43,
@@ -304,8 +348,10 @@
   "magnit": 256,
   "perek": 277,
   "lenta": 269,
-  "dixy": 263,
-  "auchan": 242
+  "auchan": 242,
+  "samokat": 300,
+  "lavka": 311,
+  "vkusvill": 316
  },
  "orange": {
   "base": 154.67,
@@ -318,8 +364,10 @@
   "magnit": 150,
   "perek": 162,
   "lenta": 158,
-  "dixy": 155,
-  "auchan": 142
+  "auchan": 142,
+  "samokat": 176,
+  "lavka": 183,
+  "vkusvill": 186
  },
  "lemon": {
   "base": 27.9,
@@ -332,8 +380,10 @@
   "magnit": 27,
   "perek": 29,
   "lenta": 28,
-  "dixy": 28,
-  "auchan": 26
+  "auchan": 26,
+  "samokat": 32,
+  "lavka": 33,
+  "vkusvill": 33
  },
  "avocado": {
   "base": 110,
@@ -344,8 +394,10 @@
   "magnit": 107,
   "perek": 116,
   "lenta": 112,
-  "dixy": 110,
-  "auchan": 101
+  "auchan": 101,
+  "samokat": 125,
+  "lavka": 130,
+  "vkusvill": 132
  },
  "chicken_fillet": {
   "base": 219.86,
@@ -358,8 +410,10 @@
   "magnit": 213,
   "perek": 231,
   "lenta": 224,
-  "dixy": 220,
-  "auchan": 202
+  "auchan": 202,
+  "samokat": 251,
+  "lavka": 259,
+  "vkusvill": 264
  },
  "chicken_thigh": {
   "base": 307.36,
@@ -372,8 +426,10 @@
   "magnit": 298,
   "perek": 323,
   "lenta": 314,
-  "dixy": 307,
-  "auchan": 283
+  "auchan": 283,
+  "samokat": 350,
+  "lavka": 363,
+  "vkusvill": 369
  },
  "chicken_drum": {
   "base": 293.38,
@@ -386,8 +442,10 @@
   "magnit": 285,
   "perek": 308,
   "lenta": 299,
-  "dixy": 293,
-  "auchan": 270
+  "auchan": 270,
+  "samokat": 334,
+  "lavka": 346,
+  "vkusvill": 352
  },
  "chicken_wings": {
   "base": 247.35,
@@ -400,8 +458,10 @@
   "magnit": 240,
   "perek": 260,
   "lenta": 252,
-  "dixy": 247,
-  "auchan": 228
+  "auchan": 228,
+  "samokat": 282,
+  "lavka": 292,
+  "vkusvill": 297
  },
  "minced_chicken": {
   "base": 178.64,
@@ -414,8 +474,10 @@
   "magnit": 173,
   "perek": 188,
   "lenta": 182,
-  "dixy": 179,
-  "auchan": 164
+  "auchan": 164,
+  "samokat": 204,
+  "lavka": 211,
+  "vkusvill": 214
  },
  "turkey_fillet": {
   "base": 359.87,
@@ -428,8 +490,10 @@
   "magnit": 349,
   "perek": 378,
   "lenta": 367,
-  "dixy": 360,
-  "auchan": 331
+  "auchan": 331,
+  "samokat": 410,
+  "lavka": 425,
+  "vkusvill": 432
  },
  "minced_turkey": {
   "base": 248.64,
@@ -442,8 +506,10 @@
   "magnit": 241,
   "perek": 261,
   "lenta": 254,
-  "dixy": 249,
-  "auchan": 229
+  "auchan": 229,
+  "samokat": 283,
+  "lavka": 293,
+  "vkusvill": 298
  },
  "minced_mix": {
   "base": 286.35,
@@ -456,8 +522,10 @@
   "magnit": 278,
   "perek": 301,
   "lenta": 292,
-  "dixy": 286,
-  "auchan": 263
+  "auchan": 263,
+  "samokat": 326,
+  "lavka": 338,
+  "vkusvill": 344
  },
  "beef": {
   "base": 508.86,
@@ -470,8 +538,10 @@
   "magnit": 494,
   "perek": 534,
   "lenta": 519,
-  "dixy": 509,
-  "auchan": 468
+  "auchan": 468,
+  "samokat": 580,
+  "lavka": 600,
+  "vkusvill": 611
  },
  "pork": {
   "base": 253.19,
@@ -484,8 +554,10 @@
   "magnit": 246,
   "perek": 266,
   "lenta": 258,
-  "dixy": 253,
-  "auchan": 233
+  "auchan": 233,
+  "samokat": 289,
+  "lavka": 299,
+  "vkusvill": 304
  },
  "liver": {
   "base": 180.6,
@@ -498,8 +570,10 @@
   "magnit": 175,
   "perek": 190,
   "lenta": 184,
-  "dixy": 181,
-  "auchan": 166
+  "auchan": 166,
+  "samokat": 206,
+  "lavka": 213,
+  "vkusvill": 217
  },
  "sausages": {
   "base": 253.18,
@@ -512,8 +586,10 @@
   "magnit": 246,
   "perek": 266,
   "lenta": 258,
-  "dixy": 253,
-  "auchan": 233
+  "auchan": 233,
+  "samokat": 289,
+  "lavka": 299,
+  "vkusvill": 304
  },
  "ham": {
   "base": 200.2,
@@ -526,8 +602,10 @@
   "magnit": 194,
   "perek": 210,
   "lenta": 204,
-  "dixy": 200,
-  "auchan": 184
+  "auchan": 184,
+  "samokat": 228,
+  "lavka": 236,
+  "vkusvill": 240
  },
  "fish_white": {
   "base": 229.92,
@@ -540,8 +618,10 @@
   "magnit": 223,
   "perek": 241,
   "lenta": 235,
-  "dixy": 230,
-  "auchan": 212
+  "auchan": 212,
+  "samokat": 262,
+  "lavka": 271,
+  "vkusvill": 276
  },
  "hake": {
   "base": 264.41,
@@ -554,8 +634,10 @@
   "magnit": 256,
   "perek": 278,
   "lenta": 270,
-  "dixy": 264,
-  "auchan": 243
+  "auchan": 243,
+  "samokat": 301,
+  "lavka": 312,
+  "vkusvill": 317
  },
  "fish_red": {
   "base": 433.43,
@@ -568,8 +650,10 @@
   "magnit": 420,
   "perek": 455,
   "lenta": 442,
-  "dixy": 433,
-  "auchan": 399
+  "auchan": 399,
+  "samokat": 494,
+  "lavka": 511,
+  "vkusvill": 520
  },
  "mackerel": {
   "base": 172.07,
@@ -582,8 +666,10 @@
   "magnit": 167,
   "perek": 181,
   "lenta": 176,
-  "dixy": 172,
-  "auchan": 158
+  "auchan": 158,
+  "samokat": 196,
+  "lavka": 203,
+  "vkusvill": 206
  },
  "herring": {
   "base": 168.93,
@@ -596,8 +682,10 @@
   "magnit": 164,
   "perek": 177,
   "lenta": 172,
-  "dixy": 169,
-  "auchan": 155
+  "auchan": 155,
+  "samokat": 193,
+  "lavka": 199,
+  "vkusvill": 203
  },
  "shrimp": {
   "base": 487.86,
@@ -610,8 +698,10 @@
   "magnit": 473,
   "perek": 512,
   "lenta": 498,
-  "dixy": 488,
-  "auchan": 449
+  "auchan": 449,
+  "samokat": 556,
+  "lavka": 576,
+  "vkusvill": 585
  },
  "squid": {
   "base": 345.34,
@@ -624,8 +714,10 @@
   "magnit": 335,
   "perek": 363,
   "lenta": 352,
-  "dixy": 345,
-  "auchan": 318
+  "auchan": 318,
+  "samokat": 394,
+  "lavka": 408,
+  "vkusvill": 414
  },
  "crab_sticks": {
   "base": 110,
@@ -636,8 +728,10 @@
   "magnit": 107,
   "perek": 116,
   "lenta": 112,
-  "dixy": 110,
-  "auchan": 101
+  "auchan": 101,
+  "samokat": 125,
+  "lavka": 130,
+  "vkusvill": 132
  },
  "tuna": {
   "base": 163.75,
@@ -650,8 +744,10 @@
   "magnit": 159,
   "perek": 172,
   "lenta": 167,
-  "dixy": 164,
-  "auchan": 151
+  "auchan": 151,
+  "samokat": 187,
+  "lavka": 193,
+  "vkusvill": 196
  },
  "saury": {
   "base": 162.64,
@@ -664,8 +760,10 @@
   "magnit": 158,
   "perek": 171,
   "lenta": 166,
-  "dixy": 163,
-  "auchan": 150
+  "auchan": 150,
+  "samokat": 185,
+  "lavka": 192,
+  "vkusvill": 195
  },
  "pelmeni": {
   "base": 359.41,
@@ -678,8 +776,10 @@
   "magnit": 349,
   "perek": 377,
   "lenta": 367,
-  "dixy": 359,
-  "auchan": 331
+  "auchan": 331,
+  "samokat": 410,
+  "lavka": 424,
+  "vkusvill": 431
  },
  "vareniki": {
   "base": 215.64,
@@ -692,8 +792,10 @@
   "magnit": 209,
   "perek": 226,
   "lenta": 220,
-  "dixy": 216,
-  "auchan": 198
+  "auchan": 198,
+  "samokat": 246,
+  "lavka": 254,
+  "vkusvill": 259
  },
  "puff_pastry": {
   "base": 170,
@@ -704,8 +806,10 @@
   "magnit": 165,
   "perek": 178,
   "lenta": 173,
-  "dixy": 170,
-  "auchan": 156
+  "auchan": 156,
+  "samokat": 194,
+  "lavka": 201,
+  "vkusvill": 204
  },
  "frozen_veg": {
   "base": 148.96,
@@ -718,8 +822,10 @@
   "magnit": 144,
   "perek": 156,
   "lenta": 152,
-  "dixy": 149,
-  "auchan": 137
+  "auchan": 137,
+  "samokat": 170,
+  "lavka": 176,
+  "vkusvill": 179
  },
  "broccoli": {
   "base": 171.3,
@@ -732,8 +838,10 @@
   "magnit": 166,
   "perek": 180,
   "lenta": 175,
-  "dixy": 171,
-  "auchan": 158
+  "auchan": 158,
+  "samokat": 195,
+  "lavka": 202,
+  "vkusvill": 206
  },
  "cauliflower": {
   "base": 156.4,
@@ -746,8 +854,10 @@
   "magnit": 152,
   "perek": 164,
   "lenta": 160,
-  "dixy": 156,
-  "auchan": 144
+  "auchan": 144,
+  "samokat": 178,
+  "lavka": 185,
+  "vkusvill": 188
  },
  "green_beans": {
   "base": 148.96,
@@ -760,8 +870,10 @@
   "magnit": 144,
   "perek": 156,
   "lenta": 152,
-  "dixy": 149,
-  "auchan": 137
+  "auchan": 137,
+  "samokat": 170,
+  "lavka": 176,
+  "vkusvill": 179
  },
  "peas": {
   "base": 134.06,
@@ -774,8 +886,10 @@
   "magnit": 130,
   "perek": 141,
   "lenta": 137,
-  "dixy": 134,
-  "auchan": 123
+  "auchan": 123,
+  "samokat": 153,
+  "lavka": 158,
+  "vkusvill": 161
  },
  "berries": {
   "base": 202.37,
@@ -788,8 +902,10 @@
   "magnit": 196,
   "perek": 212,
   "lenta": 206,
-  "dixy": 202,
-  "auchan": 186
+  "auchan": 186,
+  "samokat": 231,
+  "lavka": 239,
+  "vkusvill": 243
  },
  "milk": {
   "base": 99.3,
@@ -802,8 +918,10 @@
   "magnit": 96,
   "perek": 104,
   "lenta": 101,
-  "dixy": 99,
-  "auchan": 91
+  "auchan": 91,
+  "samokat": 113,
+  "lavka": 117,
+  "vkusvill": 119
  },
  "kefir": {
   "base": 112.89,
@@ -816,8 +934,10 @@
   "magnit": 110,
   "perek": 119,
   "lenta": 115,
-  "dixy": 113,
-  "auchan": 104
+  "auchan": 104,
+  "samokat": 129,
+  "lavka": 133,
+  "vkusvill": 135
  },
  "ryazhenka": {
   "base": 74.12,
@@ -830,8 +950,10 @@
   "magnit": 72,
   "perek": 78,
   "lenta": 76,
-  "dixy": 74,
-  "auchan": 68
+  "auchan": 68,
+  "samokat": 84,
+  "lavka": 87,
+  "vkusvill": 89
  },
  "smetana": {
   "base": 107.41,
@@ -844,8 +966,10 @@
   "magnit": 104,
   "perek": 113,
   "lenta": 110,
-  "dixy": 107,
-  "auchan": 99
+  "auchan": 99,
+  "samokat": 122,
+  "lavka": 127,
+  "vkusvill": 129
  },
  "tvorog": {
   "base": 95.92,
@@ -858,8 +982,10 @@
   "magnit": 93,
   "perek": 101,
   "lenta": 98,
-  "dixy": 96,
-  "auchan": 88
+  "auchan": 88,
+  "samokat": 109,
+  "lavka": 113,
+  "vkusvill": 115
  },
  "cheese": {
   "base": 190.34,
@@ -872,8 +998,10 @@
   "magnit": 185,
   "perek": 200,
   "lenta": 194,
-  "dixy": 190,
-  "auchan": 175
+  "auchan": 175,
+  "samokat": 217,
+  "lavka": 225,
+  "vkusvill": 228
  },
  "mozzarella": {
   "base": 130.86,
@@ -886,8 +1014,10 @@
   "magnit": 127,
   "perek": 137,
   "lenta": 133,
-  "dixy": 131,
-  "auchan": 120
+  "auchan": 120,
+  "samokat": 149,
+  "lavka": 154,
+  "vkusvill": 157
  },
  "processed_cheese": {
   "base": 143.82,
@@ -900,8 +1030,10 @@
   "magnit": 140,
   "perek": 151,
   "lenta": 147,
-  "dixy": 144,
-  "auchan": 132
+  "auchan": 132,
+  "samokat": 164,
+  "lavka": 170,
+  "vkusvill": 173
  },
  "butter": {
   "base": 198.91,
@@ -914,8 +1046,10 @@
   "magnit": 193,
   "perek": 209,
   "lenta": 203,
-  "dixy": 199,
-  "auchan": 183
+  "auchan": 183,
+  "samokat": 227,
+  "lavka": 235,
+  "vkusvill": 239
  },
  "yogurt": {
   "base": 112.01,
@@ -928,8 +1062,10 @@
   "magnit": 109,
   "perek": 118,
   "lenta": 114,
-  "dixy": 112,
-  "auchan": 103
+  "auchan": 103,
+  "samokat": 128,
+  "lavka": 132,
+  "vkusvill": 134
  },
  "cream": {
   "base": 71.54,
@@ -942,8 +1078,10 @@
   "magnit": 69,
   "perek": 75,
   "lenta": 73,
-  "dixy": 72,
-  "auchan": 66
+  "auchan": 66,
+  "samokat": 82,
+  "lavka": 84,
+  "vkusvill": 86
  },
  "feta": {
   "base": 208.56,
@@ -956,8 +1094,10 @@
   "magnit": 202,
   "perek": 219,
   "lenta": 213,
-  "dixy": 209,
-  "auchan": 192
+  "auchan": 192,
+  "samokat": 238,
+  "lavka": 246,
+  "vkusvill": 250
  },
  "condensed_milk": {
   "base": 159.58,
@@ -970,8 +1110,10 @@
   "magnit": 155,
   "perek": 168,
   "lenta": 163,
-  "dixy": 160,
-  "auchan": 147
+  "auchan": 147,
+  "samokat": 182,
+  "lavka": 188,
+  "vkusvill": 191
  },
  "eggs": {
   "base": 109.1,
@@ -984,8 +1126,10 @@
   "magnit": 106,
   "perek": 115,
   "lenta": 111,
-  "dixy": 109,
-  "auchan": 100
+  "auchan": 100,
+  "samokat": 124,
+  "lavka": 129,
+  "vkusvill": 131
  },
  "bread": {
   "base": 50.89,
@@ -998,8 +1142,10 @@
   "magnit": 49,
   "perek": 53,
   "lenta": 52,
-  "dixy": 51,
-  "auchan": 47
+  "auchan": 47,
+  "samokat": 58,
+  "lavka": 60,
+  "vkusvill": 61
  },
  "bread_whole": {
   "base": 45.43,
@@ -1012,8 +1158,10 @@
   "magnit": 44,
   "perek": 48,
   "lenta": 46,
-  "dixy": 45,
-  "auchan": 42
+  "auchan": 42,
+  "samokat": 52,
+  "lavka": 54,
+  "vkusvill": 55
  },
  "lavash": {
   "base": 35.62,
@@ -1026,8 +1174,10 @@
   "magnit": 35,
   "perek": 37,
   "lenta": 36,
-  "dixy": 36,
-  "auchan": 33
+  "auchan": 33,
+  "samokat": 41,
+  "lavka": 42,
+  "vkusvill": 43
  },
  "tortilla": {
   "base": 150,
@@ -1038,8 +1188,10 @@
   "magnit": 146,
   "perek": 158,
   "lenta": 153,
-  "dixy": 150,
-  "auchan": 138
+  "auchan": 138,
+  "samokat": 171,
+  "lavka": 177,
+  "vkusvill": 180
  },
  "buckwheat": {
   "base": 82.94,
@@ -1052,8 +1204,10 @@
   "magnit": 80,
   "perek": 87,
   "lenta": 85,
-  "dixy": 83,
-  "auchan": 76
+  "auchan": 76,
+  "samokat": 95,
+  "lavka": 98,
+  "vkusvill": 100
  },
  "rice": {
   "base": 113.17,
@@ -1066,8 +1220,10 @@
   "magnit": 110,
   "perek": 119,
   "lenta": 115,
-  "dixy": 113,
-  "auchan": 104
+  "auchan": 104,
+  "samokat": 129,
+  "lavka": 134,
+  "vkusvill": 136
  },
  "millet": {
   "base": 62.22,
@@ -1080,8 +1236,10 @@
   "magnit": 60,
   "perek": 65,
   "lenta": 63,
-  "dixy": 62,
-  "auchan": 57
+  "auchan": 57,
+  "samokat": 71,
+  "lavka": 73,
+  "vkusvill": 75
  },
  "semolina": {
   "base": 62.64,
@@ -1094,8 +1252,10 @@
   "magnit": 61,
   "perek": 66,
   "lenta": 64,
-  "dixy": 63,
-  "auchan": 58
+  "auchan": 58,
+  "samokat": 71,
+  "lavka": 74,
+  "vkusvill": 75
  },
  "barley": {
   "base": 52.87,
@@ -1108,8 +1268,10 @@
   "magnit": 51,
   "perek": 56,
   "lenta": 54,
-  "dixy": 53,
-  "auchan": 49
+  "auchan": 49,
+  "samokat": 60,
+  "lavka": 62,
+  "vkusvill": 63
  },
  "bulgur": {
   "base": 120,
@@ -1120,8 +1282,10 @@
   "magnit": 116,
   "perek": 126,
   "lenta": 122,
-  "dixy": 120,
-  "auchan": 110
+  "auchan": 110,
+  "samokat": 137,
+  "lavka": 142,
+  "vkusvill": 144
  },
  "oats": {
   "base": 57.7,
@@ -1134,8 +1298,10 @@
   "magnit": 56,
   "perek": 61,
   "lenta": 59,
-  "dixy": 58,
-  "auchan": 53
+  "auchan": 53,
+  "samokat": 66,
+  "lavka": 68,
+  "vkusvill": 69
  },
  "pasta": {
   "base": 56.28,
@@ -1148,8 +1314,10 @@
   "magnit": 55,
   "perek": 59,
   "lenta": 57,
-  "dixy": 56,
-  "auchan": 52
+  "auchan": 52,
+  "samokat": 64,
+  "lavka": 66,
+  "vkusvill": 68
  },
  "spaghetti": {
   "base": 61.91,
@@ -1162,8 +1330,10 @@
   "magnit": 60,
   "perek": 65,
   "lenta": 63,
-  "dixy": 62,
-  "auchan": 57
+  "auchan": 57,
+  "samokat": 71,
+  "lavka": 73,
+  "vkusvill": 74
  },
  "noodles": {
   "base": 74.25,
@@ -1176,8 +1346,10 @@
   "magnit": 72,
   "perek": 78,
   "lenta": 76,
-  "dixy": 74,
-  "auchan": 68
+  "auchan": 68,
+  "samokat": 85,
+  "lavka": 88,
+  "vkusvill": 89
  },
  "flour": {
   "base": 57.21,
@@ -1190,8 +1362,10 @@
   "magnit": 55,
   "perek": 60,
   "lenta": 58,
-  "dixy": 57,
-  "auchan": 53
+  "auchan": 53,
+  "samokat": 65,
+  "lavka": 68,
+  "vkusvill": 69
  },
  "starch": {
   "base": 55,
@@ -1202,8 +1376,10 @@
   "magnit": 53,
   "perek": 58,
   "lenta": 56,
-  "dixy": 55,
-  "auchan": 51
+  "auchan": 51,
+  "samokat": 63,
+  "lavka": 65,
+  "vkusvill": 66
  },
  "baking_powder": {
   "base": 15,
@@ -1214,8 +1390,10 @@
   "magnit": 15,
   "perek": 16,
   "lenta": 15,
-  "dixy": 15,
-  "auchan": 14
+  "auchan": 14,
+  "samokat": 17,
+  "lavka": 18,
+  "vkusvill": 18
  },
  "breadcrumbs": {
   "base": 50,
@@ -1226,8 +1404,10 @@
   "magnit": 48,
   "perek": 52,
   "lenta": 51,
-  "dixy": 50,
-  "auchan": 46
+  "auchan": 46,
+  "samokat": 57,
+  "lavka": 59,
+  "vkusvill": 60
  },
  "sugar": {
   "base": 82.49,
@@ -1240,8 +1420,10 @@
   "magnit": 80,
   "perek": 87,
   "lenta": 84,
-  "dixy": 82,
-  "auchan": 76
+  "auchan": 76,
+  "samokat": 94,
+  "lavka": 97,
+  "vkusvill": 99
  },
  "salt": {
   "base": 24.39,
@@ -1254,8 +1436,10 @@
   "magnit": 24,
   "perek": 26,
   "lenta": 25,
-  "dixy": 24,
-  "auchan": 22
+  "auchan": 22,
+  "samokat": 28,
+  "lavka": 29,
+  "vkusvill": 29
  },
  "oil": {
   "base": 143.85,
@@ -1268,8 +1452,10 @@
   "magnit": 140,
   "perek": 151,
   "lenta": 147,
-  "dixy": 144,
-  "auchan": 132
+  "auchan": 132,
+  "samokat": 164,
+  "lavka": 170,
+  "vkusvill": 173
  },
  "spices": {
   "base": 69.37,
@@ -1282,8 +1468,10 @@
   "magnit": 67,
   "perek": 73,
   "lenta": 71,
-  "dixy": 69,
-  "auchan": 64
+  "auchan": 64,
+  "samokat": 79,
+  "lavka": 82,
+  "vkusvill": 83
  },
  "tomato_paste": {
   "base": 111.26,
@@ -1296,8 +1484,10 @@
   "magnit": 108,
   "perek": 117,
   "lenta": 113,
-  "dixy": 111,
-  "auchan": 102
+  "auchan": 102,
+  "samokat": 127,
+  "lavka": 131,
+  "vkusvill": 134
  },
  "canned_tomatoes": {
   "base": 131.86,
@@ -1310,8 +1500,10 @@
   "magnit": 128,
   "perek": 138,
   "lenta": 134,
-  "dixy": 132,
-  "auchan": 121
+  "auchan": 121,
+  "samokat": 150,
+  "lavka": 156,
+  "vkusvill": 158
  },
  "ketchup": {
   "base": 109.93,
@@ -1324,8 +1516,10 @@
   "magnit": 107,
   "perek": 115,
   "lenta": 112,
-  "dixy": 110,
-  "auchan": 101
+  "auchan": 101,
+  "samokat": 125,
+  "lavka": 130,
+  "vkusvill": 132
  },
  "mustard": {
   "base": 60,
@@ -1336,8 +1530,10 @@
   "magnit": 58,
   "perek": 63,
   "lenta": 61,
-  "dixy": 60,
-  "auchan": 55
+  "auchan": 55,
+  "samokat": 68,
+  "lavka": 71,
+  "vkusvill": 72
  },
  "mayo": {
   "base": 133.48,
@@ -1350,8 +1546,10 @@
   "magnit": 129,
   "perek": 140,
   "lenta": 136,
-  "dixy": 133,
-  "auchan": 123
+  "auchan": 123,
+  "samokat": 152,
+  "lavka": 158,
+  "vkusvill": 160
  },
  "soy_sauce": {
   "base": 110,
@@ -1362,8 +1560,10 @@
   "magnit": 107,
   "perek": 116,
   "lenta": 112,
-  "dixy": 110,
-  "auchan": 101
+  "auchan": 101,
+  "samokat": 125,
+  "lavka": 130,
+  "vkusvill": 132
  },
  "honey": {
   "base": 183.67,
@@ -1376,8 +1576,10 @@
   "magnit": 178,
   "perek": 193,
   "lenta": 187,
-  "dixy": 184,
-  "auchan": 169
+  "auchan": 169,
+  "samokat": 209,
+  "lavka": 217,
+  "vkusvill": 220
  },
  "jam": {
   "base": 183.76,
@@ -1390,8 +1592,10 @@
   "magnit": 178,
   "perek": 193,
   "lenta": 187,
-  "dixy": 184,
-  "auchan": 169
+  "auchan": 169,
+  "samokat": 209,
+  "lavka": 217,
+  "vkusvill": 221
  },
  "nuts": {
   "base": 120.61,
@@ -1404,8 +1608,10 @@
   "magnit": 117,
   "perek": 127,
   "lenta": 123,
-  "dixy": 121,
-  "auchan": 111
+  "auchan": 111,
+  "samokat": 137,
+  "lavka": 142,
+  "vkusvill": 145
  },
  "peanut_butter": {
   "base": 220,
@@ -1416,8 +1622,10 @@
   "magnit": 213,
   "perek": 231,
   "lenta": 224,
-  "dixy": 220,
-  "auchan": 202
+  "auchan": 202,
+  "samokat": 251,
+  "lavka": 260,
+  "vkusvill": 264
  },
  "sesame": {
   "base": 50,
@@ -1428,8 +1636,10 @@
   "magnit": 48,
   "perek": 52,
   "lenta": 51,
-  "dixy": 50,
-  "auchan": 46
+  "auchan": 46,
+  "samokat": 57,
+  "lavka": 59,
+  "vkusvill": 60
  },
  "raisins": {
   "base": 79.45,
@@ -1442,8 +1652,10 @@
   "magnit": 77,
   "perek": 83,
   "lenta": 81,
-  "dixy": 79,
-  "auchan": 73
+  "auchan": 73,
+  "samokat": 91,
+  "lavka": 94,
+  "vkusvill": 95
  },
  "prunes": {
   "base": 113.5,
@@ -1456,8 +1668,10 @@
   "magnit": 110,
   "perek": 119,
   "lenta": 116,
-  "dixy": 114,
-  "auchan": 104
+  "auchan": 104,
+  "samokat": 129,
+  "lavka": 134,
+  "vkusvill": 136
  },
  "dried_apricots": {
   "base": 124.85,
@@ -1470,8 +1684,10 @@
   "magnit": 121,
   "perek": 131,
   "lenta": 127,
-  "dixy": 125,
-  "auchan": 115
+  "auchan": 115,
+  "samokat": 142,
+  "lavka": 147,
+  "vkusvill": 150
  },
  "lentils": {
   "base": 93.54,
@@ -1484,8 +1700,10 @@
   "magnit": 91,
   "perek": 98,
   "lenta": 95,
-  "dixy": 94,
-  "auchan": 86
+  "auchan": 86,
+  "samokat": 107,
+  "lavka": 110,
+  "vkusvill": 112
  },
  "split_peas": {
   "base": 66.52,
@@ -1498,8 +1716,10 @@
   "magnit": 65,
   "perek": 70,
   "lenta": 68,
-  "dixy": 67,
-  "auchan": 61
+  "auchan": 61,
+  "samokat": 76,
+  "lavka": 78,
+  "vkusvill": 80
  },
  "chickpeas": {
   "base": 98.73,
@@ -1512,8 +1732,10 @@
   "magnit": 96,
   "perek": 104,
   "lenta": 101,
-  "dixy": 99,
-  "auchan": 91
+  "auchan": 91,
+  "samokat": 113,
+  "lavka": 117,
+  "vkusvill": 118
  },
  "canned_beans": {
   "base": 121.47,
@@ -1526,8 +1748,10 @@
   "magnit": 118,
   "perek": 128,
   "lenta": 124,
-  "dixy": 121,
-  "auchan": 112
+  "auchan": 112,
+  "samokat": 138,
+  "lavka": 143,
+  "vkusvill": 146
  },
  "corn": {
   "base": 103.25,
@@ -1540,8 +1764,10 @@
   "magnit": 100,
   "perek": 108,
   "lenta": 105,
-  "dixy": 103,
-  "auchan": 95
+  "auchan": 95,
+  "samokat": 118,
+  "lavka": 122,
+  "vkusvill": 124
  },
  "green_peas": {
   "base": 116.92,
@@ -1554,8 +1780,10 @@
   "magnit": 113,
   "perek": 123,
   "lenta": 119,
-  "dixy": 117,
-  "auchan": 108
+  "auchan": 108,
+  "samokat": 133,
+  "lavka": 138,
+  "vkusvill": 140
  },
  "pickles": {
   "base": 136.66,
@@ -1568,8 +1796,10 @@
   "magnit": 133,
   "perek": 143,
   "lenta": 139,
-  "dixy": 137,
-  "auchan": 126
+  "auchan": 126,
+  "samokat": 156,
+  "lavka": 161,
+  "vkusvill": 164
  },
  "sauerkraut": {
   "base": 120,
@@ -1580,8 +1810,10 @@
   "magnit": 116,
   "perek": 126,
   "lenta": 122,
-  "dixy": 120,
-  "auchan": 110
+  "auchan": 110,
+  "samokat": 137,
+  "lavka": 142,
+  "vkusvill": 144
  },
  "turkey_thigh": {
   "base": 333.7,
@@ -1594,8 +1826,10 @@
   "magnit": 324,
   "perek": 350,
   "lenta": 340,
-  "dixy": 334,
-  "auchan": 307
+  "auchan": 307,
+  "samokat": 380,
+  "lavka": 394,
+  "vkusvill": 400
  },
  "minced_beef": {
   "base": 263.44,
@@ -1608,8 +1842,10 @@
   "magnit": 256,
   "perek": 277,
   "lenta": 269,
-  "dixy": 263,
-  "auchan": 242
+  "auchan": 242,
+  "samokat": 300,
+  "lavka": 311,
+  "vkusvill": 316
  },
  "pork_neck": {
   "base": 334.21,
@@ -1622,8 +1858,10 @@
   "magnit": 324,
   "perek": 351,
   "lenta": 341,
-  "dixy": 334,
-  "auchan": 307
+  "auchan": 307,
+  "samokat": 381,
+  "lavka": 394,
+  "vkusvill": 401
  },
  "minced_pork": {
   "base": 217.62,
@@ -1636,8 +1874,10 @@
   "magnit": 211,
   "perek": 229,
   "lenta": 222,
-  "dixy": 218,
-  "auchan": 200
+  "auchan": 200,
+  "samokat": 248,
+  "lavka": 257,
+  "vkusvill": 261
  },
  "pork_ribs": {
   "base": 328.82,
@@ -1650,8 +1890,10 @@
   "magnit": 319,
   "perek": 345,
   "lenta": 335,
-  "dixy": 329,
-  "auchan": 303
+  "auchan": 303,
+  "samokat": 375,
+  "lavka": 388,
+  "vkusvill": 395
  },
  "lasagna": {
   "base": 140.7,
@@ -1664,8 +1906,10 @@
   "magnit": 136,
   "perek": 148,
   "lenta": 144,
-  "dixy": 141,
-  "auchan": 129
+  "auchan": 129,
+  "samokat": 160,
+  "lavka": 166,
+  "vkusvill": 169
  },
  "black_pepper": {
   "base": 74.0,
@@ -1678,8 +1922,10 @@
   "magnit": 72,
   "perek": 78,
   "lenta": 75,
-  "dixy": 74,
-  "auchan": 68
+  "auchan": 68,
+  "samokat": 84,
+  "lavka": 87,
+  "vkusvill": 89
  },
  "bay_leaf": {
   "base": 57.81,
@@ -1692,8 +1938,10 @@
   "magnit": 56,
   "perek": 61,
   "lenta": 59,
-  "dixy": 58,
-  "auchan": 53
+  "auchan": 53,
+  "samokat": 66,
+  "lavka": 68,
+  "vkusvill": 69
  },
  "cinnamon": {
   "base": 52.03,
@@ -1706,8 +1954,10 @@
   "magnit": 50,
   "perek": 55,
   "lenta": 53,
-  "dixy": 52,
-  "auchan": 48
+  "auchan": 48,
+  "samokat": 59,
+  "lavka": 61,
+  "vkusvill": 62
  },
  "khmeli": {
   "base": 46.25,
@@ -1720,8 +1970,10 @@
   "magnit": 45,
   "perek": 49,
   "lenta": 47,
-  "dixy": 46,
-  "auchan": 43
+  "auchan": 43,
+  "samokat": 53,
+  "lavka": 55,
+  "vkusvill": 56
  },
  "coriander": {
   "base": 46.25,
@@ -1734,8 +1986,10 @@
   "magnit": 45,
   "perek": 49,
   "lenta": 47,
-  "dixy": 46,
-  "auchan": 43
+  "auchan": 43,
+  "samokat": 53,
+  "lavka": 55,
+  "vkusvill": 56
  },
  "paprika": {
   "base": 55.5,
@@ -1748,8 +2002,10 @@
   "magnit": 54,
   "perek": 58,
   "lenta": 57,
-  "dixy": 56,
-  "auchan": 51
+  "auchan": 51,
+  "samokat": 63,
+  "lavka": 65,
+  "vkusvill": 67
  },
  "cumin": {
   "base": 74.0,
@@ -1762,8 +2018,10 @@
   "magnit": 72,
   "perek": 78,
   "lenta": 75,
-  "dixy": 74,
-  "auchan": 68
+  "auchan": 68,
+  "samokat": 84,
+  "lavka": 87,
+  "vkusvill": 89
  },
  "curry": {
   "base": 55.5,
@@ -1776,8 +2034,10 @@
   "magnit": 54,
   "perek": 58,
   "lenta": 57,
-  "dixy": 56,
-  "auchan": 51
+  "auchan": 51,
+  "samokat": 63,
+  "lavka": 65,
+  "vkusvill": 67
  },
  "olives": {
   "base": 170,
@@ -1788,8 +2048,10 @@
   "magnit": 165,
   "perek": 178,
   "lenta": 173,
-  "dixy": 170,
-  "auchan": 156
+  "auchan": 156,
+  "samokat": 194,
+  "lavka": 201,
+  "vkusvill": 204
  },
  "_meta": {
   "updated": "2026-10-30",
@@ -1801,8 +2063,10 @@
    "magnit": 0.97,
    "perek": 1.05,
    "lenta": 1.02,
-   "dixy": 1.0,
-   "auchan": 0.92
+   "auchan": 0.92,
+   "samokat": 1.14,
+   "lavka": 1.18,
+   "vkusvill": 1.2
   },
   "coverage": {
    "ingredients": 131,
