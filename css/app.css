@@ -318,3 +318,25 @@ html.dark .pm.g{background:#12301F;color:#4ADE80}html.dark .pm.y{background:#2E2
 @media (max-width:370px){.grid3 .eq .t{font-size:11.5px}.mleg{gap:8px}.hdr-right{font-size:12px}}
 .badge.logo{overflow:hidden;padding:0;box-shadow:0 1px 3px rgba(0,0,0,.12)}.badge.logo img{width:100%;height:100%;object-fit:cover;display:block}
 .store .t{white-space:normal;overflow:visible;line-height:1.2;font-size:12.5px;min-height:30px;display:flex;align-items:center;justify-content:center}
+/* Phase 8: отзывы и удержание */
+.dayacts{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:8px}
+.minibtn{min-height:44px;padding:0 14px;border-radius:14px;border:2px solid var(--bd);background:var(--surface);font-weight:700;font-size:14px;color:var(--txt)}
+.lazytag{background:#E0F2FE;color:#075985;margin-top:0}
+.c2tag{background:#DCFCE7;color:#166534}
+.swap.dl .em{font-size:16px;line-height:16px}
+.fbrow{display:flex;align-items:center;gap:8px;margin:4px 0 2px}
+.fbrow span{flex:1;font-weight:700;font-size:14px;color:var(--mut)}
+.fbrow .btn{width:auto;padding:0 16px;min-width:56px;height:44px}
+.fbrow .btn.on{background:#DCFCE7;color:#166534}
+.fbr .chip,.frchips .chip{min-height:44px}
+.cmpcard{margin-top:12px}
+.cmp{display:flex;flex-direction:column;gap:8px;margin:10px 0}
+.cmprow{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:14px;background:var(--bg)}
+.cmprow.on{outline:2px solid var(--g)}
+.cmprow .cn{flex:1;min-width:0;display:flex;flex-direction:column;gap:3px;font-size:14px}
+.cmprow .cn span{font-size:12px;color:var(--mut)}
+.cmprow .cv{display:flex;flex-direction:column;align-items:flex-end;font-size:14px;white-space:nowrap}
+.cmprow .cv span{font-size:12px;font-weight:700}
+.cmprow .gt{color:var(--gt)} .cmprow .rd{color:#B91C1C}
+.cmprow .cmpbtn{width:auto;padding:0 12px;height:44px;font-size:13px}
+.cmpsel{width:44px;text-align:center;font-weight:800;color:var(--gt)}

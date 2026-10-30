@@ -116,8 +116,8 @@ const CK = '<span class="ck">'+ICON.check+'</span>';
 /* ====== СОСТОЯНИЕ ====== */
 function fresh(){ return {screen:'intro', city:'Москва',
   A:{store:null, adults:2, kids:0, meals:['b','l','d'], days:[0,1,2,3,4,5,6], equip:['stove','oven','micro'],
-     diets:['none'], cuisines:[], styles:[], ff:'some', allergies:['none'], dislikes:[], pantry:[], budget:null, budgetManual:false, people:null},
-  plan:null, ticks:{}, favs:[], extras:[], tab:'week', recipe:null, rtab:'ing', serv:2, rfilter:'fit', ptab:'all'}; }
+     diets:['none'], cuisines:[], styles:[], ff:'some', allergies:['none'], dislikes:[], pantry:[], budget:null, budgetManual:false, people:null, cook2:false, bad:[], likes:[]},
+  plan:null, ticks:{}, favs:[], extras:[], tab:'week', recipe:null, rtab:'ing', serv:2, rfilter:'fit', ptab:'all', fridge:[], rmode:''}; }
 function load(){ try{ const s=JSON.parse(localStorage.getItem(LS_KEY)); if(s&&s.A){ const f=fresh(); const o=Object.assign(f,s); o.A=Object.assign(fresh().A,s.A); if(STORE_ALIAS[o.A.store]) o.A.store=STORE_ALIAS[o.A.store]; if(o.A.store&&!STORES.some(x=>x.id===o.A.store)) o.A.store='p5'; return o; } }catch(e){} return null; }
 let S = load() || fresh();
 function save(){ try{ localStorage.setItem(LS_KEY, JSON.stringify(S)); }catch(e){} }
@@ -256,7 +256,12 @@ function ffCap(){ const v=FF_CAP[S.A.ff||'some']; return v==null?2:v; }
 function isFF(r){ return !!r && r.tags.includes('fastfood'); }
 function ffCount(skip){ return S.plan?S.plan.slots.filter((s,j)=>j!==skip&&s.r&&!s.hidden&&isFF(RMAP[s.r])).length:0; }
 function ffOk(r,skip){ return !isFF(r)||ffCount(skip)<ffCap(); }
-function candidates(m){ applySides(); return RECIPES.filter(r=>fits(r,m)&&!r.tags.includes('sauce')&&(ffCap()>0||!isFF(r))); }
+function isBad(r){ return (S.A.bad||[]).some(x=>x.id===r.id); }
+function candidates(m){ applySides(); return RECIPES.filter(r=>fits(r,m)&&!r.tags.includes('sauce')&&(ffCap()>0||!isFF(r))&&!isBad(r)); }
+/* «Сегодня лень»: ≤20 минут без настаивания, или без плиты/духовки/мультиварки и ≤30 минут */
+function isLazy(r){ return !r.rest && (totalTime(r)<=20 || (!r.eq.some(e=>e==='stove'||e==='oven'||e==='multi'||e==='fryer') && totalTime(r)<=30)); }
+/* «Готовим на 2 дня»: какие блюда разумно доедать на следующий день */
+function c2Ok(r){ return !!r && !isFF(r) && (r.kind==='main'||r.kind==='soup') && !r.tags.includes('sauce'); }
 function priceOf(g,st){ st=st||store(); return g.sp&&g.sp[st.id]!=null ? g.sp[st.id] : g.price*st.mult; }
 function portionCost(r){ const st=store(); return recipeIngs(r).reduce((s,i)=>{const g=ING[i.k]; return s+i.q/r.sv/g.pack*priceOf(g,st);},0); }
 function totalTime(r){ return r.prep+r.cook; }
@@ -272,6 +277,8 @@ function recipeScore(r,ctx,slotKey){
   a.styles.forEach(st=>{ if(styleMatch(r,st)) s+=2.5; });
   if(a.cuisines.includes(r.c)) s+=1.6;
   if(isFF(r) && a.ff==='often') s+=1.5;
+  if((a.likes||[]).includes(r.id)) s+=1.2;
+  if(ctx.c2 && c2Ok(r)) s+=1.5;
   if(a.kids>0 && r.tags.includes('kids')) s+=0.8;
   const batchSt=a.styles.includes('batch');
   const u=(ctx.uses[r.id]||0); s-= u*(batchSt?1.5:4); if(u>=(batchSt?3:2)) s-=12;
@@ -321,6 +328,7 @@ function generatePlan(seed,trial){ applySides();
   const ctx={uses:{},ings:new Set(),target,meatN:0,ld:0};
   const cands={}; meals.forEach(m=>cands[m]=candidates(m));
   const batch=a.styles.includes('batch')&&meals.includes('l')&&meals.includes('d');
+  const c2=!!a.cook2, both=meals.includes('l')&&meals.includes('d'); const prevMain={l:-1,d:-1};
   let prevDinner=-1;
   days.forEach((d,di)=>{
     ctx.dayRecipes=new Set(); let dayP=0;
@@ -330,14 +338,17 @@ function generatePlan(seed,trial){ applySides();
       ctx.pNeed=Math.max(0,(T.pmin-dayP))*MEAL_SHARE[m]/left;
       const take=(r,extra)=>{ slots.push(Object.assign({d,m,r:r.id},extra||{})); dayP+=r.p; ctx.dayRecipes.add(r.id);
         if((m==='l'||m==='d')){ ctx.ld++; if(r.meat) ctx.meatN++; } };
-      if(m==='l' && batch && prevDinner>=0){ const src=slots[prevDinner]; const r=src.r&&RMAP[src.r];
-        if(r && r.tags.includes('batch') && mealOk(r,'l') && !slots.some(x=>x.src===prevDinner)){ take(r,{src:prevDinner,left:true}); return; } }
+      if(m==='l' && (batch||c2) && both && prevDinner>=0){ const src=slots[prevDinner]; const r=src.r&&RMAP[src.r];
+        if(r && (c2?c2Ok(r):r.tags.includes('batch')) && mealOk(r,'l') && !slots.some(x=>x.src===prevDinner)){ take(r,{src:prevDinner,left:true,c2:c2||undefined}); return; } }
+      if(c2 && !both && (m==='l'||m==='d') && prevMain[m]>=0){ const src=slots[prevMain[m]]; const r=src.r&&RMAP[src.r];
+        if(r && !src.left && c2Ok(r)){ take(r,{src:prevMain[m],left:true,c2:true}); prevMain[m]=slots.length-1; return; } }
       const list=cands[m]; if(!list.length){ slots.push({d,m,r:null}); return; }
-      ctx.m=m; let best=null,bs=-1e9;
+      ctx.m=m; ctx.c2=c2 && di<days.length-1 && (both?m==='d':(m==='l'||m==='d')); let best=null,bs=-1e9;
       list.forEach(r=>{ if(!ffOk(r)) return; const sc=recipeScore(r,ctx,d+m); if(sc>bs){bs=sc;best=r;} });
       take(best); ctx.uses[best.id]=(ctx.uses[best.id]||0)+1;
       recipeIngs(best).forEach(i=>ctx.ings.add(i.k));
       if(m==='d') prevDinner=slots.length-1;
+      if(m==='l'||m==='d') prevMain[m]=slots.length-1;
     });
   });
   fitBudget(cands);
@@ -349,22 +360,23 @@ function generatePlan(seed,trial){ applySides();
 }
 function dayP(d){ return dayTotals(d).p; }
 /* Перекусы и баланс дня. Авто-перекусы добавляются, только если выбрано ≥2 основных приёмов пищи. */
-function balanceDays(cands){
+function balanceDays(cands,only,F){ F=F||(()=>true);
   const T=targets().ref, slots=S.plan.slots; const full=mainMeals()>=2;
   const used={}; slots.forEach(x=>{ if(x.r) used[x.r]=(used[x.r]||0)+1; });
-  const maxUse=S.A.styles.includes('batch')?3:2;
-  const snacks=candidates('s'); const psn=snacks.filter(r=>r.tags.includes('psnack')||r.p*4/r.k>=0.25);
-  dayOrder().forEach(d=>{
+  const maxUse=S.A.styles.includes('batch')||S.A.cook2?3:2;
+  const snacks=candidates('s').filter(F); const psn=snacks.filter(r=>r.tags.includes('psnack')||r.p*4/r.k>=0.25);
+  dayOrder().filter(d=>only==null||d===only).forEach(d=>{
     const inDay=()=>new Set(slots.filter(x=>x.d===d).map(x=>x.r));
     // 1) белок: меняем блюдо дня на более белковое того же приёма (без лишних ккал)
     for(let g=0; g<4 && dayP(d)<T.pmin; g++){
       const t=dayTotals(d); let best=null;
-      slots.forEach((s,i)=>{ if(s.d!==d||!s.r||s.left||s.auto||slots.some(x=>x.src===i)) return; const cur=RMAP[s.r]; const ids=inDay();
-        (cands[s.m]||candidates(s.m)).forEach(r=>{ if(ids.has(r.id)||(used[r.id]||0)>=maxUse||!ffOk(r,i)) return; const dp=r.p-cur.p; if(dp<5) return;
+      slots.forEach((s,i)=>{ if(s.d!==d||!s.r||s.left||s.auto) return; const deps=slots.filter(x=>x.src===i); const cur=RMAP[s.r]; const ids=inDay();
+        (cands[s.m]||candidates(s.m)).forEach(r=>{ if(ids.has(r.id)||(used[r.id]||0)>=maxUse||!ffOk(r,i)||!F(r)) return; const dp=r.p-cur.p; if(dp<5) return;
+          if(deps.length && !(deps.every(x=>mealOk(r,x.m)) && (!S.A.cook2||c2Ok(r)) && deps.every(x=>!full||dayTotals(x.d).k-cur.k+r.k<=T.k*1.1))) return;
           const nk=t.k-cur.k+r.k; if(full && nk>T.k*1.1) return;
           const sc=dp - Math.max(0,portionCost(r)-portionCost(cur))*0.15 - Math.abs(nk-T.k)/80;
           if(!best||sc>best.sc) best={i,r,sc,cur}; }); });
-      if(!best) break; used[best.cur.id]--; used[best.r.id]=(used[best.r.id]||0)+1; replaceSlot(best.i,best.r.id);
+      if(!best) break; const nd=slots.filter(x=>x.src===best.i).length; used[best.cur.id]-=1+nd; used[best.r.id]=(used[best.r.id]||0)+1+nd; replaceSlot(best.i,best.r.id);
     }
     if(!full) return;
     // 2) белковый перекус, если белка всё ещё мало
@@ -384,7 +396,7 @@ function balanceDays(cands){
       const t=dayTotals(d); let best=null; const ids=inDay();
       const au=slots.findIndex(x=>x.d===d&&x.auto&&!x.prot&&x.r); if(au>=0){ const r=RMAP[slots[au].r]; if(t.k-r.k>=T.k*0.9){ slots[au].r=null; slots[au].hidden=true; continue; } }
       slots.forEach((s,i)=>{ if(s.d!==d||!s.r||s.left||s.auto||slots.some(x=>x.src===i)) return; const cur=RMAP[s.r];
-        (cands[s.m]||candidates(s.m)).forEach(r=>{ if(ids.has(r.id)||(used[r.id]||0)>=maxUse||!ffOk(r,i)) return; const nk=t.k-cur.k+r.k, np=t.p-cur.p+r.p;
+        (cands[s.m]||candidates(s.m)).forEach(r=>{ if(ids.has(r.id)||(used[r.id]||0)>=maxUse||!ffOk(r,i)||!F(r)) return; const nk=t.k-cur.k+r.k, np=t.p-cur.p+r.p;
           if(nk>=t.k-40||np<Math.min(T.pmin,t.p)) return; const sc=-Math.abs(nk-T.k)-Math.max(0,portionCost(r)-portionCost(cur))*2; if(!best||sc>best.sc) best={i,r,sc,cur}; }); });
       if(!best) break; used[best.cur.id]--; used[best.r.id]=(used[best.r.id]||0)+1; replaceSlot(best.i,best.r.id);
     }
@@ -400,7 +412,8 @@ function fitBudget(cands){
       const curC=portionCost(cur); if(dt[s.d]==null) dt[s.d]=dayTotals(s.d);
       const t=dt[s.d], same=new Set(slots.filter(x=>x.d===s.d).map(x=>x.r));
       const pool=s.auto?candidates('s'):(cands[s.m]||candidates(s.m));
-      const alts=pool.filter(r=>r.id!==s.r && !same.has(r.id) && (u[r.id]||0)<maxUse && ffOk(r,i) && portionCost(r)<curC*0.9)
+      const deps=slots.filter(x=>x.src===i);
+      const alts=pool.filter(r=>r.id!==s.r && !same.has(r.id) && (u[r.id]||0)<maxUse && ffOk(r,i) && portionCost(r)<curC*0.9 && (!deps.length||(deps.every(x=>mealOk(r,x.m))&&(!S.A.cook2||c2Ok(r)))))
         .filter(r=>{ const np=t.p-cur.p+r.p; const ok=np>=Math.min(T.pmin,t.p)||np>=T.pmin; if(!ok) S.plan.pBlocked++; return ok; })
         .sort((x,y)=>portionCost(x)-portionCost(y)).slice(0,3).sort((x,y)=>(u[x.id]||0)-(u[y.id]||0));
       if(!alts.length) return; const sav=curC-portionCost(alts[0]);
@@ -410,7 +423,7 @@ function fitBudget(cands){
     total=shopping().total;
   }
 }
-function replaceSlot(i,rid){ const slots=S.plan.slots; slots[i].r=rid; slots[i].left=false; delete slots[i].src;
+function replaceSlot(i,rid){ const slots=S.plan.slots; slots[i].r=rid; slots[i].left=false; delete slots[i].src; delete slots[i].c2;
   slots.forEach(x=>{ if(x.src===i) x.r=rid; }); }
 /* Замена: шторка с 4 вариантами + «Отменить» */
 function swapOptions(i){
@@ -428,11 +441,98 @@ function swapMeal(i){
   <div class="stack" style="margin-top:10px">${alts.length>4?`<button class="btn sec sm" data-act="swapmore" data-i="${i}">Другие варианты</button>`:''}<button class="btn sec sm" data-act="closemodal">Отмена</button></div>`);
 }
 let undoState=null;
-function doSwap(i,rid){ const s=S.plan.slots[i]; undoState={i,r:s.r,left:s.left,src:s.src,deps:S.plan.slots.map((x,j)=>x.src===i?j:-1).filter(j=>j>=0)};
+function doSwap(i,rid){ const s=S.plan.slots[i]; delete S.plan.lazyPrev; undoState={i,r:s.r,left:s.left,src:s.src,c2:s.c2,deps:S.plan.slots.map((x,j)=>x.src===i?j:-1).filter(j=>j>=0)};
   replaceSlot(i,rid); closeModal(); save(); render(); toast('Заменили на «'+RMAP[rid].t+'»',{act:'undo',label:'Отменить'}); }
-function undoSwap(){ if(!undoState) return; const u=undoState, s=S.plan.slots[u.i]; s.r=u.r; s.left=u.left; if(u.src!=null) s.src=u.src;
+function undoSwap(){ if(!undoState) return; const u=undoState, s=S.plan.slots[u.i]; s.r=u.r; s.left=u.left; if(u.src!=null) s.src=u.src; if(u.c2) s.c2=true;
   u.deps.forEach(j=>{ S.plan.slots[j].r=u.r; }); undoState=null; save(); render(); toast('Замена отменена'); }
 function dayTotals(d){ const t={k:0,p:0,f:0,c:0,fi:0,su:0}; S.plan.slots.filter(s=>s.d===d&&s.r).forEach(s=>{const r=RMAP[s.r]; t.k+=r.k;t.p+=r.p;t.f+=r.f;t.c+=r.cb;t.fi+=r.fi||0;t.su+=r.su||0;}); return t; }
+
+/* ====== СЕГОДНЯ ЛЕНЬ ======
+   Меняем блюда дня на быстрые (≤20 мин) или без плиты, подбирая близкие ккал и белок; затем добираем день до норм
+   только «ленивыми» блюдами и перекусами. «Вчерашнее» (остатки) не трогаем — его не готовить. Отмена — снимок слотов. */
+function lazyDay(d){ const P=S.plan, slots=P.slots, T=targets().ref; const before=JSON.parse(JSON.stringify(slots));
+  const maxUse=S.A.styles.includes('batch')||S.A.cook2?3:2; const used={}; slots.forEach(x=>{ if(x.r) used[x.r]=(used[x.r]||0)+1; });
+  let n=0, miss=0;
+  slots.forEach((s,i)=>{ if(s.d!==d||!s.r||s.hidden||s.left) return; const cur=RMAP[s.r]; if(isLazy(cur)) return;
+    const ids=new Set(slots.filter(x=>x.d===d&&x!==s).map(x=>x.r)); const deps=slots.filter(x=>x.src===i);
+    const pool=(s.auto?candidates('s'):candidates(s.m)).filter(r=>isLazy(r)&&!ids.has(r.id)&&(used[r.id]||0)<maxUse&&ffOk(r,i)&&deps.every(x=>mealOk(r,x.m)));
+    if(!pool.length){ miss++; return; } const t=dayTotals(d);
+    const best=pool.map(r=>{ const nk=t.k-cur.k+r.k, np=t.p-cur.p+r.p;
+      return {r,sc:-Math.abs(r.k-cur.k)/40-Math.max(0,cur.p-r.p)/2-Math.max(0,T.pmin-np)*0.6-Math.max(0,Math.abs(nk-T.k)-T.k*0.08)/15+hash(P.seed+r.id+'lazy'+d)*0.6}; })
+      .sort((a,b)=>b.sc-a.sc)[0];
+    used[cur.id]--; used[best.r.id]=(used[best.r.id]||0)+1; replaceSlot(i,best.r.id); n++; });
+  const c={}; mealOrder().forEach(m=>c[m]=candidates(m).filter(isLazy));
+  balanceDays(c,d,isLazy);
+  P.lazy=Object.assign({},P.lazy,{[d]:true}); P.lazyPrev={d,slots:before}; save(); render();
+  toast(n?`${DAYS_FULL[d]}: ${n} ${plural(n,'блюдо','блюда','блюд')} заменили на быстрые`:'В этот день и так всё быстрое',n?{act:'lazyundo',label:'Отменить'}:null);
+  return {n,miss}; }
+function lazyUndo(){ const P=S.plan; if(!P||!P.lazyPrev) return; const d=P.lazyPrev.d; P.slots=P.lazyPrev.slots; delete P.lazyPrev; if(P.lazy) delete P.lazy[d]; save(); render(); toast('Вернули план дня'); }
+
+/* ====== ГДЕ ДЕШЕВЛЕ ======
+   Та же корзина (те же упаковки) во всех 8 сетях: сколько цен реальные (снимок каталога), сколько — индекс/оценка. */
+function storeCompare(){ const sh=shopping();
+  return STORES.map(st=>{ let total=0, real=0, idx=0; sh.items.forEach(x=>{ total+=Math.round(x.packs*priceOf(x.g,st)); if(realOf(x.g,st)) real++; else if(/-index$/.test(estKind(x.g,st))) idx++; });
+    return {st,total,real,idx,n:sh.items.length}; }).sort((a,b)=>a.total-b.total); }
+function compareModal(){ const rows=storeCompare(), cur=store().id, curT=(rows.find(x=>x.st.id===cur)||rows[0]).total;
+  modal(`<h3>Где дешевле эта корзина</h3><p>Те же продукты и упаковки по ценам каждой сети. «Цена магазина» — из открытого каталога сети, остальное — оценка.</p>
+  <div class="cmp">${rows.map((x,i)=>`<div class="cmprow ${x.st.id===cur?'on':''}"><div class="cn"><b>${i===0?'🏆 ':''}${esc(x.st.name)}</b><span>${x.real?`<span class="ptag real">цена магазина</span> ${x.real}/${x.n}`:'<span class="ptag est">оценка</span>'}${x.idx?` · индекс ${x.idx}`:''}</span></div>
+   <div class="cv"><b>${rub(x.total)}</b><span class="${x.total<curT?'gt':(x.total>curT?'rd':'mut')}">${x.st.id===cur?'сейчас':(x.total<curT?'−':'+')+(x.st.id===cur?'':rub(Math.abs(x.total-curT)))}</span></div>
+   ${x.st.id===cur?'<span class="cmpsel">✓</span>':`<button class="btn sec sm cmpbtn" data-act="setstore" data-id="${x.st.id}">Выбрать</button>`}</div>`).join('')}</div>
+  <p class="mut small">Цены ориентировочные: наличие и акции в конкретном магазине могут отличаться.</p><button class="btn sec sm" data-act="closemodal">Закрыть</button>`); }
+
+/* ====== ИЗ ОСТАТКОВ ====== */
+const FR_SKIP=new Set(['salt','spices','black_pepper','oil','sugar','water','bay_leaf','paprika','cumin','coriander','khmeli','curry','cinnamon','flour','vinegar']);
+function fridgeChips(){ const cnt={}; RECIPES.forEach(r=>{ if(r.tags.includes('sauce')) return; r.ing.forEach(i=>{ if(!FR_SKIP.has(i.k)&&ING[i.k]) cnt[i.k]=(cnt[i.k]||0)+1; }); });
+  return Object.keys(cnt).filter(k=>cnt[k]>=3).sort((a,b)=>cnt[b]-cnt[a]); }
+function fridgeMatches(have){ have=new Set(have||S.fridge); if(!have.size) return [];
+  return RECIPES.filter(r=>!r.tags.includes('sauce')&&!whyNot(r)&&!isBad(r)).map(r=>{ const main=recipeIngs(r).filter(i=>!FR_SKIP.has(i.k));
+    const hit=main.filter(i=>have.has(i.k)), miss=main.filter(i=>!have.has(i.k)&&!S.A.pantry.includes(i.k));
+    return {r,hit:hit.length,n:main.length,miss}; }).filter(x=>x.hit>0)
+    .sort((a,b)=>(b.miss.length===0)-(a.miss.length===0)||(b.hit/b.n)-(a.hit/a.n)||a.miss.length-b.miss.length||b.hit-a.hit); }
+function renderFridge(){ const sel=new Set(S.fridge); const chips=fridgeChips(); const res=fridgeMatches();
+  return `<button class="linkbtn" data-act="rmode" data-id="" style="margin:4px 0 8px">‹ Все рецепты</button><h1>Из остатков</h1><p class="sub">Отметьте, что есть в холодильнике — подберём блюда, где докупать меньше всего.</p>
+  <div class="search">${ICON.search}<input type="search" placeholder="Найти продукт" data-search="fridge" autocomplete="off"></div>
+  <div class="chips frchips" id="flt">${chips.map(k=>`<button class="chip ${sel.has(k)?'sel':''}" data-act="fridge" data-id="${k}" data-name="${esc(ING[k].name.toLowerCase())}">${ING[k].e} ${esc(shortName(ING[k].name))}</button>`).join('')}</div>
+  ${sel.size?`<div class="row" style="display:flex;justify-content:space-between;align-items:center;margin:14px 0 6px"><b>${res.length?`Подходит ${res.length} ${plural(res.length,'рецепт','рецепта','рецептов')}`:'Ничего не нашлось'}</b><button class="linkbtn" data-act="frclear">Сбросить (${sel.size})</button></div>
+  ${res.slice(0,30).map(x=>`<div class="meal" data-act="open" data-id="${x.r.id}">${photo(x.r,'thumb')}<div class="mi"><div class="mt">${esc(x.r.t)}</div><div class="mm">есть ${x.hit} из ${x.n} · ${totalTime(x.r)}${NB}мин · ${x.r.k}${NB}ккал</div>
+   <div class="mm" style="color:${x.miss.length?'#B45309':'var(--gt)'}">${x.miss.length?'докупить: '+esc(x.miss.slice(0,4).map(i=>shortName(ING[i.k].name).toLowerCase()).join(', '))+(x.miss.length>4?' и ещё '+(x.miss.length-4):''):'✓ всё есть'}</div></div>
+   ${S.plan?`<div class="mbtns"><button class="swap" data-act="frplan" data-id="${x.r.id}" aria-label="В план">${ICON.cal}В план</button></div>`:''}</div>`).join('')}`
+  :`<div class="note" style="margin-top:14px">Выберите хотя бы один продукт.</div>`}`; }
+
+/* ====== ОТЗЫВЫ ======
+   Код для бота: fb_<тип><индекс рецепта base36>_<причина>; тип d — не понравилось, l — понравилось; общий отзыв — fb_gen. */
+const BOT_NAME='sytoplan_bot';
+const FB_REASONS=[['t','😝 Невкусно'],['l','⏳ Долго'],['e','💸 Дорого'],['n','🛒 Нет ингредиентов'],['x','🚫 Не ем такое']];
+function fbCode(t,id,w){ if(t==='g') return 'fb_gen'; const i=RECIPES.findIndex(r=>r.id===id); return ('fb_'+t+(i>=0?i.toString(36):'0')+(w?'_'+w:'')).slice(0,64); }
+function sendFb(code,label){ const link='https://t.me/'+BOT_NAME+'?start='+code; closeModal();
+  if(inTG&&TG.openTelegramLink){ try{ TG.openTelegramLink(link); return; }catch(e){} }
+  const text=`Отзыв о ${APP_NAME}: ${label} (код ${code})`;
+  copyText(text);
+  modal(`<h3>Отзыв скопирован</h3><p>Откройте нашего бота @${BOT_NAME} в Telegram и вставьте текст — или просто перейдите по ссылке.</p><textarea readonly>${esc(text)}</textarea><div style="height:10px"></div>
+   <div class="stack"><a class="btn" href="${link}" target="_blank" rel="noopener">Открыть @${BOT_NAME}</a><button class="btn sec sm" data-act="closemodal">Закрыть</button></div>`); }
+function dislikeModal(id,i){ const r=RMAP[id]; if(!r) return;
+  modal(`<h3>👎 Не понравилось</h3><p>«${esc(r.t)}» больше не будем ставить в план. Что не так?</p>
+  <div class="chips fbr">${FB_REASONS.map(x=>`<button class="chip" data-act="fbwhy" data-id="${id}" data-w="${x[0]}" data-i="${i==null?'':i}">${x[1]}</button>`).join('')}</div>
+  <div style="height:12px"></div><button class="btn sec sm" data-act="closemodal">Отмена</button>`); }
+function markBad(id,w){ const a=S.A; a.bad=(a.bad||[]).filter(x=>x.id!==id); a.bad.push({id,w}); a.likes=(a.likes||[]).filter(x=>x!==id); save(); }
+function afterBad(id,w,i){ const r=RMAP[id]; const why=(FB_REASONS.find(x=>x[0]===w)||['',''])[1];
+  const slots=S.plan?S.plan.slots.map((s,j)=>({s,j})).filter(o=>o.s.r===id&&!o.s.left):[];
+  modal(`<div style="font-size:40px">🙈</div><h3>Скрыли «${esc(r.t)}»</h3><p>Причина: ${why}. Вернуть блюдо можно в «Профиле». Расскажете подробнее в боте? Это займёт полминуты и очень поможет.</p>
+  <div class="stack">${slots.length?`<button class="btn" data-act="badswap" data-i="${i!==''&&i!=null?i:slots[0].j}">${ICON.swap} Заменить в плане</button>`:''}
+  <button class="btn ${slots.length?'out':''}" data-act="fbsend" data-id="${fbCode('d',id,w)}" data-l="не понравилось «${esc(r.t)}» — ${esc(why.replace(/^\S+ /,''))}">💬 Написать в бот</button>
+  <button class="btn sec sm" data-act="closemodal">Готово</button></div>`); }
+function badModal(){ const b=S.A.bad||[];
+  modal(`<h3>Скрытые блюда</h3><p>${b.length?'Эти блюда не попадают в план. Нажмите «Вернуть», чтобы снова их предлагать.':'Пока ничего не скрыто. Нажмите 👎 на блюде, если оно не понравилось.'}</p>
+  ${b.map(x=>{const r=RMAP[x.id]; return r?`<div class="prow"><span class="k" style="flex:1;color:var(--txt)">${esc(r.t)}<br><span class="mut small">${(FB_REASONS.find(f=>f[0]===x.w)||['',''])[1]}</span></span><button class="btn sec sm" style="width:auto;padding:0 16px" data-act="unbad" data-id="${x.id}">Вернуть</button></div>`:'';}).join('')}
+  <div style="height:12px"></div><button class="btn sec sm" data-act="closemodal">Закрыть</button>`); }
+
+/* ====== ЭКСПОРТ СПИСКА ====== */
+function shareTG(text){ const lim=1400; let t=text;
+  if(t.length>lim){ const lines=t.split('\n'); let out=''; let i=0; for(;i<lines.length;i++){ if((out+lines[i]+'\n').length>lim-60) break; out+=lines[i]+'\n'; }
+    const rest=lines.slice(i).filter(l=>/^[☐☑]/.test(l)).length; t=out+(rest?`… и ещё ${rest} ${plural(rest,'позиция','позиции','позиций')} — полный список в ${APP_NAME}`:''); }
+  const link='https://t.me/share/url?url=&text='+encodeURIComponent(t);
+  if(inTG&&TG.openTelegramLink){ try{ TG.openTelegramLink(link); return; }catch(e){} }
+  window.open(link,'_blank'); }
 
 /* ====== РЕНДЕР ====== */
 const app=document.getElementById('app');
@@ -542,7 +642,9 @@ function renderStep(sc){
   case 'q7': return stepShell(sc,'Сколько времени на готовку?','Выберите удобный формат — можно несколько.',
     `<div class="list">${STYLES.map(s=>optCard('style',s.id,a.styles.includes(s.id),`<span class="em">${ill('st_'+s.id,s.e,'')}</span><div><div class="t">${s.name}</div><div class="s">${s.sub}</div></div>`,'row')).join('')}</div>
     <h2>🍔 Домашний фастфуд</h2><p class="sub" style="margin-top:-4px">Бургеры, шаурма, пицца, наггетсы — приготовленные дома. Сколько раз в неделю ставить в план?</p>
-    <div class="chips">${FF_OPTS.map(o=>`<button class="chip ${(a.ff||'some')===o[0]?'sel':''}" data-act="ffm" data-id="${o[0]}">${o[1]}</button>`).join('')}</div>`,
+    <div class="chips">${FF_OPTS.map(o=>`<button class="chip ${(a.ff||'some')===o[0]?'sel':''}" data-act="ffm" data-id="${o[0]}">${o[1]}</button>`).join('')}</div>
+    <h2>🍲 Готовим на 2 дня</h2><p class="sub" style="margin-top:-4px">Ужин готовим двойной порцией, а на следующий день едим его на обед (или ужин) — готовить через день.</p>
+    <div class="chips">${[[false,'Нет, каждый день свежее'],[true,'Да, готовим на 2 дня']].map(o=>`<button class="chip ${!!a.cook2===o[0]?'sel':''}" data-act="c2m" data-id="${o[0]?1:0}">${o[1]}</button>`).join('')}</div>`,
     `<button class="btn" data-act="next">Далее</button>`);
   case 'q8': return stepShell(sc,'Есть аллергии?','Блюда с этими продуктами исключим полностью.',
     `<div class="chips">${ALLERGENS.map(x=>`<button class="chip ${a.allergies.includes(x.id)?'sel':''}" data-act="allergy" data-id="${x.id}">${x.e} ${x.name}</button>`).join('')}</div>`,
@@ -662,11 +764,12 @@ function renderWeek(){
   const few=mealOrder().filter(m=>{ const c=candidates(m).length; return c>0 && c<Math.ceil(days.length/2)+1; });
   if(few.length) html+=`<div class="note">📚 Мало рецептов под ваши ответы для: ${few.map(m=>MEALMAP[m].name.toLowerCase()+' ('+candidates(m).length+')').join(', ')} — блюда будут повторяться. Можно ослабить фильтры в профиле.</div>`;
   days.forEach(d=>{ const t=dayTotals(d);
-    html+=`<div class="dayh" id="day${d}"><div class="row"><div class="n">${DAYS_FULL[d]}</div><div class="kc">${fmt(Math.round(t.k))}${NB}ккал<span class="kcf">${pp!==1?` · ${fmt(Math.round(t.k*pp))} на семью`:''}</span></div></div>${macroBar(t)}${personRows(t)}</div>`;
+    html+=`<div class="dayh" id="day${d}"><div class="row"><div class="n">${DAYS_FULL[d]}</div><div class="kc">${fmt(Math.round(t.k))}${NB}ккал<span class="kcf">${pp!==1?` · ${fmt(Math.round(t.k*pp))} на семью`:''}</span></div></div>${macroBar(t)}${personRows(t)}
+    <div class="dayacts">${plan.lazy&&plan.lazy[d]?`<span class="lefttag lazytag">😴 Лёгкий день: всё быстрое</span>${plan.lazyPrev&&plan.lazyPrev.d===d?`<button class="minibtn" data-act="lazyundo">↩︎ Вернуть</button>`:''}`:`<button class="minibtn" data-act="lazy" data-id="${d}">😴 Сегодня лень</button>`}</div></div>`;
     plan.slots.forEach((s,i)=>{ if(s.d!==d||s.hidden) return; const r=s.r&&RMAP[s.r]; const lbl=MEALMAP[s.m].short;
       if(!r){ html+=`<div class="meal empty-meal"><div class="ph thumb" style="background:var(--bg)">🤷</div><div class="mi"><div class="mlabel">${lbl}</div><div class="mt">Нет подходящих рецептов</div><div class="mm">Ослабьте фильтры в профиле</div></div></div>`; return; }
-      html+=`<div class="meal" data-act="open" data-id="${r.id}">${photo(r,'thumb')}<div class="mi"><div class="mlabel">${lbl}</div><div class="mt">${esc(r.t)}</div><div class="mm">${mealMeta(r)}</div>${s.left?'<span class="lefttag">📦 из остатков ужина</span>':''}${s.auto?`<span class="lefttag">${s.prot?'💪 добавлено для белка':'🍎 добавлено для сытости'}</span>`:''}</div>
-      <div class="mbtns"><button class="swap" data-act="swap" data-i="${i}" aria-label="Заменить">${ICON.swap}Заменить</button>${s.auto?`<button class="swap rm" data-act="rmauto" data-i="${i}" aria-label="Убрать перекус">${ICON.close}Убрать</button>`:''}</div></div>`; });
+      html+=`<div class="meal" data-act="open" data-id="${r.id}"${!s.left&&plan.slots.some(x=>x.src===i)?' data-x="2"':''}>${photo(r,'thumb')}<div class="mi"><div class="mlabel">${lbl}</div><div class="mt">${esc(r.t)}</div><div class="mm">${mealMeta(r)}</div>${s.left?(s.c2?'<span class="lefttag">🍲 вчерашнее — только разогреть</span>':'<span class="lefttag">📦 из остатков ужина</span>'):''}${!s.left&&plan.slots.some(x=>x.src===i)?'<span class="lefttag c2tag">🍲 готовим на 2 дня · ×2 порции</span>':''}${s.auto?`<span class="lefttag">${s.prot?'💪 добавлено для белка':'🍎 добавлено для сытости'}</span>`:''}</div>
+      <div class="mbtns"><button class="swap" data-act="swap" data-i="${i}" aria-label="Заменить">${ICON.swap}Заменить</button>${s.auto?`<button class="swap rm" data-act="rmauto" data-i="${i}" aria-label="Убрать перекус">${ICON.close}Убрать</button>`:`<button class="swap dl" data-act="dislike" data-id="${r.id}" data-i="${i}" aria-label="Не понравилось"><span class="em">👎</span>Не моё</button>`}</div></div>`; });
   });
   html+=`<p class="foot">КБЖУ — на одну взрослую порцию (×N — рекомендуемая порция едока), по таблицам состава продуктов. Нормы — ориентир, не медицинская рекомендация. ${priceNote()}</p>`;
   return html;
@@ -678,6 +781,8 @@ function renderShop(){
   <div class="bar"><i style="width:${pct}%;background:${sh.total<=b?'var(--g)':'var(--red)'}"></i></div>
   <div class="small" style="font-weight:700;color:${sh.total<=b?'var(--gt)':'#B91C1C'}">${sh.total<=b?'✓ Укладываемся, остаётся '+rub(b-sh.total):'Превышение на '+rub(sh.total-b)}</div>
   <div class="small mut" style="margin-top:6px">${(()=>{const n=sh.items.filter(x=>realOf(x.g)).length; return n?`<span class="ptag real">цена магазина</span> ${n} из ${sh.items.length} позиций · остальные <span class="ptag est">оценка</span>`:`Все цены — <span class="ptag est">оценка</span> (у сети нет открытого каталога — пока нет снимка цен)`;})()}</div></div>`;
+  { const rows=storeCompare(), best=rows[0], curT=(rows.find(x=>x.st.id===store().id)||best).total;
+    html+=`<button class="shopcard cmpcard" data-act="compare"><span class="ic">🏷️</span><div style="flex:1;min-width:0"><div class="t">Где дешевле</div><div class="s">${best.st.id===store().id?'✓ '+esc(store().name)+' — самая дешёвая из 8 сетей':`${esc(best.st.name)} — ${rub(best.total)}, на ${rub(curT-best.total)} дешевле`}</div></div><span class="mut">›</span></button>`; }
   if(S.extras.length) html+=`<div class="chips" style="margin-top:12px">${S.extras.map((x,i)=>`<button class="chip sel" data-act="rmextra" data-i="${i}">➕ ${esc(RMAP[x.r].t)} · ${dec(x.serv)} порц. <span class="x">×</span></button>`).join('')}</div>`;
   AISLES.forEach(a=>{ const it=sh.items.filter(x=>x.g.aisle===a.id); if(!it.length) return;
     html+=`<div class="aisle">${a.e} ${a.name} <span class="c">${it.length}</span></div>`;
@@ -687,11 +792,12 @@ function renderShop(){
   if(sh.home.length){ html+=`<div class="aisle">🏠 Есть дома <span class="c">${sh.home.length}</span></div>`;
     sh.home.forEach(x=>{ html+=`<div class="li"><span class="e">${x.g.e}</span><div class="nm"><b>${esc(x.g.name)}</b><span>понадобится ≈ ${fmtAmount(x.q,x.g.unit)}</span></div><span class="homepill">есть дома</span></div>`; }); }
   const left=sh.items.filter(x=>!S.ticks[x.k]).length;
-  html+=`<div class="stack" style="margin-top:22px"><button class="btn out sm" data-act="copylist">Скопировать список</button>${left&&left<sh.items.length?`<button class="btn sec sm" data-act="copyleft">Скопировать только некупленное (${left})</button>`:''}</div>
+  html+=`<div class="stack" style="margin-top:22px"><button class="btn sm" data-act="tglist">✈️ Отправить в Telegram</button><button class="btn out sm" data-act="copylist">Скопировать список</button>${left&&left<sh.items.length?`<button class="btn sec sm" data-act="copyleft">Скопировать только некупленное (${left})</button>`:''}</div>
   <p class="foot">Количество округлено до реальных упаковок. ${priceNote()} ${storeReal()?'Цена магазина пересчитана на указанную упаковку; наличие и акции в вашем магазине могут отличаться.':'Это ориентир, не цена на полке.'}</p>`;
   return html;
 }
 function renderRecipes(){
+  if(S.rmode==='fridge') return renderFridge();
   const f=S.rfilter, cat=S.rcat||'all'; let list=RECIPES;
   if(f==='fit') list=list.filter(r=>!whyNot(r)); else if(f==='fav') list=list.filter(r=>S.favs.includes(r.id));
   list=list.filter(r=>inCat(r,cat));
@@ -699,6 +805,7 @@ function renderRecipes(){
   const empty=f==='fav'?`<div class="empty">${ill('empty','<div style="font-size:54px">💚</div>')}<b>Пока пусто</b>Нажмите на сердечко на странице рецепта — он появится здесь.</div>`
     :`<div class="empty">${ill('empty','<div style="font-size:54px">🍽️</div>')}<b>Ничего не нашлось</b>Попробуйте другую категорию или вкладку «Все».</div>`;
   return `<h1>Рецепты</h1><p class="sub">${RECIPES.length} ${plural(RECIPES.length,'рецепт','рецепта','рецептов')} в базе, ${fitN} подходят вам</p>
+  <button class="shopcard" data-act="rmode" data-id="fridge" style="margin:0 0 12px"><span class="ic">🧊</span><div style="flex:1;min-width:0"><div class="t">Из остатков</div><div class="s">Отметьте, что есть в холодильнике — подскажем, что приготовить</div></div><span class="mut">›</span></button>
   <div class="search">${ICON.search}<input type="search" placeholder="Найти блюдо" data-search="recipes" autocomplete="off"></div>
   <div class="tabs">${[['fit','Подходят вам'],['fav','Избранное ('+S.favs.length+')'],['all','Все рецепты']].map(t=>`<button class="tab ${f===t[0]?'on':''}" data-act="rfilter" data-id="${t[0]}">${t[1]}</button>`).join('')}</div>
   <div class="tabs" style="margin-top:-6px">${CATS.map(c=>`<button class="chip ${cat===c[0]?'sel':''}" style="flex:0 0 auto;padding:7px 12px;font-size:13px" data-act="rcat" data-id="${c[0]}">${c[1]}</button>`).join('')}</div>
@@ -713,11 +820,13 @@ function renderProfile(){
   const rows=[['Магазин',store().name,'q1'],['Город',S.city,'city'],['Едоки',`${a.adults} взр. · ${a.kids} дет. · ${dec(portions())} порц./приём`,'q2'],
    ['Нормы КБЖУ',T.set?T.ad.map(t=>fmt(t.k)+' ккал / Б '+t.pmin+' г').join('; '):'по среднему взрослому','q2b'],
    ['Приёмы пищи',listNames(a.meals,MEALS),'q3'],['Дни',dayOrder().map(d=>DAYS[d]).join(', '),'q4'],['Техника',listNames(a.equip,EQUIP),'q5'],
-   ['Питание',a.diets.includes('none')?'Без ограничений':listNames(a.diets,DIETS),'q6'],['Любимые кухни',listNames(a.cuisines,CUISINES),'q6'],['Формат',listNames(a.styles,STYLES),'q7'],['Домашний фастфуд',(FF_OPTS.find(o=>o[0]===(a.ff||'some'))||FF_OPTS[1])[1],'q7'],
+   ['Питание',a.diets.includes('none')?'Без ограничений':listNames(a.diets,DIETS),'q6'],['Любимые кухни',listNames(a.cuisines,CUISINES),'q6'],['Формат',listNames(a.styles,STYLES),'q7'],['Домашний фастфуд',(FF_OPTS.find(o=>o[0]===(a.ff||'some'))||FF_OPTS[1])[1],'q7'],['Готовим на 2 дня',a.cook2?'Да, ужин → обед завтра':'Нет','q7'],
    ['Аллергии',a.allergies.includes('none')?'Нет':listNames(a.allergies,ALLERGENS),'q8'],['Не любите',a.dislikes.map(id=>DISLIKES.find(d=>d[0]===id)[1]).join(', ')||'—','q9'],
    ['Есть дома',a.pantry.length?a.pantry.map(k=>shortName(ING[k].name).toLowerCase()).join(', '):'—','q10'],['Бюджет',rub(a.budget)+' / неделя','q11']];
   return `<h1>Профиль</h1><p class="sub">Ваши ответы. Нажмите на строку, измените и нажмите «Сохранить» — план пересоберётся.</p>
-  <div class="card" style="padding:4px 16px">${rows.map(r=>`<div class="prow" data-act="${r[2]==='city'?'city':'edit'}" data-id="${r[2]}" style="cursor:pointer"><span class="k">${r[0]}</span><span class="v">${esc(r[1])} <span class="mut">›</span></span></div>`).join('')}</div>
+  <div class="card" style="padding:4px 16px">${rows.map(r=>`<div class="prow" data-act="${r[2]==='city'?'city':'edit'}" data-id="${r[2]}" style="cursor:pointer"><span class="k">${r[0]}</span><span class="v">${esc(r[1])} <span class="mut">›</span></span></div>`).join('')}
+  <div class="prow" data-act="badlist" style="cursor:pointer"><span class="k">Скрытые блюда 👎</span><span class="v">${(a.bad||[]).length||'—'} <span class="mut">›</span></span></div></div>
+  <button class="shopcard" data-act="fbsend" data-id="fb_gen" data-l="общий отзыв" style="margin-top:14px"><span class="ic">💬</span><div style="flex:1;min-width:0"><div class="t">Оставить отзыв</div><div class="s">Что понравилось, что улучшить — напишите в бот @${BOT_NAME}</div></div><span class="mut">›</span></button>
   <div class="stack" style="margin-top:20px"><button class="btn" data-act="regen">${ICON.swap} Пересобрать план</button><button class="btn sec" data-act="edit" data-id="q1">Изменить ответы</button><button class="btn sec" data-act="restart" style="color:#B91C1C">Начать заново</button></div>
   <p class="foot">${APP_NAME} · прототип. ${priceNote()} Реальные цены — только из официальных открытых каталогов сетей (сейчас ВкусВилл и Лента). Нормы КБЖУ — ориентир, не медицинская рекомендация.</p>`;
 }
@@ -737,6 +846,7 @@ function renderRecipe(){
    <button class="act" data-act="toplan"><span class="c">${ICON.cal}</span>В план</button>
    <button class="act" data-act="toshop"><span class="c">${ICON.cart}</span>В покупки</button>
    <button class="act" data-act="sharerecipe"><span class="c">${ICON.share}</span>Поделиться</button></div>
+  ${(()=>{ const lk=(S.A.likes||[]).includes(r.id), bd=isBad(r); return `<div class="fbrow"><span>Как вам блюдо?</span><button class="btn sec sm ${lk?'on':''}" data-act="like">👍${lk?' Нравится':''}</button><button class="btn sec sm ${bd?'on':''}" data-act="${bd?'unbad':'dislike'}" data-id="${r.id}">👎${bd?' Скрыто · вернуть':''}</button></div>`; })()}
   <h2>КБЖУ на порцию</h2>
   <div class="kb"><div class="k"><b>${r.k}</b><span>ккал</span></div><div class="p"><b>${r.p}</b><span>белки, г</span></div><div class="f"><b>${r.f}</b><span>жиры, г</span></div><div class="c"><b>${r.cb}</b><span>углеводы, г</span></div></div>
   <div class="kbnote">Клетчатка ${dec(r.fi||0)}${NB}г${r.su?` · добавленный сахар ${r.su}${NB}г`:''}. Рассчитано по составу ингредиентов (таблицы Скурихина/USDA), на одну взрослую порцию.</div>
@@ -758,8 +868,8 @@ let toastT; function toast(t,o){ let el=document.querySelector('.toast'); if(!el
   el.innerHTML=esc(t)+(o?` <button class="tbtn" data-act="${o.act}">${o.label}</button>`:''); clearTimeout(toastT); toastT=setTimeout(()=>el.remove(),o?4500:2200); }
 function listText(onlyLeft){
   const sh=shopping(); let t=`Список покупок — ${APP_NAME} (${store().name})${onlyLeft?' · только некупленное':''}\n`;
-  AISLES.forEach(a=>{ const it=sh.items.filter(x=>x.g.aisle===a.id&&!(onlyLeft&&S.ticks[x.k])); if(!it.length) return; t+=`\n${a.name}:\n`;
-    it.forEach(x=>{ t+=`${S.ticks[x.k]?'✓':'•'} ${x.g.name} ${fmtPack(x.g.pack,x.g.unit)} × ${x.packs} — ~${rub(x.price)}\n`; }); });
+  AISLES.forEach(a=>{ const it=sh.items.filter(x=>x.g.aisle===a.id&&!(onlyLeft&&S.ticks[x.k])); if(!it.length) return; t+=`\n${a.e} ${a.name}:\n`;
+    it.forEach(x=>{ t+=`${S.ticks[x.k]?'☑':'☐'} ${x.g.name} ${fmtPack(x.g.pack,x.g.unit)} × ${x.packs} — ~${rub(x.price)}\n`; }); });
   t+=`\nИтого: ~${rub(sh.total)} (бюджет ${rub(S.A.budget)})\n`;
   if(sh.home.length) t+=`\nЕсть дома: ${sh.home.map(x=>x.g.name.toLowerCase()).join(', ')}\n`;
   return t.replace(/\u00A0/g,' ');
@@ -794,7 +904,7 @@ document.addEventListener('click',e=>{
   case 'next': { const i=STEPS.indexOf(S.screen); go(STEPS[i+1]); break; }
   case 'restart': modal(`<h3>Начать заново?</h3><p>Ответы, план и список покупок будут удалены.</p><div class="stack"><button class="btn" data-act="dorestart" style="background:#EF4444;box-shadow:none">Да, начать заново</button><button class="btn sec" data-act="closemodal">Отмена</button></div>`); break;
   case 'dorestart': closeModal(); try{localStorage.removeItem(LS_KEY);}catch(_){} S=fresh(); save(); render(); break;
-  case 'closemodal': closeModal(); break;
+  case 'closemodal': closeModal(); if(S.frp){ S.frp=false; S.recipe=null; } break;
   case 'city': cityModal(); break;
   case 'savecity': { const v=(document.getElementById('cityin').value||'').trim(); closeModal(); if(v) set({city:v}); break; }
   case 'store': a.store=id; save(); render(); break;
@@ -815,6 +925,25 @@ document.addEventListener('click',e=>{
   case 'cuis': toggle(a.cuisines,id); save(); render(); break;
   case 'style': toggle(a.styles,id); save(); render(); break;
   case 'ffm': a.ff=id; save(); render(); break;
+  case 'c2m': a.cook2=id==='1'; save(); render(); break;
+  case 'lazy': lazyDay(+id); break;
+  case 'lazyundo': { const t=document.querySelector('.toast'); if(t) t.remove(); lazyUndo(); break; }
+  case 'compare': compareModal(); break;
+  case 'setstore': { a.store=id; closeModal(); save(); render(); toast('Цены пересчитаны для '+store().name); break; }
+  case 'tglist': shareTG(listText()); break;
+  case 'rmode': searchQ=''; set({rmode:id}); break;
+  case 'fridge': toggle(S.fridge,id); save(); render(); reapplySearch(); break;
+  case 'frclear': S.fridge=[]; save(); render(); break;
+  case 'frplan': e.stopPropagation(); S.frp=true; S.recipe=id; S.serv=portions(); S.rtab='ing'; toPlanModal(); break;
+  case 'dislike': e.stopPropagation(); dislikeModal(id||S.recipe, el.dataset.i); break;
+  case 'fbwhy': { const i=el.dataset.i; markBad(id,el.dataset.w); closeModal(); render(); afterBad(id,el.dataset.w,i); break; }
+  case 'badswap': closeModal(); swapMeal(+el.dataset.i); break;
+  case 'fbsend': sendFb(id,el.dataset.l||''); break;
+  case 'like': { const L=a.likes=(a.likes||[]); const on=!L.includes(S.recipe); if(on){ L.push(S.recipe); a.bad=(a.bad||[]).filter(x=>x.id!==S.recipe); } else L.splice(L.indexOf(S.recipe),1); save(); render();
+    if(on) toast('Будем чаще предлагать',{act:'fblike',label:'Написать в бот'}); break; }
+  case 'fblike': { const t=document.querySelector('.toast'); if(t) t.remove(); const r=RMAP[S.recipe]; sendFb(fbCode('l',S.recipe),'понравилось «'+(r?r.t:'')+'»'); break; }
+  case 'badlist': badModal(); break;
+  case 'unbad': a.bad=(a.bad||[]).filter(x=>x.id!==id); save(); if(document.getElementById('modal')&&!S.recipe) badModal(); else closeModal(); render(); toast('Блюдо снова будет в подборе'); break;
   case 'allergy': if(id==='none') a.allergies=['none']; else { a.allergies=a.allergies.filter(x=>x!=='none'); toggle(a.allergies,id); if(!a.allergies.length) a.allergies=['none']; } save(); render(); break;
   case 'dislike': toggle(a.dislikes,id); save(); render(); reapplySearch(); break;
   case 'pantry': toggle(a.pantry,id); save(); render(); reapplySearch(); break;
@@ -823,14 +952,14 @@ document.addEventListener('click',e=>{
   case 'regenq': closeModal(); S.quick=true; set({screen:'loading',ticks:{}}); break;
   case 'tab': S.tab=id; set({recipe:null}); break;
   case 'swap': e.stopPropagation(); swapMeal(+el.dataset.i); break;
-  case 'open': S.serv=portions(); S.rtab='ing'; set({recipe:id}); break;
+  case 'open': S.serv=portions()*(+el.dataset.x||1); S.rtab='ing'; set({recipe:id}); break;
   case 'closerecipe': navDir='back'; set({recipe:null}); break;
   case 'rtab': set({rtab:id}); break;
   case 'serv': S.serv=Math.max(0.5,Math.min(12,Math.round((S.serv+(+el.dataset.d))*2)/2)); save(); render(); break;
   case 'fav': toggle(S.favs,S.recipe); save(); render(); toast(S.favs.includes(S.recipe)?'Добавлено в избранное':'Убрано из избранного'); break;
   case 'toplan': toPlanModal(); break;
-  case 'putplan': { const i=+el.dataset.i, s=S.plan.slots[i]; undoState={i,r:s.r,left:s.left,src:s.src,deps:S.plan.slots.map((x,j)=>x.src===i?j:-1).filter(j=>j>=0)};
-    replaceSlot(i,S.recipe); closeModal(); save(); render(); toast(`Добавлено: ${DAYS[s.d]}, ${MEALMAP[s.m].name.toLowerCase()}`,{act:'undo',label:'Отменить'}); break; }
+  case 'putplan': { const i=+el.dataset.i, s=S.plan.slots[i]; undoState={i,r:s.r,left:s.left,src:s.src,c2:s.c2,deps:S.plan.slots.map((x,j)=>x.src===i?j:-1).filter(j=>j>=0)};
+    replaceSlot(i,S.recipe); closeModal(); if(S.frp){ S.frp=false; S.recipe=null; } delete S.plan.lazyPrev; save(); render(); toast(`Добавлено: ${DAYS[s.d]}, ${MEALMAP[s.m].name.toLowerCase()}`,{act:'undo',label:'Отменить'}); break; }
   case 'tpf': S.tpf=id; toPlanModal(); break;
   case 'toshop': { const ex=S.extras.find(x=>x.r===S.recipe); if(ex) ex.serv+=S.serv; else S.extras.push({r:S.recipe,serv:S.serv}); save();
     toast(ex?`Добавили ещё ${dec(S.serv)} порц. — всего ${dec(ex.serv)} порц. в покупках`:`Ингредиенты на ${dec(S.serv)} порц. добавлены в покупки`); break; }
