@@ -1,0 +1,199 @@
+vinegret 74 Винегрет |salad
+korean_carrot 74 Морковь по-корейски |salad
+beet_prunes 63 Свёкла с черносливом и чесноком |salad
+banana_muffins 62 Банановые маффины |snack
+veg_sticks 59 Овощные палочки с йогуртовым соусом |snack
+charlotte 57 Шарлотка с яблоками |snack
+cabbage_salad 53 Салат из капусты с морковью |salad
+lean_oatmeal 52 Постная овсянка с бананом и изюмом |breakfast
+garlic_croutons 52 Гренки с чесноком |snack
+micro_potato 51 Картофель в микроволновке с зеленью |hot
+draniki 49 Драники со сметаной |breakfast
+lentil_soup 47 Чечевичный суп |soup
+oat_cookies 45 Овсяное печенье с бананом |snack
+zucchini_fritters 42 Кабачковые оладьи |breakfast
+fruit_plate 39 Фрукты нарезкой |snack
+lean_cabbage_mush 39 Тушёная капуста с грибами |hot
+lean_millet 36 Пшённая каша с изюмом на воде |breakfast
+bliny 35 Блины на молоке со сметаной |breakfast
+omelet_oven 35 Пышный омлет в духовке |breakfast
+rice_apple_lean 34 Рисовая каша с яблоком на воде |breakfast
+buckwheat_milk 31 Гречка с молоком |breakfast
+pb_toast 31 Тост с арахисовой пастой и бананом |breakfast
+stuffed_eggs 31 Яйца, фаршированные сыром |snack
+plov 30 Плов с курицей |hot
+chickpea_curry 30 Карри из нута с рисом |hot
+buckwheat_egg 30 Гречка с яйцом и зелёным луком |breakfast
+radish_salad 30 Салат из редиса с огурцом и яйцом |salad
+lentil_stew 29 Рагу из чечевицы с овощами |hot
+rice_porridge 27 Рисовая каша на молоке |breakfast
+oladyi 27 Оладьи на кефире |breakfast
+bean_soup 26 Овощной суп с фасолью |soup
+meatball_soup 25 Суп с фрикадельками |soup
+lean_borsch 24 Постный борщ с фасолью |soup
+egg_broth 24 Куриный бульон с яйцом и гренками |soup
+lobio 24 Лобио из красной фасоли |hot
+chicken_noodle 23 Куриный суп с вермишелью |soup
+minestrone 23 Минестроне с фасолью |soup
+lean_plov 23 Постный плов с грибами |hot
+omelet_tomato 22 Омлет с помидорами и зеленью |breakfast
+veg_stew 22 Овощное рагу с кабачками |hot
+lentil_buckwheat_mush 22 Гречка с грибами и луком |hot
+herring_potato 22 Селёдка с картошкой и луком |hot
+frittata 21 Фриттата с кабачком и перцем |breakfast
+egg_muffins 21 Яичные маффины с овощами |breakfast
+chicken_potato_stew 21 Тушёная картошка с курицей |hot
+oatmeal_apple 20 Овсянка с яблоком и корицей |breakfast
+tomato_spaghetti 20 Спагетти с томатным соусом |hot
+french_toast 20 Сладкие гренки на молоке |breakfast
+mug_omelet 20 Омлет в кружке за 3 минуты |breakfast
+schi 19 Щи из свежей капусты |soup
+millet_pumpkin 19 Пшённая каша с тыквой |breakfast
+lapshevnik 19 Лапшевник с творогом |breakfast
+dumpling_soup 19 Суп с клёцками |soup
+borsch 18 Борщ со сметаной |soup
+pb_oatmeal 18 Овсянка с арахисовой пастой и бананом |breakfast
+pea_soup 18 Гороховый суп со свининой |soup
+svekolnik 18 Холодный свекольник на кефире |soup
+banana_pancakes 17 Банановые панкейки |breakfast
+cheese_soup 17 Сырный суп с курицей |soup
+country_potato 17 Картофель по-деревенски с грибами |hot
+ajapsandali 16 Аджапсандали |hot
+cabbage_sausages 16 Тушёная капуста с сосисками |hot
+oat_pancake 15 Овсяноблин с сыром |breakfast
+zapekanka 15 Творожная запеканка |breakfast
+fried_rice 15 Жареный рис с овощами и яйцом |hot
+rassolnik 15 Рассольник с перловкой |soup
+risotto 15 Ризотто с грибами |hot
+herring_sandwich 14 Бутерброды с сельдью |snack
+lazy_golubtsy 13 Ленивые голубцы |hot
+chicken_cutlets_pasta 13 Куриные котлеты с макаронами |hot
+fish_cutlets 12 Рыбные котлеты с пюре |hot
+mac_cheese 12 Запечённые макароны с сыром |hot
+barley_mushrooms 12 Перловка с грибами |hot
+tabbouleh 12 Табуле с булгуром |salad
+sandwich_cheese 11 Бутерброды с сыром и огурцом |breakfast
+cucumber_sandwich_lean 11 Хлеб с овощами и зеленью |snack
+scramble_toast 11 Скрэмбл с сыром на тосте |breakfast
+chicken_sandwich 11 Сэндвич с курицей и овощами |hot
+beef_plov 11 Плов с говядиной |hot
+golubtsy 11 Голубцы классические |hot
+fruit_salad 11 Фруктовый салат с йогуртом |snack
+navy_pasta 10 Макароны по-флотски |hot
+chicken_oven 10 Курица в духовке с картофелем |hot
+semolina 10 Манная каша с вареньем |breakfast
+sour_schi 10 Щи из квашеной капусты |soup
+chicken_curry 10 Курица карри с рисом |hot
+veg_smetana 10 Салат из свежих овощей со сметаной |salad
+lazy_khinkali 9 Ленивые хинкали |hot
+mushroom_soup 9 Грибной суп с картофелем |soup
+chicken_skewers 9 Куриные шашлычки в духовке |hot
+zrazy 9 Картофельные зразы с грибами |hot
+shakshuka 8 Шакшука |breakfast
+cutlets_mash 8 Котлеты с картофельным пюре |hot
+drumsticks_veg 8 Голени с овощами в духовке |hot
+shuba 8 Сельдь под шубой |salad
+eggs_sausages 7 Яичница с сосисками |breakfast
+buckwheat_chicken 7 Гречка по-купечески с курицей |hot
+yogurt_fruit 7 Йогурт с фруктами и мёдом |snack
+nuts_raisins 7 Орехи с изюмом |snack
+bulgur_chicken 7 Булгур с курицей и овощами |hot
+crab_salad 7 Крабовый салат |hot
+tvorog_bliny 7 Блинчики с творогом |snack
+lavash_lasagna 6 Лазанья из лаваша |hot
+zharkoe 6 Жаркое по-домашнему |hot
+honey_wings 6 Крылышки в медово-соевом соусе с рисом |hot
+greek_chicken 6 Курица по-гречески с картофелем и лимоном |hot
+buckwheat_veg 6 Гречка с овощами по-азиатски |hot
+mimosa 6 Салат «Мимоза» |salad
+baked_apples 5 Печёные яблоки с творогом |snack
+kharcho 5 Суп харчо |soup
+goulash 5 Гуляш из говядины с гречкой |hot
+olivier 5 Оливье с ветчиной |salad
+dried_fruit_mix 5 Курага, чернослив и орехи |snack
+liver_stroganoff 4 Печень по-строгановски с гречкой |hot
+omelet_ham 4 Омлет с ветчиной и сыром |breakfast
+pumpkin_rice_multi 4 Рисовая каша с тыквой в мультиварке |breakfast
+lazy_vareniki 4 Ленивые вареники |breakfast
+chicken_chops 4 Куриные отбивные в кляре |hot
+potato_casserole 4 Картофельная запеканка с фаршем |hot
+cauliflower_batter 4 Цветная капуста в кляре |snack
+warm_chicken_salad 4 Тёплый салат с курицей |salad
+okroshka 3 Окрошка на кефире |soup
+overnight_oats 3 Ленивая овсянка в банке |breakfast
+ukha 3 Уха из горбуши |soup
+sweet_sour_pork 3 Свинина в кисло-сладком соусе |hot
+chicken_wrap 3 Ролл в тортилье с курицей |hot
+ryazhenka_banana 3 Ряженка с бананом |snack
+hot_sandwich 2 Горячие бутерброды с ветчиной |breakfast
+stewed_cabbage 2 Тушёная капуста с курицей |hot
+pelmeni 2 Пельмени со сметаной |hot
+teriyaki 2 Курица терияки с рисом |hot
+shawarma 2 Домашняя шаурма в лаваше |hot
+druzhba 2 Каша «Дружба» в мультиварке |breakfast
+shurpa 2 Шурпа с говядиной |soup
+turkey_steam 2 Паровые котлеты из индейки с гречкой |hot
+udon_chicken 2 Удон с курицей и овощами |hot
+falafel 2 Фалафель в духовке с салатом |hot
+stuffed_zucchini 2 Кабачки, фаршированные курицей |hot
+bean_chicken_salad 2 Салат с фасолью и курицей |salad
+stuffed_peppers 1 Фаршированные перцы |hot
+chakhokhbili 1 Чахохбили из курицы |hot
+meatballs_multi 1 Тефтели в томатном соусе |hot
+kefir_smoothie 1 Смузи из кефира с бананом |snack
+solyanka 1 Солянка сборная |soup
+stroganoff 1 Бефстроганов с пюре |hot
+pork_chops 1 Отбивные из свинины с овощами |hot
+julienne 1 Жюльен с курицей и грибами |hot
+carbonara 1 Паста карбонара с ветчиной |hot
+chkmeruli 1 Чкмерули — курица в сливочно-чесночном соусе |hot
+multi_chicken_rice 1 Курица с рисом в мультиварке |hot
+pork_potato_oven 1 Свинина с картофелем в духовке |hot
+paella 1 Паэлья с курицей и креветками |hot
+moussaka 1 Мусака |hot
+vareniki_onion 1 Вареники с картофелем и жареным луком |hot
+bliny_chicken 1 Блины с курицей и грибами |hot
+pumpkin_bulgur 1 Запечённая тыква с булгуром и брынзой |hot
+air_fries 1 Картофель фри в аэрогриле |snack
+multi_turkey_stew 1 Рагу с индейкой в мультиварке |hot
+lavash_roll 1 Рулет из лаваша с ветчиной и сыром |snack
+syrniki 0 Сырники со сметаной |breakfast
+egg_toast 0 Тосты с яйцом и зеленью |breakfast
+tvorog_banana 0 Творог с бананом и мёдом |breakfast
+smoothie_bowl 0 Ягодный смузи-боул |breakfast
+greek_salad 0 Греческий салат с брынзой |hot
+tuna_salad 0 Салат с тунцом и яйцом |salad
+hummus_veg 0 Домашний хумус с овощными палочками |snack
+pollock_veg 0 Минтай с овощами в духовке |hot
+creamy_pasta 0 Паста с курицей в сливочном соусе |hot
+lagman 0 Лагман |hot
+air_nuggets 0 Куриные наггетсы в аэрогриле |hot
+wok_shrimp 0 Лапша с креветками и овощами |hot
+baked_salmon 0 Горбуша запечённая с рисом |hot
+tvorog_berries 0 Творог с ягодами |snack
+micro_oatmeal 0 Овсянка в микроволновке с ягодами |breakfast
+avocado_toast 0 Тост с авокадо и яйцом |breakfast
+lazy_khachapuri 0 Ленивые хачапури на сковороде |breakfast
+tvorog_greens 0 Творог со сметаной, огурцом и зеленью |breakfast
+micro_zapekanka 0 Творожная запеканка в микроволновке |breakfast
+pumpkin_cream 0 Тыквенный крем-суп |soup
+broccoli_cream 0 Крем-суп из брокколи с сыром |soup
+gazpacho 0 Гаспачо |soup
+hake_tomato 0 Хек в томатном соусе с рисом |hot
+mackerel_oven 0 Скумбрия, запечённая с картофелем |hot
+squid_smetana 0 Кальмары в сметане с рисом |hot
+turkey_broccoli 0 Индейка с брокколи в сливочном соусе |hot
+bolognese 0 Спагетти болоньезе |hot
+tuna_pasta 0 Паста с тунцом и томатами |hot
+lavash_pizza 0 Пицца на лаваше |hot
+pasta_broccoli 0 Паста с курицей и брокколи |hot
+hake_med 0 Хек по-средиземноморски |hot
+turkey_pumpkin 0 Индейка, тушённая с тыквой |hot
+veg_casserole 0 Овощная запеканка с брокколи и сыром |hot
+shrimp_pasta 0 Паста с креветками в сливочно-чесночном соусе |hot
+air_drumsticks 0 Голени в аэрогриле |hot
+air_fish 0 Рыба с овощами в аэрогриле |hot
+caesar 0 Цезарь с курицей |salad
+squid_salad 0 Салат с кальмарами и яйцом |salad
+pear_tvorog 0 Груша с творогом и мёдом |snack
+puff_ham 0 Слойки с ветчиной и сыром |snack
