@@ -9,11 +9,40 @@
   "p5": 52,
   "magnit": 49,
   "perek": 53,
-  "lenta": 51,
+  "lenta": 50,
   "auchan": 46,
   "samokat": 57,
   "lavka": 59,
-  "vkusvill": 60
+  "vkusvill": 54,
+  "real": {
+   "lenta": {
+    "price": 50,
+    "pack_price": 249.95,
+    "per": 49.99,
+    "per_unit": "кг",
+    "name": "Картофель, фасованный, весовой",
+    "url": "https://lenta.com/product/kartofel-fas-ves-rossiya-598363/",
+    "regular": true,
+    "via": "api",
+    "promo_now": true,
+    "size": "5 кг/л",
+    "date": "2026-10-30"
+   },
+   "vkusvill": {
+    "price": 54,
+    "pack_price": 54.0,
+    "per": 54.0,
+    "per_unit": "кг",
+    "name": "Картофель",
+    "url": "https://vkusvill.ru/goods/kartofel-1713/",
+    "regular": true,
+    "via": "api",
+    "promo_now": false,
+    "size": "1 кг/л",
+    "date": "2026-10-30"
+   }
+  },
+  "est": {}
  },
  "onion": {
   "base": 49.19,
@@ -25,11 +54,40 @@
   "p5": 51,
   "magnit": 48,
   "perek": 52,
-  "lenta": 50,
+  "lenta": 52,
   "auchan": 45,
   "samokat": 56,
   "lavka": 58,
-  "vkusvill": 59
+  "vkusvill": 58,
+  "real": {
+   "lenta": {
+    "price": 52,
+    "pack_price": 26.0,
+    "per": 52.0,
+    "per_unit": "кг",
+    "name": "Лук репчатый, весовой",
+    "url": "https://lenta.com/product/luk-repchatyjj-ves-1kg-303640/",
+    "regular": true,
+    "via": "api",
+    "promo_now": true,
+    "size": "0.5 кг/л",
+    "date": "2026-10-30"
+   },
+   "vkusvill": {
+    "price": 58,
+    "pack_price": 58.0,
+    "per": 58.0,
+    "per_unit": "кг",
+    "name": "Лук репчатый",
+    "url": "https://vkusvill.ru/goods/luk-repchatyy-605/",
+    "regular": true,
+    "via": "api",
+    "promo_now": false,
+    "size": "1 кг/л",
+    "date": "2026-10-30"
+   }
+  },
+  "est": {}
  },
  "carrot": {
   "base": 48.85,
@@ -41,11 +99,40 @@
   "p5": 51,
   "magnit": 47,
   "perek": 51,
-  "lenta": 50,
+  "lenta": 35,
   "auchan": 45,
   "samokat": 56,
   "lavka": 58,
-  "vkusvill": 59
+  "vkusvill": 53,
+  "real": {
+   "lenta": {
+    "price": 35,
+    "pack_price": 17.5,
+    "per": 35.0,
+    "per_unit": "кг",
+    "name": "Морковь, весовая",
+    "url": "https://lenta.com/product/morkov-ves-1kg-303639/",
+    "regular": true,
+    "via": "api",
+    "promo_now": false,
+    "size": "0.5 кг/л",
+    "date": "2026-10-30"
+   },
+   "vkusvill": {
+    "price": 53,
+    "pack_price": 53.0,
+    "per": 53.0,
+    "per_unit": "кг",
+    "name": "Морковь",
+    "url": "https://vkusvill.ru/goods/morkov-606/",
+    "regular": true,
+    "via": "api",
+    "promo_now": false,
+    "size": "1 кг/л",
+    "date": "2026-10-30"
+   }
+  },
+  "est": {}
  },
  "garlic": {
   "base": 32.9,
@@ -57,11 +144,27 @@
   "p5": 34,
   "magnit": 32,
   "perek": 35,
-  "lenta": 34,
+  "lenta": 36,
   "auchan": 30,
   "samokat": 38,
   "lavka": 39,
-  "vkusvill": 39
+  "vkusvill": 39,
+  "real": {
+   "lenta": {
+    "price": 36,
+    "pack_price": 35.6,
+    "per": 356.0,
+    "per_unit": "кг",
+    "name": "Чеснок, весовой",
+    "url": "https://lenta.com/product/chesnok-ves-11187/",
+    "regular": true,
+    "via": "api",
+    "promo_now": true,
+    "size": "0.1 кг/л",
+    "date": "2026-10-30"
+   }
+  },
+  "est": {}
  },
  "cabbage": {
   "base": 38.5,
@@ -73,11 +176,40 @@
   "p5": 40,
   "magnit": 37,
   "perek": 40,
-  "lenta": 39,
+  "lenta": 46,
   "auchan": 35,
   "samokat": 44,
   "lavka": 45,
-  "vkusvill": 46
+  "vkusvill": 48,
+  "real": {
+   "lenta": {
+    "price": 46,
+    "pack_price": 91.98,
+    "per": 45.99,
+    "per_unit": "кг",
+    "name": "Капуста белокочанная, весовая",
+    "url": "https://lenta.com/product/kapusta-belokochannaya-ves-11189/",
+    "regular": true,
+    "via": "api",
+    "promo_now": true,
+    "size": "2 кг/л",
+    "date": "2026-10-30"
+   },
+   "vkusvill": {
+    "price": 48,
+    "pack_price": 48.0,
+    "per": 48.0,
+    "per_unit": "кг",
+    "name": "Капуста белокочанная",
+    "url": "https://vkusvill.ru/goods/kapusta-belokochannaya-602/",
+    "regular": true,
+    "via": "api",
+    "promo_now": false,
+    "size": "1 кг/л",
+    "date": "2026-10-30"
+   }
+  },
+  "est": {}
  },
  "beet": {
   "base": 46.78,
@@ -89,11 +221,40 @@
   "p5": 49,
   "magnit": 45,
   "perek": 49,
-  "lenta": 48,
+  "lenta": 42,
   "auchan": 43,
   "samokat": 53,
   "lavka": 55,
-  "vkusvill": 56
+  "vkusvill": 45,
+  "real": {
+   "lenta": {
+    "price": 42,
+    "pack_price": 21.0,
+    "per": 42.0,
+    "per_unit": "кг",
+    "name": "Свекла весовая",
+    "url": "https://lenta.com/product/svekla-ves-1kg-300884/",
+    "regular": true,
+    "via": "api",
+    "promo_now": false,
+    "size": "0.5 кг/л",
+    "date": "2026-10-30"
+   },
+   "vkusvill": {
+    "price": 45,
+    "pack_price": 45.0,
+    "per": 45.0,
+    "per_unit": "кг",
+    "name": "Свекла",
+    "url": "https://vkusvill.ru/goods/svekla-611/",
+    "regular": true,
+    "via": "api",
+    "promo_now": false,
+    "size": "1 кг/л",
+    "date": "2026-10-30"
+   }
+  },
+  "est": {}
  },
  "tomato": {
   "base": 106.85,
@@ -105,11 +266,40 @@
   "p5": 111,
   "magnit": 104,
   "perek": 112,
-  "lenta": 109,
+  "lenta": 185,
   "auchan": 98,
   "samokat": 122,
   "lavka": 126,
-  "vkusvill": 128
+  "vkusvill": 135,
+  "real": {
+   "lenta": {
+    "price": 185,
+    "pack_price": 185.0,
+    "per": 370.0,
+    "per_unit": "кг",
+    "name": "Томаты тепличные, весовые",
+    "url": "https://lenta.com/product/tomaty-teplichnye-ves-rossiya-135324/",
+    "regular": true,
+    "via": "api",
+    "promo_now": false,
+    "size": "0.5 кг/л",
+    "date": "2026-10-30"
+   },
+   "vkusvill": {
+    "price": 135,
+    "pack_price": 270.0,
+    "per": 270.0,
+    "per_unit": "кг",
+    "name": "Томаты красные",
+    "url": "https://vkusvill.ru/goods/tomaty-krasnye-15456/",
+    "regular": true,
+    "via": "api",
+    "promo_now": false,
+    "size": "1 кг/л",
+    "date": "2026-10-30"
+   }
+  },
+  "est": {}
  },
  "cucumber": {
   "base": 63.55,
@@ -121,11 +311,40 @@
   "p5": 66,
   "magnit": 62,
   "perek": 67,
-  "lenta": 65,
+  "lenta": 48,
   "auchan": 58,
   "samokat": 72,
   "lavka": 75,
-  "vkusvill": 76
+  "vkusvill": 60,
+  "real": {
+   "lenta": {
+    "price": 48,
+    "pack_price": 47.5,
+    "per": 95.0,
+    "per_unit": "кг",
+    "name": "Огурцы среднеплодные гладкие, весовые",
+    "url": "https://lenta.com/product/ogurcy-sredneplodnye-gladkie-ves-162743/",
+    "regular": true,
+    "via": "api",
+    "promo_now": true,
+    "size": "0.5 кг/л",
+    "date": "2026-10-30"
+   },
+   "vkusvill": {
+    "price": 60,
+    "pack_price": 120.0,
+    "per": 120.0,
+    "per_unit": "кг",
+    "name": "Огурцы гладкие",
+    "url": "https://vkusvill.ru/goods/ogurtsy-gladkie-16645/",
+    "regular": true,
+    "via": "api",
+    "promo_now": false,
+    "size": "1 кг/л",
+    "date": "2026-10-30"
+   }
+  },
+  "est": {}
  },
  "pepper": {
   "base": 132.03,
@@ -141,7 +360,23 @@
   "auchan": 121,
   "samokat": 151,
   "lavka": 156,
-  "vkusvill": 158
+  "vkusvill": 178,
+  "real": {
+   "vkusvill": {
+    "price": 178,
+    "pack_price": 355.0,
+    "per": 355.0,
+    "per_unit": "кг",
+    "name": "Перец желтый сладкий",
+    "url": "https://vkusvill.ru/goods/perets-zheltyy-sladkiy-18303/",
+    "regular": true,
+    "via": "api",
+    "promo_now": false,
+    "size": "1 кг/л",
+    "date": "2026-10-30"
+   }
+  },
+  "est": {}
  },
  "zucchini": {
   "base": 120,
@@ -155,7 +390,23 @@
   "auchan": 110,
   "samokat": 137,
   "lavka": 142,
-  "vkusvill": 144
+  "vkusvill": 218,
+  "real": {
+   "vkusvill": {
+    "price": 218,
+    "pack_price": 218.0,
+    "per": 218.0,
+    "per_unit": "кг",
+    "name": "Кабачки",
+    "url": "https://vkusvill.ru/goods/kabachki-619/",
+    "regular": true,
+    "via": "api",
+    "promo_now": false,
+    "size": "1 кг/л",
+    "date": "2026-10-30"
+   }
+  },
+  "est": {}
  },
  "eggplant": {
   "base": 130,
@@ -169,7 +420,23 @@
   "auchan": 120,
   "samokat": 148,
   "lavka": 153,
-  "vkusvill": 156
+  "vkusvill": 221,
+  "real": {
+   "vkusvill": {
+    "price": 221,
+    "pack_price": 265.0,
+    "per": 441.67,
+    "per_unit": "кг",
+    "name": "Баклажаны тепличные Россия, 600 г",
+    "url": "https://vkusvill.ru/goods/baklazhany-teplichnye-rossiya-38412/",
+    "regular": true,
+    "via": "api",
+    "promo_now": false,
+    "size": "0.6 кг/л",
+    "date": "2026-10-30"
+   }
+  },
+  "est": {}
  },
  "pumpkin": {
   "base": 60,
@@ -179,11 +446,40 @@
   "p5": 62,
   "magnit": 58,
   "perek": 63,
-  "lenta": 61,
+  "lenta": 117,
   "auchan": 55,
   "samokat": 68,
   "lavka": 71,
-  "vkusvill": 72
+  "vkusvill": 105,
+  "real": {
+   "lenta": {
+    "price": 117,
+    "pack_price": 198.88,
+    "per": 116.99,
+    "per_unit": "кг",
+    "name": "Тыква Баттернат новый урожай, весовая",
+    "url": "https://lenta.com/product/tykva-batternat-novyjj-urozhajj-ves-1kg-43796/",
+    "regular": true,
+    "via": "api",
+    "promo_now": false,
+    "size": "1.7 кг/л",
+    "date": "2026-10-30"
+   },
+   "vkusvill": {
+    "price": 105,
+    "pack_price": 105.0,
+    "per": 105.0,
+    "per_unit": "кг",
+    "name": "Тыква",
+    "url": "https://vkusvill.ru/goods/tykva-1212/",
+    "regular": true,
+    "via": "api",
+    "promo_now": false,
+    "size": "1 кг/л",
+    "date": "2026-10-30"
+   }
+  },
+  "est": {}
  },
  "radish": {
   "base": 70,
@@ -193,11 +489,40 @@
   "p5": 73,
   "magnit": 68,
   "perek": 74,
-  "lenta": 71,
+  "lenta": 77,
   "auchan": 64,
   "samokat": 80,
   "lavka": 83,
-  "vkusvill": 84
+  "vkusvill": 55,
+  "real": {
+   "lenta": {
+    "price": 77,
+    "pack_price": 192.59,
+    "per": 385.18,
+    "per_unit": "кг",
+    "name": "Редис, 500г",
+    "url": "https://lenta.com/product/redis-500g-172378/",
+    "regular": true,
+    "via": "api",
+    "promo_now": false,
+    "size": "0.5 кг/л",
+    "date": "2026-10-30"
+   },
+   "vkusvill": {
+    "price": 55,
+    "pack_price": 165.0,
+    "per": 275.0,
+    "per_unit": "кг",
+    "name": "Редис дайкон, 600 г",
+    "url": "https://vkusvill.ru/goods/redis-daykon-83249/",
+    "regular": true,
+    "via": "api",
+    "promo_now": false,
+    "size": "0.6 кг/л",
+    "date": "2026-10-30"
+   }
+  },
+  "est": {}
  },
  "lettuce": {
   "base": 130,
@@ -207,11 +532,40 @@
   "p5": 135,
   "magnit": 126,
   "perek": 136,
-  "lenta": 133,
+  "lenta": 120,
   "auchan": 120,
   "samokat": 148,
   "lavka": 153,
-  "vkusvill": 156
+  "vkusvill": 112,
+  "real": {
+   "lenta": {
+    "price": 120,
+    "pack_price": 126.0,
+    "per": 300.0,
+    "per_unit": "кг",
+    "name": "Салат Айсберг, весовой",
+    "url": "https://lenta.com/product/salat-ajjsberg-svezhijj-ves-172231/",
+    "regular": true,
+    "via": "api",
+    "promo_now": false,
+    "size": "0.42 кг/л",
+    "date": "2026-10-30"
+   },
+   "vkusvill": {
+    "price": 112,
+    "pack_price": 280.0,
+    "per": 280.0,
+    "per_unit": "кг",
+    "name": "Салат Айсберг весовой",
+    "url": "https://vkusvill.ru/goods/salat-aysberg-vesovoy-837/",
+    "regular": true,
+    "via": "api",
+    "promo_now": false,
+    "size": "1 кг/л",
+    "date": "2026-10-30"
+   }
+  },
+  "est": {}
  },
  "ginger": {
   "base": 45,
@@ -221,11 +575,40 @@
   "p5": 47,
   "magnit": 44,
   "perek": 47,
-  "lenta": 46,
+  "lenta": 51,
   "auchan": 41,
   "samokat": 51,
   "lavka": 53,
-  "vkusvill": 54
+  "vkusvill": 99,
+  "real": {
+   "lenta": {
+    "price": 51,
+    "pack_price": 127.5,
+    "per": 510.0,
+    "per_unit": "кг",
+    "name": "Имбирь свежий, весовой",
+    "url": "https://lenta.com/product/imbir-svezhijj-ves-41422/",
+    "regular": true,
+    "via": "api",
+    "promo_now": false,
+    "size": "0.25 кг/л",
+    "date": "2026-10-30"
+   },
+   "vkusvill": {
+    "price": 99,
+    "pack_price": 198.0,
+    "per": 990.0,
+    "per_unit": "кг",
+    "name": "Имбирь, 200 г",
+    "url": "https://vkusvill.ru/goods/imbir-31268/",
+    "regular": true,
+    "via": "api",
+    "promo_now": false,
+    "size": "0.2 кг/л",
+    "date": "2026-10-30"
+   }
+  },
+  "est": {}
  },
  "greens": {
   "base": 45.03,
@@ -237,11 +620,40 @@
   "p5": 47,
   "magnit": 44,
   "perek": 47,
-  "lenta": 46,
+  "lenta": 50,
   "auchan": 41,
   "samokat": 51,
   "lavka": 53,
-  "vkusvill": 54
+  "vkusvill": 52,
+  "real": {
+   "lenta": {
+    "price": 50,
+    "pack_price": 99.99,
+    "per": 999.9,
+    "per_unit": "кг",
+    "name": "Укроп ЛЕНТА свежий, 100г",
+    "url": "https://lenta.com/product/ukrop-svezhijj-up-100g-582227/",
+    "regular": true,
+    "via": "api",
+    "promo_now": false,
+    "size": "0.1 кг/л",
+    "date": "2026-10-30"
+   },
+   "vkusvill": {
+    "price": 52,
+    "pack_price": 105.0,
+    "per": 1050.0,
+    "per_unit": "кг",
+    "name": "Укроп, 100 г",
+    "url": "https://vkusvill.ru/goods/ukrop-31275/",
+    "regular": true,
+    "via": "api",
+    "promo_now": false,
+    "size": "0.1 кг/л",
+    "date": "2026-10-30"
+   }
+  },
+  "est": {}
  },
  "cilantro": {
   "base": 49.53,
@@ -253,11 +665,40 @@
   "p5": 52,
   "magnit": 48,
   "perek": 52,
-  "lenta": 51,
+  "lenta": 75,
   "auchan": 46,
   "samokat": 56,
   "lavka": 58,
-  "vkusvill": 59
+  "vkusvill": 98,
+  "real": {
+   "lenta": {
+    "price": 75,
+    "pack_price": 149.99,
+    "per": 1499.9,
+    "per_unit": "кг",
+    "name": "Кинза свежая, 100г",
+    "url": "https://lenta.com/product/kinza-svezhaya-up-100g-582230/",
+    "regular": true,
+    "via": "api",
+    "promo_now": false,
+    "size": "0.1 кг/л",
+    "date": "2026-10-30"
+   },
+   "vkusvill": {
+    "price": 98,
+    "pack_price": 98.0,
+    "per": 1960.0,
+    "per_unit": "кг",
+    "name": "Кинза, 50 г",
+    "url": "https://vkusvill.ru/goods/kinza-15310/",
+    "regular": true,
+    "via": "api",
+    "promo_now": false,
+    "size": "0.05 кг/л",
+    "date": "2026-10-30"
+   }
+  },
+  "est": {}
  },
  "green_onion": {
   "base": 40.53,
@@ -269,11 +710,40 @@
   "p5": 42,
   "magnit": 39,
   "perek": 43,
-  "lenta": 41,
+  "lenta": 50,
   "auchan": 37,
   "samokat": 46,
   "lavka": 48,
-  "vkusvill": 49
+  "vkusvill": 49,
+  "real": {
+   "lenta": {
+    "price": 50,
+    "pack_price": 99.99,
+    "per": 999.9,
+    "per_unit": "кг",
+    "name": "Лук зеленый ЛЕНТА свежий, 100г",
+    "url": "https://lenta.com/product/luk-svezhijj-up-100g-582272/",
+    "regular": true,
+    "via": "api",
+    "promo_now": false,
+    "size": "0.1 кг/л",
+    "date": "2026-10-30"
+   },
+   "vkusvill": {
+    "price": 49,
+    "pack_price": 98.0,
+    "per": 980.0,
+    "per_unit": "кг",
+    "name": "Лук зеленый, 100 г",
+    "url": "https://vkusvill.ru/goods/luk-zelenyy-31276/",
+    "regular": true,
+    "via": "api",
+    "promo_now": false,
+    "size": "0.1 кг/л",
+    "date": "2026-10-30"
+   }
+  },
+  "est": {}
  },
  "mushrooms": {
   "base": 161.28,
@@ -289,7 +759,9 @@
   "auchan": 148,
   "samokat": 184,
   "lavka": 190,
-  "vkusvill": 194
+  "vkusvill": 194,
+  "real": {},
+  "est": {}
  },
  "celery": {
   "base": 120,
@@ -299,11 +771,40 @@
   "p5": 125,
   "magnit": 116,
   "perek": 126,
-  "lenta": 122,
+  "lenta": 136,
   "auchan": 110,
   "samokat": 137,
   "lavka": 142,
-  "vkusvill": 144
+  "vkusvill": 119,
+  "real": {
+   "lenta": {
+    "price": 136,
+    "pack_price": 226.0,
+    "per": 452.0,
+    "per_unit": "кг",
+    "name": "Сельдерей, стебель, весовой",
+    "url": "https://lenta.com/product/selderejj-stebel-ves-29126/",
+    "regular": true,
+    "via": "api",
+    "promo_now": true,
+    "size": "0.5 кг/л",
+    "date": "2026-10-30"
+   },
+   "vkusvill": {
+    "price": 119,
+    "pack_price": 398.0,
+    "per": 398.0,
+    "per_unit": "кг",
+    "name": "Сельдерей корневой",
+    "url": "https://vkusvill.ru/goods/selderey-kornevoy-21362/",
+    "regular": true,
+    "via": "api",
+    "promo_now": false,
+    "size": "1 кг/л",
+    "date": "2026-10-30"
+   }
+  },
+  "est": {}
  },
  "apple": {
   "base": 141.78,
@@ -315,11 +816,40 @@
   "p5": 147,
   "magnit": 138,
   "perek": 149,
-  "lenta": 145,
+  "lenta": 113,
   "auchan": 130,
   "samokat": 162,
   "lavka": 167,
-  "vkusvill": 170
+  "vkusvill": 150,
+  "real": {
+   "lenta": {
+    "price": 113,
+    "pack_price": 79.09,
+    "per": 112.99,
+    "per_unit": "кг",
+    "name": "Яблоки Сезонные, весовые",
+    "url": "https://lenta.com/product/yabloki-sezonnye-novyjj-urozhajj-ves-635117/",
+    "regular": true,
+    "via": "api",
+    "promo_now": false,
+    "size": "0.7 кг/л",
+    "date": "2026-10-30"
+   },
+   "vkusvill": {
+    "price": 150,
+    "pack_price": 150.0,
+    "per": 150.0,
+    "per_unit": "кг",
+    "name": "Яблоко Гала",
+    "url": "https://vkusvill.ru/goods/yabloko-gala-15846/",
+    "regular": true,
+    "via": "api",
+    "promo_now": false,
+    "size": "1 кг/л",
+    "date": "2026-10-30"
+   }
+  },
+  "est": {}
  },
  "banana": {
   "base": 157.76,
@@ -331,11 +861,40 @@
   "p5": 164,
   "magnit": 153,
   "perek": 166,
-  "lenta": 161,
+  "lenta": 187,
   "auchan": 145,
   "samokat": 180,
   "lavka": 186,
-  "vkusvill": 189
+  "vkusvill": 168,
+  "real": {
+   "lenta": {
+    "price": 187,
+    "pack_price": 187.24,
+    "per": 187.24,
+    "per_unit": "кг",
+    "name": "Бананы, весовые",
+    "url": "https://lenta.com/product/banany-ves-11230/",
+    "regular": true,
+    "via": "api",
+    "promo_now": false,
+    "size": "1 кг/л",
+    "date": "2026-10-30"
+   },
+   "vkusvill": {
+    "price": 168,
+    "pack_price": 168.0,
+    "per": 168.0,
+    "per_unit": "кг",
+    "name": "Бананы",
+    "url": "https://vkusvill.ru/goods/banany-731/",
+    "regular": true,
+    "via": "api",
+    "promo_now": false,
+    "size": "1 кг/л",
+    "date": "2026-10-30"
+   }
+  },
+  "est": {}
  },
  "pear": {
   "base": 263.43,
@@ -347,11 +906,40 @@
   "p5": 274,
   "magnit": 256,
   "perek": 277,
-  "lenta": 269,
+  "lenta": 257,
   "auchan": 242,
   "samokat": 300,
   "lavka": 311,
-  "vkusvill": 316
+  "vkusvill": 198,
+  "real": {
+   "lenta": {
+    "price": 257,
+    "pack_price": 128.4,
+    "per": 256.8,
+    "per_unit": "кг",
+    "name": "Груши Китайские, весовые",
+    "url": "https://lenta.com/product/grusha-kitajjskaya-ves-94435/",
+    "regular": true,
+    "via": "api",
+    "promo_now": true,
+    "size": "0.5 кг/л",
+    "date": "2026-10-30"
+   },
+   "vkusvill": {
+    "price": 198,
+    "pack_price": 198.0,
+    "per": 198.0,
+    "per_unit": "кг",
+    "name": "Груша сезонная",
+    "url": "https://vkusvill.ru/goods/grusha-sezonnaya-57116/",
+    "regular": true,
+    "via": "api",
+    "promo_now": false,
+    "size": "1 кг/л",
+    "date": "2026-10-30"
+   }
+  },
+  "est": {}
  },
  "orange": {
   "base": 154.67,
@@ -363,11 +951,40 @@
   "p5": 161,
   "magnit": 150,
   "perek": 162,
-  "lenta": 158,
+  "lenta": 198,
   "auchan": 142,
   "samokat": 176,
   "lavka": 183,
-  "vkusvill": 186
+  "vkusvill": 198,
+  "real": {
+   "lenta": {
+    "price": 198,
+    "pack_price": 138.59,
+    "per": 197.99,
+    "per_unit": "кг",
+    "name": "Апельсины, весовые",
+    "url": "https://lenta.com/product/apelsiny-ves-11225/",
+    "regular": true,
+    "via": "api",
+    "promo_now": true,
+    "size": "0.7 кг/л",
+    "date": "2026-10-30"
+   },
+   "vkusvill": {
+    "price": 198,
+    "pack_price": 198.0,
+    "per": 198.0,
+    "per_unit": "кг",
+    "name": "Апельсины",
+    "url": "https://vkusvill.ru/goods/apelsiny-729/",
+    "regular": true,
+    "via": "api",
+    "promo_now": false,
+    "size": "1 кг/л",
+    "date": "2026-10-30"
+   }
+  },
+  "est": {}
  },
  "lemon": {
   "base": 27.9,
@@ -379,11 +996,40 @@
   "p5": 29,
   "magnit": 27,
   "perek": 29,
-  "lenta": 28,
+  "lenta": 25,
   "auchan": 26,
   "samokat": 32,
   "lavka": 33,
-  "vkusvill": 33
+  "vkusvill": 29,
+  "real": {
+   "lenta": {
+    "price": 25,
+    "pack_price": 38.52,
+    "per": 25.04,
+    "per_unit": "шт",
+    "name": "Лимоны, весовые",
+    "url": "https://lenta.com/product/limony-ves-94429/",
+    "regular": true,
+    "via": "api",
+    "promo_now": false,
+    "size": "0.2 кг/л",
+    "date": "2026-10-30"
+   },
+   "vkusvill": {
+    "price": 29,
+    "pack_price": 225.0,
+    "per": 29.25,
+    "per_unit": "шт",
+    "name": "Лимоны",
+    "url": "https://vkusvill.ru/goods/limony-730/",
+    "regular": true,
+    "via": "api",
+    "promo_now": false,
+    "size": "1 кг/л",
+    "date": "2026-10-30"
+   }
+  },
+  "est": {}
  },
  "avocado": {
   "base": 110,
@@ -393,11 +1039,40 @@
   "p5": 114,
   "magnit": 107,
   "perek": 116,
-  "lenta": 112,
+  "lenta": 88,
   "auchan": 101,
   "samokat": 125,
   "lavka": 130,
-  "vkusvill": 132
+  "vkusvill": 144,
+  "real": {
+   "lenta": {
+    "price": 88,
+    "pack_price": 235.2,
+    "per": 88.2,
+    "per_unit": "шт",
+    "name": "Авокадо, весовой",
+    "url": "https://lenta.com/product/avokado-ves-638739/",
+    "regular": true,
+    "via": "api",
+    "promo_now": true,
+    "size": "0.4 кг/л",
+    "date": "2026-10-30"
+   },
+   "vkusvill": {
+    "price": 144,
+    "pack_price": 575.0,
+    "per": 143.75,
+    "per_unit": "шт",
+    "name": "Авокадо Хасс, 600 г",
+    "url": "https://vkusvill.ru/goods/avokado-khass-25528/",
+    "regular": true,
+    "via": "api",
+    "promo_now": false,
+    "size": "0.6 кг/л",
+    "date": "2026-10-30"
+   }
+  },
+  "est": {}
  },
  "chicken_fillet": {
   "base": 219.86,
@@ -409,11 +1084,40 @@
   "p5": 229,
   "magnit": 213,
   "perek": 231,
-  "lenta": 224,
+  "lenta": 242,
   "auchan": 202,
   "samokat": 251,
   "lavka": 259,
-  "vkusvill": 264
+  "vkusvill": 328,
+  "real": {
+   "lenta": {
+    "price": 242,
+    "pack_price": 653.39,
+    "per": 483.99,
+    "per_unit": "кг",
+    "name": "Грудка куриная ЛАТИФА с кожей, Халяль, весовая",
+    "url": "https://lenta.com/product/grudka-cyplenka-brojjlera-s-kozhejj-halyal-ohl-ves-rossiya-702072/",
+    "regular": true,
+    "via": "api",
+    "promo_now": false,
+    "size": "1.35 кг/л",
+    "date": "2026-10-30"
+   },
+   "vkusvill": {
+    "price": 328,
+    "pack_price": 656.0,
+    "per": 656.0,
+    "per_unit": "кг",
+    "name": "Филе грудки цыпленка-бройлера",
+    "url": "https://vkusvill.ru/goods/file-grudki-tsyplenka-broylera-488/",
+    "regular": true,
+    "via": "api",
+    "promo_now": false,
+    "size": "1 кг/л",
+    "date": "2026-10-30"
+   }
+  },
+  "est": {}
  },
  "chicken_thigh": {
   "base": 307.36,
@@ -425,11 +1129,40 @@
   "p5": 320,
   "magnit": 298,
   "perek": 323,
-  "lenta": 314,
+  "lenta": 243,
   "auchan": 283,
   "samokat": 350,
   "lavka": 363,
-  "vkusvill": 369
+  "vkusvill": 412,
+  "real": {
+   "lenta": {
+    "price": 243,
+    "pack_price": 256.49,
+    "per": 269.99,
+    "per_unit": "кг",
+    "name": "Бедро куриное замороженное ЛЕНТА FRESH, весовое",
+    "url": "https://lenta.com/product/cyplenok-brojjler-bedro-zam-ves-rossiya-700317/",
+    "regular": true,
+    "via": "api",
+    "promo_now": false,
+    "size": "0.95 кг/л",
+    "date": "2026-10-30"
+   },
+   "vkusvill": {
+    "price": 412,
+    "pack_price": 458.0,
+    "per": 458.0,
+    "per_unit": "кг",
+    "name": "Бедро цыпленка бройлера",
+    "url": "https://vkusvill.ru/goods/bedro-tsyplenka-broylera-18580/",
+    "regular": true,
+    "via": "api",
+    "promo_now": false,
+    "size": "1 кг/л",
+    "date": "2026-10-30"
+   }
+  },
+  "est": {}
  },
  "chicken_drum": {
   "base": 293.38,
@@ -441,11 +1174,40 @@
   "p5": 305,
   "magnit": 285,
   "perek": 308,
-  "lenta": 299,
+  "lenta": 317,
   "auchan": 270,
   "samokat": 334,
   "lavka": 346,
-  "vkusvill": 352
+  "vkusvill": 398,
+  "real": {
+   "lenta": {
+    "price": 317,
+    "pack_price": 281.59,
+    "per": 351.99,
+    "per_unit": "кг",
+    "name": "Голень куриная 365 ДНЕЙ, весовая",
+    "url": "https://lenta.com/product/golen-kurinaya-ohl-fas-ves-rossiya-199551/",
+    "regular": true,
+    "via": "api",
+    "promo_now": false,
+    "size": "0.8 кг/л",
+    "date": "2026-10-30"
+   },
+   "vkusvill": {
+    "price": 398,
+    "pack_price": 442.0,
+    "per": 442.0,
+    "per_unit": "кг",
+    "name": "Голень цыпленка-бройлера",
+    "url": "https://vkusvill.ru/goods/golen-tsyplenka-broylera-489/",
+    "regular": true,
+    "via": "api",
+    "promo_now": false,
+    "size": "1 кг/л",
+    "date": "2026-10-30"
+   }
+  },
+  "est": {}
  },
  "chicken_wings": {
   "base": 247.35,
@@ -457,11 +1219,40 @@
   "p5": 257,
   "magnit": 240,
   "perek": 260,
-  "lenta": 252,
+  "lenta": 351,
   "auchan": 228,
   "samokat": 282,
   "lavka": 292,
-  "vkusvill": 297
+  "vkusvill": 457,
+  "real": {
+   "lenta": {
+    "price": 351,
+    "pack_price": 350.99,
+    "per": 389.99,
+    "per_unit": "кг",
+    "name": "Крыло куриное 365 ДНЕЙ, весовое",
+    "url": "https://lenta.com/product/krylo-kurinoe-ohl-fas-ves-rossiya-199547/",
+    "regular": true,
+    "via": "api",
+    "promo_now": true,
+    "size": "0.9 кг/л",
+    "date": "2026-10-30"
+   },
+   "vkusvill": {
+    "price": 457,
+    "pack_price": 508.0,
+    "per": 508.0,
+    "per_unit": "кг",
+    "name": "Крыло цыпленка-бройлера, упаковка от 1.3 кг",
+    "url": "https://vkusvill.ru/goods/krylo-tsyplenka-broylera-82543/",
+    "regular": true,
+    "via": "api",
+    "promo_now": false,
+    "size": "1 кг/л",
+    "date": "2026-10-30"
+   }
+  },
+  "est": {}
  },
  "minced_chicken": {
   "base": 178.64,
@@ -473,11 +1264,40 @@
   "p5": 186,
   "magnit": 173,
   "perek": 188,
-  "lenta": 182,
+  "lenta": 366,
   "auchan": 164,
   "samokat": 204,
   "lavka": 211,
-  "vkusvill": 214
+  "vkusvill": 349,
+  "real": {
+   "lenta": {
+    "price": 366,
+    "pack_price": 292.99,
+    "per": 732.48,
+    "per_unit": "кг",
+    "name": "Фарш куриный МИРАТОРГ, 400г",
+    "url": "https://lenta.com/product/farsh-kurinyjj-mgs-rossiya-400g-684983/",
+    "regular": true,
+    "via": "api",
+    "promo_now": true,
+    "size": "0.4 кг/л",
+    "date": "2026-10-30"
+   },
+   "vkusvill": {
+    "price": 349,
+    "pack_price": 349.0,
+    "per": 698.0,
+    "per_unit": "кг",
+    "name": "Фарш из цыплят-бройлеров, 500 г",
+    "url": "https://vkusvill.ru/goods/farsh-iz-tsyplyat-broylerov-21194/",
+    "regular": true,
+    "via": "api",
+    "promo_now": false,
+    "size": "0.5 кг/л",
+    "date": "2026-10-30"
+   }
+  },
+  "est": {}
  },
  "turkey_fillet": {
   "base": 359.87,
@@ -489,11 +1309,40 @@
   "p5": 374,
   "magnit": 349,
   "perek": 378,
-  "lenta": 367,
+  "lenta": 400,
   "auchan": 331,
   "samokat": 410,
   "lavka": 425,
-  "vkusvill": 432
+  "vkusvill": 464,
+  "real": {
+   "lenta": {
+    "price": 400,
+    "pack_price": 399.99,
+    "per": 799.98,
+    "per_unit": "кг",
+    "name": "Филе грудки индейки ИНДИЛАЙТ, 500г",
+    "url": "https://lenta.com/product/file-grudki-indejjki-ohl-gvu-rossiya-500g-484629/",
+    "regular": true,
+    "via": "api",
+    "promo_now": false,
+    "size": "0.5 кг/л",
+    "date": "2026-10-30"
+   },
+   "vkusvill": {
+    "price": 464,
+    "pack_price": 928.0,
+    "per": 928.0,
+    "per_unit": "кг",
+    "name": "Филе грудки индейки",
+    "url": "https://vkusvill.ru/goods/file-grudki-indeyki-1066/",
+    "regular": true,
+    "via": "api",
+    "promo_now": false,
+    "size": "1 кг/л",
+    "date": "2026-10-30"
+   }
+  },
+  "est": {}
  },
  "minced_turkey": {
   "base": 248.64,
@@ -505,11 +1354,40 @@
   "p5": 259,
   "magnit": 241,
   "perek": 261,
-  "lenta": 254,
+  "lenta": 221,
   "auchan": 229,
   "samokat": 283,
   "lavka": 293,
-  "vkusvill": 298
+  "vkusvill": 366,
+  "real": {
+   "lenta": {
+    "price": 221,
+    "pack_price": 248.99,
+    "per": 553.31,
+    "per_unit": "кг",
+    "name": "Фарш из индейки ИНДИЛАЙТ Классический, 450г",
+    "url": "https://lenta.com/product/farsh-iz-indejjki-klassicheskijj-lotok-gvu-rossiya-450g-430753/",
+    "regular": true,
+    "via": "api",
+    "promo_now": false,
+    "size": "0.45 кг/л",
+    "date": "2026-10-30"
+   },
+   "vkusvill": {
+    "price": 366,
+    "pack_price": 458.0,
+    "per": 916.0,
+    "per_unit": "кг",
+    "name": "Фарш из индейки, 500 г",
+    "url": "https://vkusvill.ru/goods/farsh-iz-indeyki-37018/",
+    "regular": true,
+    "via": "api",
+    "promo_now": false,
+    "size": "0.5 кг/л",
+    "date": "2026-10-30"
+   }
+  },
+  "est": {}
  },
  "minced_mix": {
   "base": 286.35,
@@ -525,7 +1403,9 @@
   "auchan": 263,
   "samokat": 326,
   "lavka": 338,
-  "vkusvill": 344
+  "vkusvill": 344,
+  "real": {},
+  "est": {}
  },
  "beef": {
   "base": 508.86,
@@ -541,7 +1421,23 @@
   "auchan": 468,
   "samokat": 580,
   "lavka": 600,
-  "vkusvill": 611
+  "vkusvill": 627,
+  "real": {
+   "vkusvill": {
+    "price": 627,
+    "pack_price": 941.0,
+    "per": 1254.67,
+    "per_unit": "кг",
+    "name": "Говядина для вторых блюд",
+    "url": "https://vkusvill.ru/goods/govyadina-dlya-vtorykh-blyud-37017/",
+    "regular": true,
+    "via": "api",
+    "promo_now": false,
+    "size": "0.75 кг/л",
+    "date": "2026-10-30"
+   }
+  },
+  "est": {}
  },
  "pork": {
   "base": 253.19,
@@ -553,11 +1449,40 @@
   "p5": 263,
   "magnit": 246,
   "perek": 266,
-  "lenta": 258,
+  "lenta": 170,
   "auchan": 233,
   "samokat": 289,
   "lavka": 299,
-  "vkusvill": 304
+  "vkusvill": 329,
+  "real": {
+   "lenta": {
+    "price": 170,
+    "pack_price": 339.99,
+    "per": 339.99,
+    "per_unit": "кг",
+    "name": "Лопатка свиная на кости, на шкуре, весовая",
+    "url": "https://lenta.com/product/svinina-lopatka-na-kosti-na-shkure-polufabrikat-ohlazhdennyjj-rossiya-69381/",
+    "regular": true,
+    "via": "api",
+    "promo_now": true,
+    "size": "1 кг/л",
+    "date": "2026-10-30"
+   },
+   "vkusvill": {
+    "price": 329,
+    "pack_price": 658.0,
+    "per": 658.0,
+    "per_unit": "кг",
+    "name": "Лопатка свиная",
+    "url": "https://vkusvill.ru/goods/lopatka-svinaya-123522/",
+    "regular": true,
+    "via": "api",
+    "promo_now": false,
+    "size": "1 кг/л",
+    "date": "2026-10-30"
+   }
+  },
+  "est": {}
  },
  "liver": {
   "base": 180.6,
@@ -569,11 +1494,40 @@
   "p5": 188,
   "magnit": 175,
   "perek": 190,
-  "lenta": 184,
+  "lenta": 286,
   "auchan": 166,
   "samokat": 206,
   "lavka": 213,
-  "vkusvill": 217
+  "vkusvill": 283,
+  "real": {
+   "lenta": {
+    "price": 286,
+    "pack_price": 256.99,
+    "per": 571.09,
+    "per_unit": "кг",
+    "name": "Печень куриная ПЕТЕЛИНКА, 450г",
+    "url": "https://lenta.com/product/pechen-cyplenka-brojjlera-ohl-rossiya-450g-766317/",
+    "regular": true,
+    "via": "api",
+    "promo_now": false,
+    "size": "0.45 кг/л",
+    "date": "2026-10-30"
+   },
+   "vkusvill": {
+    "price": 283,
+    "pack_price": 283.0,
+    "per": 566.0,
+    "per_unit": "кг",
+    "name": "Печень цыпленка-бройлера, замороженная, 500 г",
+    "url": "https://vkusvill.ru/goods/pechen-tsyplenka-broylera-45346/",
+    "regular": true,
+    "via": "api",
+    "promo_now": false,
+    "size": "0.5 кг/л",
+    "date": "2026-10-30"
+   }
+  },
+  "est": {}
  },
  "sausages": {
   "base": 253.18,
@@ -585,11 +1539,40 @@
   "p5": 263,
   "magnit": 246,
   "perek": 266,
-  "lenta": 258,
+  "lenta": 272,
   "auchan": 233,
   "samokat": 289,
   "lavka": 299,
-  "vkusvill": 304
+  "vkusvill": 446,
+  "real": {
+   "lenta": {
+    "price": 272,
+    "pack_price": 241.99,
+    "per": 604.98,
+    "per_unit": "кг",
+    "name": "Сосиски ЛЕНТА Выбор Экспертов с сыром, 400г",
+    "url": "https://lenta.com/product/sosiski-vybor-ekspertov-s-syrom-rossiya-400g-866209/",
+    "regular": true,
+    "via": "api",
+    "promo_now": true,
+    "size": "0.4 кг/л",
+    "date": "2026-10-30"
+   },
+   "vkusvill": {
+    "price": 446,
+    "pack_price": 377.0,
+    "per": 992.11,
+    "per_unit": "кг",
+    "name": "Сосиски ВкусВилл со сливками",
+    "url": "https://vkusvill.ru/goods/sosiski-vkusvill-so-slivkami-96521/",
+    "regular": true,
+    "via": "api",
+    "promo_now": false,
+    "size": "0.38 кг/л",
+    "date": "2026-10-30"
+   }
+  },
+  "est": {}
  },
  "ham": {
   "base": 200.2,
@@ -601,11 +1584,40 @@
   "p5": 208,
   "magnit": 194,
   "perek": 210,
-  "lenta": 204,
+  "lenta": 209,
   "auchan": 184,
   "samokat": 228,
   "lavka": 236,
-  "vkusvill": 240
+  "vkusvill": 319,
+  "real": {
+   "lenta": {
+    "price": 209,
+    "pack_price": 347.99,
+    "per": 695.98,
+    "per_unit": "кг",
+    "name": "Ветчина УМКК Мясницкая, 500г",
+    "url": "https://lenta.com/product/vetchina-myasnickaya-rossiya-500g-547720/",
+    "regular": true,
+    "via": "api",
+    "promo_now": true,
+    "size": "0.5 кг/л",
+    "date": "2026-10-30"
+   },
+   "vkusvill": {
+    "price": 319,
+    "pack_price": 1064.0,
+    "per": 1064.0,
+    "per_unit": "кг",
+    "name": "Ветчина куриная \"Нежная\"",
+    "url": "https://vkusvill.ru/goods/vetchina-kurinaya-nezhnaya-38127/",
+    "regular": true,
+    "via": "api",
+    "promo_now": false,
+    "size": "1 кг/л",
+    "date": "2026-10-30"
+   }
+  },
+  "est": {}
  },
  "fish_white": {
   "base": 229.92,
@@ -617,11 +1629,27 @@
   "p5": 239,
   "magnit": 223,
   "perek": 241,
-  "lenta": 235,
+  "lenta": 350,
   "auchan": 212,
   "samokat": 262,
   "lavka": 271,
-  "vkusvill": 276
+  "vkusvill": 276,
+  "real": {
+   "lenta": {
+    "price": 350,
+    "pack_price": 210.0,
+    "per": 700.0,
+    "per_unit": "кг",
+    "name": "Минтай филе (из замороженного сырья) ЛЕНТА FRESH, весовой",
+    "url": "https://lenta.com/product/mintajj-file-razmorozhennoe-rossiya-253366/",
+    "regular": true,
+    "via": "api",
+    "promo_now": true,
+    "size": "0.3 кг/л",
+    "date": "2026-10-30"
+   }
+  },
+  "est": {}
  },
  "hake": {
   "base": 264.41,
@@ -633,11 +1661,40 @@
   "p5": 275,
   "magnit": 256,
   "perek": 278,
-  "lenta": 270,
+  "lenta": 305,
   "auchan": 243,
   "samokat": 301,
   "lavka": 312,
-  "vkusvill": 317
+  "vkusvill": 572,
+  "real": {
+   "lenta": {
+    "price": 305,
+    "pack_price": 914.99,
+    "per": 609.99,
+    "per_unit": "кг",
+    "name": "Хек потрошеный без головы (из замороженного сырья) ЛЕНТА FRESH, весовой",
+    "url": "https://lenta.com/product/hek-potroshenyjj-obezglavlennyjj-1kg-razmorozhennyjj-rossiya-253365/",
+    "regular": true,
+    "via": "api",
+    "promo_now": true,
+    "size": "1.5 кг/л",
+    "date": "2026-10-30"
+   },
+   "vkusvill": {
+    "price": 572,
+    "pack_price": 687.0,
+    "per": 1145.0,
+    "per_unit": "кг",
+    "name": "Хек филе без кожи зам., 600 г",
+    "url": "https://vkusvill.ru/goods/khek-file-bez-kozhi-zam-113941/",
+    "regular": true,
+    "via": "api",
+    "promo_now": false,
+    "size": "0.6 кг/л",
+    "date": "2026-10-30"
+   }
+  },
+  "est": {}
  },
  "fish_red": {
   "base": 433.43,
@@ -649,11 +1706,40 @@
   "p5": 451,
   "magnit": 420,
   "perek": 455,
-  "lenta": 442,
+  "lenta": 385,
   "auchan": 399,
   "samokat": 494,
   "lavka": 511,
-  "vkusvill": 520
+  "vkusvill": 571,
+  "real": {
+   "lenta": {
+    "price": 385,
+    "pack_price": 923.99,
+    "per": 769.99,
+    "per_unit": "кг",
+    "name": "Горбуша непотрошеная с головой, замороженная, весовая",
+    "url": "https://lenta.com/product/gorbusha-nepotr-sg-zam-rossiya-558366/",
+    "regular": true,
+    "via": "api",
+    "promo_now": true,
+    "size": "1.2 кг/л",
+    "date": "2026-10-30"
+   },
+   "vkusvill": {
+    "price": 571,
+    "pack_price": 280.0,
+    "per": 1142.86,
+    "per_unit": "кг",
+    "name": "Горбуша натуральная, 245 г",
+    "url": "https://vkusvill.ru/goods/gorbusha-naturalnaya-59860/",
+    "regular": true,
+    "via": "api",
+    "promo_now": false,
+    "size": "0.245 кг/л",
+    "date": "2026-10-30"
+   }
+  },
+  "est": {}
  },
  "mackerel": {
   "base": 172.07,
@@ -669,7 +1755,9 @@
   "auchan": 158,
   "samokat": 196,
   "lavka": 203,
-  "vkusvill": 206
+  "vkusvill": 206,
+  "real": {},
+  "est": {}
  },
  "herring": {
   "base": 168.93,
@@ -681,11 +1769,40 @@
   "p5": 176,
   "magnit": 164,
   "perek": 177,
-  "lenta": 172,
+  "lenta": 171,
   "auchan": 155,
   "samokat": 193,
   "lavka": 199,
-  "vkusvill": 203
+  "vkusvill": 184,
+  "real": {
+   "lenta": {
+    "price": 171,
+    "pack_price": 170.99,
+    "per": 683.96,
+    "per_unit": "кг",
+    "name": "Сельдь Тихоокеанская БАЛТИЙСКИЙ БЕРЕГ филе на коже в заливке с пряностями, 250г",
+    "url": "https://lenta.com/product/seld-atlanticheskaya-file-na-kozhe-v-zalivke-s-pryanostyami-rossiya-250g-716427/",
+    "regular": true,
+    "via": "api",
+    "promo_now": true,
+    "size": "0.25 кг/л",
+    "date": "2026-10-30"
+   },
+   "vkusvill": {
+    "price": 184,
+    "pack_price": 250.0,
+    "per": 735.29,
+    "per_unit": "кг",
+    "name": "Сельдь филе-кусочки с луком в масле, 340 г",
+    "url": "https://vkusvill.ru/goods/seld-file-kusochki-s-lukom-v-masle-21253/",
+    "regular": true,
+    "via": "api",
+    "promo_now": true,
+    "size": "0.34 кг/л",
+    "date": "2026-10-30"
+   }
+  },
+  "est": {}
  },
  "shrimp": {
   "base": 487.86,
@@ -701,7 +1818,23 @@
   "auchan": 449,
   "samokat": 556,
   "lavka": 576,
-  "vkusvill": 585
+  "vkusvill": 565,
+  "real": {
+   "vkusvill": {
+    "price": 565,
+    "pack_price": 2827.0,
+    "per": 1130.8,
+    "per_unit": "кг",
+    "name": "Креветки северные в/м 150+, 2,5 кг",
+    "url": "https://vkusvill.ru/goods/krevetki-severnye-v-m-150-116063/",
+    "regular": true,
+    "via": "api",
+    "promo_now": false,
+    "size": "2.5 кг/л",
+    "date": "2026-10-30"
+   }
+  },
+  "est": {}
  },
  "squid": {
   "base": 345.34,
@@ -713,11 +1846,40 @@
   "p5": 359,
   "magnit": 335,
   "perek": 363,
-  "lenta": 352,
+  "lenta": 335,
   "auchan": 318,
   "samokat": 394,
   "lavka": 408,
-  "vkusvill": 414
+  "vkusvill": 562,
+  "real": {
+   "lenta": {
+    "price": 335,
+    "pack_price": 335.0,
+    "per": 670.0,
+    "per_unit": "кг",
+    "name": "Кальмар неочищенный, тушка (из замороженного сырья) ЛЕНТА FRESH, весовой",
+    "url": "https://lenta.com/product/kalmar-tushkaneochishchennyjj-iz-morozhennogo-syrya-polufabrikat-rossiya-493968/",
+    "regular": true,
+    "via": "api",
+    "promo_now": true,
+    "size": "0.5 кг/л",
+    "date": "2026-10-30"
+   },
+   "vkusvill": {
+    "price": 562,
+    "pack_price": 225.0,
+    "per": 1125.0,
+    "per_unit": "кг",
+    "name": "Кальмар кусочки в солевой заливке, 200 г",
+    "url": "https://vkusvill.ru/goods/kalmar-kusochki-v-solevoy-zalivke-22352/",
+    "regular": true,
+    "via": "api",
+    "promo_now": false,
+    "size": "0.2 кг/л",
+    "date": "2026-10-30"
+   }
+  },
+  "est": {}
  },
  "crab_sticks": {
   "base": 110,
@@ -727,11 +1889,40 @@
   "p5": 114,
   "magnit": 107,
   "perek": 116,
-  "lenta": 112,
+  "lenta": 74,
   "auchan": 101,
   "samokat": 125,
   "lavka": 130,
-  "vkusvill": 132
+  "vkusvill": 182,
+  "real": {
+   "lenta": {
+    "price": 74,
+    "pack_price": 36.99,
+    "per": 369.9,
+    "per_unit": "кг",
+    "name": "Крабовые палочки охлажденные 365 ДНЕЙ (имитация), 100г",
+    "url": "https://lenta.com/product/krabovye-palochki-imitaciya-rossiya-100g-428044/",
+    "regular": true,
+    "via": "api",
+    "promo_now": false,
+    "size": "0.1 кг/л",
+    "date": "2026-10-30"
+   },
+   "vkusvill": {
+    "price": 182,
+    "pack_price": 365.0,
+    "per": 912.5,
+    "per_unit": "кг",
+    "name": "Крабовые палочки (имитация) зам., 400 г",
+    "url": "https://vkusvill.ru/goods/krabovye-palochki-imitatsiya-zam-102422/",
+    "regular": true,
+    "via": "api",
+    "promo_now": false,
+    "size": "0.4 кг/л",
+    "date": "2026-10-30"
+   }
+  },
+  "est": {}
  },
  "tuna": {
   "base": 163.75,
@@ -747,7 +1938,23 @@
   "auchan": 151,
   "samokat": 187,
   "lavka": 193,
-  "vkusvill": 196
+  "vkusvill": 198,
+  "real": {
+   "vkusvill": {
+    "price": 198,
+    "pack_price": 198.0,
+    "per": 1070.27,
+    "per_unit": "кг",
+    "name": "Тунец (полосатый) Вкусные консервы филе-кусочки нат., 185 г",
+    "url": "https://vkusvill.ru/goods/tunets-polosatyy-vkusnye-konservy-file-kusochki-nat-123840/",
+    "regular": true,
+    "via": "api",
+    "promo_now": false,
+    "size": "0.185 кг/л",
+    "date": "2026-10-30"
+   }
+  },
+  "est": {}
  },
  "saury": {
   "base": 162.64,
@@ -759,11 +1966,40 @@
   "p5": 169,
   "magnit": 158,
   "perek": 171,
-  "lenta": 166,
+  "lenta": 164,
   "auchan": 150,
   "samokat": 185,
   "lavka": 192,
-  "vkusvill": 195
+  "vkusvill": 291,
+  "real": {
+   "lenta": {
+    "price": 164,
+    "pack_price": 166.99,
+    "per": 667.96,
+    "per_unit": "кг",
+    "name": "Сайра Тихоокеанская, 230–250г",
+    "url": "https://lenta.com/product/rk-sajjra-tihookeanskaya-rossiya-230-250g-5083/",
+    "regular": true,
+    "via": "api",
+    "promo_now": false,
+    "size": "0.25 кг/л",
+    "date": "2026-10-30"
+   },
+   "vkusvill": {
+    "price": 291,
+    "pack_price": 270.0,
+    "per": 1189.43,
+    "per_unit": "кг",
+    "name": "Сайра тихоокеанская натуральная кусочки ж/б, 227 г",
+    "url": "https://vkusvill.ru/goods/sayra-tikhookeanskaya-naturalnaya-kusochki-zh-b-93175/",
+    "regular": true,
+    "via": "api",
+    "promo_now": true,
+    "size": "0.227 кг/л",
+    "date": "2026-10-30"
+   }
+  },
+  "est": {}
  },
  "pelmeni": {
   "base": 359.41,
@@ -779,7 +2015,23 @@
   "auchan": 331,
   "samokat": 410,
   "lavka": 424,
-  "vkusvill": 431
+  "vkusvill": 455,
+  "real": {
+   "vkusvill": {
+    "price": 455,
+    "pack_price": 455.0,
+    "per": 568.75,
+    "per_unit": "кг",
+    "name": "Пельмени \"Нежные\" с цыпленком-бройлером и укропом",
+    "url": "https://vkusvill.ru/goods/pelmeni-nezhnye-s-tsyplenkom-broylerom-i-ukropom-27439/",
+    "regular": true,
+    "via": "api",
+    "promo_now": false,
+    "size": "0.8 кг/л",
+    "date": "2026-10-30"
+   }
+  },
+  "est": {}
  },
  "vareniki": {
   "base": 215.64,
@@ -791,11 +2043,40 @@
   "p5": 224,
   "magnit": 209,
   "perek": 226,
-  "lenta": 220,
+  "lenta": 360,
   "auchan": 198,
   "samokat": 246,
   "lavka": 254,
-  "vkusvill": 259
+  "vkusvill": 382,
+  "real": {
+   "lenta": {
+    "price": 360,
+    "pack_price": 135.0,
+    "per": 450.0,
+    "per_unit": "кг",
+    "name": "Вареники с картофелем и грибами ЛЕНТА FRESH, весовые",
+    "url": "https://lenta.com/product/vareniki-s-kartofelem-i-gribami-ves-rossiya-175234/",
+    "regular": true,
+    "via": "api",
+    "promo_now": false,
+    "size": "0.3 кг/л",
+    "date": "2026-10-30"
+   },
+   "vkusvill": {
+    "price": 382,
+    "pack_price": 477.0,
+    "per": 477.0,
+    "per_unit": "кг",
+    "name": "Вареники с картофелем и луком, 1 кг",
+    "url": "https://vkusvill.ru/goods/vareniki-s-kartofelem-i-lukom-74595/",
+    "regular": true,
+    "via": "api",
+    "promo_now": false,
+    "size": "1 кг/л",
+    "date": "2026-10-30"
+   }
+  },
+  "est": {}
  },
  "puff_pastry": {
   "base": 170,
@@ -809,7 +2090,23 @@
   "auchan": 156,
   "samokat": 194,
   "lavka": 201,
-  "vkusvill": 204
+  "vkusvill": 388,
+  "real": {
+   "vkusvill": {
+    "price": 388,
+    "pack_price": 388.0,
+    "per": 776.0,
+    "per_unit": "кг",
+    "name": "Тесто слоеное бездрожжевое на слив. масле зам. 500 г",
+    "url": "https://vkusvill.ru/goods/testo-sloenoe-bezdrozhzhevoe-na-sliv-masle-zam-500-g-25365/",
+    "regular": true,
+    "via": "api",
+    "promo_now": false,
+    "size": "0.5 кг/л",
+    "date": "2026-10-30"
+   }
+  },
+  "est": {}
  },
  "frozen_veg": {
   "base": 148.96,
@@ -825,7 +2122,23 @@
   "auchan": 137,
   "samokat": 170,
   "lavka": 176,
-  "vkusvill": 179
+  "vkusvill": 140,
+  "real": {
+   "vkusvill": {
+    "price": 140,
+    "pack_price": 140.0,
+    "per": 350.0,
+    "per_unit": "кг",
+    "name": "Смесь овощная \"Классический гарнир\", зам.",
+    "url": "https://vkusvill.ru/goods/smes-ovoshchnaya-klassicheskiy-garnir-101868/",
+    "regular": true,
+    "via": "api",
+    "promo_now": false,
+    "size": "0.4 кг/л",
+    "date": "2026-10-30"
+   }
+  },
+  "est": {}
  },
  "broccoli": {
   "base": 171.3,
@@ -841,7 +2154,9 @@
   "auchan": 158,
   "samokat": 195,
   "lavka": 202,
-  "vkusvill": 206
+  "vkusvill": 206,
+  "real": {},
+  "est": {}
  },
  "cauliflower": {
   "base": 156.4,
@@ -857,7 +2172,23 @@
   "auchan": 144,
   "samokat": 178,
   "lavka": 185,
-  "vkusvill": 188
+  "vkusvill": 210,
+  "real": {
+   "vkusvill": {
+    "price": 210,
+    "pack_price": 210.0,
+    "per": 525.0,
+    "per_unit": "кг",
+    "name": "Капуста цветная, свежезамороженная",
+    "url": "https://vkusvill.ru/goods/kapusta-tsvetnaya-16127/",
+    "regular": true,
+    "via": "api",
+    "promo_now": false,
+    "size": "0.4 кг/л",
+    "date": "2026-10-30"
+   }
+  },
+  "est": {}
  },
  "green_beans": {
   "base": 148.96,
@@ -873,7 +2204,23 @@
   "auchan": 137,
   "samokat": 170,
   "lavka": 176,
-  "vkusvill": 179
+  "vkusvill": 154,
+  "real": {
+   "vkusvill": {
+    "price": 154,
+    "pack_price": 154.0,
+    "per": 385.0,
+    "per_unit": "кг",
+    "name": "Фасоль стручковая, свежезамороженная",
+    "url": "https://vkusvill.ru/goods/fasol-struchkovaya-16091/",
+    "regular": true,
+    "via": "api",
+    "promo_now": false,
+    "size": "0.4 кг/л",
+    "date": "2026-10-30"
+   }
+  },
+  "est": {}
  },
  "peas": {
   "base": 134.06,
@@ -889,7 +2236,23 @@
   "auchan": 123,
   "samokat": 153,
   "lavka": 158,
-  "vkusvill": 161
+  "vkusvill": 171,
+  "real": {
+   "vkusvill": {
+    "price": 171,
+    "pack_price": 150.0,
+    "per": 428.57,
+    "per_unit": "кг",
+    "name": "Горошек зеленый, замороженный",
+    "url": "https://vkusvill.ru/goods/goroshek-zelenyy-29706/",
+    "regular": true,
+    "via": "api",
+    "promo_now": false,
+    "size": "0.35 кг/л",
+    "date": "2026-10-30"
+   }
+  },
+  "est": {}
  },
  "berries": {
   "base": 202.37,
@@ -905,7 +2268,9 @@
   "auchan": 186,
   "samokat": 231,
   "lavka": 239,
-  "vkusvill": 243
+  "vkusvill": 243,
+  "real": {},
+  "est": {}
  },
  "milk": {
   "base": 99.3,
@@ -917,11 +2282,40 @@
   "p5": 103,
   "magnit": 96,
   "perek": 104,
-  "lenta": 101,
+  "lenta": 81,
   "auchan": 91,
   "samokat": 113,
   "lavka": 117,
-  "vkusvill": 119
+  "vkusvill": 111,
+  "real": {
+   "lenta": {
+    "price": 81,
+    "pack_price": 74.74,
+    "per": 80.8,
+    "per_unit": "л",
+    "name": "Молоко ультрапастеризованное 365 ДНЕЙ 2,5%, без змж, 925мл",
+    "url": "https://lenta.com/product/moloko-upast-25-bez-zmzh-rossiya-925ml-671053/",
+    "regular": true,
+    "via": "api",
+    "promo_now": false,
+    "size": "0.925 кг/л",
+    "date": "2026-10-30"
+   },
+   "vkusvill": {
+    "price": 111,
+    "pack_price": 100.0,
+    "per": 111.11,
+    "per_unit": "л",
+    "name": "Молоко 2,5% в бутылке, 900 мл",
+    "url": "https://vkusvill.ru/goods/moloko-2-36296/",
+    "regular": true,
+    "via": "api",
+    "promo_now": false,
+    "size": "0.9 кг/л",
+    "date": "2026-10-30"
+   }
+  },
+  "est": {}
  },
  "kefir": {
   "base": 112.89,
@@ -933,11 +2327,40 @@
   "p5": 117,
   "magnit": 110,
   "perek": 119,
-  "lenta": 115,
+  "lenta": 109,
   "auchan": 104,
   "samokat": 129,
   "lavka": 133,
-  "vkusvill": 135
+  "vkusvill": 124,
+  "real": {
+   "lenta": {
+    "price": 109,
+    "pack_price": 86.99,
+    "per": 108.74,
+    "per_unit": "л",
+    "name": "Кефир 365 ДНЕЙ 2,5%, без змж, 800г",
+    "url": "https://lenta.com/product/kefir-25-pl-bez-zmzh-rossiya-800g-484317/",
+    "regular": true,
+    "via": "api",
+    "promo_now": false,
+    "size": "0.8 кг/л",
+    "date": "2026-10-30"
+   },
+   "vkusvill": {
+    "price": 124,
+    "pack_price": 112.0,
+    "per": 124.44,
+    "per_unit": "л",
+    "name": "Кефир 2,5% в бутылке, 900 г",
+    "url": "https://vkusvill.ru/goods/kefir-2-42406/",
+    "regular": true,
+    "via": "api",
+    "promo_now": false,
+    "size": "0.9 кг/л",
+    "date": "2026-10-30"
+   }
+  },
+  "est": {}
  },
  "ryazhenka": {
   "base": 74.12,
@@ -949,11 +2372,40 @@
   "p5": 77,
   "magnit": 72,
   "perek": 78,
-  "lenta": 76,
+  "lenta": 65,
   "auchan": 68,
   "samokat": 84,
   "lavka": 87,
-  "vkusvill": 89
+  "vkusvill": 93,
+  "real": {
+   "lenta": {
+    "price": 65,
+    "pack_price": 104.49,
+    "per": 130.61,
+    "per_unit": "л",
+    "name": "Ряженка 365 ДНЕЙ 2,5%, без змж, 800г",
+    "url": "https://lenta.com/product/ryazhenka-25-plenka-bez-zmzh-rossiya-800g-706100/",
+    "regular": true,
+    "via": "api",
+    "promo_now": true,
+    "size": "0.8 кг/л",
+    "date": "2026-10-30"
+   },
+   "vkusvill": {
+    "price": 93,
+    "pack_price": 167.0,
+    "per": 185.56,
+    "per_unit": "л",
+    "name": "Ряженка 4%, 900 г",
+    "url": "https://vkusvill.ru/goods/ryazhenka-4-117287/",
+    "regular": true,
+    "via": "api",
+    "promo_now": false,
+    "size": "0.9 кг/л",
+    "date": "2026-10-30"
+   }
+  },
+  "est": {}
  },
  "smetana": {
   "base": 107.41,
@@ -965,11 +2417,40 @@
   "p5": 112,
   "magnit": 104,
   "perek": 113,
-  "lenta": 110,
+  "lenta": 107,
   "auchan": 99,
   "samokat": 122,
   "lavka": 127,
-  "vkusvill": 129
+  "vkusvill": 118,
+  "real": {
+   "lenta": {
+    "price": 107,
+    "pack_price": 106.99,
+    "per": 356.63,
+    "per_unit": "кг",
+    "name": "Сметана ЛЕНТА 15%, без змж, 300г",
+    "url": "https://lenta.com/product/smetana-15-bez-zmzh-rossiya-300g-710158/",
+    "regular": true,
+    "via": "api",
+    "promo_now": true,
+    "size": "0.3 кг/л",
+    "date": "2026-10-30"
+   },
+   "vkusvill": {
+    "price": 118,
+    "pack_price": 98.0,
+    "per": 392.0,
+    "per_unit": "кг",
+    "name": "Сметана 15%, 250 г",
+    "url": "https://vkusvill.ru/goods/smetana-15-14526/",
+    "regular": true,
+    "via": "api",
+    "promo_now": false,
+    "size": "0.25 кг/л",
+    "date": "2026-10-30"
+   }
+  },
+  "est": {}
  },
  "tvorog": {
   "base": 95.92,
@@ -981,11 +2462,40 @@
   "p5": 100,
   "magnit": 93,
   "perek": 101,
-  "lenta": 98,
+  "lenta": 76,
   "auchan": 88,
   "samokat": 109,
   "lavka": 113,
-  "vkusvill": 115
+  "vkusvill": 102,
+  "real": {
+   "lenta": {
+    "price": 76,
+    "pack_price": 67.99,
+    "per": 377.72,
+    "per_unit": "кг",
+    "name": "Творог 365 ДНЕЙ 5%, без змж, 180г",
+    "url": "https://lenta.com/product/tvorog-5-bez-zmzh-rossiya-180g-568903/",
+    "regular": true,
+    "via": "api",
+    "promo_now": false,
+    "size": "0.18 кг/л",
+    "date": "2026-10-30"
+   },
+   "vkusvill": {
+    "price": 102,
+    "pack_price": 203.0,
+    "per": 507.5,
+    "per_unit": "кг",
+    "name": "Творог 5%, 400 г",
+    "url": "https://vkusvill.ru/goods/tvorog-5-185/",
+    "regular": true,
+    "via": "api",
+    "promo_now": false,
+    "size": "0.4 кг/л",
+    "date": "2026-10-30"
+   }
+  },
+  "est": {}
  },
  "cheese": {
   "base": 190.34,
@@ -997,11 +2507,40 @@
   "p5": 198,
   "magnit": 185,
   "perek": 200,
-  "lenta": 194,
+  "lenta": 137,
   "auchan": 175,
   "samokat": 217,
   "lavka": 225,
-  "vkusvill": 228
+  "vkusvill": 199,
+  "real": {
+   "lenta": {
+    "price": 137,
+    "pack_price": 274.0,
+    "per": 685.0,
+    "per_unit": "кг",
+    "name": "Сыр полутвердый 365 ДНЕЙ Российский 45–50% без змж, весовой",
+    "url": "https://lenta.com/product/syr-polutverdyjj-rossijjskijj-45-50-bez-zmzh-ves-rossiya-467393/",
+    "regular": true,
+    "via": "api",
+    "promo_now": false,
+    "size": "0.4 кг/л",
+    "date": "2026-10-30"
+   },
+   "vkusvill": {
+    "price": 199,
+    "pack_price": 996.0,
+    "per": 996.0,
+    "per_unit": "кг",
+    "name": "Сыр \"Российский\"",
+    "url": "https://vkusvill.ru/goods/syr-rossiyskiy-336/",
+    "regular": true,
+    "via": "api",
+    "promo_now": false,
+    "size": "1 кг/л",
+    "date": "2026-10-30"
+   }
+  },
+  "est": {}
  },
  "mozzarella": {
   "base": 130.86,
@@ -1017,7 +2556,9 @@
   "auchan": 120,
   "samokat": 149,
   "lavka": 154,
-  "vkusvill": 157
+  "vkusvill": 157,
+  "real": {},
+  "est": {}
  },
  "processed_cheese": {
   "base": 143.82,
@@ -1029,11 +2570,40 @@
   "p5": 150,
   "magnit": 140,
   "perek": 151,
-  "lenta": 147,
+  "lenta": 146,
   "auchan": 132,
   "samokat": 164,
   "lavka": 170,
-  "vkusvill": 173
+  "vkusvill": 196,
+  "real": {
+   "lenta": {
+    "price": 146,
+    "pack_price": 292.99,
+    "per": 732.48,
+    "per_unit": "кг",
+    "name": "Сыр плавленый СЫРОБОГАТОВ с мясом барбекю 45%, без змж, 400г",
+    "url": "https://lenta.com/product/syr-plavlenyjj-s-myasom-barbekyu-45-bez-zmzh-rossiya-400g-719757/",
+    "regular": true,
+    "via": "api",
+    "promo_now": true,
+    "size": "0.4 кг/л",
+    "date": "2026-10-30"
+   },
+   "vkusvill": {
+    "price": 196,
+    "pack_price": 88.0,
+    "per": 977.78,
+    "per_unit": "кг",
+    "name": "Сыр плавленый \"Дружба\", 90 г",
+    "url": "https://vkusvill.ru/goods/syr-plavlenyy-druzhba-43061/",
+    "regular": true,
+    "via": "api",
+    "promo_now": false,
+    "size": "0.09 кг/л",
+    "date": "2026-10-30"
+   }
+  },
+  "est": {}
  },
  "butter": {
   "base": 198.91,
@@ -1045,11 +2615,40 @@
   "p5": 207,
   "magnit": 193,
   "perek": 209,
-  "lenta": 203,
+  "lenta": 257,
   "auchan": 183,
   "samokat": 227,
   "lavka": 235,
-  "vkusvill": 239
+  "vkusvill": 224,
+  "real": {
+   "lenta": {
+    "price": 257,
+    "pack_price": 256.99,
+    "per": 1427.72,
+    "per_unit": "кг",
+    "name": "Масло сливочное ПРОСТОКВАШИНО 82% высший сорт, без змж, 180г",
+    "url": "https://lenta.com/product/maslo-slivochnoe-vs-82-folga-bez-zmzh-rossiya-180g-193753/",
+    "regular": true,
+    "via": "api",
+    "promo_now": true,
+    "size": "0.18 кг/л",
+    "date": "2026-10-30"
+   },
+   "vkusvill": {
+    "price": 224,
+    "pack_price": 224.0,
+    "per": 1244.44,
+    "per_unit": "кг",
+    "name": "Масло сливочное 82,5%, 180 г",
+    "url": "https://vkusvill.ru/goods/maslo-slivochnoe-82-73204/",
+    "regular": true,
+    "via": "api",
+    "promo_now": false,
+    "size": "0.18 кг/л",
+    "date": "2026-10-30"
+   }
+  },
+  "est": {}
  },
  "yogurt": {
   "base": 112.01,
@@ -1061,11 +2660,40 @@
   "p5": 116,
   "magnit": 109,
   "perek": 118,
-  "lenta": 114,
+  "lenta": 160,
   "auchan": 103,
   "samokat": 128,
   "lavka": 132,
-  "vkusvill": 134
+  "vkusvill": 165,
+  "real": {
+   "lenta": {
+    "price": 160,
+    "pack_price": 56.99,
+    "per": 455.92,
+    "per_unit": "кг",
+    "name": "Йогурт ПЕРВЫЙ ВКУС Натурель Натуральный 2,5%, без змж, 125г",
+    "url": "https://lenta.com/product/jjogurt-pervyjj-vkus-naturalnyjj-25-pst-bez-zmzh-rossiya-125g-434240/",
+    "regular": true,
+    "via": "api",
+    "promo_now": true,
+    "size": "0.125 кг/л",
+    "date": "2026-10-30"
+   },
+   "vkusvill": {
+    "price": 165,
+    "pack_price": 118.0,
+    "per": 472.0,
+    "per_unit": "кг",
+    "name": "Йогурт греческий 2%, 250г",
+    "url": "https://vkusvill.ru/goods/yogurt-grecheskiy-2-118739/",
+    "regular": true,
+    "via": "api",
+    "promo_now": false,
+    "size": "0.25 кг/л",
+    "date": "2026-10-30"
+   }
+  },
+  "est": {}
  },
  "cream": {
   "base": 71.54,
@@ -1077,11 +2705,40 @@
   "p5": 74,
   "magnit": 69,
   "perek": 75,
-  "lenta": 73,
+  "lenta": 52,
   "auchan": 66,
   "samokat": 82,
   "lavka": 84,
-  "vkusvill": 86
+  "vkusvill": 68,
+  "real": {
+   "lenta": {
+    "price": 52,
+    "pack_price": 51.99,
+    "per": 259.95,
+    "per_unit": "л",
+    "name": "Сливки ультрапастеризованные 365 ДНЕЙ 10%, без змж, 200мл",
+    "url": "https://lenta.com/product/slivki-upast-10-bez-zmzh-rossiya-200ml-524430/",
+    "regular": true,
+    "via": "api",
+    "promo_now": false,
+    "size": "0.2 кг/л",
+    "date": "2026-10-30"
+   },
+   "vkusvill": {
+    "price": 68,
+    "pack_price": 152.0,
+    "per": 337.78,
+    "per_unit": "л",
+    "name": "Сливки 10%, 450 мл",
+    "url": "https://vkusvill.ru/goods/slivki-10-1225/",
+    "regular": true,
+    "via": "api",
+    "promo_now": false,
+    "size": "0.45 кг/л",
+    "date": "2026-10-30"
+   }
+  },
+  "est": {}
  },
  "feta": {
   "base": 208.56,
@@ -1097,7 +2754,9 @@
   "auchan": 192,
   "samokat": 238,
   "lavka": 246,
-  "vkusvill": 250
+  "vkusvill": 250,
+  "real": {},
+  "est": {}
  },
  "condensed_milk": {
   "base": 159.58,
@@ -1109,11 +2768,40 @@
   "p5": 166,
   "magnit": 155,
   "perek": 168,
-  "lenta": 163,
+  "lenta": 174,
   "auchan": 147,
   "samokat": 182,
   "lavka": 188,
-  "vkusvill": 191
+  "vkusvill": 167,
+  "real": {
+   "lenta": {
+    "price": 174,
+    "pack_price": 457.99,
+    "per": 457.99,
+    "per_unit": "кг",
+    "name": "Молоко сгущенное СКЗ с сахаром, без змж, 1000г",
+    "url": "https://lenta.com/product/moloko-sgushchennoe-s-saharom-pet-bez-zmzh-rossiya-1000g-595316/",
+    "regular": true,
+    "via": "api",
+    "promo_now": true,
+    "size": "1 кг/л",
+    "date": "2026-10-30"
+   },
+   "vkusvill": {
+    "price": 167,
+    "pack_price": 286.0,
+    "per": 440.0,
+    "per_unit": "кг",
+    "name": "Молоко сгущенное цельное с сахаром, 650 г",
+    "url": "https://vkusvill.ru/goods/moloko-sgushchennoe-tselnoe-s-sakharom-81495/",
+    "regular": true,
+    "via": "api",
+    "promo_now": false,
+    "size": "0.65 кг/л",
+    "date": "2026-10-30"
+   }
+  },
+  "est": {}
  },
  "eggs": {
   "base": 109.1,
@@ -1125,11 +2813,40 @@
   "p5": 113,
   "magnit": 106,
   "perek": 115,
-  "lenta": 111,
+  "lenta": 110,
   "auchan": 100,
   "samokat": 124,
   "lavka": 129,
-  "vkusvill": 131
+  "vkusvill": 118,
+  "real": {
+   "lenta": {
+    "price": 110,
+    "pack_price": 109.99,
+    "per": 11.0,
+    "per_unit": "шт",
+    "name": "Яйцо куриное ВАРАКСИНО деревенское С1, 10шт",
+    "url": "https://lenta.com/product/yajjco-kurinoe-derevenskoe-s1-rossiya-10sht-532884/",
+    "regular": true,
+    "via": "api",
+    "promo_now": false,
+    "size": "10 шт",
+    "date": "2026-10-30"
+   },
+   "vkusvill": {
+    "price": 118,
+    "pack_price": 236.0,
+    "per": 11.8,
+    "per_unit": "шт",
+    "name": "Яйцо куриное С1, 20 шт",
+    "url": "https://vkusvill.ru/goods/yaytso-kurinoe-s1-69187/",
+    "regular": true,
+    "via": "api",
+    "promo_now": false,
+    "size": "20 шт",
+    "date": "2026-10-30"
+   }
+  },
+  "est": {}
  },
  "bread": {
   "base": 50.89,
@@ -1141,11 +2858,40 @@
   "p5": 53,
   "magnit": 49,
   "perek": 53,
-  "lenta": 52,
+  "lenta": 83,
   "auchan": 47,
   "samokat": 58,
   "lavka": 60,
-  "vkusvill": 61
+  "vkusvill": 99,
+  "real": {
+   "lenta": {
+    "price": 83,
+    "pack_price": 61.99,
+    "per": 206.63,
+    "per_unit": "кг",
+    "name": "Батон ВОСХОД Молочный классический, в нарезке, 300г",
+    "url": "https://lenta.com/product/baton-molochnyjj-klassicheskijj-v-narezke-rossiya-300g-639809/",
+    "regular": true,
+    "via": "api",
+    "promo_now": false,
+    "size": "0.3 кг/л",
+    "date": "2026-10-30"
+   },
+   "vkusvill": {
+    "price": 99,
+    "pack_price": 74.0,
+    "per": 246.67,
+    "per_unit": "кг",
+    "name": "Хлеб пшеничный \"Ремесленный\" на закваске, нарезка",
+    "url": "https://vkusvill.ru/goods/khleb-pshenichnyy-remeslennyy-na-zakvaske-112959/",
+    "regular": true,
+    "via": "api",
+    "promo_now": false,
+    "size": "0.3 кг/л",
+    "date": "2026-10-30"
+   }
+  },
+  "est": {}
  },
  "bread_whole": {
   "base": 45.43,
@@ -1157,11 +2903,40 @@
   "p5": 47,
   "magnit": 44,
   "perek": 48,
-  "lenta": 46,
+  "lenta": 53,
   "auchan": 42,
   "samokat": 52,
   "lavka": 54,
-  "vkusvill": 55
+  "vkusvill": 90,
+  "real": {
+   "lenta": {
+    "price": 53,
+    "pack_price": 52.99,
+    "per": 176.63,
+    "per_unit": "кг",
+    "name": "Хлеб зерновой ЧЕЛНЫ-ХЛЕБ Челнинский, в нарезке, 300г",
+    "url": "https://lenta.com/product/hleb-chelninskijj-zernovojj-nar-up-rossiya-300g-548189/",
+    "regular": true,
+    "via": "api",
+    "promo_now": false,
+    "size": "0.3 кг/л",
+    "date": "2026-10-30"
+   },
+   "vkusvill": {
+    "price": 90,
+    "pack_price": 300.0,
+    "per": 300.0,
+    "per_unit": "кг",
+    "name": "Хлеб цельнозерновой с отрубями",
+    "url": "https://vkusvill.ru/goods/khleb-tselnozernovoy-s-otrubyami-58728/",
+    "regular": true,
+    "via": "api",
+    "promo_now": false,
+    "size": "1 кг/л",
+    "date": "2026-10-30"
+   }
+  },
+  "est": {}
  },
  "lavash": {
   "base": 35.62,
@@ -1173,11 +2948,40 @@
   "p5": 37,
   "magnit": 35,
   "perek": 37,
-  "lenta": 36,
+  "lenta": 47,
   "auchan": 33,
   "samokat": 41,
   "lavka": 42,
-  "vkusvill": 43
+  "vkusvill": 68,
+  "real": {
+   "lenta": {
+    "price": 47,
+    "pack_price": 41.99,
+    "per": 233.28,
+    "per_unit": "кг",
+    "name": "Лавашики пшеничные ВЫБОР СЕМЬИ, 180г",
+    "url": "https://lenta.com/product/lavashiki-pshenichnye-rossiya-180g-747017/",
+    "regular": true,
+    "via": "api",
+    "promo_now": false,
+    "size": "0.18 кг/л",
+    "date": "2026-10-30"
+   },
+   "vkusvill": {
+    "price": 68,
+    "pack_price": 68.0,
+    "per": 340.0,
+    "per_unit": "кг",
+    "name": "Лаваш \"Цельнозерновой с отрубями\", СПб",
+    "url": "https://vkusvill.ru/goods/lavash-tselnozernovoy-s-otrubyami-66608/",
+    "regular": true,
+    "via": "api",
+    "promo_now": false,
+    "size": "0.2 кг/л",
+    "date": "2026-10-30"
+   }
+  },
+  "est": {}
  },
  "tortilla": {
   "base": 150,
@@ -1187,11 +2991,40 @@
   "p5": 156,
   "magnit": 146,
   "perek": 158,
-  "lenta": 153,
+  "lenta": 97,
   "auchan": 138,
   "samokat": 171,
   "lavka": 177,
-  "vkusvill": 180
+  "vkusvill": 133,
+  "real": {
+   "lenta": {
+    "price": 97,
+    "pack_price": 77.99,
+    "per": 389.95,
+    "per_unit": "кг",
+    "name": "Тортилья пшеничная ПЕКАРЬ ПАНДА высший сорт, 200г",
+    "url": "https://lenta.com/product/tortilya-pshenichnaya-vs-rossiya-200g-470287/",
+    "regular": true,
+    "via": "api",
+    "promo_now": false,
+    "size": "0.2 кг/л",
+    "date": "2026-10-30"
+   },
+   "vkusvill": {
+    "price": 133,
+    "pack_price": 80.0,
+    "per": 533.33,
+    "per_unit": "кг",
+    "name": "Тортилья пшеничная",
+    "url": "https://vkusvill.ru/goods/tortilya-pshenichnaya-24852/",
+    "regular": true,
+    "via": "api",
+    "promo_now": false,
+    "size": "0.15 кг/л",
+    "date": "2026-10-30"
+   }
+  },
+  "est": {}
  },
  "buckwheat": {
   "base": 82.94,
@@ -1203,11 +3036,40 @@
   "p5": 86,
   "magnit": 80,
   "perek": 87,
-  "lenta": 85,
+  "lenta": 49,
   "auchan": 76,
   "samokat": 95,
   "lavka": 98,
-  "vkusvill": 100
+  "vkusvill": 93,
+  "real": {
+   "lenta": {
+    "price": 49,
+    "pack_price": 54.99,
+    "per": 54.99,
+    "per_unit": "кг",
+    "name": "Крупа гречневая 365 ДНЕЙ 1-й сорт, 1кг",
+    "url": "https://lenta.com/product/krupa-grechnevaya-1s-rossiya-1000g-705656/",
+    "regular": true,
+    "via": "api",
+    "promo_now": false,
+    "size": "1 кг/л",
+    "date": "2026-10-30"
+   },
+   "vkusvill": {
+    "price": 93,
+    "pack_price": 93.0,
+    "per": 103.33,
+    "per_unit": "кг",
+    "name": "Крупа гречневая ядрица, 900 г",
+    "url": "https://vkusvill.ru/goods/krupa-grechnevaya-yadritsa-17699/",
+    "regular": true,
+    "via": "api",
+    "promo_now": false,
+    "size": "0.9 кг/л",
+    "date": "2026-10-30"
+   }
+  },
+  "est": {}
  },
  "rice": {
   "base": 113.17,
@@ -1219,11 +3081,40 @@
   "p5": 118,
   "magnit": 110,
   "perek": 119,
-  "lenta": 115,
+  "lenta": 81,
   "auchan": 104,
   "samokat": 129,
   "lavka": 134,
-  "vkusvill": 136
+  "vkusvill": 146,
+  "real": {
+   "lenta": {
+    "price": 81,
+    "pack_price": 89.99,
+    "per": 89.99,
+    "per_unit": "кг",
+    "name": "Рис круглозерный 365 ДНЕЙ, 1кг",
+    "url": "https://lenta.com/product/ris-kruglozernyjj-rossiya-1000g-719364/",
+    "regular": true,
+    "via": "api",
+    "promo_now": true,
+    "size": "1 кг/л",
+    "date": "2026-10-30"
+   },
+   "vkusvill": {
+    "price": 146,
+    "pack_price": 146.0,
+    "per": 162.22,
+    "per_unit": "кг",
+    "name": "Рис круглозерный шлифованный, 900 г",
+    "url": "https://vkusvill.ru/goods/ris-kruglozernyy-shlifovannyy-59756/",
+    "regular": true,
+    "via": "api",
+    "promo_now": false,
+    "size": "0.9 кг/л",
+    "date": "2026-10-30"
+   }
+  },
+  "est": {}
  },
  "millet": {
   "base": 62.22,
@@ -1235,11 +3126,40 @@
   "p5": 65,
   "magnit": 60,
   "perek": 65,
-  "lenta": 63,
+  "lenta": 39,
   "auchan": 57,
   "samokat": 71,
   "lavka": 73,
-  "vkusvill": 75
+  "vkusvill": 86,
+  "real": {
+   "lenta": {
+    "price": 39,
+    "pack_price": 42.99,
+    "per": 42.99,
+    "per_unit": "кг",
+    "name": "Пшено 365 ДНЕЙ шлифованное, 1кг",
+    "url": "https://lenta.com/product/psheno-shlifovannoe-rossiya-1000g-708075/",
+    "regular": true,
+    "via": "api",
+    "promo_now": true,
+    "size": "1 кг/л",
+    "date": "2026-10-30"
+   },
+   "vkusvill": {
+    "price": 86,
+    "pack_price": 48.0,
+    "per": 96.0,
+    "per_unit": "кг",
+    "name": "Пшено шлифованное, 500 гр",
+    "url": "https://vkusvill.ru/goods/psheno-shlifovannoe-24753/",
+    "regular": true,
+    "via": "api",
+    "promo_now": false,
+    "size": "0.5 кг/л",
+    "date": "2026-10-30"
+   }
+  },
+  "est": {}
  },
  "semolina": {
   "base": 62.64,
@@ -1251,11 +3171,40 @@
   "p5": 65,
   "magnit": 61,
   "perek": 66,
-  "lenta": 64,
+  "lenta": 46,
   "auchan": 58,
   "samokat": 71,
   "lavka": 74,
-  "vkusvill": 75
+  "vkusvill": 90,
+  "real": {
+   "lenta": {
+    "price": 46,
+    "pack_price": 39.99,
+    "per": 57.13,
+    "per_unit": "кг",
+    "name": "Крупа манная 365 ДНЕЙ марка М, 700г",
+    "url": "https://lenta.com/product/krupa-mannaya-marka-m-rossiya-700g-64357/",
+    "regular": true,
+    "via": "api",
+    "promo_now": true,
+    "size": "0.7 кг/л",
+    "date": "2026-10-30"
+   },
+   "vkusvill": {
+    "price": 90,
+    "pack_price": 56.0,
+    "per": 112.0,
+    "per_unit": "кг",
+    "name": "Крупа манная",
+    "url": "https://vkusvill.ru/goods/krupa-mannaya-17678/",
+    "regular": true,
+    "via": "api",
+    "promo_now": false,
+    "size": "0.5 кг/л",
+    "date": "2026-10-30"
+   }
+  },
+  "est": {}
  },
  "barley": {
   "base": 52.87,
@@ -1267,11 +3216,40 @@
   "p5": 55,
   "magnit": 51,
   "perek": 56,
-  "lenta": 54,
+  "lenta": 35,
   "auchan": 49,
   "samokat": 60,
   "lavka": 62,
-  "vkusvill": 63
+  "vkusvill": 108,
+  "real": {
+   "lenta": {
+    "price": 35,
+    "pack_price": 30.99,
+    "per": 38.74,
+    "per_unit": "кг",
+    "name": "Крупа перловая 365 ДНЕЙ №1, 800г",
+    "url": "https://lenta.com/product/krupa-perlovaya-1-rossiya-800g-337442/",
+    "regular": true,
+    "via": "api",
+    "promo_now": false,
+    "size": "0.8 кг/л",
+    "date": "2026-10-30"
+   },
+   "vkusvill": {
+    "price": 108,
+    "pack_price": 60.0,
+    "per": 120.0,
+    "per_unit": "кг",
+    "name": "Крупа ячменная перловая, 500 г",
+    "url": "https://vkusvill.ru/goods/krupa-yachmennaya-perlovaya-21020/",
+    "regular": true,
+    "via": "api",
+    "promo_now": false,
+    "size": "0.5 кг/л",
+    "date": "2026-10-30"
+   }
+  },
+  "est": {}
  },
  "bulgur": {
   "base": 120,
@@ -1281,11 +3259,40 @@
   "p5": 125,
   "magnit": 116,
   "perek": 126,
-  "lenta": 122,
+  "lenta": 127,
   "auchan": 110,
   "samokat": 137,
   "lavka": 142,
-  "vkusvill": 144
+  "vkusvill": 126,
+  "real": {
+   "lenta": {
+    "price": 127,
+    "pack_price": 126.99,
+    "per": 282.2,
+    "per_unit": "кг",
+    "name": "Булгур пшеничный АГРО-АЛЬЯНС Экстра из твердых сортов, 450г",
+    "url": "https://lenta.com/product/krupa-pshenichnaya-ekstra-bulgur-iz-tverdyh-sortov-rossiya-450g-531864/",
+    "regular": true,
+    "via": "api",
+    "promo_now": true,
+    "size": "0.45 кг/л",
+    "date": "2026-10-30"
+   },
+   "vkusvill": {
+    "price": 126,
+    "pack_price": 112.0,
+    "per": 280.0,
+    "per_unit": "кг",
+    "name": "Булгур (пакетики), 400 г",
+    "url": "https://vkusvill.ru/goods/bulgur-paketiki-85404/",
+    "regular": true,
+    "via": "api",
+    "promo_now": false,
+    "size": "0.4 кг/л",
+    "date": "2026-10-30"
+   }
+  },
+  "est": {}
  },
  "oats": {
   "base": 57.7,
@@ -1297,11 +3304,40 @@
   "p5": 60,
   "magnit": 56,
   "perek": 61,
-  "lenta": 59,
+  "lenta": 64,
   "auchan": 53,
   "samokat": 66,
   "lavka": 68,
-  "vkusvill": 69
+  "vkusvill": 81,
+  "real": {
+   "lenta": {
+    "price": 64,
+    "pack_price": 63.99,
+    "per": 127.98,
+    "per_unit": "кг",
+    "name": "Хлопья овсяные ЛЕНТА Экстра, 500г",
+    "url": "https://lenta.com/product/hlopya-ovsyanye-ekstra-rossiya-500g-709949/",
+    "regular": true,
+    "via": "api",
+    "promo_now": true,
+    "size": "0.5 кг/л",
+    "date": "2026-10-30"
+   },
+   "vkusvill": {
+    "price": 81,
+    "pack_price": 65.0,
+    "per": 162.5,
+    "per_unit": "кг",
+    "name": "Хлопья овсяные, 400 г",
+    "url": "https://vkusvill.ru/goods/khlopya-ovsyanye-64315/",
+    "regular": true,
+    "via": "api",
+    "promo_now": false,
+    "size": "0.4 кг/л",
+    "date": "2026-10-30"
+   }
+  },
+  "est": {}
  },
  "pasta": {
   "base": 56.28,
@@ -1313,11 +3349,40 @@
   "p5": 59,
   "magnit": 55,
   "perek": 59,
-  "lenta": 57,
+  "lenta": 26,
   "auchan": 52,
   "samokat": 64,
   "lavka": 66,
-  "vkusvill": 68
+  "vkusvill": 85,
+  "real": {
+   "lenta": {
+    "price": 26,
+    "pack_price": 22.99,
+    "per": 57.47,
+    "per_unit": "кг",
+    "name": "Макароны 365 ДНЕЙ Рожки, группа В высший сорт, 400г",
+    "url": "https://lenta.com/product/makarony-rozhki-grv-vs-rossiya-400g-351889/",
+    "regular": true,
+    "via": "api",
+    "promo_now": true,
+    "size": "0.4 кг/л",
+    "date": "2026-10-30"
+   },
+   "vkusvill": {
+    "price": 85,
+    "pack_price": 85.0,
+    "per": 188.89,
+    "per_unit": "кг",
+    "name": "Макаронные изделия \"Рожки с гребешком\", Гальяни, 450 г",
+    "url": "https://vkusvill.ru/goods/makaronnye-izdeliya-rozhki-s-grebeshkom-77393/",
+    "regular": true,
+    "via": "api",
+    "promo_now": false,
+    "size": "0.45 кг/л",
+    "date": "2026-10-30"
+   }
+  },
+  "est": {}
  },
  "spaghetti": {
   "base": 61.91,
@@ -1333,7 +3398,9 @@
   "auchan": 57,
   "samokat": 71,
   "lavka": 73,
-  "vkusvill": 74
+  "vkusvill": 74,
+  "real": {},
+  "est": {}
  },
  "noodles": {
   "base": 74.25,
@@ -1345,11 +3412,27 @@
   "p5": 77,
   "magnit": 72,
   "perek": 78,
-  "lenta": 76,
+  "lenta": 86,
   "auchan": 68,
   "samokat": 85,
   "lavka": 88,
-  "vkusvill": 89
+  "vkusvill": 89,
+  "real": {
+   "lenta": {
+    "price": 86,
+    "pack_price": 71.99,
+    "per": 287.96,
+    "per_unit": "кг",
+    "name": "Лапша ВНУК Домашняя яичная группа В, 250г",
+    "url": "https://lenta.com/product/lapsha-domashnyaya-yaichnaya-gr-v-rossiya-250g-635008/",
+    "regular": true,
+    "via": "api",
+    "promo_now": false,
+    "size": "0.25 кг/л",
+    "date": "2026-10-30"
+   }
+  },
+  "est": {}
  },
  "flour": {
   "base": 57.21,
@@ -1361,11 +3444,40 @@
   "p5": 59,
   "magnit": 55,
   "perek": 60,
-  "lenta": 58,
+  "lenta": 61,
   "auchan": 53,
   "samokat": 65,
   "lavka": 68,
-  "vkusvill": 69
+  "vkusvill": 69,
+  "real": {
+   "lenta": {
+    "price": 61,
+    "pack_price": 122.99,
+    "per": 61.49,
+    "per_unit": "кг",
+    "name": "Мука пшеничная АЛЕКСЕЕВСКАЯ общего назначения, 2кг",
+    "url": "https://lenta.com/product/muka-on-rossiya-2kg-374604/",
+    "regular": true,
+    "via": "api",
+    "promo_now": true,
+    "size": "2 кг/л",
+    "date": "2026-10-30"
+   },
+   "vkusvill": {
+    "price": 69,
+    "pack_price": 138.0,
+    "per": 69.0,
+    "per_unit": "кг",
+    "name": "Мука пшеничная хлебопекарная в/с, 2 кг",
+    "url": "https://vkusvill.ru/goods/muka-pshenichnaya-khlebopekarnaya-v-s-71556/",
+    "regular": true,
+    "via": "api",
+    "promo_now": false,
+    "size": "2 кг/л",
+    "date": "2026-10-30"
+   }
+  },
+  "est": {}
  },
  "starch": {
   "base": 55,
@@ -1375,11 +3487,40 @@
   "p5": 57,
   "magnit": 53,
   "perek": 58,
-  "lenta": 56,
+  "lenta": 55,
   "auchan": 51,
   "samokat": 63,
   "lavka": 65,
-  "vkusvill": 66
+  "vkusvill": 70,
+  "real": {
+   "lenta": {
+    "price": 55,
+    "pack_price": 110.99,
+    "per": 277.47,
+    "per_unit": "кг",
+    "name": "Крахмал картофельный ЛЕНТА, 400г",
+    "url": "https://lenta.com/product/krahmal-kartofelnyjj-rossiya-400g-585323/",
+    "regular": true,
+    "via": "api",
+    "promo_now": true,
+    "size": "0.4 кг/л",
+    "date": "2026-10-30"
+   },
+   "vkusvill": {
+    "price": 70,
+    "pack_price": 70.0,
+    "per": 350.0,
+    "per_unit": "кг",
+    "name": "Крахмал кукурузный",
+    "url": "https://vkusvill.ru/goods/krakhmal-kukuruznyy-38450/",
+    "regular": true,
+    "via": "api",
+    "promo_now": false,
+    "size": "0.2 кг/л",
+    "date": "2026-10-30"
+   }
+  },
+  "est": {}
  },
  "baking_powder": {
   "base": 15,
@@ -1389,11 +3530,27 @@
   "p5": 16,
   "magnit": 15,
   "perek": 16,
-  "lenta": 15,
+  "lenta": 8,
   "auchan": 14,
   "samokat": 17,
   "lavka": 18,
-  "vkusvill": 18
+  "vkusvill": 18,
+  "real": {
+   "lenta": {
+    "price": 8,
+    "pack_price": 7.99,
+    "per": 799.0,
+    "per_unit": "кг",
+    "name": "Разрыхлитель теста ЛЕНТА, 10г",
+    "url": "https://lenta.com/product/razryhlitel-testa-rossiya-10-gr-427560/",
+    "regular": true,
+    "via": "api",
+    "promo_now": false,
+    "size": "0.01 кг/л",
+    "date": "2026-10-30"
+   }
+  },
+  "est": {}
  },
  "breadcrumbs": {
   "base": 50,
@@ -1403,11 +3560,27 @@
   "p5": 52,
   "magnit": 48,
   "perek": 52,
-  "lenta": 51,
+  "lenta": 55,
   "auchan": 46,
   "samokat": 57,
   "lavka": 59,
-  "vkusvill": 60
+  "vkusvill": 60,
+  "real": {
+   "lenta": {
+    "price": 55,
+    "pack_price": 54.99,
+    "per": 274.95,
+    "per_unit": "кг",
+    "name": "Сухари панировочные ЛЕНТА, 200г",
+    "url": "https://lenta.com/product/suhari-panirovochnye-rossiya-200g-638246/",
+    "regular": true,
+    "via": "api",
+    "promo_now": true,
+    "size": "0.2 кг/л",
+    "date": "2026-10-30"
+   }
+  },
+  "est": {}
  },
  "sugar": {
   "base": 82.49,
@@ -1419,11 +3592,40 @@
   "p5": 86,
   "magnit": 80,
   "perek": 87,
-  "lenta": 84,
+  "lenta": 75,
   "auchan": 76,
   "samokat": 94,
   "lavka": 97,
-  "vkusvill": 99
+  "vkusvill": 93,
+  "real": {
+   "lenta": {
+    "price": 75,
+    "pack_price": 376.99,
+    "per": 75.4,
+    "per_unit": "кг",
+    "name": "Сахар, 5кг",
+    "url": "https://lenta.com/product/sahar-rossiya-5kg-17266/",
+    "regular": true,
+    "via": "api",
+    "promo_now": false,
+    "size": "5 кг/л",
+    "date": "2026-10-30"
+   },
+   "vkusvill": {
+    "price": 93,
+    "pack_price": 93.0,
+    "per": 93.0,
+    "per_unit": "кг",
+    "name": "Сахар-песок, 1 кг",
+    "url": "https://vkusvill.ru/goods/sakhar-pesok-67632/",
+    "regular": true,
+    "via": "api",
+    "promo_now": false,
+    "size": "1 кг/л",
+    "date": "2026-10-30"
+   }
+  },
+  "est": {}
  },
  "salt": {
   "base": 24.39,
@@ -1435,11 +3637,40 @@
   "p5": 25,
   "magnit": 24,
   "perek": 26,
-  "lenta": 25,
+  "lenta": 21,
   "auchan": 22,
   "samokat": 28,
   "lavka": 29,
-  "vkusvill": 29
+  "vkusvill": 50,
+  "real": {
+   "lenta": {
+    "price": 21,
+    "pack_price": 20.99,
+    "per": 20.99,
+    "per_unit": "кг",
+    "name": "Соль ИЛЕЦКАЯ помол №1 высший сорт, 1кг",
+    "url": "https://lenta.com/product/sol-pomol-1-vs-rossiya-1kg-73998/",
+    "regular": true,
+    "via": "api",
+    "promo_now": false,
+    "size": "1 кг/л",
+    "date": "2026-10-30"
+   },
+   "vkusvill": {
+    "price": 50,
+    "pack_price": 50.0,
+    "per": 50.0,
+    "per_unit": "кг",
+    "name": "Соль пищевая каменная, 1 кг",
+    "url": "https://vkusvill.ru/goods/sol-pishchevaya-kamennaya-103071/",
+    "regular": true,
+    "via": "api",
+    "promo_now": false,
+    "size": "1 кг/л",
+    "date": "2026-10-30"
+   }
+  },
+  "est": {}
  },
  "oil": {
   "base": 143.85,
@@ -1451,11 +3682,40 @@
   "p5": 150,
   "magnit": 140,
   "perek": 151,
-  "lenta": 147,
+  "lenta": 118,
   "auchan": 132,
   "samokat": 164,
   "lavka": 170,
-  "vkusvill": 173
+  "vkusvill": 148,
+  "real": {
+   "lenta": {
+    "price": 118,
+    "pack_price": 104.99,
+    "per": 131.24,
+    "per_unit": "л",
+    "name": "Масло подсолнечное 365 ДНЕЙ рафинированное дезодорированное, 800мл",
+    "url": "https://lenta.com/product/maslo-podsolnechnoe-rafinirovannoe-dezodorirovannoe-rossiya-800ml-698517/",
+    "regular": true,
+    "via": "api",
+    "promo_now": true,
+    "size": "0.8 кг/л",
+    "date": "2026-10-30"
+   },
+   "vkusvill": {
+    "price": 148,
+    "pack_price": 165.0,
+    "per": 165.0,
+    "per_unit": "л",
+    "name": "Масло подсолнечное рафинированное",
+    "url": "https://vkusvill.ru/goods/maslo-podsolnechnoe-rafinirovannoe-37147/",
+    "regular": true,
+    "via": "api",
+    "promo_now": false,
+    "size": "1 кг/л",
+    "date": "2026-10-30"
+   }
+  },
+  "est": {}
  },
  "spices": {
   "base": 69.37,
@@ -1467,11 +3727,40 @@
   "p5": 72,
   "magnit": 67,
   "perek": 73,
-  "lenta": 71,
+  "lenta": 32,
   "auchan": 64,
   "samokat": 79,
   "lavka": 82,
-  "vkusvill": 83
+  "vkusvill": 72,
+  "real": {
+   "lenta": {
+    "price": 32,
+    "pack_price": 80.99,
+    "per": 1079.87,
+    "per_unit": "кг",
+    "name": "Приправа MAGGI Универсальная Ароматный букет, с овощами, зеленью и специями, 75г",
+    "url": "https://lenta.com/product/priprava-universalnaya-aromatnyjj-buket-s-ovoshchami-zelenyu-i-speciyami-rossiya-75g-792550/",
+    "regular": true,
+    "via": "api",
+    "promo_now": true,
+    "size": "0.075 кг/л",
+    "date": "2026-10-30"
+   },
+   "vkusvill": {
+    "price": 72,
+    "pack_price": 60.0,
+    "per": 2400.0,
+    "per_unit": "кг",
+    "name": "Приправа для картофельных долек",
+    "url": "https://vkusvill.ru/goods/priprava-dlya-kartofelnykh-dolek-28699/",
+    "regular": true,
+    "via": "api",
+    "promo_now": false,
+    "size": "0.025 кг/л",
+    "date": "2026-10-30"
+   }
+  },
+  "est": {}
  },
  "tomato_paste": {
   "base": 111.26,
@@ -1483,11 +3772,40 @@
   "p5": 116,
   "magnit": 108,
   "perek": 117,
-  "lenta": 113,
+  "lenta": 116,
   "auchan": 102,
   "samokat": 127,
   "lavka": 131,
-  "vkusvill": 134
+  "vkusvill": 132,
+  "real": {
+   "lenta": {
+    "price": 116,
+    "pack_price": 205.99,
+    "per": 429.15,
+    "per_unit": "кг",
+    "name": "Паста томатная КУХМАСТЕР, 480г",
+    "url": "https://lenta.com/product/tomatnaya-pasta-ekstra-gost-stb-rossiya-480g-505259/",
+    "regular": true,
+    "via": "api",
+    "promo_now": true,
+    "size": "0.48 кг/л",
+    "date": "2026-10-30"
+   },
+   "vkusvill": {
+    "price": 132,
+    "pack_price": 127.0,
+    "per": 488.46,
+    "per_unit": "кг",
+    "name": "Паста томатная, 260 г",
+    "url": "https://vkusvill.ru/goods/pasta-tomatnaya-110868/",
+    "regular": true,
+    "via": "api",
+    "promo_now": false,
+    "size": "0.26 кг/л",
+    "date": "2026-10-30"
+   }
+  },
+  "est": {}
  },
  "canned_tomatoes": {
   "base": 131.86,
@@ -1503,7 +3821,23 @@
   "auchan": 121,
   "samokat": 150,
   "lavka": 156,
-  "vkusvill": 158
+  "vkusvill": 131,
+  "real": {
+   "vkusvill": {
+    "price": 131,
+    "pack_price": 245.0,
+    "per": 326.67,
+    "per_unit": "кг",
+    "name": "Томаты очищенные в собственном соку",
+    "url": "https://vkusvill.ru/goods/tomaty-ochishchennye-v-sobstvennom-soku-18209/",
+    "regular": true,
+    "via": "api",
+    "promo_now": false,
+    "size": "0.75 кг/л",
+    "date": "2026-10-30"
+   }
+  },
+  "est": {}
  },
  "ketchup": {
   "base": 109.93,
@@ -1515,11 +3849,40 @@
   "p5": 114,
   "magnit": 107,
   "perek": 115,
-  "lenta": 112,
+  "lenta": 119,
   "auchan": 101,
   "samokat": 125,
   "lavka": 130,
-  "vkusvill": 132
+  "vkusvill": 131,
+  "real": {
+   "lenta": {
+    "price": 119,
+    "pack_price": 169.99,
+    "per": 339.98,
+    "per_unit": "кг",
+    "name": "Кетчуп МАХЕЕВЪ Томатный, 500г",
+    "url": "https://lenta.com/product/ketchup-tomatnyjj-rossiya-500g-309931/",
+    "regular": true,
+    "via": "api",
+    "promo_now": true,
+    "size": "0.5 кг/л",
+    "date": "2026-10-30"
+   },
+   "vkusvill": {
+    "price": 131,
+    "pack_price": 105.0,
+    "per": 375.0,
+    "per_unit": "кг",
+    "name": "Кетчуп \"Шашлычный\"",
+    "url": "https://vkusvill.ru/goods/ketchup-shashlychnyy-91893/",
+    "regular": true,
+    "via": "api",
+    "promo_now": false,
+    "size": "0.28 кг/л",
+    "date": "2026-10-30"
+   }
+  },
+  "est": {}
  },
  "mustard": {
   "base": 60,
@@ -1529,11 +3892,40 @@
   "p5": 62,
   "magnit": 58,
   "perek": 63,
-  "lenta": 61,
+  "lenta": 41,
   "auchan": 55,
   "samokat": 68,
   "lavka": 71,
-  "vkusvill": 72
+  "vkusvill": 47,
+  "real": {
+   "lenta": {
+    "price": 41,
+    "pack_price": 56.99,
+    "per": 407.07,
+    "per_unit": "кг",
+    "name": "Горчица МАХЕЕВЪ Русская, 140г",
+    "url": "https://lenta.com/product/gorchica-russkaya-rossiya-140g-309783/",
+    "regular": true,
+    "via": "api",
+    "promo_now": true,
+    "size": "0.14 кг/л",
+    "date": "2026-10-30"
+   },
+   "vkusvill": {
+    "price": 47,
+    "pack_price": 94.0,
+    "per": 470.0,
+    "per_unit": "кг",
+    "name": "Горчица \"Столовая\"",
+    "url": "https://vkusvill.ru/goods/gorchitsa-stolovaya-17138/",
+    "regular": true,
+    "via": "api",
+    "promo_now": false,
+    "size": "0.2 кг/л",
+    "date": "2026-10-30"
+   }
+  },
+  "est": {}
  },
  "mayo": {
   "base": 133.48,
@@ -1545,11 +3937,40 @@
   "p5": 139,
   "magnit": 129,
   "perek": 140,
-  "lenta": 136,
+  "lenta": 113,
   "auchan": 123,
   "samokat": 152,
   "lavka": 158,
-  "vkusvill": 160
+  "vkusvill": 126,
+  "real": {
+   "lenta": {
+    "price": 113,
+    "pack_price": 225.99,
+    "per": 282.49,
+    "per_unit": "кг",
+    "name": "Майонез МАХЕЕВЪ Провансаль с лимонным соком 50,5%, 800мл",
+    "url": "https://lenta.com/product/majjonez-provansal-s-limonnym-sokom-505-dp-rossiya-800ml-76137/",
+    "regular": true,
+    "via": "api",
+    "promo_now": true,
+    "size": "0.8 кг/л",
+    "date": "2026-10-30"
+   },
+   "vkusvill": {
+    "price": 126,
+    "pack_price": 118.0,
+    "per": 314.67,
+    "per_unit": "кг",
+    "name": "Майонез \"Провансаль Слобода\",375 г",
+    "url": "https://vkusvill.ru/goods/mayonez-provansal-sloboda-43157/",
+    "regular": true,
+    "via": "api",
+    "promo_now": false,
+    "size": "0.375 кг/л",
+    "date": "2026-10-30"
+   }
+  },
+  "est": {}
  },
  "soy_sauce": {
   "base": 110,
@@ -1559,11 +3980,40 @@
   "p5": 114,
   "magnit": 107,
   "perek": 116,
-  "lenta": 112,
+  "lenta": 52,
   "auchan": 101,
   "samokat": 125,
   "lavka": 130,
-  "vkusvill": 132
+  "vkusvill": 67,
+  "real": {
+   "lenta": {
+    "price": 52,
+    "pack_price": 86.99,
+    "per": 347.96,
+    "per_unit": "л",
+    "name": "Соус соевый PAN ASIAN Легкий, 250мл",
+    "url": "https://lenta.com/product/sous-soevyjj-legkijj-rossiya-250ml-710993/",
+    "regular": true,
+    "via": "api",
+    "promo_now": true,
+    "size": "0.25 кг/л",
+    "date": "2026-10-30"
+   },
+   "vkusvill": {
+    "price": 67,
+    "pack_price": 125.0,
+    "per": 449.64,
+    "per_unit": "л",
+    "name": "Соус соевый слабосоленый",
+    "url": "https://vkusvill.ru/goods/sous-soevyy-slabosolenyy-91730/",
+    "regular": true,
+    "via": "api",
+    "promo_now": false,
+    "size": "0.278 кг/л",
+    "date": "2026-10-30"
+   }
+  },
+  "est": {}
  },
  "honey": {
   "base": 183.67,
@@ -1575,11 +4025,40 @@
   "p5": 191,
   "magnit": 178,
   "perek": 193,
-  "lenta": 187,
+  "lenta": 115,
   "auchan": 169,
   "samokat": 209,
   "lavka": 217,
-  "vkusvill": 220
+  "vkusvill": 207,
+  "real": {
+   "lenta": {
+    "price": 115,
+    "pack_price": 229.99,
+    "per": 459.98,
+    "per_unit": "кг",
+    "name": "Мед натуральный РАЗНОТРАВИЕ, 500г",
+    "url": "https://lenta.com/product/med-naturalnyjj-rossiya-500g-387905/",
+    "regular": true,
+    "via": "api",
+    "promo_now": true,
+    "size": "0.5 кг/л",
+    "date": "2026-10-30"
+   },
+   "vkusvill": {
+    "price": 207,
+    "pack_price": 414.0,
+    "per": 828.0,
+    "per_unit": "кг",
+    "name": "Мед натуральный \"Луговые медоносы\", 500 г",
+    "url": "https://vkusvill.ru/goods/med-naturalnyy-lugovye-medonosy-16771/",
+    "regular": true,
+    "via": "api",
+    "promo_now": true,
+    "size": "0.5 кг/л",
+    "date": "2026-10-30"
+   }
+  },
+  "est": {}
  },
  "jam": {
   "base": 183.76,
@@ -1591,11 +4070,40 @@
   "p5": 191,
   "magnit": 178,
   "perek": 193,
-  "lenta": 187,
+  "lenta": 166,
   "auchan": 169,
   "samokat": 209,
   "lavka": 217,
-  "vkusvill": 221
+  "vkusvill": 241,
+  "real": {
+   "lenta": {
+    "price": 166,
+    "pack_price": 127.99,
+    "per": 474.04,
+    "per_unit": "кг",
+    "name": "Джем ЛЕНТА Черная смородина, 270г",
+    "url": "https://lenta.com/product/dzhem-chernaya-smorodina-dojj-pak-rossiya-270g-727602/",
+    "regular": true,
+    "via": "api",
+    "promo_now": true,
+    "size": "0.27 кг/л",
+    "date": "2026-10-30"
+   },
+   "vkusvill": {
+    "price": 241,
+    "pack_price": 248.0,
+    "per": 688.89,
+    "per_unit": "кг",
+    "name": "Варенье абрикосовое с ядрами абрикоса",
+    "url": "https://vkusvill.ru/goods/varene-abrikosovoe-s-yadrami-abrikosa-34132/",
+    "regular": true,
+    "via": "api",
+    "promo_now": false,
+    "size": "0.36 кг/л",
+    "date": "2026-10-30"
+   }
+  },
+  "est": {}
  },
  "nuts": {
   "base": 120.61,
@@ -1611,7 +4119,23 @@
   "auchan": 111,
   "samokat": 137,
   "lavka": 142,
-  "vkusvill": 145
+  "vkusvill": 153,
+  "real": {
+   "vkusvill": {
+    "price": 153,
+    "pack_price": 458.0,
+    "per": 1526.67,
+    "per_unit": "кг",
+    "name": "Орех грецкий, 300 г",
+    "url": "https://vkusvill.ru/goods/orekh-gretskiy-70711/",
+    "regular": true,
+    "via": "api",
+    "promo_now": false,
+    "size": "0.3 кг/л",
+    "date": "2026-10-30"
+   }
+  },
+  "est": {}
  },
  "peanut_butter": {
   "base": 220,
@@ -1621,11 +4145,40 @@
   "p5": 229,
   "magnit": 213,
   "perek": 231,
-  "lenta": 224,
+  "lenta": 214,
   "auchan": 202,
   "samokat": 251,
   "lavka": 260,
-  "vkusvill": 264
+  "vkusvill": 325,
+  "real": {
+   "lenta": {
+    "price": 214,
+    "pack_price": 290.99,
+    "per": 855.85,
+    "per_unit": "кг",
+    "name": "Паста арахисовая DELISSE Crunchy, 340г",
+    "url": "https://lenta.com/product/pasta-arahisovaya-crunchy-rossiya-340g-668945/",
+    "regular": true,
+    "via": "api",
+    "promo_now": true,
+    "size": "0.34 кг/л",
+    "date": "2026-10-30"
+   },
+   "vkusvill": {
+    "price": 325,
+    "pack_price": 195.0,
+    "per": 1300.0,
+    "per_unit": "кг",
+    "name": "Арахисовая паста",
+    "url": "https://vkusvill.ru/goods/arakhisovaya-pasta-15882/",
+    "regular": true,
+    "via": "api",
+    "promo_now": false,
+    "size": "0.15 кг/л",
+    "date": "2026-10-30"
+   }
+  },
+  "est": {}
  },
  "sesame": {
   "base": 50,
@@ -1635,11 +4188,27 @@
   "p5": 52,
   "magnit": 48,
   "perek": 52,
-  "lenta": 51,
+  "lenta": 57,
   "auchan": 46,
   "samokat": 57,
   "lavka": 59,
-  "vkusvill": 60
+  "vkusvill": 60,
+  "real": {
+   "lenta": {
+    "price": 57,
+    "pack_price": 170.99,
+    "per": 1139.93,
+    "per_unit": "кг",
+    "name": "Кунжут ОГО! семена, 150г",
+    "url": "https://lenta.com/product/kunzhut-semena-rossiya-150g-523426/",
+    "regular": true,
+    "via": "api",
+    "promo_now": true,
+    "size": "0.15 кг/л",
+    "date": "2026-10-30"
+   }
+  },
+  "est": {}
  },
  "raisins": {
   "base": 79.45,
@@ -1651,11 +4220,40 @@
   "p5": 83,
   "magnit": 77,
   "perek": 83,
-  "lenta": 81,
+  "lenta": 75,
   "auchan": 73,
   "samokat": 91,
   "lavka": 94,
-  "vkusvill": 95
+  "vkusvill": 192,
+  "real": {
+   "lenta": {
+    "price": 75,
+    "pack_price": 55.99,
+    "per": 373.27,
+    "per_unit": "кг",
+    "name": "Изюм 365 ДНЕЙ светлый, 150г",
+    "url": "https://lenta.com/product/izyum-svetlyjj-rossiya-150g-434425/",
+    "regular": true,
+    "via": "api",
+    "promo_now": false,
+    "size": "0.15 кг/л",
+    "date": "2026-10-30"
+   },
+   "vkusvill": {
+    "price": 192,
+    "pack_price": 144.0,
+    "per": 960.0,
+    "per_unit": "кг",
+    "name": "Изюм светлый, 150 г",
+    "url": "https://vkusvill.ru/goods/izyum-svetlyy-18172/",
+    "regular": true,
+    "via": "api",
+    "promo_now": false,
+    "size": "0.15 кг/л",
+    "date": "2026-10-30"
+   }
+  },
+  "est": {}
  },
  "prunes": {
   "base": 113.5,
@@ -1667,11 +4265,27 @@
   "p5": 118,
   "magnit": 110,
   "perek": 119,
-  "lenta": 116,
+  "lenta": 176,
   "auchan": 104,
   "samokat": 129,
   "lavka": 134,
-  "vkusvill": 136
+  "vkusvill": 136,
+  "real": {
+   "lenta": {
+    "price": 176,
+    "pack_price": 175.99,
+    "per": 879.95,
+    "per_unit": "кг",
+    "name": "Чернослив ВЫБОР СЕМЬИ без косточки, 200г",
+    "url": "https://lenta.com/product/chernosliv-bez-kostochki-rossiya-200g-730387/",
+    "regular": true,
+    "via": "api",
+    "promo_now": true,
+    "size": "0.2 кг/л",
+    "date": "2026-10-30"
+   }
+  },
+  "est": {}
  },
  "dried_apricots": {
   "base": 124.85,
@@ -1683,11 +4297,27 @@
   "p5": 130,
   "magnit": 121,
   "perek": 131,
-  "lenta": 127,
+  "lenta": 262,
   "auchan": 115,
   "samokat": 142,
   "lavka": 147,
-  "vkusvill": 150
+  "vkusvill": 150,
+  "real": {
+   "lenta": {
+    "price": 262,
+    "pack_price": 655.99,
+    "per": 1311.98,
+    "per_unit": "кг",
+    "name": "Курага BONVIDA 500г",
+    "url": "https://lenta.com/product/kuraga-rossiya-500g-519492/",
+    "regular": true,
+    "via": "api",
+    "promo_now": true,
+    "size": "0.5 кг/л",
+    "date": "2026-10-30"
+   }
+  },
+  "est": {}
  },
  "lentils": {
   "base": 93.54,
@@ -1699,11 +4329,40 @@
   "p5": 97,
   "magnit": 91,
   "perek": 98,
-  "lenta": 95,
+  "lenta": 119,
   "auchan": 86,
   "samokat": 107,
   "lavka": 110,
-  "vkusvill": 112
+  "vkusvill": 156,
+  "real": {
+   "lenta": {
+    "price": 119,
+    "pack_price": 106.99,
+    "per": 237.76,
+    "per_unit": "кг",
+    "name": "Чечевица красная ЛЕНТА, 450г",
+    "url": "https://lenta.com/product/chechevica-krasnaya-rossiya-450g-686669/",
+    "regular": true,
+    "via": "api",
+    "promo_now": true,
+    "size": "0.45 кг/л",
+    "date": "2026-10-30"
+   },
+   "vkusvill": {
+    "price": 156,
+    "pack_price": 140.0,
+    "per": 311.11,
+    "per_unit": "кг",
+    "name": "Чечевица красная, 450 г",
+    "url": "https://vkusvill.ru/goods/chechevitsa-krasnaya-36616/",
+    "regular": true,
+    "via": "api",
+    "promo_now": false,
+    "size": "0.45 кг/л",
+    "date": "2026-10-30"
+   }
+  },
+  "est": {}
  },
  "split_peas": {
   "base": 66.52,
@@ -1719,7 +4378,36 @@
   "auchan": 61,
   "samokat": 76,
   "lavka": 78,
-  "vkusvill": 80
+  "vkusvill": 125,
+  "real": {
+   "lenta": {
+    "price": 68,
+    "pack_price": 67.99,
+    "per": 84.99,
+    "per_unit": "кг",
+    "name": "Горох ВЫБОР СЕМЬИ колотый, 800г",
+    "url": "https://lenta.com/product/goroh-kolotyjj-rossiya-800g-708982/",
+    "regular": true,
+    "via": "api",
+    "promo_now": true,
+    "size": "0.8 кг/л",
+    "date": "2026-10-30"
+   },
+   "vkusvill": {
+    "price": 125,
+    "pack_price": 78.0,
+    "per": 156.0,
+    "per_unit": "кг",
+    "name": "Горох колотый шлифованный, 500 г",
+    "url": "https://vkusvill.ru/goods/gorokh-kolotyy-shlifovannyy-14513/",
+    "regular": true,
+    "via": "api",
+    "promo_now": false,
+    "size": "0.5 кг/л",
+    "date": "2026-10-30"
+   }
+  },
+  "est": {}
  },
  "chickpeas": {
   "base": 98.73,
@@ -1731,11 +4419,40 @@
   "p5": 103,
   "magnit": 96,
   "perek": 104,
-  "lenta": 101,
+  "lenta": 149,
   "auchan": 91,
   "samokat": 113,
   "lavka": 117,
-  "vkusvill": 118
+  "vkusvill": 146,
+  "real": {
+   "lenta": {
+    "price": 149,
+    "pack_price": 133.99,
+    "per": 297.76,
+    "per_unit": "кг",
+    "name": "Нут АГРО-АЛЬЯНС Экстра, 450г",
+    "url": "https://lenta.com/product/nut-ekstra-tip-1-prodovolstvennyjj-rossiya-450g-263704/",
+    "regular": true,
+    "via": "api",
+    "promo_now": true,
+    "size": "0.45 кг/л",
+    "date": "2026-10-30"
+   },
+   "vkusvill": {
+    "price": 146,
+    "pack_price": 146.0,
+    "per": 292.0,
+    "per_unit": "кг",
+    "name": "Нут продовольственный, 500 г",
+    "url": "https://vkusvill.ru/goods/nut-prodovolstvennyy-31046/",
+    "regular": true,
+    "via": "api",
+    "promo_now": false,
+    "size": "0.5 кг/л",
+    "date": "2026-10-30"
+   }
+  },
+  "est": {}
  },
  "canned_beans": {
   "base": 121.47,
@@ -1747,11 +4464,40 @@
   "p5": 126,
   "magnit": 118,
   "perek": 128,
-  "lenta": 124,
+  "lenta": 74,
   "auchan": 112,
   "samokat": 138,
   "lavka": 143,
-  "vkusvill": 146
+  "vkusvill": 116,
+  "real": {
+   "lenta": {
+    "price": 74,
+    "pack_price": 66.99,
+    "per": 186.08,
+    "per_unit": "кг",
+    "name": "Фасоль красная 365 ДНЕЙ натуральная, 360г",
+    "url": "https://lenta.com/product/fasol-krasnaya-naturalnaya-rossiya-360g-367154/",
+    "regular": true,
+    "via": "api",
+    "promo_now": false,
+    "size": "0.36 кг/л",
+    "date": "2026-10-30"
+   },
+   "vkusvill": {
+    "price": 116,
+    "pack_price": 116.0,
+    "per": 290.0,
+    "per_unit": "кг",
+    "name": "Фасоль красная (без доб. сахара), 400 г",
+    "url": "https://vkusvill.ru/goods/fasol-krasnaya-bez-dob-sakhara-108684/",
+    "regular": true,
+    "via": "api",
+    "promo_now": false,
+    "size": "0.4 кг/л",
+    "date": "2026-10-30"
+   }
+  },
+  "est": {}
  },
  "corn": {
   "base": 103.25,
@@ -1763,11 +4509,40 @@
   "p5": 107,
   "magnit": 100,
   "perek": 108,
-  "lenta": 105,
+  "lenta": 69,
   "auchan": 95,
   "samokat": 118,
   "lavka": 122,
-  "vkusvill": 124
+  "vkusvill": 146,
+  "real": {
+   "lenta": {
+    "price": 69,
+    "pack_price": 85.99,
+    "per": 202.33,
+    "per_unit": "кг",
+    "name": "Кукуруза консервированная 365 ДНЕЙ в зернах, 425мл",
+    "url": "https://lenta.com/product/kukuruza-konservirovannaya-v-zernah-rossiya-425ml-427669/",
+    "regular": true,
+    "via": "api",
+    "promo_now": false,
+    "size": "0.425 кг/л",
+    "date": "2026-10-30"
+   },
+   "vkusvill": {
+    "price": 146,
+    "pack_price": 146.0,
+    "per": 429.41,
+    "per_unit": "кг",
+    "name": "Кукуруза сахарная в зернах",
+    "url": "https://vkusvill.ru/goods/kukuruza-sakharnaya-v-zernakh-16379/",
+    "regular": true,
+    "via": "api",
+    "promo_now": false,
+    "size": "0.34 кг/л",
+    "date": "2026-10-30"
+   }
+  },
+  "est": {}
  },
  "green_peas": {
   "base": 116.92,
@@ -1779,11 +4554,40 @@
   "p5": 122,
   "magnit": 113,
   "perek": 123,
-  "lenta": 119,
+  "lenta": 177,
   "auchan": 108,
   "samokat": 133,
   "lavka": 138,
-  "vkusvill": 140
+  "vkusvill": 139,
+  "real": {
+   "lenta": {
+    "price": 177,
+    "pack_price": 176.99,
+    "per": 442.48,
+    "per_unit": "кг",
+    "name": "Горошек зеленый ДЯДЯ ВАНЯ консервированный, 400г",
+    "url": "https://lenta.com/product/goroshek-zelenyjj-konservirovannyjj-zhb-rossiya-400g-132994/",
+    "regular": true,
+    "via": "api",
+    "promo_now": true,
+    "size": "0.4 кг/л",
+    "date": "2026-10-30"
+   },
+   "vkusvill": {
+    "price": 139,
+    "pack_price": 146.0,
+    "per": 347.62,
+    "per_unit": "кг",
+    "name": "Горошек зеленый консервированный",
+    "url": "https://vkusvill.ru/goods/goroshek-zelenyy-konservirovannyy-16378/",
+    "regular": true,
+    "via": "api",
+    "promo_now": false,
+    "size": "0.42 кг/л",
+    "date": "2026-10-30"
+   }
+  },
+  "est": {}
  },
  "pickles": {
   "base": 136.66,
@@ -1795,11 +4599,40 @@
   "p5": 142,
   "magnit": 133,
   "perek": 143,
-  "lenta": 139,
+  "lenta": 101,
   "auchan": 126,
   "samokat": 156,
   "lavka": 161,
-  "vkusvill": 164
+  "vkusvill": 142,
+  "real": {
+   "lenta": {
+    "price": 101,
+    "pack_price": 145.99,
+    "per": 202.76,
+    "per_unit": "кг",
+    "name": "Огурцы маринованные 365 ДНЕЙ, 720мл",
+    "url": "https://lenta.com/product/ogurcy-marinovannye-rossiya-720ml-165369/",
+    "regular": true,
+    "via": "api",
+    "promo_now": false,
+    "size": "0.72 кг/л",
+    "date": "2026-10-30"
+   },
+   "vkusvill": {
+    "price": 142,
+    "pack_price": 228.0,
+    "per": 285.0,
+    "per_unit": "кг",
+    "name": "Огурцы соленые со смородиной",
+    "url": "https://vkusvill.ru/goods/ogurtsy-solenye-so-smorodinoy-94663/",
+    "regular": true,
+    "via": "api",
+    "promo_now": false,
+    "size": "0.8 кг/л",
+    "date": "2026-10-30"
+   }
+  },
+  "est": {}
  },
  "sauerkraut": {
   "base": 120,
@@ -1809,11 +4642,40 @@
   "p5": 125,
   "magnit": 116,
   "perek": 126,
-  "lenta": 122,
+  "lenta": 92,
   "auchan": 110,
   "samokat": 137,
   "lavka": 142,
-  "vkusvill": 144
+  "vkusvill": 204,
+  "real": {
+   "lenta": {
+    "price": 92,
+    "pack_price": 183.99,
+    "per": 183.99,
+    "per_unit": "кг",
+    "name": "Капуста квашеная БЕЛОРУЧКА с морковью и клюквой, 1000г",
+    "url": "https://lenta.com/product/kapusta-kvashenaya-s-morkovyu-i-klyukvojj-rossiya-1000g-113130/",
+    "regular": true,
+    "via": "api",
+    "promo_now": false,
+    "size": "1 кг/л",
+    "date": "2026-10-30"
+   },
+   "vkusvill": {
+    "price": 204,
+    "pack_price": 204.0,
+    "per": 408.0,
+    "per_unit": "кг",
+    "name": "Капуста квашеная с морковью, 500 г",
+    "url": "https://vkusvill.ru/goods/kapusta-kvashenaya-s-morkovyu-102947/",
+    "regular": true,
+    "via": "api",
+    "promo_now": false,
+    "size": "0.5 кг/л",
+    "date": "2026-10-30"
+   }
+  },
+  "est": {}
  },
  "turkey_thigh": {
   "base": 333.7,
@@ -1825,11 +4687,40 @@
   "p5": 347,
   "magnit": 324,
   "perek": 350,
-  "lenta": 340,
+  "lenta": 508,
   "auchan": 307,
   "samokat": 380,
   "lavka": 394,
-  "vkusvill": 400
+  "vkusvill": 547,
+  "real": {
+   "lenta": {
+    "price": 508,
+    "pack_price": 346.99,
+    "per": 846.32,
+    "per_unit": "кг",
+    "name": "Филе бедра индейки ИНДИЛАЙТ, 410г",
+    "url": "https://lenta.com/product/file-bedra-indejjki-ohl-gvu-rossiya-410g-484545/",
+    "regular": true,
+    "via": "api",
+    "promo_now": false,
+    "size": "0.41 кг/л",
+    "date": "2026-10-30"
+   },
+   "vkusvill": {
+    "price": 547,
+    "pack_price": 912.0,
+    "per": 912.0,
+    "per_unit": "кг",
+    "name": "Филе бедра индейки",
+    "url": "https://vkusvill.ru/goods/file-bedra-indeyki-1067/",
+    "regular": true,
+    "via": "api",
+    "promo_now": false,
+    "size": "1 кг/л",
+    "date": "2026-10-30"
+   }
+  },
+  "est": {}
  },
  "minced_beef": {
   "base": 263.44,
@@ -1841,11 +4732,40 @@
   "p5": 274,
   "magnit": 256,
   "perek": 277,
-  "lenta": 269,
+  "lenta": 410,
   "auchan": 242,
   "samokat": 300,
   "lavka": 311,
-  "vkusvill": 316
+  "vkusvill": 444,
+  "real": {
+   "lenta": {
+    "price": 410,
+    "pack_price": 409.99,
+    "per": 1024.97,
+    "per_unit": "кг",
+    "name": "Фарш говяжий СОСНОВОБОРСКАЯ, 400г",
+    "url": "https://lenta.com/product/farsh-govyazhijj-lotok-mgs-ohl-rossiya-400g-478087/",
+    "regular": true,
+    "via": "api",
+    "promo_now": true,
+    "size": "0.4 кг/л",
+    "date": "2026-10-30"
+   },
+   "vkusvill": {
+    "price": 444,
+    "pack_price": 444.0,
+    "per": 1110.0,
+    "per_unit": "кг",
+    "name": "Фарш говяжий Халяль",
+    "url": "https://vkusvill.ru/goods/farsh-govyazhiy-khalyal-78365/",
+    "regular": true,
+    "via": "api",
+    "promo_now": true,
+    "size": "0.4 кг/л",
+    "date": "2026-10-30"
+   }
+  },
+  "est": {}
  },
  "pork_neck": {
   "base": 334.21,
@@ -1857,11 +4777,40 @@
   "p5": 348,
   "magnit": 324,
   "perek": 351,
-  "lenta": 341,
+  "lenta": 330,
   "auchan": 307,
   "samokat": 381,
   "lavka": 394,
-  "vkusvill": 401
+  "vkusvill": 508,
+  "real": {
+   "lenta": {
+    "price": 330,
+    "pack_price": 549.99,
+    "per": 549.99,
+    "per_unit": "кг",
+    "name": "Шея свиная на кости, на шкуре, весовая",
+    "url": "https://lenta.com/product/svinina-sheya-na-kosti-na-shkure-polufabrika-polufabrikat-ohlazhdennyjj-rossiya-60327/",
+    "regular": true,
+    "via": "api",
+    "promo_now": true,
+    "size": "1 кг/л",
+    "date": "2026-10-30"
+   },
+   "vkusvill": {
+    "price": 508,
+    "pack_price": 847.0,
+    "per": 847.0,
+    "per_unit": "кг",
+    "name": "Шейка свиная без кости",
+    "url": "https://vkusvill.ru/goods/sheyka-svinaya-bez-kosti-14983/",
+    "regular": true,
+    "via": "api",
+    "promo_now": false,
+    "size": "1 кг/л",
+    "date": "2026-10-30"
+   }
+  },
+  "est": {}
  },
  "minced_pork": {
   "base": 217.62,
@@ -1873,11 +4822,27 @@
   "p5": 226,
   "magnit": 211,
   "perek": 229,
-  "lenta": 222,
+  "lenta": 160,
   "auchan": 200,
   "samokat": 248,
   "lavka": 257,
-  "vkusvill": 261
+  "vkusvill": 261,
+  "real": {
+   "lenta": {
+    "price": 160,
+    "pack_price": 200.0,
+    "per": 400.0,
+    "per_unit": "кг",
+    "name": "Фарш из свинины Любительский ЛЕНТА FRESH, весовой",
+    "url": "https://lenta.com/product/farsh-svinojj-lyubitelskijj-polufabrikat-ohlazhdennyjj-rossiya-378691/",
+    "regular": true,
+    "via": "api",
+    "promo_now": true,
+    "size": "0.5 кг/л",
+    "date": "2026-10-30"
+   }
+  },
+  "est": {}
  },
  "pork_ribs": {
   "base": 328.82,
@@ -1889,11 +4854,40 @@
   "p5": 342,
   "magnit": 319,
   "perek": 345,
-  "lenta": 335,
+  "lenta": 446,
   "auchan": 303,
   "samokat": 375,
   "lavka": 388,
-  "vkusvill": 395
+  "vkusvill": 622,
+  "real": {
+   "lenta": {
+    "price": 446,
+    "pack_price": 389.89,
+    "per": 556.99,
+    "per_unit": "кг",
+    "name": "Ребрышки свиные МИРАТОРГ Деликатесные, весовые",
+    "url": "https://lenta.com/product/svinina-rebryshki-delikatesnye-ohl-ves-rossiya-248989/",
+    "regular": true,
+    "via": "api",
+    "promo_now": false,
+    "size": "0.7 кг/л",
+    "date": "2026-10-30"
+   },
+   "vkusvill": {
+    "price": 622,
+    "pack_price": 778.0,
+    "per": 778.0,
+    "per_unit": "кг",
+    "name": "Ребрышки с корейки свиные",
+    "url": "https://vkusvill.ru/goods/rebryshki-s-koreyki-svinye-124178/",
+    "regular": true,
+    "via": "api",
+    "promo_now": false,
+    "size": "1 кг/л",
+    "date": "2026-10-30"
+   }
+  },
+  "est": {}
  },
  "lasagna": {
   "base": 140.7,
@@ -1905,11 +4899,27 @@
   "p5": 146,
   "magnit": 136,
   "perek": 148,
-  "lenta": 144,
+  "lenta": 108,
   "auchan": 129,
   "samokat": 160,
   "lavka": 166,
-  "vkusvill": 169
+  "vkusvill": 169,
+  "real": {
+   "lenta": {
+    "price": 108,
+    "pack_price": 107.99,
+    "per": 431.96,
+    "per_unit": "кг",
+    "name": "Макароны MARCO PANATTI Лазанья, 250г",
+    "url": "https://lenta.com/product/makarony-lazanya-rossiya-250g-709050/",
+    "regular": true,
+    "via": "api",
+    "promo_now": true,
+    "size": "0.25 кг/л",
+    "date": "2026-10-30"
+   }
+  },
+  "est": {}
  },
  "black_pepper": {
   "base": 74.0,
@@ -1921,11 +4931,40 @@
   "p5": 77,
   "magnit": 72,
   "perek": 78,
-  "lenta": 75,
+  "lenta": 34,
   "auchan": 68,
   "samokat": 84,
   "lavka": 87,
-  "vkusvill": 89
+  "vkusvill": 90,
+  "real": {
+   "lenta": {
+    "price": 34,
+    "pack_price": 16.99,
+    "per": 1699.0,
+    "per_unit": "кг",
+    "name": "Перец черный АВС Палитра молотый, 10г",
+    "url": "https://lenta.com/product/perec-palitra-chernyjj-molotyjj-rossiya-10g-574101/",
+    "regular": true,
+    "via": "api",
+    "promo_now": false,
+    "size": "0.01 кг/л",
+    "date": "2026-10-30"
+   },
+   "vkusvill": {
+    "price": 90,
+    "pack_price": 45.0,
+    "per": 4500.0,
+    "per_unit": "кг",
+    "name": "Перец черный молотый, 10 г",
+    "url": "https://vkusvill.ru/goods/perets-chernyy-molotyy-16844/",
+    "regular": true,
+    "via": "api",
+    "promo_now": false,
+    "size": "0.01 кг/л",
+    "date": "2026-10-30"
+   }
+  },
+  "est": {}
  },
  "bay_leaf": {
   "base": 57.81,
@@ -1937,11 +4976,40 @@
   "p5": 60,
   "magnit": 56,
   "perek": 61,
-  "lenta": 59,
+  "lenta": 27,
   "auchan": 53,
   "samokat": 66,
   "lavka": 68,
-  "vkusvill": 69
+  "vkusvill": 61,
+  "real": {
+   "lenta": {
+    "price": 27,
+    "pack_price": 53.99,
+    "per": 2699.5,
+    "per_unit": "кг",
+    "name": "Лавровый лист ЭСТЕТИКА ВКУСА, 20г",
+    "url": "https://lenta.com/product/lavrovyjj-list-rossiya-20g-673456/",
+    "regular": true,
+    "via": "api",
+    "promo_now": false,
+    "size": "0.02 кг/л",
+    "date": "2026-10-30"
+   },
+   "vkusvill": {
+    "price": 61,
+    "pack_price": 61.0,
+    "per": 6100.0,
+    "per_unit": "кг",
+    "name": "Лавровый лист",
+    "url": "https://vkusvill.ru/goods/lavrovyy-list-14551/",
+    "regular": true,
+    "via": "api",
+    "promo_now": false,
+    "size": "0.01 кг/л",
+    "date": "2026-10-30"
+   }
+  },
+  "est": {}
  },
  "cinnamon": {
   "base": 52.03,
@@ -1953,11 +5021,40 @@
   "p5": 54,
   "magnit": 50,
   "perek": 55,
-  "lenta": 53,
+  "lenta": 30,
   "auchan": 48,
   "samokat": 59,
   "lavka": 61,
-  "vkusvill": 62
+  "vkusvill": 78,
+  "real": {
+   "lenta": {
+    "price": 30,
+    "pack_price": 29.99,
+    "per": 1999.33,
+    "per_unit": "кг",
+    "name": "Корица молотая ЛЕНТА, 15г",
+    "url": "https://lenta.com/product/korica-molotaya-rossiya-15g-550705/",
+    "regular": true,
+    "via": "api",
+    "promo_now": true,
+    "size": "0.015 кг/л",
+    "date": "2026-10-30"
+   },
+   "vkusvill": {
+    "price": 78,
+    "pack_price": 78.0,
+    "per": 5200.0,
+    "per_unit": "кг",
+    "name": "Корица молотая, Шри-Ланка",
+    "url": "https://vkusvill.ru/goods/koritsa-molotaya-51887/",
+    "regular": true,
+    "via": "api",
+    "promo_now": false,
+    "size": "0.015 кг/л",
+    "date": "2026-10-30"
+   }
+  },
+  "est": {}
  },
  "khmeli": {
   "base": 46.25,
@@ -1969,11 +5066,40 @@
   "p5": 48,
   "magnit": 45,
   "perek": 49,
-  "lenta": 47,
+  "lenta": 23,
   "auchan": 43,
   "samokat": 53,
   "lavka": 55,
-  "vkusvill": 56
+  "vkusvill": 67,
+  "real": {
+   "lenta": {
+    "price": 23,
+    "pack_price": 192.99,
+    "per": 1135.24,
+    "per_unit": "кг",
+    "name": "Приправа BONVIDA Хмели-сунели, 170г",
+    "url": "https://lenta.com/product/priprava-hmeli-suneli-rossiya-170g-701139/",
+    "regular": true,
+    "via": "api",
+    "promo_now": true,
+    "size": "0.17 кг/л",
+    "date": "2026-10-30"
+   },
+   "vkusvill": {
+    "price": 67,
+    "pack_price": 67.0,
+    "per": 3350.0,
+    "per_unit": "кг",
+    "name": "Приправа Хмели-Сунели, 20 г",
+    "url": "https://vkusvill.ru/goods/priprava-khmeli-suneli-71903/",
+    "regular": true,
+    "via": "api",
+    "promo_now": false,
+    "size": "0.02 кг/л",
+    "date": "2026-10-30"
+   }
+  },
+  "est": {}
  },
  "coriander": {
   "base": 46.25,
@@ -1985,11 +5111,40 @@
   "p5": 48,
   "magnit": 45,
   "perek": 49,
-  "lenta": 47,
+  "lenta": 35,
   "auchan": 43,
   "samokat": 53,
   "lavka": 55,
-  "vkusvill": 56
+  "vkusvill": 80,
+  "real": {
+   "lenta": {
+    "price": 35,
+    "pack_price": 34.99,
+    "per": 1749.5,
+    "per_unit": "кг",
+    "name": "Кориандр ИНДАНА молотый, 20г",
+    "url": "https://lenta.com/product/priprava-koriandr-molotyjj-rossiya-20g-704748/",
+    "regular": true,
+    "via": "api",
+    "promo_now": false,
+    "size": "0.02 кг/л",
+    "date": "2026-10-30"
+   },
+   "vkusvill": {
+    "price": 80,
+    "pack_price": 40.0,
+    "per": 4000.0,
+    "per_unit": "кг",
+    "name": "Кориандр молотый",
+    "url": "https://vkusvill.ru/goods/koriandr-molotyy-38449/",
+    "regular": true,
+    "via": "api",
+    "promo_now": false,
+    "size": "0.01 кг/л",
+    "date": "2026-10-30"
+   }
+  },
+  "est": {}
  },
  "paprika": {
   "base": 55.5,
@@ -2001,11 +5156,40 @@
   "p5": 58,
   "magnit": 54,
   "perek": 58,
-  "lenta": 57,
+  "lenta": 25,
   "auchan": 51,
   "samokat": 63,
   "lavka": 65,
-  "vkusvill": 67
+  "vkusvill": 94,
+  "real": {
+   "lenta": {
+    "price": 25,
+    "pack_price": 241.99,
+    "per": 1273.63,
+    "per_unit": "кг",
+    "name": "Паприка молотая BONVIDA, 190г",
+    "url": "https://lenta.com/product/priprava-paprika-molotaya-rossiya-190g-496342/",
+    "regular": true,
+    "via": "api",
+    "promo_now": true,
+    "size": "0.19 кг/л",
+    "date": "2026-10-30"
+   },
+   "vkusvill": {
+    "price": 94,
+    "pack_price": 47.0,
+    "per": 4700.0,
+    "per_unit": "кг",
+    "name": "Паприка молотая",
+    "url": "https://vkusvill.ru/goods/paprika-molotaya-16360/",
+    "regular": true,
+    "via": "api",
+    "promo_now": false,
+    "size": "0.01 кг/л",
+    "date": "2026-10-30"
+   }
+  },
+  "est": {}
  },
  "cumin": {
   "base": 74.0,
@@ -2017,11 +5201,40 @@
   "p5": 77,
   "magnit": 72,
   "perek": 78,
-  "lenta": 75,
+  "lenta": 49,
   "auchan": 68,
   "samokat": 84,
   "lavka": 87,
-  "vkusvill": 89
+  "vkusvill": 76,
+  "real": {
+   "lenta": {
+    "price": 49,
+    "pack_price": 36.99,
+    "per": 2466.0,
+    "per_unit": "кг",
+    "name": "Кумин (зира) ЛЕНТА семена, 15г",
+    "url": "https://lenta.com/product/kumin-zira-rossiya-15g-657738/",
+    "regular": true,
+    "via": "api",
+    "promo_now": true,
+    "size": "0.015 кг/л",
+    "date": "2026-10-30"
+   },
+   "vkusvill": {
+    "price": 76,
+    "pack_price": 57.0,
+    "per": 3800.0,
+    "per_unit": "кг",
+    "name": "Зира",
+    "url": "https://vkusvill.ru/goods/zira-38455/",
+    "regular": true,
+    "via": "api",
+    "promo_now": false,
+    "size": "0.015 кг/л",
+    "date": "2026-10-30"
+   }
+  },
+  "est": {}
  },
  "curry": {
   "base": 55.5,
@@ -2033,11 +5246,27 @@
   "p5": 58,
   "magnit": 54,
   "perek": 58,
-  "lenta": 57,
+  "lenta": 92,
   "auchan": 51,
   "samokat": 63,
   "lavka": 65,
-  "vkusvill": 67
+  "vkusvill": 67,
+  "real": {
+   "lenta": {
+    "price": 92,
+    "pack_price": 123.99,
+    "per": 4592.22,
+    "per_unit": "кг",
+    "name": "Карри KOTANYI, 27г",
+    "url": "https://lenta.com/product/priprava-karri-avstriya-27g-391086/",
+    "regular": true,
+    "via": "api",
+    "promo_now": true,
+    "size": "0.027 кг/л",
+    "date": "2026-10-30"
+   }
+  },
+  "est": {}
  },
  "olives": {
   "base": 170,
@@ -2047,11 +5276,40 @@
   "p5": 177,
   "magnit": 165,
   "perek": 178,
-  "lenta": 173,
+  "lenta": 126,
   "auchan": 156,
   "samokat": 194,
   "lavka": 201,
-  "vkusvill": 204
+  "vkusvill": 265,
+  "real": {
+   "lenta": {
+    "price": 126,
+    "pack_price": 131.99,
+    "per": 420.35,
+    "per_unit": "кг",
+    "name": "Оливки без косточки 365 ДНЕЙ зеленые, 300/314мл",
+    "url": "https://lenta.com/product/olivki-zelenye-bk-ispaniya-300314ml-388153/",
+    "regular": true,
+    "via": "api",
+    "promo_now": false,
+    "size": "0.314 кг/л",
+    "date": "2026-10-30"
+   },
+   "vkusvill": {
+    "price": 265,
+    "pack_price": 247.0,
+    "per": 882.14,
+    "per_unit": "кг",
+    "name": "Оливки зеленые без косточки, ж/б, 280 г, Испания",
+    "url": "https://vkusvill.ru/goods/olivki-zelenye-bez-kostochki-107767/",
+    "regular": true,
+    "via": "api",
+    "promo_now": false,
+    "size": "0.28 кг/л",
+    "date": "2026-10-30"
+   }
+  },
+  "est": {}
  },
  "_meta": {
   "updated": "2026-10-30",
@@ -2074,12 +5332,208 @@
    "rosstat_derived": 41,
    "demo": 21,
    "real_pct": 84.0,
-   "store_direct_pct": 0
+   "store_direct_pct": 21.1,
+   "store_pct": {
+    "p5": 0.0,
+    "magnit": 0.0,
+    "perek": 0.0,
+    "lenta": 83.3,
+    "auchan": 0.0,
+    "samokat": 0.0,
+    "lavka": 0.0,
+    "vkusvill": 85.6
+   },
+   "store_pct_with_index": {
+    "p5": 0.0,
+    "magnit": 0.0,
+    "perek": 0.0,
+    "lenta": 83.3,
+    "auchan": 0.0,
+    "samokat": 0.0,
+    "lavka": 0.0,
+    "vkusvill": 85.6
+   }
   },
   "sources": [
    "https://rosstat.gov.ru/statistics/price (nedel_sred_cen.xlsx, sred_potreb_cen)",
    "store_coef: prosto.ru (апрель 2026), ngnovoros.ru (сентябрь 2025) — ориентировочно"
   ],
-  "note": "Цена магазина = средняя цена Росстата × коэффициент сети; не цена на полке."
+  "note": "Цена магазина = средняя цена Росстата × коэффициент сети; не цена на полке.",
+  "stores": {
+   "p5": {
+    "ok": false,
+    "matched": 0,
+    "derived": 0,
+    "of": 132,
+    "pct": 0.0,
+    "pct_with_index": 0.0,
+    "date": "",
+    "via": [],
+    "index": null
+   },
+   "magnit": {
+    "ok": false,
+    "matched": 0,
+    "derived": 0,
+    "of": 132,
+    "pct": 0.0,
+    "pct_with_index": 0.0,
+    "date": "",
+    "via": [],
+    "index": {
+     "overall": null,
+     "by_cat": {},
+     "pairs": 0,
+     "pairs_by_cat": {}
+    }
+   },
+   "perek": {
+    "ok": false,
+    "matched": 0,
+    "derived": 0,
+    "of": 132,
+    "pct": 0.0,
+    "pct_with_index": 0.0,
+    "date": "",
+    "via": [],
+    "index": {
+     "overall": null,
+     "by_cat": {},
+     "pairs": 0,
+     "pairs_by_cat": {}
+    }
+   },
+   "lenta": {
+    "ok": true,
+    "matched": 110,
+    "derived": 0,
+    "of": 132,
+    "pct": 83.3,
+    "pct_with_index": 83.3,
+    "date": "2026-10-30",
+    "via": [
+     "api"
+    ],
+    "index": {
+     "overall": null,
+     "by_cat": {},
+     "pairs": 0,
+     "pairs_by_cat": {}
+    },
+    "source": "Лента — официальный открытый Integration API (lenta.com/llms.txt), ТК124, Москва, 7-я Кожуховская улица, 9 (ТРЦ Мозаика), доставка (lo)"
+   },
+   "auchan": {
+    "ok": false,
+    "matched": 0,
+    "derived": 0,
+    "of": 132,
+    "pct": 0.0,
+    "pct_with_index": 0.0,
+    "date": "",
+    "via": [],
+    "index": {
+     "overall": null,
+     "by_cat": {},
+     "pairs": 0,
+     "pairs_by_cat": {}
+    }
+   },
+   "samokat": {
+    "ok": false,
+    "matched": 0,
+    "derived": 0,
+    "of": 132,
+    "pct": 0.0,
+    "pct_with_index": 0.0,
+    "date": "",
+    "via": [],
+    "index": {
+     "overall": null,
+     "by_cat": {},
+     "pairs": 0,
+     "pairs_by_cat": {}
+    }
+   },
+   "lavka": {
+    "ok": false,
+    "matched": 0,
+    "derived": 0,
+    "of": 132,
+    "pct": 0.0,
+    "pct_with_index": 0.0,
+    "date": "",
+    "via": [],
+    "index": {
+     "overall": null,
+     "by_cat": {},
+     "pairs": 0,
+     "pairs_by_cat": {}
+    }
+   },
+   "vkusvill": {
+    "ok": true,
+    "matched": 113,
+    "derived": 0,
+    "of": 132,
+    "pct": 85.6,
+    "pct_with_index": 85.6,
+    "date": "2026-10-30",
+    "via": [
+     "api"
+    ],
+    "index": {
+     "overall": null,
+     "by_cat": {},
+     "pairs": 0,
+     "pairs_by_cat": {}
+    },
+    "source": "ВкусВилл — официальный MCP-сервер (mcp.vkusvill.ru), общий каталог"
+   }
+  },
+  "snapshot_files": [],
+  "method": "цена магазина (снимок/официальный API) → Пятёрочка × индекс сети по категории (корзина 25 продуктов) → Росстат × коэффициент сети; всегда обычная цена без акций и карт лояльности"
+ },
+ "rice_cakes": {
+  "base": 95,
+  "source": "demo",
+  "item": null,
+  "date": null,
+  "real": {
+   "lenta": {
+    "price": 90,
+    "pack_price": 98.99,
+    "per": 899.91,
+    "per_unit": "кг",
+    "name": "Хлебцы рисовые Z LUCKY хрустящие, 110г",
+    "url": "https://lenta.com/product/hlebcy-hrustyashchie-risovye-belarus-110g-674945/",
+    "regular": true,
+    "via": "api",
+    "promo_now": true,
+    "size": "0.11 кг/л",
+    "date": "2026-10-30"
+   },
+   "vkusvill": {
+    "price": 132,
+    "pack_price": 79.0,
+    "per": 1316.67,
+    "per_unit": "кг",
+    "name": "Хлебцы \"Рисовые с кунжутом\" с морской солью",
+    "url": "https://vkusvill.ru/goods/khlebtsy-risovye-s-kunzhutom-s-morskoy-solyu-18045/",
+    "regular": true,
+    "via": "api",
+    "promo_now": false,
+    "size": "0.06 кг/л",
+    "date": "2026-10-30"
+   }
+  },
+  "p5": 99,
+  "magnit": 92,
+  "perek": 100,
+  "lenta": 90,
+  "auchan": 87,
+  "samokat": 108,
+  "lavka": 112,
+  "vkusvill": 132,
+  "est": {}
  }
 }

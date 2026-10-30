@@ -59,3 +59,17 @@ Steps: [ ] data+recipes  [ ] app refactor/design  [ ] illustrations  [ ] recipe 
 - Assertions: tools/profiles.mjs and tools/qa_logic.mjs (copy of qa logic.mjs, `node tools/qa_logic.mjs [url]`) check every plan ingredient
   incl. sides/auto-snacks and every shopping-list item against allergies + veg/lean; exit 1 on violation.
 - Results: veg+GF+dairy 1846 → 2120 kcal/adult/day (kcal ±10% 1/7 → 7/7); «все аллергии» 1764 → 2040; 11 profiles + 16 scenarios, 0 violations.
+
+## Фаза 5: реальные цены магазинов (30.10.2026)
+Правило: не обходим блокировки (без капчи, поддельных токенов, приватных API и смены прокси). Цена всегда обычная, без акций и карт лояльности.
+- **Официальные открытые API (автоматически, `tools/store_prices.py`):**
+  - ВкусВилл: MCP-сервер `mcp.vkusvill.ru/mcp`, публичный инструмент `vkusvill_products_search`, общий каталог; берётся `price.old`, если идёт акция.
+  - Лента: Integration API `integration.api.lenta.com`, спецификация `lenta.com/llms.txt`, «аутентификация не используется»; ближайший к центру Москвы гипермаркет, канал lo; берётся `priceRegular`.
+- **Сайты остальных сетей недоступны с box:** 5ka и Перекрёсток (JS-проверка «бот»), Магнит и Самокат (403), Лента и Ашан (сайт 401/403, Qrator), Лавка (403 «много запросов с IP» и адрес через /api/), Едадил (SSO).
+  Проверено обычным headless Chrome без маскировки. Выход box в интернет идёт через не-российский IP 104.28.x, поэтому часть блоков, вероятно, по IP. В обычном браузере пользователя в РФ цены, скорее всего, видны, но с box это не проверить.
+- **Ежемесячные снимки (`tools/store_csv.py`, `data/store_prices/README.md`):**
+  - полный снимок Пятёрочки `p5_YYYY-MM.csv` и корзина `basket_YYYY-MM.csv` (25 продуктов × 8 сетей);
+  - индекс сети к Пятёрочке считается по категориям, с общим индексом как запасным вариантом;
+  - слои цен: цена магазина → Пятёрочка × индекс → Росстат × коэффициент.
+  - Шаблоны с поисковыми запросами лежат в `data/store_prices/_template/`.
+- **Приложение:** метки «цена магазина · дата», «оценка · индекс» и «оценка»; доля позиций с ценой магазина в списке покупок; метка у стоимости порции; честный текст priceNote.

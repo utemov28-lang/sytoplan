@@ -8,12 +8,18 @@
   TLS rosstat.gov.ru подписан Russian Trusted Root CA → используем tools/certs/ru_ca.pem
   (корневой + промежуточные сертификаты Минцифры с gu-st.ru) только для этих запросов.
 
-Магазины (Пятёрочка, Магнит, Перекрёсток, Лента, Ашан, Самокат, Яндекс Лавка, ВкусВилл) не отдают каталоги анонимно
-(JS-челлендж / 401 / 403 на 30.10.2026), поэтому цена магазина = цена Росстата × коэффициент
-уровня цен сети (STORE_COEF ниже, источники в комментарии). Это ориентир, не цена на полке.
+Реальные цены магазинов (tools/store_prices.py) — только официальные открытые интерфейсы сетей:
+  ВкусВилл — официальный MCP-сервер mcp.vkusvill.ru; Лента — Integration API (lenta.com/llms.txt), Москва.
+Для совпавших ингредиентов цена сети = реальная цена, пересчитанная на упаковку ингредиента (поле real).
+Остальные сети (Пятёрочка, Магнит, Перекрёсток, Ашан, Самокат, Яндекс Лавка) открытого API не имеют, сайты закрыты
+JS-челленджем / 401 / 403 / капчей (30.10.2026) — не обходим; для них и для несовпавших продуктов цена =
+цена Росстата × коэффициент уровня цен сети (STORE_COEF ниже). Это ориентир, не цена на полке.
 
-Запуск:  python3 tools/update_prices.py            (скачает свежие файлы)
+Запуск:  python3 tools/update_prices.py            (скачает свежие файлы Росстата + цены ВкусВилла/Ленты)
          python3 tools/update_prices.py --local DIR (взять nedel.xlsx / mes.xlsx из DIR)
+         --stores-only                              (только цены магазинов: API + снимки, Росстат из текущего prices.json)
+         --no-stores                                (без API ВкусВилла/Ленты; CSV-снимки всё равно вливаются)
+  Снимки: python3 tools/store_csv.py --template YYYY-MM → заполнить → python3 tools/store_csv.py
 Нужно: python3, openpyxl, curl, node (чтобы прочитать каталог ингредиентов из js/data.js).
 """
 import json, os, re, subprocess, sys, datetime, tempfile
@@ -89,7 +95,7 @@ def curl(url, out=None):
 def catalog():
     js = ("const fs=require('fs'),vm=require('vm');const c={console};vm.createContext(c);"
           "vm.runInContext(fs.readFileSync(process.argv[1],'utf8').replace(/^const /gm,'var '),c);"
-          "console.log(JSON.stringify(Object.fromEntries(Object.entries(c.ING).map(([k,g])=>[k,{name:g.name,pack:g.pack,unit:g.unit,price:g.price,w:g.w}]))))")
+          "console.log(JSON.stringify(Object.fromEntries(Object.entries(c.ING).map(([k,g])=>[k,{name:g.name,pack:g.pack,unit:g.unit,price:g.price,w:g.w,aisle:g.aisle}]))))")
     return json.loads(subprocess.run(['node', '-e', js, os.path.join(ROOT, 'js', 'data.js')], capture_output=True, check=True).stdout)
 
 def weekly(path):
@@ -124,7 +130,28 @@ def find(table, rx):
         if re.search(rx, name): return name
     return None
 
+def stores_layer(res, cat):
+    """API ВкусВилла/Ленты (если не --no-stores) + снимки CSV + индексы к Пятёрочке → res (на месте)."""
+    sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+    import store_csv
+    api_meta = {}
+    if '--no-stores' not in sys.argv:
+        import store_prices
+        real, api_meta = store_prices.fetch(cat, {k: res[k]['base'] for k in cat}, PIECE_G)
+        for k in cat:                                   # заменяем цены только опрошенных сетей
+            old = {sid: v for sid, v in (res[k].get('real') or {}).items() if sid not in api_meta}
+            old.update(real.get(k, {})); res[k]['real'] = old
+    res['_meta'].setdefault('stores', {}).update(api_meta)
+    store_csv.build(res, cat, PIECE_G, STORE_COEF)
+
 def main():
+    if '--stores-only' in sys.argv:          # Росстат не трогаем: берём base из текущего prices.json
+        p = os.path.join(ROOT, 'data', 'prices.json'); res = json.load(open(p, encoding='utf-8')); cat = catalog()
+        for k, g in cat.items():
+            if k not in res: res[k] = {'base': g['price'], 'source': 'demo', 'item': None, 'date': None}
+        stores_layer(res, cat); res['_meta']['updated'] = datetime.date.today().isoformat()
+        json.dump(res, open(p, 'w', encoding='utf-8'), ensure_ascii=False, indent=1)
+        print(json.dumps(res['_meta']['coverage'].get('store_pct'), ensure_ascii=False)); return
     tmp = tempfile.mkdtemp()
     if '--local' in sys.argv:
         d = sys.argv[sys.argv.index('--local') + 1]; wf, mf = os.path.join(d, 'nedel.xlsx'), os.path.join(d, 'mes.xlsx')
@@ -163,10 +190,15 @@ def main():
         'updated': datetime.date.today().isoformat(), 'weekly_date': wdate, 'monthly_period': mper,
         'region': 'Российская Федерация (средние цены)', 'store_coef': STORE_COEF,
         'coverage': {'ingredients': n, 'rosstat_direct': stats['rosstat'], 'rosstat_derived': stats['derived'], 'demo': stats['demo'],
-                     'real_pct': round(100 * (stats['rosstat'] + stats['derived']) / n, 1), 'store_direct_pct': 0},
+                     'real_pct': round(100 * (stats['rosstat'] + stats['derived']) / n, 1),
+                     },
         'sources': ['https://rosstat.gov.ru/statistics/price (nedel_sred_cen.xlsx, sred_potreb_cen)',
-                    'store_coef: prosto.ru (апрель 2026), ngnovoros.ru (сентябрь 2025) — ориентировочно'],
-        'note': 'Цена магазина = средняя цена Росстата × коэффициент сети; не цена на полке.'}
+                    'store_coef: prosto.ru (апрель 2026), ngnovoros.ru (сентябрь 2025) — ориентировочно',
+                    'ВкусВилл: https://mcp.vkusvill.ru/mcp (официальный MCP, публичный поиск)',
+                    'Лента: https://integration.api.lenta.com (официальный открытый API, lenta.com/llms.txt)'],
+        'note': 'Поле real — цена магазина из официального открытого каталога (Москва), пересчитанная на упаковку; '
+                'иначе цена = средняя цена Росстата × коэффициент сети (оценка, не цена на полке).'}
+    stores_layer(res, cat)
     os.makedirs(os.path.join(ROOT, 'data'), exist_ok=True)
     with open(os.path.join(ROOT, 'data', 'prices.json'), 'w', encoding='utf-8') as fh:
         json.dump(res, fh, ensure_ascii=False, indent=1)

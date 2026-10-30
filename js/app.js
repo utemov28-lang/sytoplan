@@ -131,14 +131,23 @@ function store(){ return STORES.find(s=>s.id===S.A.store) || STORES[0]; }
 /* ====== ЦЕНЫ ====== data/prices.json: {ингредиент: {p5,magnit,…: ₽ за упаковку, source, date}, _meta} */
 let PRICES_META=null;
 function applyPrices(P){ if(!P||!P._meta) return; Object.keys(P).forEach(k=>{ const g=ING[k], p=P[k]; if(!g||k==='_meta') return;
-  g.sp={}; STORES.forEach(st=>{ if(typeof p[st.id]==='number') g.sp[st.id]=p[st.id]; }); g.psrc=p.source; }); PRICES_META=P._meta; _baseCache={}; }
+  g.sp={}; STORES.forEach(st=>{ if(typeof p[st.id]==='number') g.sp[st.id]=p[st.id]; }); g.psrc=p.source; g.real=p.real||null; g.est=p.est||null; }); PRICES_META=P._meta; _baseCache={}; }
 function loadPrices(){ const t=new Promise(res=>setTimeout(res,3000));
   const f=fetch('data/prices.json',{cache:'no-cache'}).then(r=>r.ok?r.json():null).then(applyPrices).catch(()=>{});
   return Promise.race([f,t]); }
 function priceDate(){ if(!PRICES_META) return ''; const [y,mo,da]=(PRICES_META.weekly_date||PRICES_META.updated||'').split('-'); return `${+da} ${['января','февраля','марта','апреля','мая','июня','июля','августа','сентября','октября','ноября','декабря'][+mo-1]} ${y}`; }
-/* Честная подпись: цены магазинов напрямую не берём — средняя цена Росстата × уровень цен сети */
+/* Реальные цены (ВкусВилл, Лента — официальные открытые API) помечаем «цена магазина» с датой; остальное — «оценка» (Росстат × уровень цен сети) */
+const RU_MON=['января','февраля','марта','апреля','мая','июня','июля','августа','сентября','октября','ноября','декабря'];
+function dateRu(iso){ const [y,mo,da]=(iso||'').split('-'); return da?`${+da} ${RU_MON[+mo-1]} ${y}`:(iso||''); }
+function realOf(g,st){ st=st||store(); return g&&g.real&&g.real[st.id]||null; }
+function storeReal(st){ st=st||store(); const m=PRICES_META&&PRICES_META.stores&&PRICES_META.stores[st.id]; return m&&(m.matched||m.derived)?m:null; }
+function estKind(g,st){ st=st||store(); return g&&g.est&&g.est[st.id]||'rosstat'; }
+function priceTag(g,st){ const r=realOf(g,st); if(r) return `<small class="ptag real" title="${esc(r.name)} — ${r.pack_price} ₽ за ${esc(r.size)} (обычная цена)">цена магазина · ${dateRu(r.date).replace(/ \d{4}$/,'')}</small>`;
+  return estKind(g,st)==='p5-index'?`<small class="ptag est" title="Цена Пятёрочки × индекс цен сети по категории">оценка · индекс</small>`:`<small class="ptag est" title="Средняя цена Росстата × уровень цен сети">оценка</small>`; }
 function priceNote(){ if(!PRICES_META) return 'Цены: примерные запасные данные, ориентировочно.';
-  return `Цены: Росстат × уровень цен сети, ориентировочно (данные на ${priceDate()}).`; }
+  const m=storeReal();
+  if(m) return `Цены ${store().name}: для ${m.matched} из ${m.of} продуктов — цена магазина (обычная цена без акций, Москва, ${dateRu(m.date)})${m.derived?`, для ${m.derived} — оценка по индексу к Пятёрочке`:''}, остальные — оценка: Росстат × уровень цен сети (данные на ${priceDate()}).`;
+  return `Цены ${store().name} — оценка: Росстат × уровень цен сети (данные на ${priceDate()}); открытого каталога у сети нет.`; }
 
 /* ====== РАСЧЁТЫ ====== */
 /* Порции: взрослый = 1, ребёнок = 0,5 (или по его норме калорий, если заполнены параметры КБЖУ) */
@@ -656,18 +665,19 @@ function renderShop(){
   let html=`<h1>Список покупок</h1><p class="sub">${sh.items.length} ${plural(sh.items.length,'позиция','позиции','позиций')} · ${store().name} · на ${dec(portions())} ${plural(Math.ceil(portions()),'порцию','порции','порций')}</p>
   <div class="sumcard"><div class="sumrow"><div><div class="mut small" style="font-weight:700">Итого примерно</div><div class="v">${rub(sh.total)}</div></div><div style="text-align:right"><div class="mut small" style="font-weight:700">Бюджет</div><div style="font-weight:800;font-size:18px">${rub(b)}</div></div></div>
   <div class="bar"><i style="width:${pct}%;background:${sh.total<=b?'var(--g)':'var(--red)'}"></i></div>
-  <div class="small" style="font-weight:700;color:${sh.total<=b?'var(--gt)':'#B91C1C'}">${sh.total<=b?'✓ Укладываемся, остаётся '+rub(b-sh.total):'Превышение на '+rub(sh.total-b)}</div></div>`;
+  <div class="small" style="font-weight:700;color:${sh.total<=b?'var(--gt)':'#B91C1C'}">${sh.total<=b?'✓ Укладываемся, остаётся '+rub(b-sh.total):'Превышение на '+rub(sh.total-b)}</div>
+  <div class="small mut" style="margin-top:6px">${(()=>{const n=sh.items.filter(x=>realOf(x.g)).length; return n?`<span class="ptag real">цена магазина</span> ${n} из ${sh.items.length} позиций · остальные <span class="ptag est">оценка</span>`:`Все цены — <span class="ptag est">оценка</span> (у сети нет открытого каталога — пока нет снимка цен)`;})()}</div></div>`;
   if(S.extras.length) html+=`<div class="chips" style="margin-top:12px">${S.extras.map((x,i)=>`<button class="chip sel" data-act="rmextra" data-i="${i}">➕ ${esc(RMAP[x.r].t)} · ${dec(x.serv)} порц. <span class="x">×</span></button>`).join('')}</div>`;
   AISLES.forEach(a=>{ const it=sh.items.filter(x=>x.g.aisle===a.id); if(!it.length) return;
     html+=`<div class="aisle">${a.e} ${a.name} <span class="c">${it.length}</span></div>`;
     it.forEach(x=>{ const done=S.ticks[x.k];
       html+=`<div class="li ${done?'done':''}"><button class="cb" data-act="tick" data-id="${x.k}" aria-label="Отметить">${ICON.check}</button><span class="e">${x.g.e}</span>
-      <div class="nm"><b>${esc(x.g.name)} · ${fmtPack(x.g.pack,x.g.unit)} × ${x.packs}</b><span>нужно ≈ ${fmtAmount(x.q,x.g.unit)}</span></div><div class="pr">~${rub(x.price)}</div></div>`; }); });
+      <div class="nm"><b>${esc(x.g.name)} · ${fmtPack(x.g.pack,x.g.unit)} × ${x.packs}</b><span>нужно ≈ ${fmtAmount(x.q,x.g.unit)}</span></div><div class="pr">${realOf(x.g)?'':'~'}${rub(x.price)}${priceTag(x.g)}</div></div>`; }); });
   if(sh.home.length){ html+=`<div class="aisle">🏠 Есть дома <span class="c">${sh.home.length}</span></div>`;
     sh.home.forEach(x=>{ html+=`<div class="li"><span class="e">${x.g.e}</span><div class="nm"><b>${esc(x.g.name)}</b><span>понадобится ≈ ${fmtAmount(x.q,x.g.unit)}</span></div><span class="homepill">есть дома</span></div>`; }); }
   const left=sh.items.filter(x=>!S.ticks[x.k]).length;
   html+=`<div class="stack" style="margin-top:22px"><button class="btn out sm" data-act="copylist">Скопировать список</button>${left&&left<sh.items.length?`<button class="btn sec sm" data-act="copyleft">Скопировать только некупленное (${left})</button>`:''}</div>
-  <p class="foot">Количество округлено до реальных упаковок. ${priceNote()} Для ${store().name} — это ориентир, не цена на полке.</p>`;
+  <p class="foot">Количество округлено до реальных упаковок. ${priceNote()} ${storeReal()?'Цена магазина пересчитана на указанную упаковку; наличие и акции в вашем магазине могут отличаться.':'Это ориентир, не цена на полке.'}</p>`;
   return html;
 }
 function renderRecipes(){
@@ -698,7 +708,7 @@ function renderProfile(){
   return `<h1>Профиль</h1><p class="sub">Ваши ответы. Нажмите на строку, измените и нажмите «Сохранить» — план пересоберётся.</p>
   <div class="card" style="padding:4px 16px">${rows.map(r=>`<div class="prow" data-act="${r[2]==='city'?'city':'edit'}" data-id="${r[2]}" style="cursor:pointer"><span class="k">${r[0]}</span><span class="v">${esc(r[1])} <span class="mut">›</span></span></div>`).join('')}</div>
   <div class="stack" style="margin-top:20px"><button class="btn" data-act="regen">${ICON.swap} Пересобрать план</button><button class="btn sec" data-act="edit" data-id="q1">Изменить ответы</button><button class="btn sec" data-act="restart" style="color:#B91C1C">Начать заново</button></div>
-  <p class="foot">${APP_NAME} · прототип. ${priceNote()} Интеграции с магазинами пока нет. Нормы КБЖУ — ориентир, не медицинская рекомендация.</p>`;
+  <p class="foot">${APP_NAME} · прототип. ${priceNote()} Реальные цены — только из официальных открытых каталогов сетей (сейчас ВкусВилл и Лента). Нормы КБЖУ — ориентир, не медицинская рекомендация.</p>`;
 }
 /* --- рецепт --- */
 function renderRecipe(){
@@ -719,7 +729,7 @@ function renderRecipe(){
   <h2>КБЖУ на порцию</h2>
   <div class="kb"><div class="k"><b>${r.k}</b><span>ккал</span></div><div class="p"><b>${r.p}</b><span>белки, г</span></div><div class="f"><b>${r.f}</b><span>жиры, г</span></div><div class="c"><b>${r.cb}</b><span>углеводы, г</span></div></div>
   <div class="kbnote">Клетчатка ${dec(r.fi||0)}${NB}г${r.su?` · добавленный сахар ${r.su}${NB}г`:''}. Рассчитано по составу ингредиентов (таблицы Скурихина/USDA), на одну взрослую порцию.</div>
-  <div class="times"><div><b>${r.prep} мин</b>подготовка</div><div><b>${r.cook} мин</b>готовка${r.side&&r.side!=='хлеб'?' с гарниром':''}</div><div><b>~${fmt(portionCost(r))} ₽</b>за порцию</div></div>
+  <div class="times"><div><b>${r.prep} мин</b>подготовка</div><div><b>${r.cook} мин</b>готовка${r.side&&r.side!=='хлеб'?' с гарниром':''}</div><div><b>~${fmt(portionCost(r))} ₽</b>за порцию${(()=>{const ii=recipeIngs(r), n=ii.filter(i=>realOf(ING[i.k])).length; return n?` · <span class="ptag real">цена магазина</span> ${n}/${ii.length}`:` · <span class="ptag est">оценка</span>`;})()}</div></div>
   ${r.rest?`<div class="note" style="margin-top:8px">⏳ Плюс ${r.rest[0]>=480?'ночь':(r.rest[0]>=60?Math.round(r.rest[0]/60)+' ч':r.rest[0]+' мин')} ${r.rest[1]} — заложите время заранее.</div>`:''}
   <h2>Нужна техника</h2><div class="chips">${r.eq.length?r.eq.map(e=>{const q=EQUIP.find(x=>x.id===e); return `<span class="chip ${S.A.equip.includes(e)?'sel':''}">${q.e} ${q.name}</span>`;}).join(''):'<span class="chip">🙌 Без техники</span>'}</div>
   <div class="seg"><button class="${S.rtab==='ing'?'on':''}" data-act="rtab" data-id="ing">Ингредиенты</button><button class="${S.rtab==='steps'?'on':''}" data-act="rtab" data-id="steps">Приготовление · ${r.steps.length} ${plural(r.steps.length,'шаг','шага','шагов')}</button></div>
