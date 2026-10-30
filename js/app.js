@@ -9,6 +9,21 @@ RECIPES.forEach(r=>{
   calcNutrition(r);
   RMAP[r.id] = r;
 });
+/* Гарнир учитывает аллергии: если гарнир (хлеб) содержит аллерген пользователя — подменяем на безопасный аналог
+   (рисовые хлебцы без глютена/кунжута), чтобы рецепт не выпадал из плана и в план не попадал аллерген. */
+const SIDE_ALT={bread:{k:'rice_cakes',f:0.6,name:'рисовые хлебцы'}};
+const ALLERGEN_IDS=['nuts','peanut','dairy','eggs','gluten','fish','seafood','soy','sesame','honey','mustard'];
+function deriveFlags(r){ const fl=new Set(); r.ing.forEach(i=>ING[i.k]&&ING[i.k].flags.forEach(f=>fl.add(f)));
+  r.meat=fl.has('meat'); r.fish=fl.has('fish')||fl.has('seafood'); r.al=ALLERGEN_IDS.filter(a=>fl.has(a)); calcNutrition(r); }
+let SIDE_MODE=null;
+function applySides(){ const al=new Set(((S&&S.A&&S.A.allergies)||[]).filter(x=>x!=='none')); const key=[...al].sort().join();
+  if(key===SIDE_MODE) return; SIDE_MODE=key;
+  RECIPES.forEach(r=>{ const i=r.ing.findIndex(x=>x.side); if(i<0) return;
+    const o=r.sideOrig||(r.sideOrig={k:r.ing[i].k,q:r.ing[i].q,name:r.side,si:r.steps.indexOf(SIDE_STEP[r.ing[i].k])});
+    const alt=SIDE_ALT[o.k]; const use=(ING[o.k].flags.some(f=>al.has(f)) && alt && !ING[alt.k].flags.some(f=>al.has(f)))?alt:null;
+    const k=use?use.k:o.k; if(r.ing[i].k===k) return;
+    r.ing[i]={k,q:use?Math.round(o.q*use.f):o.q,side:true}; r.side=use?use.name:o.name; if(o.si>=0) r.steps[o.si]=SIDE_STEP[k];
+    deriveFlags(r); }); }
 const MEALMAP = Object.fromEntries(MEALS.map(m=>[m.id,m]));
 const CUISMAP = Object.fromEntries(CUISINES.map(c=>[c.id,c]));
 const STEPS = ['q1','q2','q2b','q3','q4','q5','q6','q7','q8','q9','q10','q11'];
@@ -224,7 +239,7 @@ function mealOk(r,m){ if(!m||r.m.includes(m)) return true;
   if(m==='d') return r.m.includes('l') && (r.kind==='main'||r.kind==='salad');
   return false; }
 function fits(r,m){ return mealOk(r,m) && !whyNot(r); }
-function candidates(m){ return RECIPES.filter(r=>fits(r,m)); }
+function candidates(m){ applySides(); return RECIPES.filter(r=>fits(r,m)); }
 function priceOf(g,st){ st=st||store(); return g.sp&&g.sp[st.id]!=null ? g.sp[st.id] : g.price*st.mult; }
 function portionCost(r){ const st=store(); return recipeIngs(r).reduce((s,i)=>{const g=ING[i.k]; return s+i.q/r.sv/g.pack*priceOf(g,st);},0); }
 function totalTime(r){ return r.prep+r.cook; }
@@ -278,7 +293,7 @@ function shopTotalFor(slots){ const save=S.plan; S.plan=Object.assign({},save||{
    3) «готовка впрок»: обед следующего дня = остатки ужина (если рецепт batch);
    4) баланс дней под нормы: белок ≥ нормы (жёстко: замена блюда или белковый перекус), ккал в пределах ±10 %;
    5) подгонка под бюджет без потери белка; если не выходит — предупреждение о компромиссе. */
-function generatePlan(seed,trial){
+function generatePlan(seed,trial){ applySides();
   const a=S.A; const days=dayOrder(), meals=mealOrder();
   const perPortion=a.budget/(Math.max(1,portionsPerWeek()));
   const baseSum=meals.reduce((s,m)=>s+mealBase(m),0)/meals.length;
@@ -404,7 +419,7 @@ function dayTotals(d){ const t={k:0,p:0,f:0,c:0,fi:0,su:0}; S.plan.slots.filter(
 /* ====== РЕНДЕР ====== */
 const app=document.getElementById('app');
 let lastKey='', keepToast=false;
-function render(){
+function render(){ applySides();
   const y=window.scrollY; let html='';
   const sc=S.screen;
   if(S.recipe && RMAP[S.recipe]) html=renderRecipe();

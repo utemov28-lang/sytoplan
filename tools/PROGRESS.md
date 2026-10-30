@@ -51,3 +51,11 @@ Steps: [ ] data+recipes  [ ] app refactor/design  [ ] illustrations  [ ] recipe 
 - logic.mjs: 13 scenarios, 0 violations, 0 page errors, 0 empty slots.
 - Known/left: auto bread side can add gluten to gluten-free plans (veg+gluten profile 1846 kcal, kOk 1/7); store prices = Rosstat × chain multiplier (estimates);
   logos are App Store icons; qa/flow.mjs needs update for the swap picker sheet (selector clicks after swap).
+### Allergy-aware sides (30.10.2026)
+- Sides are baked into recipes at load; the bread side made 36 soups/salads/no-stove mains count as gluten+sesame, so GF/sesame users lost them
+  (no leak — over-filtering → low kcal). Now js/app.js applySides(): when the side's flags hit a user allergy, it swaps to a safe alt
+  (SIDE_ALT: bread → rice_cakes «Хлебцы рисовые (без глютена)», 0.6× weight ≈ same kcal), recomputes r.al/КБЖУ and the serving step;
+  reverts when the allergy is removed. Snacks/top-ups/protein snacks already come from candidates() → whyNot() (all filters).
+- Assertions: tools/profiles.mjs and tools/qa_logic.mjs (copy of qa logic.mjs, `node tools/qa_logic.mjs [url]`) check every plan ingredient
+  incl. sides/auto-snacks and every shopping-list item against allergies + veg/lean; exit 1 on violation.
+- Results: veg+GF+dairy 1846 → 2120 kcal/adult/day (kcal ±10% 1/7 → 7/7); «все аллергии» 1764 → 2040; 11 profiles + 16 scenarios, 0 violations.
