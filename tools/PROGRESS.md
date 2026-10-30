@@ -39,3 +39,15 @@ Steps: [ ] data+recipes  [ ] app refactor/design  [ ] illustrations  [ ] recipe 
 ### (b) +39 recipes → 300 total (js/recipes_more5.js)
 - 9 fish (минтай ×5, хек, скумбрия, сельдь ×2, тунец, сайра), 14 veg/lean high-protein (чечевица, нут, фасоль, яйца, творог), 10 budget GF dishes (сосиски, фарш, голени, печень), 4 no-stove.
 - 9 profiles after: avg 2107 kcal; protein ≥1.0 g/kg 61/63 days, ≥target 55/63; kcal ±10% 55/63; veg+gluten maxRep 3→2, lean kcal 7/7.
+### (c) Recipe photos — 300/300
+- Generated food photos (one consistent style: top-down, white plate, light linen), tools/imgmap.txt → tools/convert.py →
+  img/r/<id>.webp 800×600 + img/r/s/<id>.webp 320×240 thumbnails, lazy-loaded; list in js/images.js (IMG_R). Fallback = clay illustration / emoji.
+- Spot-check of 30 random thumbnails: no obvious mismatches (known minor: beef_azu potatoes look pasta-like, turkey_steam — accepted).
+### (d) Pantry tiles — 27 clay illustrations
+- p_<key> in img/i/ (256px WebP, same clay style as eq_*/diet_*), 57 illustrations total; q10 tiles use ill('p_'+key) with emoji fallback.
+- To redo one image: generate, replace hash in tools/imgmap.txt, run `python3 tools/convert.py`.
+### Final checks (30.10.2026)
+- 9 profiles: avg 2107 kcal/adult/day, errors 0, maxRep 2, protein ≥1.0 g/kg 61/63 days, kcal ±10% 55/63.
+- logic.mjs: 13 scenarios, 0 violations, 0 page errors, 0 empty slots.
+- Known/left: auto bread side can add gluten to gluten-free plans (veg+gluten profile 1846 kcal, kOk 1/7); store prices = Rosstat × chain multiplier (estimates);
+  logos are App Store icons; qa/flow.mjs needs update for the swap picker sheet (selector clicks after swap).
