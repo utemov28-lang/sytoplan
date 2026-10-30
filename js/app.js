@@ -141,12 +141,13 @@ const RU_MON=['января','февраля','марта','апреля','ма�
 function dateRu(iso){ const [y,mo,da]=(iso||'').split('-'); return da?`${+da} ${RU_MON[+mo-1]} ${y}`:(iso||''); }
 function realOf(g,st){ st=st||store(); return g&&g.real&&g.real[st.id]||null; }
 function storeReal(st){ st=st||store(); const m=PRICES_META&&PRICES_META.stores&&PRICES_META.stores[st.id]; return m&&(m.matched||m.derived)?m:null; }
+function idxBaseName(){ const b=(PRICES_META&&PRICES_META.index_base)||'p5'; return b==='lenta'?'Ленты':'Пятёрочки'; }
 function estKind(g,st){ st=st||store(); return g&&g.est&&g.est[st.id]||'rosstat'; }
 function priceTag(g,st){ const r=realOf(g,st); if(r) return `<small class="ptag real" title="${esc(r.name)} — ${r.pack_price} ₽ за ${esc(r.size)} (обычная цена)">цена магазина · ${dateRu(r.date).replace(/ \d{4}$/,'')}</small>`;
-  return estKind(g,st)==='p5-index'?`<small class="ptag est" title="Цена Пятёрочки × индекс цен сети по категории">оценка · индекс</small>`:`<small class="ptag est" title="Средняя цена Росстата × уровень цен сети">оценка</small>`; }
+  return /-index$/.test(estKind(g,st))?`<small class="ptag est" title="Цена ${idxBaseName('род')} × индекс цен сети по категории">оценка · индекс</small>`:`<small class="ptag est" title="Средняя цена Росстата × уровень цен сети">оценка</small>`; }
 function priceNote(){ if(!PRICES_META) return 'Цены: примерные запасные данные, ориентировочно.';
   const m=storeReal();
-  if(m) return `Цены ${store().name}: для ${m.matched} из ${m.of} продуктов — цена магазина (обычная цена без акций, Москва, ${dateRu(m.date)})${m.derived?`, для ${m.derived} — оценка по индексу к Пятёрочке`:''}, остальные — оценка: Росстат × уровень цен сети (данные на ${priceDate()}).`;
+  if(m) return `Цены ${store().name}: для ${m.matched} из ${m.of} продуктов — цена магазина (обычная цена без акций, Москва, ${dateRu(m.date)})${m.derived?`, для ${m.derived} — оценка: цена ${idxBaseName('род')} × индекс сети по категории (по корзине из 25 продуктов)`:''}, остальные — оценка: Росстат × уровень цен сети (данные на ${priceDate()}).`;
   return `Цены ${store().name} — оценка: Росстат × уровень цен сети (данные на ${priceDate()}); открытого каталога у сети нет.`; }
 
 /* ====== РАСЧЁТЫ ====== */

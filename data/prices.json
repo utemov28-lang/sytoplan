@@ -10,9 +10,9 @@
   "magnit": 49,
   "perek": 53,
   "lenta": 50,
-  "auchan": 46,
+  "auchan": 38,
   "samokat": 57,
-  "lavka": 59,
+  "lavka": 69,
   "vkusvill": 54,
   "real": {
    "lenta": {
@@ -40,6 +40,30 @@
     "promo_now": false,
     "size": "1 кг/л",
     "date": "2026-10-30"
+   },
+   "auchan": {
+    "price": 38,
+    "pack_price": 37.99,
+    "per": 37.99,
+    "per_unit": "кг",
+    "name": "Картофель белый вес",
+    "url": "https://www.auchan.ru/product/kartofel_belyy_ves/",
+    "regular": true,
+    "size": "1 kg",
+    "date": "2026-10-30",
+    "via": "basket"
+   },
+   "lavka": {
+    "price": 69,
+    "pack_price": 69.0,
+    "per": 69.0,
+    "per_unit": "кг",
+    "name": "Картофель белый ранний 1 кг",
+    "url": "https://lavka.yandex.ru/good/kartofel-belyj-rannij-1-kilogram",
+    "regular": true,
+    "size": "1 kg",
+    "date": "2026-10-30",
+    "via": "basket"
    }
   },
   "est": {}
@@ -55,9 +79,9 @@
   "magnit": 48,
   "perek": 52,
   "lenta": 52,
-  "auchan": 45,
+  "auchan": 46,
   "samokat": 56,
-  "lavka": 58,
+  "lavka": 79,
   "vkusvill": 58,
   "real": {
    "lenta": {
@@ -85,6 +109,30 @@
     "promo_now": false,
     "size": "1 кг/л",
     "date": "2026-10-30"
+   },
+   "auchan": {
+    "price": 46,
+    "pack_price": 45.99,
+    "per": 45.99,
+    "per_unit": "кг",
+    "name": "Лук репчатый вес",
+    "url": "https://www.auchan.ru/product/luk_repchatyy_ves_fas/",
+    "regular": true,
+    "size": "1 kg",
+    "date": "2026-10-30",
+    "via": "basket"
+   },
+   "lavka": {
+    "price": 79,
+    "pack_price": 79.0,
+    "per": 79.0,
+    "per_unit": "кг",
+    "name": "Лук репчатый молодой 1 кг",
+    "url": "https://lavka.yandex.ru/good/luk-repchatyj-rossiya-1-kilogram",
+    "regular": true,
+    "size": "1 kg",
+    "date": "2026-10-30",
+    "via": "basket"
    }
   },
   "est": {}
@@ -100,9 +148,9 @@
   "magnit": 47,
   "perek": 51,
   "lenta": 35,
-  "auchan": 45,
+  "auchan": 27,
   "samokat": 56,
-  "lavka": 58,
+  "lavka": 69,
   "vkusvill": 53,
   "real": {
    "lenta": {
@@ -130,6 +178,30 @@
     "promo_now": false,
     "size": "1 кг/л",
     "date": "2026-10-30"
+   },
+   "auchan": {
+    "price": 27,
+    "pack_price": 26.99,
+    "per": 26.99,
+    "per_unit": "кг",
+    "name": "Социальный товар Морковь вес",
+    "url": "https://www.auchan.ru/product/morkov_ves/",
+    "regular": true,
+    "size": "1 kg",
+    "date": "2026-10-30",
+    "via": "basket"
+   },
+   "lavka": {
+    "price": 69,
+    "pack_price": 69.0,
+    "per": 69.0,
+    "per_unit": "кг",
+    "name": "Морковь 1 кг",
+    "url": "https://lavka.yandex.ru/good/morkov-1-kilogram-2",
+    "regular": true,
+    "size": "1 kg",
+    "date": "2026-10-30",
+    "via": "basket"
    }
   },
   "est": {}
@@ -145,9 +217,9 @@
   "magnit": 32,
   "perek": 35,
   "lenta": 36,
-  "auchan": 30,
+  "auchan": 32,
   "samokat": 38,
-  "lavka": 39,
+  "lavka": 61,
   "vkusvill": 39,
   "real": {
    "lenta": {
@@ -164,7 +236,11 @@
     "date": "2026-10-30"
    }
   },
-  "est": {}
+  "est": {
+   "auchan": "lenta-index",
+   "lavka": "lenta-index",
+   "vkusvill": "lenta-index"
+  }
  },
  "cabbage": {
   "base": 38.5,
@@ -177,9 +253,9 @@
   "magnit": 37,
   "perek": 40,
   "lenta": 46,
-  "auchan": 35,
+  "auchan": 41,
   "samokat": 44,
-  "lavka": 45,
+  "lavka": 78,
   "vkusvill": 48,
   "real": {
    "lenta": {
@@ -209,7 +285,10 @@
     "date": "2026-10-30"
    }
   },
-  "est": {}
+  "est": {
+   "auchan": "lenta-index",
+   "lavka": "lenta-index"
+  }
  },
  "beet": {
   "base": 46.78,
@@ -222,9 +301,9 @@
   "magnit": 45,
   "perek": 49,
   "lenta": 42,
-  "auchan": 43,
+  "auchan": 38,
   "samokat": 53,
-  "lavka": 55,
+  "lavka": 71,
   "vkusvill": 45,
   "real": {
    "lenta": {
@@ -254,7 +333,10 @@
     "date": "2026-10-30"
    }
   },
-  "est": {}
+  "est": {
+   "auchan": "lenta-index",
+   "lavka": "lenta-index"
+  }
  },
  "tomato": {
   "base": 106.85,
@@ -267,7 +349,7 @@
   "magnit": 104,
   "perek": 112,
   "lenta": 185,
-  "auchan": 98,
+  "auchan": 167,
   "samokat": 122,
   "lavka": 126,
   "vkusvill": 135,
@@ -299,7 +381,9 @@
     "date": "2026-10-30"
    }
   },
-  "est": {}
+  "est": {
+   "auchan": "lenta-index"
+  }
  },
  "cucumber": {
   "base": 63.55,
@@ -312,9 +396,9 @@
   "magnit": 62,
   "perek": 67,
   "lenta": 48,
-  "auchan": 58,
+  "auchan": 70,
   "samokat": 72,
-  "lavka": 75,
+  "lavka": 132,
   "vkusvill": 60,
   "real": {
    "lenta": {
@@ -342,6 +426,30 @@
     "promo_now": false,
     "size": "1 кг/л",
     "date": "2026-10-30"
+   },
+   "auchan": {
+    "price": 70,
+    "pack_price": 139.99,
+    "per": 139.99,
+    "per_unit": "кг",
+    "name": "Огурцы пупырчатые среднеплодные вес",
+    "url": "https://www.auchan.ru/product/ogurec_pupyrchatyy_sredneplodnyy/",
+    "regular": true,
+    "size": "1 kg",
+    "date": "2026-10-30",
+    "via": "basket"
+   },
+   "lavka": {
+    "price": 132,
+    "pack_price": 159.0,
+    "per": 265.0,
+    "per_unit": "кг",
+    "name": "Огурцы средние гладкие 600 г",
+    "url": "https://lavka.yandex.ru/good/ogurcy-srednie-gladkie-600-gram",
+    "regular": true,
+    "size": "600 g",
+    "date": "2026-10-30",
+    "via": "basket"
    }
   },
   "est": {}
@@ -447,7 +555,7 @@
   "magnit": 58,
   "perek": 63,
   "lenta": 117,
-  "auchan": 55,
+  "auchan": 106,
   "samokat": 68,
   "lavka": 71,
   "vkusvill": 105,
@@ -479,7 +587,9 @@
     "date": "2026-10-30"
    }
   },
-  "est": {}
+  "est": {
+   "auchan": "lenta-index"
+  }
  },
  "radish": {
   "base": 70,
@@ -490,9 +600,9 @@
   "magnit": 68,
   "perek": 74,
   "lenta": 77,
-  "auchan": 64,
+  "auchan": 69,
   "samokat": 80,
-  "lavka": 83,
+  "lavka": 131,
   "vkusvill": 55,
   "real": {
    "lenta": {
@@ -522,7 +632,10 @@
     "date": "2026-10-30"
    }
   },
-  "est": {}
+  "est": {
+   "auchan": "lenta-index",
+   "lavka": "lenta-index"
+  }
  },
  "lettuce": {
   "base": 130,
@@ -533,9 +646,9 @@
   "magnit": 126,
   "perek": 136,
   "lenta": 120,
-  "auchan": 120,
+  "auchan": 108,
   "samokat": 148,
-  "lavka": 153,
+  "lavka": 204,
   "vkusvill": 112,
   "real": {
    "lenta": {
@@ -565,7 +678,10 @@
     "date": "2026-10-30"
    }
   },
-  "est": {}
+  "est": {
+   "auchan": "lenta-index",
+   "lavka": "lenta-index"
+  }
  },
  "ginger": {
   "base": 45,
@@ -576,9 +692,9 @@
   "magnit": 44,
   "perek": 47,
   "lenta": 51,
-  "auchan": 41,
+  "auchan": 46,
   "samokat": 51,
-  "lavka": 53,
+  "lavka": 87,
   "vkusvill": 99,
   "real": {
    "lenta": {
@@ -608,7 +724,10 @@
     "date": "2026-10-30"
    }
   },
-  "est": {}
+  "est": {
+   "auchan": "lenta-index",
+   "lavka": "lenta-index"
+  }
  },
  "greens": {
   "base": 45.03,
@@ -621,9 +740,9 @@
   "magnit": 44,
   "perek": 47,
   "lenta": 50,
-  "auchan": 41,
+  "auchan": 45,
   "samokat": 51,
-  "lavka": 53,
+  "lavka": 85,
   "vkusvill": 52,
   "real": {
    "lenta": {
@@ -653,7 +772,10 @@
     "date": "2026-10-30"
    }
   },
-  "est": {}
+  "est": {
+   "auchan": "lenta-index",
+   "lavka": "lenta-index"
+  }
  },
  "cilantro": {
   "base": 49.53,
@@ -666,7 +788,7 @@
   "magnit": 48,
   "perek": 52,
   "lenta": 75,
-  "auchan": 46,
+  "auchan": 68,
   "samokat": 56,
   "lavka": 58,
   "vkusvill": 98,
@@ -698,7 +820,9 @@
     "date": "2026-10-30"
    }
   },
-  "est": {}
+  "est": {
+   "auchan": "lenta-index"
+  }
  },
  "green_onion": {
   "base": 40.53,
@@ -711,9 +835,9 @@
   "magnit": 39,
   "perek": 43,
   "lenta": 50,
-  "auchan": 37,
+  "auchan": 45,
   "samokat": 46,
-  "lavka": 48,
+  "lavka": 85,
   "vkusvill": 49,
   "real": {
    "lenta": {
@@ -743,7 +867,10 @@
     "date": "2026-10-30"
    }
   },
-  "est": {}
+  "est": {
+   "auchan": "lenta-index",
+   "lavka": "lenta-index"
+  }
  },
  "mushrooms": {
   "base": 161.28,
@@ -772,9 +899,9 @@
   "magnit": 116,
   "perek": 126,
   "lenta": 136,
-  "auchan": 110,
+  "auchan": 123,
   "samokat": 137,
-  "lavka": 142,
+  "lavka": 231,
   "vkusvill": 119,
   "real": {
    "lenta": {
@@ -804,7 +931,10 @@
     "date": "2026-10-30"
    }
   },
-  "est": {}
+  "est": {
+   "auchan": "lenta-index",
+   "lavka": "lenta-index"
+  }
  },
  "apple": {
   "base": 141.78,
@@ -817,9 +947,9 @@
   "magnit": 138,
   "perek": 149,
   "lenta": 113,
-  "auchan": 130,
+  "auchan": 100,
   "samokat": 162,
-  "lavka": 167,
+  "lavka": 232,
   "vkusvill": 150,
   "real": {
    "lenta": {
@@ -847,6 +977,30 @@
     "promo_now": false,
     "size": "1 кг/л",
     "date": "2026-10-30"
+   },
+   "auchan": {
+    "price": 100,
+    "pack_price": 99.99,
+    "per": 99.99,
+    "per_unit": "кг",
+    "name": "Яблоки Гала новый урожай вес",
+    "url": "https://www.auchan.ru/product/yabloko_gala_nov_ur/",
+    "regular": true,
+    "size": "1 kg",
+    "date": "2026-10-30",
+    "via": "basket"
+   },
+   "lavka": {
+    "price": 232,
+    "pack_price": 139.0,
+    "per": 231.67,
+    "per_unit": "кг",
+    "name": "Яблоки Гала 600 г",
+    "url": "https://lavka.yandex.ru/good/yabloki-gala-600-gram",
+    "regular": true,
+    "size": "600 g",
+    "date": "2026-10-30",
+    "via": "basket"
    }
   },
   "est": {}
@@ -862,9 +1016,9 @@
   "magnit": 153,
   "perek": 166,
   "lenta": 187,
-  "auchan": 145,
+  "auchan": 150,
   "samokat": 180,
-  "lavka": 186,
+  "lavka": 194,
   "vkusvill": 168,
   "real": {
    "lenta": {
@@ -892,6 +1046,30 @@
     "promo_now": false,
     "size": "1 кг/л",
     "date": "2026-10-30"
+   },
+   "auchan": {
+    "price": 150,
+    "pack_price": 149.99,
+    "per": 149.99,
+    "per_unit": "кг",
+    "name": "Бананы вес",
+    "url": "https://www.auchan.ru/product/banany_ves/",
+    "regular": true,
+    "size": "1 kg",
+    "date": "2026-10-30",
+    "via": "basket"
+   },
+   "lavka": {
+    "price": 194,
+    "pack_price": 35.0,
+    "per": 194.44,
+    "per_unit": "кг",
+    "name": "Банан",
+    "url": "https://lavka.yandex.ru/good/spelyj-banan-1-unit",
+    "regular": true,
+    "size": "1 pcs",
+    "date": "2026-10-30",
+    "via": "basket"
    }
   },
   "est": {}
@@ -907,9 +1085,9 @@
   "magnit": 256,
   "perek": 277,
   "lenta": 257,
-  "auchan": 242,
+  "auchan": 232,
   "samokat": 300,
-  "lavka": 311,
+  "lavka": 437,
   "vkusvill": 198,
   "real": {
    "lenta": {
@@ -939,7 +1117,10 @@
     "date": "2026-10-30"
    }
   },
-  "est": {}
+  "est": {
+   "auchan": "lenta-index",
+   "lavka": "lenta-index"
+  }
  },
  "orange": {
   "base": 154.67,
@@ -952,9 +1133,9 @@
   "magnit": 150,
   "perek": 162,
   "lenta": 198,
-  "auchan": 142,
+  "auchan": 179,
   "samokat": 176,
-  "lavka": 183,
+  "lavka": 337,
   "vkusvill": 198,
   "real": {
    "lenta": {
@@ -984,7 +1165,10 @@
     "date": "2026-10-30"
    }
   },
-  "est": {}
+  "est": {
+   "auchan": "lenta-index",
+   "lavka": "lenta-index"
+  }
  },
  "lemon": {
   "base": 27.9,
@@ -997,9 +1181,9 @@
   "magnit": 27,
   "perek": 29,
   "lenta": 25,
-  "auchan": 26,
+  "auchan": 23,
   "samokat": 32,
-  "lavka": 33,
+  "lavka": 43,
   "vkusvill": 29,
   "real": {
    "lenta": {
@@ -1029,7 +1213,10 @@
     "date": "2026-10-30"
    }
   },
-  "est": {}
+  "est": {
+   "auchan": "lenta-index",
+   "lavka": "lenta-index"
+  }
  },
  "avocado": {
   "base": 110,
@@ -1040,9 +1227,9 @@
   "magnit": 107,
   "perek": 116,
   "lenta": 88,
-  "auchan": 101,
+  "auchan": 79,
   "samokat": 125,
-  "lavka": 130,
+  "lavka": 150,
   "vkusvill": 144,
   "real": {
    "lenta": {
@@ -1072,7 +1259,10 @@
     "date": "2026-10-30"
    }
   },
-  "est": {}
+  "est": {
+   "auchan": "lenta-index",
+   "lavka": "lenta-index"
+  }
  },
  "chicken_fillet": {
   "base": 219.86,
@@ -1085,9 +1275,9 @@
   "magnit": 213,
   "perek": 231,
   "lenta": 242,
-  "auchan": 202,
+  "auchan": 300,
   "samokat": 251,
-  "lavka": 259,
+  "lavka": 319,
   "vkusvill": 328,
   "real": {
    "lenta": {
@@ -1115,6 +1305,30 @@
     "promo_now": false,
     "size": "1 кг/л",
     "date": "2026-10-30"
+   },
+   "auchan": {
+    "price": 300,
+    "pack_price": 599.99,
+    "per": 599.99,
+    "per_unit": "кг",
+    "name": "Филе куриное Петелинка без кожи охлажденное",
+    "url": "https://www.auchan.ru/product/file_kur1kg_ohlpetelinka/",
+    "regular": true,
+    "size": "1 kg",
+    "date": "2026-10-30",
+    "via": "basket"
+   },
+   "lavka": {
+    "price": 319,
+    "pack_price": 319.0,
+    "per": 638.0,
+    "per_unit": "кг",
+    "name": "Филе грудки цыплёнка Троекурово",
+    "url": "https://lavka.yandex.ru/good/file-grudki-cyplyonka-brojlera-troekurovo-dlya-salata-500-gram",
+    "regular": true,
+    "size": "500 g",
+    "date": "2026-10-30",
+    "via": "basket"
    }
   },
   "est": {}
@@ -1130,9 +1344,9 @@
   "magnit": 298,
   "perek": 323,
   "lenta": 243,
-  "auchan": 283,
+  "auchan": 234,
   "samokat": 350,
-  "lavka": 363,
+  "lavka": 339,
   "vkusvill": 412,
   "real": {
    "lenta": {
@@ -1160,6 +1374,30 @@
     "promo_now": false,
     "size": "1 кг/л",
     "date": "2026-10-30"
+   },
+   "auchan": {
+    "price": 234,
+    "pack_price": 259.99,
+    "per": 259.99,
+    "per_unit": "кг",
+    "name": "Бедро цыпленка-бройлера с хребтом Каждый день охлажденное",
+    "url": "https://www.auchan.ru/product/kdbedro_cb_ohl_lotok/",
+    "regular": true,
+    "size": "1 kg",
+    "date": "2026-10-30",
+    "via": "basket"
+   },
+   "lavka": {
+    "price": 339,
+    "pack_price": 339.0,
+    "per": 376.67,
+    "per_unit": "кг",
+    "name": "Бедро цыплёнка Троекурово охлаждённое",
+    "url": "https://lavka.yandex.ru/good/bedro-cyplyonka-brojlera-troekurovo-ohlazhdyonnoe-900-gram",
+    "regular": true,
+    "size": "900 g",
+    "date": "2026-10-30",
+    "via": "basket"
    }
   },
   "est": {}
@@ -1175,9 +1413,9 @@
   "magnit": 285,
   "perek": 308,
   "lenta": 317,
-  "auchan": 270,
+  "auchan": 290,
   "samokat": 334,
-  "lavka": 346,
+  "lavka": 451,
   "vkusvill": 398,
   "real": {
    "lenta": {
@@ -1207,7 +1445,10 @@
     "date": "2026-10-30"
    }
   },
-  "est": {}
+  "est": {
+   "auchan": "lenta-index",
+   "lavka": "lenta-index"
+  }
  },
  "chicken_wings": {
   "base": 247.35,
@@ -1220,9 +1461,9 @@
   "magnit": 240,
   "perek": 260,
   "lenta": 351,
-  "auchan": 228,
+  "auchan": 321,
   "samokat": 282,
-  "lavka": 292,
+  "lavka": 500,
   "vkusvill": 457,
   "real": {
    "lenta": {
@@ -1252,7 +1493,10 @@
     "date": "2026-10-30"
    }
   },
-  "est": {}
+  "est": {
+   "auchan": "lenta-index",
+   "lavka": "lenta-index"
+  }
  },
  "minced_chicken": {
   "base": 178.64,
@@ -1265,7 +1509,7 @@
   "magnit": 173,
   "perek": 188,
   "lenta": 366,
-  "auchan": 164,
+  "auchan": 335,
   "samokat": 204,
   "lavka": 211,
   "vkusvill": 349,
@@ -1297,7 +1541,9 @@
     "date": "2026-10-30"
    }
   },
-  "est": {}
+  "est": {
+   "auchan": "lenta-index"
+  }
  },
  "turkey_fillet": {
   "base": 359.87,
@@ -1310,9 +1556,9 @@
   "magnit": 349,
   "perek": 378,
   "lenta": 400,
-  "auchan": 331,
+  "auchan": 366,
   "samokat": 410,
-  "lavka": 425,
+  "lavka": 569,
   "vkusvill": 464,
   "real": {
    "lenta": {
@@ -1342,7 +1588,10 @@
     "date": "2026-10-30"
    }
   },
-  "est": {}
+  "est": {
+   "auchan": "lenta-index",
+   "lavka": "lenta-index"
+  }
  },
  "minced_turkey": {
   "base": 248.64,
@@ -1355,9 +1604,9 @@
   "magnit": 241,
   "perek": 261,
   "lenta": 221,
-  "auchan": 229,
+  "auchan": 202,
   "samokat": 283,
-  "lavka": 293,
+  "lavka": 315,
   "vkusvill": 366,
   "real": {
    "lenta": {
@@ -1387,7 +1636,10 @@
     "date": "2026-10-30"
    }
   },
-  "est": {}
+  "est": {
+   "auchan": "lenta-index",
+   "lavka": "lenta-index"
+  }
  },
  "minced_mix": {
   "base": 286.35,
@@ -1400,11 +1652,36 @@
   "magnit": 278,
   "perek": 301,
   "lenta": 292,
-  "auchan": 263,
+  "auchan": 290,
   "samokat": 326,
-  "lavka": 338,
+  "lavka": 311,
   "vkusvill": 344,
-  "real": {},
+  "real": {
+   "auchan": {
+    "price": 290,
+    "pack_price": 289.99,
+    "per": 579.98,
+    "per_unit": "кг",
+    "name": "Фарш из свинины и говядины Мираторг Домашний",
+    "url": "https://www.auchan.ru/product/farsh-po-domashnemu-ohl-500g/",
+    "regular": true,
+    "size": "500 g",
+    "date": "2026-10-30",
+    "via": "basket"
+   },
+   "lavka": {
+    "price": 311,
+    "pack_price": 249.0,
+    "per": 622.5,
+    "per_unit": "кг",
+    "name": "Фарш Домашний Мираторг (свинина+говядина)",
+    "url": "https://lavka.yandex.ru/good/farsh-domashnij-miratorg-iz-svininy-i-govyadiny-400-gram",
+    "regular": true,
+    "size": "400 g",
+    "date": "2026-10-30",
+    "via": "basket"
+   }
+  },
   "est": {}
  },
  "beef": {
@@ -1420,7 +1697,7 @@
   "lenta": 519,
   "auchan": 468,
   "samokat": 580,
-  "lavka": 600,
+  "lavka": 711,
   "vkusvill": 627,
   "real": {
    "vkusvill": {
@@ -1435,6 +1712,18 @@
     "promo_now": false,
     "size": "0.75 кг/л",
     "date": "2026-10-30"
+   },
+   "lavka": {
+    "price": 711,
+    "pack_price": 569.0,
+    "per": 1422.5,
+    "per_unit": "кг",
+    "name": "Мякоть говяжьей лопатки Из Лавки",
+    "url": "https://lavka.yandex.ru/good/myakot-govyazhej-lopatki-iz-lavki-400-gram",
+    "regular": true,
+    "size": "400 g",
+    "date": "2026-10-30",
+    "via": "basket"
    }
   },
   "est": {}
@@ -1450,9 +1739,9 @@
   "magnit": 246,
   "perek": 266,
   "lenta": 170,
-  "auchan": 233,
+  "auchan": 190,
   "samokat": 289,
-  "lavka": 299,
+  "lavka": 242,
   "vkusvill": 329,
   "real": {
    "lenta": {
@@ -1480,9 +1769,23 @@
     "promo_now": false,
     "size": "1 кг/л",
     "date": "2026-10-30"
+   },
+   "auchan": {
+    "price": 190,
+    "pack_price": 379.99,
+    "per": 379.99,
+    "per_unit": "кг",
+    "name": "Мякоть лопатки свинины Каждый день охлажденная",
+    "url": "https://www.auchan.ru/product/myakot_lopatki_svininy_vu_1kg/",
+    "regular": true,
+    "size": "1 kg",
+    "date": "2026-10-30",
+    "via": "basket"
    }
   },
-  "est": {}
+  "est": {
+   "lavka": "lenta-index"
+  }
  },
  "liver": {
   "base": 180.6,
@@ -1495,9 +1798,9 @@
   "magnit": 175,
   "perek": 190,
   "lenta": 286,
-  "auchan": 166,
+  "auchan": 262,
   "samokat": 206,
-  "lavka": 213,
+  "lavka": 407,
   "vkusvill": 283,
   "real": {
    "lenta": {
@@ -1527,7 +1830,10 @@
     "date": "2026-10-30"
    }
   },
-  "est": {}
+  "est": {
+   "auchan": "lenta-index",
+   "lavka": "lenta-index"
+  }
  },
  "sausages": {
   "base": 253.18,
@@ -1540,9 +1846,9 @@
   "magnit": 246,
   "perek": 266,
   "lenta": 272,
-  "auchan": 233,
+  "auchan": 249,
   "samokat": 289,
-  "lavka": 299,
+  "lavka": 387,
   "vkusvill": 446,
   "real": {
    "lenta": {
@@ -1572,7 +1878,10 @@
     "date": "2026-10-30"
    }
   },
-  "est": {}
+  "est": {
+   "auchan": "lenta-index",
+   "lavka": "lenta-index"
+  }
  },
  "ham": {
   "base": 200.2,
@@ -1585,9 +1894,9 @@
   "magnit": 194,
   "perek": 210,
   "lenta": 209,
-  "auchan": 184,
+  "auchan": 191,
   "samokat": 228,
-  "lavka": 236,
+  "lavka": 297,
   "vkusvill": 319,
   "real": {
    "lenta": {
@@ -1617,7 +1926,10 @@
     "date": "2026-10-30"
    }
   },
-  "est": {}
+  "est": {
+   "auchan": "lenta-index",
+   "lavka": "lenta-index"
+  }
  },
  "fish_white": {
   "base": 229.92,
@@ -1630,10 +1942,10 @@
   "magnit": 223,
   "perek": 241,
   "lenta": 350,
-  "auchan": 212,
+  "auchan": 292,
   "samokat": 262,
-  "lavka": 271,
-  "vkusvill": 276,
+  "lavka": 561,
+  "vkusvill": 488,
   "real": {
    "lenta": {
     "price": 350,
@@ -1647,9 +1959,35 @@
     "promo_now": true,
     "size": "0.3 кг/л",
     "date": "2026-10-30"
+   },
+   "auchan": {
+    "price": 292,
+    "pack_price": 349.99,
+    "per": 583.32,
+    "per_unit": "кг",
+    "name": "Минтай замороженный Каждый день филе без кожи",
+    "url": "https://www.auchan.ru/product/kd-mintay-file-bez-kozhi-600-g/",
+    "regular": true,
+    "size": "600 g",
+    "date": "2026-10-30",
+    "via": "basket"
+   },
+   "lavka": {
+    "price": 561,
+    "pack_price": 449.0,
+    "per": 1122.5,
+    "per_unit": "кг",
+    "name": "Минтай филе Из Лавки без кожи замороженный",
+    "url": "https://lavka.yandex.ru/good/mintaj-file-iz-lavki-bez-kozhi-zamorozhennyj-400-gram",
+    "regular": true,
+    "size": "400 g",
+    "date": "2026-10-30",
+    "via": "basket"
    }
   },
-  "est": {}
+  "est": {
+   "vkusvill": "lenta-index"
+  }
  },
  "hake": {
   "base": 264.41,
@@ -1662,9 +2000,9 @@
   "magnit": 256,
   "perek": 278,
   "lenta": 305,
-  "auchan": 243,
+  "auchan": 279,
   "samokat": 301,
-  "lavka": 312,
+  "lavka": 434,
   "vkusvill": 572,
   "real": {
    "lenta": {
@@ -1694,7 +2032,10 @@
     "date": "2026-10-30"
    }
   },
-  "est": {}
+  "est": {
+   "auchan": "lenta-index",
+   "lavka": "lenta-index"
+  }
  },
  "fish_red": {
   "base": 433.43,
@@ -1707,9 +2048,9 @@
   "magnit": 420,
   "perek": 455,
   "lenta": 385,
-  "auchan": 399,
+  "auchan": 352,
   "samokat": 494,
-  "lavka": 511,
+  "lavka": 548,
   "vkusvill": 571,
   "real": {
    "lenta": {
@@ -1739,7 +2080,10 @@
     "date": "2026-10-30"
    }
   },
-  "est": {}
+  "est": {
+   "auchan": "lenta-index",
+   "lavka": "lenta-index"
+  }
  },
  "mackerel": {
   "base": 172.07,
@@ -1770,9 +2114,9 @@
   "magnit": 164,
   "perek": 177,
   "lenta": 171,
-  "auchan": 155,
+  "auchan": 156,
   "samokat": 193,
-  "lavka": 199,
+  "lavka": 243,
   "vkusvill": 184,
   "real": {
    "lenta": {
@@ -1802,7 +2146,10 @@
     "date": "2026-10-30"
    }
   },
-  "est": {}
+  "est": {
+   "auchan": "lenta-index",
+   "lavka": "lenta-index"
+  }
  },
  "shrimp": {
   "base": 487.86,
@@ -1847,9 +2194,9 @@
   "magnit": 335,
   "perek": 363,
   "lenta": 335,
-  "auchan": 318,
+  "auchan": 306,
   "samokat": 394,
-  "lavka": 408,
+  "lavka": 477,
   "vkusvill": 562,
   "real": {
    "lenta": {
@@ -1879,7 +2226,10 @@
     "date": "2026-10-30"
    }
   },
-  "est": {}
+  "est": {
+   "auchan": "lenta-index",
+   "lavka": "lenta-index"
+  }
  },
  "crab_sticks": {
   "base": 110,
@@ -1890,9 +2240,9 @@
   "magnit": 107,
   "perek": 116,
   "lenta": 74,
-  "auchan": 101,
+  "auchan": 68,
   "samokat": 125,
-  "lavka": 130,
+  "lavka": 105,
   "vkusvill": 182,
   "real": {
    "lenta": {
@@ -1922,7 +2272,10 @@
     "date": "2026-10-30"
    }
   },
-  "est": {}
+  "est": {
+   "auchan": "lenta-index",
+   "lavka": "lenta-index"
+  }
  },
  "tuna": {
   "base": 163.75,
@@ -1967,9 +2320,9 @@
   "magnit": 158,
   "perek": 171,
   "lenta": 164,
-  "auchan": 150,
+  "auchan": 162,
   "samokat": 185,
-  "lavka": 192,
+  "lavka": 246,
   "vkusvill": 291,
   "real": {
    "lenta": {
@@ -1999,7 +2352,10 @@
     "date": "2026-10-30"
    }
   },
-  "est": {}
+  "est": {
+   "auchan": "lenta-index",
+   "lavka": "lenta-index"
+  }
  },
  "pelmeni": {
   "base": 359.41,
@@ -2044,7 +2400,7 @@
   "magnit": 209,
   "perek": 226,
   "lenta": 360,
-  "auchan": 198,
+  "auchan": 355,
   "samokat": 246,
   "lavka": 254,
   "vkusvill": 382,
@@ -2076,7 +2432,9 @@
     "date": "2026-10-30"
    }
   },
-  "est": {}
+  "est": {
+   "auchan": "lenta-index"
+  }
  },
  "puff_pastry": {
   "base": 170,
@@ -2283,9 +2641,9 @@
   "magnit": 96,
   "perek": 104,
   "lenta": 81,
-  "auchan": 91,
+  "auchan": 84,
   "samokat": 113,
-  "lavka": 117,
+  "lavka": 106,
   "vkusvill": 111,
   "real": {
    "lenta": {
@@ -2313,6 +2671,30 @@
     "promo_now": false,
     "size": "0.9 кг/л",
     "date": "2026-10-30"
+   },
+   "auchan": {
+    "price": 84,
+    "pack_price": 75.99,
+    "per": 84.43,
+    "per_unit": "л",
+    "name": "Молоко Лакомо 2.5% ГОСТ БЗМЖ",
+    "url": "https://www.auchan.ru/product/lakomo-moloko-2-5-900ml-pet/",
+    "regular": true,
+    "size": "900 ml",
+    "date": "2026-10-30",
+    "via": "basket"
+   },
+   "lavka": {
+    "price": 106,
+    "pack_price": 99.0,
+    "per": 106.45,
+    "per_unit": "л",
+    "name": "Молоко 2.5% Домик в деревне пастеризованное",
+    "url": "https://lavka.yandex.ru/good/moloko-25percent-domik-v-derevne-pasterizovannoe-930-millilitre",
+    "regular": true,
+    "size": "930 ml",
+    "date": "2026-10-30",
+    "via": "basket"
    }
   },
   "est": {}
@@ -2328,9 +2710,9 @@
   "magnit": 110,
   "perek": 119,
   "lenta": 109,
-  "auchan": 104,
+  "auchan": 94,
   "samokat": 129,
-  "lavka": 133,
+  "lavka": 124,
   "vkusvill": 124,
   "real": {
    "lenta": {
@@ -2358,6 +2740,30 @@
     "promo_now": false,
     "size": "0.9 кг/л",
     "date": "2026-10-30"
+   },
+   "auchan": {
+    "price": 94,
+    "pack_price": 84.99,
+    "per": 94.43,
+    "per_unit": "л",
+    "name": "Кефир Лакомо 2.5% ГОСТ БЗМЖ",
+    "url": "https://www.auchan.ru/product/lakomo-kefir-2-5-900g-pet-bzm/",
+    "regular": true,
+    "size": "900 ml",
+    "date": "2026-10-30",
+    "via": "basket"
+   },
+   "lavka": {
+    "price": 124,
+    "pack_price": 115.0,
+    "per": 123.66,
+    "per_unit": "л",
+    "name": "Кефир 2.5% Простоквашино",
+    "url": "https://lavka.yandex.ru/good/kefir-25percent-prostokvashino-930-millilitre",
+    "regular": true,
+    "size": "930 ml",
+    "date": "2026-10-30",
+    "via": "basket"
    }
   },
   "est": {}
@@ -2373,9 +2779,9 @@
   "magnit": 72,
   "perek": 78,
   "lenta": 65,
-  "auchan": 68,
+  "auchan": 58,
   "samokat": 84,
-  "lavka": 87,
+  "lavka": 74,
   "vkusvill": 93,
   "real": {
    "lenta": {
@@ -2405,7 +2811,10 @@
     "date": "2026-10-30"
    }
   },
-  "est": {}
+  "est": {
+   "auchan": "lenta-index",
+   "lavka": "lenta-index"
+  }
  },
  "smetana": {
   "base": 107.41,
@@ -2418,9 +2827,9 @@
   "magnit": 104,
   "perek": 113,
   "lenta": 107,
-  "auchan": 99,
+  "auchan": 70,
   "samokat": 122,
-  "lavka": 127,
+  "lavka": 109,
   "vkusvill": 118,
   "real": {
    "lenta": {
@@ -2448,6 +2857,30 @@
     "promo_now": false,
     "size": "0.25 кг/л",
     "date": "2026-10-30"
+   },
+   "auchan": {
+    "price": 70,
+    "pack_price": 69.98,
+    "per": 233.27,
+    "per_unit": "кг",
+    "name": "Сметана Каждый день 15% БЗМЖ",
+    "url": "https://www.auchan.ru/product/kd-smetana-kd-15-300g-bzmzh/",
+    "regular": true,
+    "size": "300 g",
+    "date": "2026-10-30",
+    "via": "basket"
+   },
+   "lavka": {
+    "price": 109,
+    "pack_price": 109.0,
+    "per": 363.33,
+    "per_unit": "кг",
+    "name": "Сметана 15% Домик в деревне",
+    "url": "https://lavka.yandex.ru/good/smetana-domik-v-derevne-15percent-300-gram",
+    "regular": true,
+    "size": "300 g",
+    "date": "2026-10-30",
+    "via": "basket"
    }
   },
   "est": {}
@@ -2463,9 +2896,9 @@
   "magnit": 93,
   "perek": 101,
   "lenta": 76,
-  "auchan": 88,
+  "auchan": 105,
   "samokat": 109,
-  "lavka": 113,
+  "lavka": 109,
   "vkusvill": 102,
   "real": {
    "lenta": {
@@ -2493,6 +2926,30 @@
     "promo_now": false,
     "size": "0.4 кг/л",
     "date": "2026-10-30"
+   },
+   "auchan": {
+    "price": 105,
+    "pack_price": 104.99,
+    "per": 524.95,
+    "per_unit": "кг",
+    "name": "Творог зерненый Село зеленое 5% БЗМЖ",
+    "url": "https://www.auchan.ru/product/tvorog-selo-zelenoe-5-0-2-kg/",
+    "regular": true,
+    "size": "200 g",
+    "date": "2026-10-30",
+    "via": "basket"
+   },
+   "lavka": {
+    "price": 109,
+    "pack_price": 109.0,
+    "per": 545.0,
+    "per_unit": "кг",
+    "name": "Творог рассыпчатый 5% Из Лавки",
+    "url": "https://lavka.yandex.ru/good/tvorog-5percent-iz-lavki-rassypchatyj-200-gram",
+    "regular": true,
+    "size": "200 g",
+    "date": "2026-10-30",
+    "via": "basket"
    }
   },
   "est": {}
@@ -2508,9 +2965,9 @@
   "magnit": 185,
   "perek": 200,
   "lenta": 137,
-  "auchan": 175,
+  "auchan": 122,
   "samokat": 217,
-  "lavka": 225,
+  "lavka": 155,
   "vkusvill": 199,
   "real": {
    "lenta": {
@@ -2540,7 +2997,10 @@
     "date": "2026-10-30"
    }
   },
-  "est": {}
+  "est": {
+   "auchan": "lenta-index",
+   "lavka": "lenta-index"
+  }
  },
  "mozzarella": {
   "base": 130.86,
@@ -2571,9 +3031,9 @@
   "magnit": 140,
   "perek": 151,
   "lenta": 146,
-  "auchan": 132,
+  "auchan": 130,
   "samokat": 164,
-  "lavka": 170,
+  "lavka": 165,
   "vkusvill": 196,
   "real": {
    "lenta": {
@@ -2603,7 +3063,10 @@
     "date": "2026-10-30"
    }
   },
-  "est": {}
+  "est": {
+   "auchan": "lenta-index",
+   "lavka": "lenta-index"
+  }
  },
  "butter": {
   "base": 198.91,
@@ -2616,9 +3079,9 @@
   "magnit": 193,
   "perek": 209,
   "lenta": 257,
-  "auchan": 183,
+  "auchan": 190,
   "samokat": 227,
-  "lavka": 235,
+  "lavka": 219,
   "vkusvill": 224,
   "real": {
    "lenta": {
@@ -2646,6 +3109,30 @@
     "promo_now": false,
     "size": "0.18 кг/л",
     "date": "2026-10-30"
+   },
+   "auchan": {
+    "price": 190,
+    "pack_price": 189.99,
+    "per": 1055.5,
+    "per_unit": "кг",
+    "name": "Масло сливочное Дмитровский двор 82.5% ГОСТ БЗМЖ",
+    "url": "https://www.auchan.ru/product/maslo-dmitdvor-82-5-180gr/",
+    "regular": true,
+    "size": "180 g",
+    "date": "2026-10-30",
+    "via": "basket"
+   },
+   "lavka": {
+    "price": 219,
+    "pack_price": 219.0,
+    "per": 1216.67,
+    "per_unit": "кг",
+    "name": "Масло сливочное 82.5% Из Лавки",
+    "url": "https://lavka.yandex.ru/good/maslo-slivochnoe-825percent-iz-lavki-tradicionnoe-180-gram",
+    "regular": true,
+    "size": "180 g",
+    "date": "2026-10-30",
+    "via": "basket"
    }
   },
   "est": {}
@@ -2661,9 +3148,9 @@
   "magnit": 109,
   "perek": 118,
   "lenta": 160,
-  "auchan": 103,
+  "auchan": 142,
   "samokat": 128,
-  "lavka": 132,
+  "lavka": 181,
   "vkusvill": 165,
   "real": {
    "lenta": {
@@ -2693,7 +3180,10 @@
     "date": "2026-10-30"
    }
   },
-  "est": {}
+  "est": {
+   "auchan": "lenta-index",
+   "lavka": "lenta-index"
+  }
  },
  "cream": {
   "base": 71.54,
@@ -2706,9 +3196,9 @@
   "magnit": 69,
   "perek": 75,
   "lenta": 52,
-  "auchan": 66,
+  "auchan": 46,
   "samokat": 82,
-  "lavka": 84,
+  "lavka": 59,
   "vkusvill": 68,
   "real": {
    "lenta": {
@@ -2738,7 +3228,10 @@
     "date": "2026-10-30"
    }
   },
-  "est": {}
+  "est": {
+   "auchan": "lenta-index",
+   "lavka": "lenta-index"
+  }
  },
  "feta": {
   "base": 208.56,
@@ -2769,9 +3262,9 @@
   "magnit": 155,
   "perek": 168,
   "lenta": 174,
-  "auchan": 147,
+  "auchan": 172,
   "samokat": 182,
-  "lavka": 188,
+  "lavka": 261,
   "vkusvill": 167,
   "real": {
    "lenta": {
@@ -2801,7 +3294,10 @@
     "date": "2026-10-30"
    }
   },
-  "est": {}
+  "est": {
+   "auchan": "lenta-index",
+   "lavka": "lenta-index"
+  }
  },
  "eggs": {
   "base": 109.1,
@@ -2814,9 +3310,9 @@
   "magnit": 106,
   "perek": 115,
   "lenta": 110,
-  "auchan": 100,
+  "auchan": 90,
   "samokat": 124,
-  "lavka": 129,
+  "lavka": 125,
   "vkusvill": 118,
   "real": {
    "lenta": {
@@ -2844,6 +3340,30 @@
     "promo_now": false,
     "size": "20 шт",
     "date": "2026-10-30"
+   },
+   "auchan": {
+    "price": 90,
+    "pack_price": 89.99,
+    "per": 9.0,
+    "per_unit": "шт",
+    "name": "Яйцо куриное Каждый день С1",
+    "url": "https://www.auchan.ru/product/kd-yayco-kurinoe-s1-10-sht-1/",
+    "regular": true,
+    "size": "10 pcs",
+    "date": "2026-10-30",
+    "via": "basket"
+   },
+   "lavka": {
+    "price": 125,
+    "pack_price": 125.0,
+    "per": 12.5,
+    "per_unit": "шт",
+    "name": "Яйцо С1 Из Лавки",
+    "url": "https://lavka.yandex.ru/good/yajca-kurinye-s1-iz-lavki-10-unit",
+    "regular": true,
+    "size": "10 pcs",
+    "date": "2026-10-30",
+    "via": "basket"
    }
   },
   "est": {}
@@ -2859,9 +3379,9 @@
   "magnit": 49,
   "perek": 53,
   "lenta": 83,
-  "auchan": 47,
+  "auchan": 43,
   "samokat": 58,
-  "lavka": 60,
+  "lavka": 95,
   "vkusvill": 99,
   "real": {
    "lenta": {
@@ -2889,6 +3409,30 @@
     "promo_now": false,
     "size": "0.3 кг/л",
     "date": "2026-10-30"
+   },
+   "auchan": {
+    "price": 43,
+    "pack_price": 42.99,
+    "per": 107.47,
+    "per_unit": "кг",
+    "name": "Батон пшеничный АШАН нарезной",
+    "url": "https://www.auchan.ru/product/batony_nareznye_vs_400g/",
+    "regular": true,
+    "size": "400 g",
+    "date": "2026-10-30",
+    "via": "basket"
+   },
+   "lavka": {
+    "price": 95,
+    "pack_price": 95.0,
+    "per": 237.5,
+    "per_unit": "кг",
+    "name": "Батон Нарезной Черёмушки",
+    "url": "https://lavka.yandex.ru/good/baton-nareznoj-cheryomushki-narezka-400-gram",
+    "regular": true,
+    "size": "400 g",
+    "date": "2026-10-30",
+    "via": "basket"
    }
   },
   "est": {}
@@ -2904,9 +3448,9 @@
   "magnit": 44,
   "perek": 48,
   "lenta": 53,
-  "auchan": 42,
+  "auchan": 52,
   "samokat": 52,
-  "lavka": 54,
+  "lavka": 79,
   "vkusvill": 90,
   "real": {
    "lenta": {
@@ -2936,7 +3480,10 @@
     "date": "2026-10-30"
    }
   },
-  "est": {}
+  "est": {
+   "auchan": "lenta-index",
+   "lavka": "lenta-index"
+  }
  },
  "lavash": {
   "base": 35.62,
@@ -2949,9 +3496,9 @@
   "magnit": 35,
   "perek": 37,
   "lenta": 47,
-  "auchan": 33,
+  "auchan": 46,
   "samokat": 41,
-  "lavka": 42,
+  "lavka": 70,
   "vkusvill": 68,
   "real": {
    "lenta": {
@@ -2981,7 +3528,10 @@
     "date": "2026-10-30"
    }
   },
-  "est": {}
+  "est": {
+   "auchan": "lenta-index",
+   "lavka": "lenta-index"
+  }
  },
  "tortilla": {
   "base": 150,
@@ -2992,9 +3542,9 @@
   "magnit": 146,
   "perek": 158,
   "lenta": 97,
-  "auchan": 138,
+  "auchan": 96,
   "samokat": 171,
-  "lavka": 177,
+  "lavka": 145,
   "vkusvill": 133,
   "real": {
    "lenta": {
@@ -3024,7 +3574,10 @@
     "date": "2026-10-30"
    }
   },
-  "est": {}
+  "est": {
+   "auchan": "lenta-index",
+   "lavka": "lenta-index"
+  }
  },
  "buckwheat": {
   "base": 82.94,
@@ -3037,9 +3590,9 @@
   "magnit": 80,
   "perek": 87,
   "lenta": 49,
-  "auchan": 76,
+  "auchan": 135,
   "samokat": 95,
-  "lavka": 98,
+  "lavka": 109,
   "vkusvill": 93,
   "real": {
    "lenta": {
@@ -3067,6 +3620,30 @@
     "promo_now": false,
     "size": "0.9 кг/л",
     "date": "2026-10-30"
+   },
+   "auchan": {
+    "price": 135,
+    "pack_price": 134.99,
+    "per": 149.99,
+    "per_unit": "кг",
+    "name": "Крупа гречневая Националь ядрица",
+    "url": "https://www.auchan.ru/product/krupa-grechnevaya-nacional-yadrica-900-g/",
+    "regular": true,
+    "size": "900 g",
+    "date": "2026-10-30",
+    "via": "basket"
+   },
+   "lavka": {
+    "price": 109,
+    "pack_price": 109.0,
+    "per": 121.11,
+    "per_unit": "кг",
+    "name": "Крупа гречневая ядрица Из Лавки",
+    "url": "https://lavka.yandex.ru/good/krupa-grechnevaya-yadrica-iz-lavki-bystrorazvarivayushayasya-900-gram",
+    "regular": true,
+    "size": "900 g",
+    "date": "2026-10-30",
+    "via": "basket"
    }
   },
   "est": {}
@@ -3082,9 +3659,9 @@
   "magnit": 110,
   "perek": 119,
   "lenta": 81,
-  "auchan": 104,
+  "auchan": 130,
   "samokat": 129,
-  "lavka": 134,
+  "lavka": 189,
   "vkusvill": 146,
   "real": {
    "lenta": {
@@ -3112,6 +3689,30 @@
     "promo_now": false,
     "size": "0.9 кг/л",
     "date": "2026-10-30"
+   },
+   "auchan": {
+    "price": 130,
+    "pack_price": 129.99,
+    "per": 144.43,
+    "per_unit": "кг",
+    "name": "Рис круглозерный Мистраль Краснодар",
+    "url": "https://www.auchan.ru/product/ris-kruglozernyy-mistral-krasnodar-900-g/",
+    "regular": true,
+    "size": "900 g",
+    "date": "2026-10-30",
+    "via": "basket"
+   },
+   "lavka": {
+    "price": 189,
+    "pack_price": 189.0,
+    "per": 210.0,
+    "per_unit": "кг",
+    "name": "Рис круглозёрный Из Лавки",
+    "url": "https://lavka.yandex.ru/good/krupa-risovaya-iz-lavki-shlifovannaya-900-gram",
+    "regular": true,
+    "size": "900 g",
+    "date": "2026-10-30",
+    "via": "basket"
    }
   },
   "est": {}
@@ -3127,9 +3728,9 @@
   "magnit": 60,
   "perek": 65,
   "lenta": 39,
-  "auchan": 57,
+  "auchan": 38,
   "samokat": 71,
-  "lavka": 73,
+  "lavka": 58,
   "vkusvill": 86,
   "real": {
    "lenta": {
@@ -3159,7 +3760,10 @@
     "date": "2026-10-30"
    }
   },
-  "est": {}
+  "est": {
+   "auchan": "lenta-index",
+   "lavka": "lenta-index"
+  }
  },
  "semolina": {
   "base": 62.64,
@@ -3172,9 +3776,9 @@
   "magnit": 61,
   "perek": 66,
   "lenta": 46,
-  "auchan": 58,
+  "auchan": 45,
   "samokat": 71,
-  "lavka": 74,
+  "lavka": 69,
   "vkusvill": 90,
   "real": {
    "lenta": {
@@ -3204,7 +3808,10 @@
     "date": "2026-10-30"
    }
   },
-  "est": {}
+  "est": {
+   "auchan": "lenta-index",
+   "lavka": "lenta-index"
+  }
  },
  "barley": {
   "base": 52.87,
@@ -3217,9 +3824,9 @@
   "magnit": 51,
   "perek": 56,
   "lenta": 35,
-  "auchan": 49,
+  "auchan": 35,
   "samokat": 60,
-  "lavka": 62,
+  "lavka": 52,
   "vkusvill": 108,
   "real": {
    "lenta": {
@@ -3249,7 +3856,10 @@
     "date": "2026-10-30"
    }
   },
-  "est": {}
+  "est": {
+   "auchan": "lenta-index",
+   "lavka": "lenta-index"
+  }
  },
  "bulgur": {
   "base": 120,
@@ -3260,9 +3870,9 @@
   "magnit": 116,
   "perek": 126,
   "lenta": 127,
-  "auchan": 110,
+  "auchan": 125,
   "samokat": 137,
-  "lavka": 142,
+  "lavka": 190,
   "vkusvill": 126,
   "real": {
    "lenta": {
@@ -3292,7 +3902,10 @@
     "date": "2026-10-30"
    }
   },
-  "est": {}
+  "est": {
+   "auchan": "lenta-index",
+   "lavka": "lenta-index"
+  }
  },
  "oats": {
   "base": 57.7,
@@ -3305,9 +3918,9 @@
   "magnit": 56,
   "perek": 61,
   "lenta": 64,
-  "auchan": 53,
+  "auchan": 63,
   "samokat": 66,
-  "lavka": 68,
+  "lavka": 96,
   "vkusvill": 81,
   "real": {
    "lenta": {
@@ -3337,7 +3950,10 @@
     "date": "2026-10-30"
    }
   },
-  "est": {}
+  "est": {
+   "auchan": "lenta-index",
+   "lavka": "lenta-index"
+  }
  },
  "pasta": {
   "base": 56.28,
@@ -3350,9 +3966,9 @@
   "magnit": 55,
   "perek": 59,
   "lenta": 26,
-  "auchan": 52,
+  "auchan": 85,
   "samokat": 64,
-  "lavka": 66,
+  "lavka": 109,
   "vkusvill": 85,
   "real": {
    "lenta": {
@@ -3380,6 +3996,30 @@
     "promo_now": false,
     "size": "0.45 кг/л",
     "date": "2026-10-30"
+   },
+   "auchan": {
+    "price": 85,
+    "pack_price": 84.99,
+    "per": 188.87,
+    "per_unit": "кг",
+    "name": "Макаронные изделия Итальянская штучка Рожки",
+    "url": "https://www.auchan.ru/product/makarony-450gr-rozhki-it-shtuchka/",
+    "regular": true,
+    "size": "450 g",
+    "date": "2026-10-30",
+    "via": "basket"
+   },
+   "lavka": {
+    "price": 109,
+    "pack_price": 109.0,
+    "per": 242.22,
+    "per_unit": "кг",
+    "name": "Макароны Рожок полубублик Шебекинские",
+    "url": "https://lavka.yandex.ru/good/makarony-shebekinskie-rozhok-polubublik-202-450-gram",
+    "regular": true,
+    "size": "450 g",
+    "date": "2026-10-30",
+    "via": "basket"
    }
   },
   "est": {}
@@ -3413,10 +4053,10 @@
   "magnit": 72,
   "perek": 78,
   "lenta": 86,
-  "auchan": 68,
+  "auchan": 85,
   "samokat": 85,
-  "lavka": 88,
-  "vkusvill": 89,
+  "lavka": 129,
+  "vkusvill": 134,
   "real": {
    "lenta": {
     "price": 86,
@@ -3432,7 +4072,11 @@
     "date": "2026-10-30"
    }
   },
-  "est": {}
+  "est": {
+   "auchan": "lenta-index",
+   "lavka": "lenta-index",
+   "vkusvill": "lenta-index"
+  }
  },
  "flour": {
   "base": 57.21,
@@ -3445,9 +4089,9 @@
   "magnit": 55,
   "perek": 60,
   "lenta": 61,
-  "auchan": 53,
+  "auchan": 65,
   "samokat": 65,
-  "lavka": 68,
+  "lavka": 95,
   "vkusvill": 69,
   "real": {
    "lenta": {
@@ -3475,6 +4119,30 @@
     "promo_now": false,
     "size": "2 кг/л",
     "date": "2026-10-30"
+   },
+   "auchan": {
+    "price": 65,
+    "pack_price": 64.99,
+    "per": 64.99,
+    "per_unit": "кг",
+    "name": "Мука пшеничная Мелькомбинат №3 экстра высший сорт",
+    "url": "https://www.auchan.ru/product/muka-pshenichnaya-melkombinat-3-ekstra-v-c-1-kg/",
+    "regular": true,
+    "size": "1 kg",
+    "date": "2026-10-30",
+    "via": "basket"
+   },
+   "lavka": {
+    "price": 95,
+    "pack_price": 95.0,
+    "per": 95.0,
+    "per_unit": "кг",
+    "name": "Мука пшеничная Makfa высший сорт",
+    "url": "https://lavka.yandex.ru/good/muka-pshenichnaya-makfa-vysshij-sort-1-kilogram",
+    "regular": true,
+    "size": "1 kg",
+    "date": "2026-10-30",
+    "via": "basket"
    }
   },
   "est": {}
@@ -3488,9 +4156,9 @@
   "magnit": 53,
   "perek": 58,
   "lenta": 55,
-  "auchan": 51,
+  "auchan": 54,
   "samokat": 63,
-  "lavka": 65,
+  "lavka": 82,
   "vkusvill": 70,
   "real": {
    "lenta": {
@@ -3520,7 +4188,10 @@
     "date": "2026-10-30"
    }
   },
-  "est": {}
+  "est": {
+   "auchan": "lenta-index",
+   "lavka": "lenta-index"
+  }
  },
  "baking_powder": {
   "base": 15,
@@ -3531,10 +4202,10 @@
   "magnit": 15,
   "perek": 16,
   "lenta": 8,
-  "auchan": 14,
+  "auchan": 8,
   "samokat": 17,
-  "lavka": 18,
-  "vkusvill": 18,
+  "lavka": 12,
+  "vkusvill": 12,
   "real": {
    "lenta": {
     "price": 8,
@@ -3550,7 +4221,11 @@
     "date": "2026-10-30"
    }
   },
-  "est": {}
+  "est": {
+   "auchan": "lenta-index",
+   "lavka": "lenta-index",
+   "vkusvill": "lenta-index"
+  }
  },
  "breadcrumbs": {
   "base": 50,
@@ -3561,10 +4236,10 @@
   "magnit": 48,
   "perek": 52,
   "lenta": 55,
-  "auchan": 46,
+  "auchan": 54,
   "samokat": 57,
-  "lavka": 59,
-  "vkusvill": 60,
+  "lavka": 82,
+  "vkusvill": 86,
   "real": {
    "lenta": {
     "price": 55,
@@ -3580,7 +4255,11 @@
     "date": "2026-10-30"
    }
   },
-  "est": {}
+  "est": {
+   "auchan": "lenta-index",
+   "lavka": "lenta-index",
+   "vkusvill": "lenta-index"
+  }
  },
  "sugar": {
   "base": 82.49,
@@ -3593,9 +4272,9 @@
   "magnit": 80,
   "perek": 87,
   "lenta": 75,
-  "auchan": 76,
+  "auchan": 53,
   "samokat": 94,
-  "lavka": 97,
+  "lavka": 99,
   "vkusvill": 93,
   "real": {
    "lenta": {
@@ -3623,6 +4302,30 @@
     "promo_now": false,
     "size": "1 кг/л",
     "date": "2026-10-30"
+   },
+   "auchan": {
+    "price": 53,
+    "pack_price": 52.99,
+    "per": 52.99,
+    "per_unit": "кг",
+    "name": "Социальный товар Сахарный песок",
+    "url": "https://www.auchan.ru/product/saharnyy-pesok-russkiy-sahar-1-kg/",
+    "regular": true,
+    "size": "1 kg",
+    "date": "2026-10-30",
+    "via": "basket"
+   },
+   "lavka": {
+    "price": 99,
+    "pack_price": 99.0,
+    "per": 99.0,
+    "per_unit": "кг",
+    "name": "Сахар-песок Русский",
+    "url": "https://lavka.yandex.ru/good/sahar-pesok-russkij-1-kilogram",
+    "regular": true,
+    "size": "1 kg",
+    "date": "2026-10-30",
+    "via": "basket"
    }
   },
   "est": {}
@@ -3638,9 +4341,9 @@
   "magnit": 24,
   "perek": 26,
   "lenta": 21,
-  "auchan": 22,
+  "auchan": 21,
   "samokat": 28,
-  "lavka": 29,
+  "lavka": 31,
   "vkusvill": 50,
   "real": {
    "lenta": {
@@ -3670,7 +4373,10 @@
     "date": "2026-10-30"
    }
   },
-  "est": {}
+  "est": {
+   "auchan": "lenta-index",
+   "lavka": "lenta-index"
+  }
  },
  "oil": {
   "base": 143.85,
@@ -3683,9 +4389,9 @@
   "magnit": 140,
   "perek": 151,
   "lenta": 118,
-  "auchan": 132,
+  "auchan": 126,
   "samokat": 164,
-  "lavka": 170,
+  "lavka": 143,
   "vkusvill": 148,
   "real": {
    "lenta": {
@@ -3713,6 +4419,30 @@
     "promo_now": false,
     "size": "1 кг/л",
     "date": "2026-10-30"
+   },
+   "auchan": {
+    "price": 126,
+    "pack_price": 139.99,
+    "per": 139.99,
+    "per_unit": "л",
+    "name": "Масло подсолнечное Я люблю готовить рафинированное",
+    "url": "https://www.auchan.ru/product/maslo-podsoln-raf-dez-1l-yalg/",
+    "regular": true,
+    "size": "1000 ml",
+    "date": "2026-10-30",
+    "via": "basket"
+   },
+   "lavka": {
+    "price": 143,
+    "pack_price": 159.0,
+    "per": 159.0,
+    "per_unit": "л",
+    "name": "Масло подсолнечное Благо рафинированное",
+    "url": "https://lavka.yandex.ru/good/maslo-podsolnechnoe-blago-rafinirovannoe-1-liter",
+    "regular": true,
+    "size": "1000 ml",
+    "date": "2026-10-30",
+    "via": "basket"
    }
   },
   "est": {}
@@ -3728,9 +4458,9 @@
   "magnit": 67,
   "perek": 73,
   "lenta": 32,
-  "auchan": 64,
+  "auchan": 32,
   "samokat": 79,
-  "lavka": 82,
+  "lavka": 48,
   "vkusvill": 72,
   "real": {
    "lenta": {
@@ -3760,7 +4490,10 @@
     "date": "2026-10-30"
    }
   },
-  "est": {}
+  "est": {
+   "auchan": "lenta-index",
+   "lavka": "lenta-index"
+  }
  },
  "tomato_paste": {
   "base": 111.26,
@@ -3773,9 +4506,9 @@
   "magnit": 108,
   "perek": 117,
   "lenta": 116,
-  "auchan": 102,
+  "auchan": 114,
   "samokat": 127,
-  "lavka": 131,
+  "lavka": 174,
   "vkusvill": 132,
   "real": {
    "lenta": {
@@ -3805,7 +4538,10 @@
     "date": "2026-10-30"
    }
   },
-  "est": {}
+  "est": {
+   "auchan": "lenta-index",
+   "lavka": "lenta-index"
+  }
  },
  "canned_tomatoes": {
   "base": 131.86,
@@ -3850,9 +4586,9 @@
   "magnit": 107,
   "perek": 115,
   "lenta": 119,
-  "auchan": 101,
+  "auchan": 117,
   "samokat": 125,
-  "lavka": 130,
+  "lavka": 178,
   "vkusvill": 131,
   "real": {
    "lenta": {
@@ -3882,7 +4618,10 @@
     "date": "2026-10-30"
    }
   },
-  "est": {}
+  "est": {
+   "auchan": "lenta-index",
+   "lavka": "lenta-index"
+  }
  },
  "mustard": {
   "base": 60,
@@ -3893,9 +4632,9 @@
   "magnit": 58,
   "perek": 63,
   "lenta": 41,
-  "auchan": 55,
+  "auchan": 40,
   "samokat": 68,
-  "lavka": 71,
+  "lavka": 61,
   "vkusvill": 47,
   "real": {
    "lenta": {
@@ -3925,7 +4664,10 @@
     "date": "2026-10-30"
    }
   },
-  "est": {}
+  "est": {
+   "auchan": "lenta-index",
+   "lavka": "lenta-index"
+  }
  },
  "mayo": {
   "base": 133.48,
@@ -3938,9 +4680,9 @@
   "magnit": 129,
   "perek": 140,
   "lenta": 113,
-  "auchan": 123,
+  "auchan": 111,
   "samokat": 152,
-  "lavka": 158,
+  "lavka": 169,
   "vkusvill": 126,
   "real": {
    "lenta": {
@@ -3970,7 +4712,10 @@
     "date": "2026-10-30"
    }
   },
-  "est": {}
+  "est": {
+   "auchan": "lenta-index",
+   "lavka": "lenta-index"
+  }
  },
  "soy_sauce": {
   "base": 110,
@@ -3981,9 +4726,9 @@
   "magnit": 107,
   "perek": 116,
   "lenta": 52,
-  "auchan": 101,
+  "auchan": 51,
   "samokat": 125,
-  "lavka": 130,
+  "lavka": 78,
   "vkusvill": 67,
   "real": {
    "lenta": {
@@ -4013,7 +4758,10 @@
     "date": "2026-10-30"
    }
   },
-  "est": {}
+  "est": {
+   "auchan": "lenta-index",
+   "lavka": "lenta-index"
+  }
  },
  "honey": {
   "base": 183.67,
@@ -4026,9 +4774,9 @@
   "magnit": 178,
   "perek": 193,
   "lenta": 115,
-  "auchan": 169,
+  "auchan": 113,
   "samokat": 209,
-  "lavka": 217,
+  "lavka": 172,
   "vkusvill": 207,
   "real": {
    "lenta": {
@@ -4058,7 +4806,10 @@
     "date": "2026-10-30"
    }
   },
-  "est": {}
+  "est": {
+   "auchan": "lenta-index",
+   "lavka": "lenta-index"
+  }
  },
  "jam": {
   "base": 183.76,
@@ -4071,9 +4822,9 @@
   "magnit": 178,
   "perek": 193,
   "lenta": 166,
-  "auchan": 169,
+  "auchan": 164,
   "samokat": 209,
-  "lavka": 217,
+  "lavka": 249,
   "vkusvill": 241,
   "real": {
    "lenta": {
@@ -4103,7 +4854,10 @@
     "date": "2026-10-30"
    }
   },
-  "est": {}
+  "est": {
+   "auchan": "lenta-index",
+   "lavka": "lenta-index"
+  }
  },
  "nuts": {
   "base": 120.61,
@@ -4146,9 +4900,9 @@
   "magnit": 213,
   "perek": 231,
   "lenta": 214,
-  "auchan": 202,
+  "auchan": 211,
   "samokat": 251,
-  "lavka": 260,
+  "lavka": 321,
   "vkusvill": 325,
   "real": {
    "lenta": {
@@ -4178,7 +4932,10 @@
     "date": "2026-10-30"
    }
   },
-  "est": {}
+  "est": {
+   "auchan": "lenta-index",
+   "lavka": "lenta-index"
+  }
  },
  "sesame": {
   "base": 50,
@@ -4189,10 +4946,10 @@
   "magnit": 48,
   "perek": 52,
   "lenta": 57,
-  "auchan": 46,
+  "auchan": 56,
   "samokat": 57,
-  "lavka": 59,
-  "vkusvill": 60,
+  "lavka": 85,
+  "vkusvill": 89,
   "real": {
    "lenta": {
     "price": 57,
@@ -4208,7 +4965,11 @@
     "date": "2026-10-30"
    }
   },
-  "est": {}
+  "est": {
+   "auchan": "lenta-index",
+   "lavka": "lenta-index",
+   "vkusvill": "lenta-index"
+  }
  },
  "raisins": {
   "base": 79.45,
@@ -4221,9 +4982,9 @@
   "magnit": 77,
   "perek": 83,
   "lenta": 75,
-  "auchan": 73,
+  "auchan": 74,
   "samokat": 91,
-  "lavka": 94,
+  "lavka": 112,
   "vkusvill": 192,
   "real": {
    "lenta": {
@@ -4253,7 +5014,10 @@
     "date": "2026-10-30"
    }
   },
-  "est": {}
+  "est": {
+   "auchan": "lenta-index",
+   "lavka": "lenta-index"
+  }
  },
  "prunes": {
   "base": 113.5,
@@ -4266,10 +5030,10 @@
   "magnit": 110,
   "perek": 119,
   "lenta": 176,
-  "auchan": 104,
+  "auchan": 174,
   "samokat": 129,
-  "lavka": 134,
-  "vkusvill": 136,
+  "lavka": 264,
+  "vkusvill": 275,
   "real": {
    "lenta": {
     "price": 176,
@@ -4285,7 +5049,11 @@
     "date": "2026-10-30"
    }
   },
-  "est": {}
+  "est": {
+   "auchan": "lenta-index",
+   "lavka": "lenta-index",
+   "vkusvill": "lenta-index"
+  }
  },
  "dried_apricots": {
   "base": 124.85,
@@ -4298,7 +5066,7 @@
   "magnit": 121,
   "perek": 131,
   "lenta": 262,
-  "auchan": 115,
+  "auchan": 258,
   "samokat": 142,
   "lavka": 147,
   "vkusvill": 150,
@@ -4317,7 +5085,9 @@
     "date": "2026-10-30"
    }
   },
-  "est": {}
+  "est": {
+   "auchan": "lenta-index"
+  }
  },
  "lentils": {
   "base": 93.54,
@@ -4330,9 +5100,9 @@
   "magnit": 91,
   "perek": 98,
   "lenta": 119,
-  "auchan": 86,
+  "auchan": 117,
   "samokat": 107,
-  "lavka": 110,
+  "lavka": 178,
   "vkusvill": 156,
   "real": {
    "lenta": {
@@ -4362,7 +5132,10 @@
     "date": "2026-10-30"
    }
   },
-  "est": {}
+  "est": {
+   "auchan": "lenta-index",
+   "lavka": "lenta-index"
+  }
  },
  "split_peas": {
   "base": 66.52,
@@ -4375,9 +5148,9 @@
   "magnit": 65,
   "perek": 70,
   "lenta": 68,
-  "auchan": 61,
+  "auchan": 67,
   "samokat": 76,
-  "lavka": 78,
+  "lavka": 102,
   "vkusvill": 125,
   "real": {
    "lenta": {
@@ -4407,7 +5180,10 @@
     "date": "2026-10-30"
    }
   },
-  "est": {}
+  "est": {
+   "auchan": "lenta-index",
+   "lavka": "lenta-index"
+  }
  },
  "chickpeas": {
   "base": 98.73,
@@ -4420,9 +5196,9 @@
   "magnit": 96,
   "perek": 104,
   "lenta": 149,
-  "auchan": 91,
+  "auchan": 147,
   "samokat": 113,
-  "lavka": 117,
+  "lavka": 223,
   "vkusvill": 146,
   "real": {
    "lenta": {
@@ -4452,7 +5228,10 @@
     "date": "2026-10-30"
    }
   },
-  "est": {}
+  "est": {
+   "auchan": "lenta-index",
+   "lavka": "lenta-index"
+  }
  },
  "canned_beans": {
   "base": 121.47,
@@ -4465,9 +5244,9 @@
   "magnit": 118,
   "perek": 128,
   "lenta": 74,
-  "auchan": 112,
+  "auchan": 73,
   "samokat": 138,
-  "lavka": 143,
+  "lavka": 111,
   "vkusvill": 116,
   "real": {
    "lenta": {
@@ -4497,7 +5276,10 @@
     "date": "2026-10-30"
    }
   },
-  "est": {}
+  "est": {
+   "auchan": "lenta-index",
+   "lavka": "lenta-index"
+  }
  },
  "corn": {
   "base": 103.25,
@@ -4510,9 +5292,9 @@
   "magnit": 100,
   "perek": 108,
   "lenta": 69,
-  "auchan": 95,
+  "auchan": 68,
   "samokat": 118,
-  "lavka": 122,
+  "lavka": 103,
   "vkusvill": 146,
   "real": {
    "lenta": {
@@ -4542,7 +5324,10 @@
     "date": "2026-10-30"
    }
   },
-  "est": {}
+  "est": {
+   "auchan": "lenta-index",
+   "lavka": "lenta-index"
+  }
  },
  "green_peas": {
   "base": 116.92,
@@ -4555,9 +5340,9 @@
   "magnit": 113,
   "perek": 123,
   "lenta": 177,
-  "auchan": 108,
+  "auchan": 175,
   "samokat": 133,
-  "lavka": 138,
+  "lavka": 265,
   "vkusvill": 139,
   "real": {
    "lenta": {
@@ -4587,7 +5372,10 @@
     "date": "2026-10-30"
    }
   },
-  "est": {}
+  "est": {
+   "auchan": "lenta-index",
+   "lavka": "lenta-index"
+  }
  },
  "pickles": {
   "base": 136.66,
@@ -4600,9 +5388,9 @@
   "magnit": 133,
   "perek": 143,
   "lenta": 101,
-  "auchan": 126,
+  "auchan": 100,
   "samokat": 156,
-  "lavka": 161,
+  "lavka": 151,
   "vkusvill": 142,
   "real": {
    "lenta": {
@@ -4632,7 +5420,10 @@
     "date": "2026-10-30"
    }
   },
-  "est": {}
+  "est": {
+   "auchan": "lenta-index",
+   "lavka": "lenta-index"
+  }
  },
  "sauerkraut": {
   "base": 120,
@@ -4643,9 +5434,9 @@
   "magnit": 116,
   "perek": 126,
   "lenta": 92,
-  "auchan": 110,
+  "auchan": 91,
   "samokat": 137,
-  "lavka": 142,
+  "lavka": 138,
   "vkusvill": 204,
   "real": {
    "lenta": {
@@ -4675,7 +5466,10 @@
     "date": "2026-10-30"
    }
   },
-  "est": {}
+  "est": {
+   "auchan": "lenta-index",
+   "lavka": "lenta-index"
+  }
  },
  "turkey_thigh": {
   "base": 333.7,
@@ -4688,9 +5482,9 @@
   "magnit": 324,
   "perek": 350,
   "lenta": 508,
-  "auchan": 307,
+  "auchan": 464,
   "samokat": 380,
-  "lavka": 394,
+  "lavka": 723,
   "vkusvill": 547,
   "real": {
    "lenta": {
@@ -4720,7 +5514,10 @@
     "date": "2026-10-30"
    }
   },
-  "est": {}
+  "est": {
+   "auchan": "lenta-index",
+   "lavka": "lenta-index"
+  }
  },
  "minced_beef": {
   "base": 263.44,
@@ -4733,9 +5530,9 @@
   "magnit": 256,
   "perek": 277,
   "lenta": 410,
-  "auchan": 242,
+  "auchan": 375,
   "samokat": 300,
-  "lavka": 311,
+  "lavka": 584,
   "vkusvill": 444,
   "real": {
    "lenta": {
@@ -4765,7 +5562,10 @@
     "date": "2026-10-30"
    }
   },
-  "est": {}
+  "est": {
+   "auchan": "lenta-index",
+   "lavka": "lenta-index"
+  }
  },
  "pork_neck": {
   "base": 334.21,
@@ -4778,9 +5578,9 @@
   "magnit": 324,
   "perek": 351,
   "lenta": 330,
-  "auchan": 307,
+  "auchan": 302,
   "samokat": 381,
-  "lavka": 394,
+  "lavka": 470,
   "vkusvill": 508,
   "real": {
    "lenta": {
@@ -4810,7 +5610,10 @@
     "date": "2026-10-30"
    }
   },
-  "est": {}
+  "est": {
+   "auchan": "lenta-index",
+   "lavka": "lenta-index"
+  }
  },
  "minced_pork": {
   "base": 217.62,
@@ -4823,10 +5626,10 @@
   "magnit": 211,
   "perek": 229,
   "lenta": 160,
-  "auchan": 200,
+  "auchan": 146,
   "samokat": 248,
-  "lavka": 257,
-  "vkusvill": 261,
+  "lavka": 228,
+  "vkusvill": 223,
   "real": {
    "lenta": {
     "price": 160,
@@ -4842,7 +5645,11 @@
     "date": "2026-10-30"
    }
   },
-  "est": {}
+  "est": {
+   "auchan": "lenta-index",
+   "lavka": "lenta-index",
+   "vkusvill": "lenta-index"
+  }
  },
  "pork_ribs": {
   "base": 328.82,
@@ -4855,9 +5662,9 @@
   "magnit": 319,
   "perek": 345,
   "lenta": 446,
-  "auchan": 303,
+  "auchan": 408,
   "samokat": 375,
-  "lavka": 388,
+  "lavka": 635,
   "vkusvill": 622,
   "real": {
    "lenta": {
@@ -4887,7 +5694,10 @@
     "date": "2026-10-30"
    }
   },
-  "est": {}
+  "est": {
+   "auchan": "lenta-index",
+   "lavka": "lenta-index"
+  }
  },
  "lasagna": {
   "base": 140.7,
@@ -4900,9 +5710,9 @@
   "magnit": 136,
   "perek": 148,
   "lenta": 108,
-  "auchan": 129,
+  "auchan": 106,
   "samokat": 160,
-  "lavka": 166,
+  "lavka": 162,
   "vkusvill": 169,
   "real": {
    "lenta": {
@@ -4919,7 +5729,11 @@
     "date": "2026-10-30"
    }
   },
-  "est": {}
+  "est": {
+   "auchan": "lenta-index",
+   "lavka": "lenta-index",
+   "vkusvill": "lenta-index"
+  }
  },
  "black_pepper": {
   "base": 74.0,
@@ -4932,9 +5746,9 @@
   "magnit": 72,
   "perek": 78,
   "lenta": 34,
-  "auchan": 68,
+  "auchan": 34,
   "samokat": 84,
-  "lavka": 87,
+  "lavka": 51,
   "vkusvill": 90,
   "real": {
    "lenta": {
@@ -4964,7 +5778,10 @@
     "date": "2026-10-30"
    }
   },
-  "est": {}
+  "est": {
+   "auchan": "lenta-index",
+   "lavka": "lenta-index"
+  }
  },
  "bay_leaf": {
   "base": 57.81,
@@ -4977,9 +5794,9 @@
   "magnit": 56,
   "perek": 61,
   "lenta": 27,
-  "auchan": 53,
+  "auchan": 27,
   "samokat": 66,
-  "lavka": 68,
+  "lavka": 40,
   "vkusvill": 61,
   "real": {
    "lenta": {
@@ -5009,7 +5826,10 @@
     "date": "2026-10-30"
    }
   },
-  "est": {}
+  "est": {
+   "auchan": "lenta-index",
+   "lavka": "lenta-index"
+  }
  },
  "cinnamon": {
   "base": 52.03,
@@ -5022,9 +5842,9 @@
   "magnit": 50,
   "perek": 55,
   "lenta": 30,
-  "auchan": 48,
+  "auchan": 30,
   "samokat": 59,
-  "lavka": 61,
+  "lavka": 45,
   "vkusvill": 78,
   "real": {
    "lenta": {
@@ -5054,7 +5874,10 @@
     "date": "2026-10-30"
    }
   },
-  "est": {}
+  "est": {
+   "auchan": "lenta-index",
+   "lavka": "lenta-index"
+  }
  },
  "khmeli": {
   "base": 46.25,
@@ -5067,9 +5890,9 @@
   "magnit": 45,
   "perek": 49,
   "lenta": 23,
-  "auchan": 43,
+  "auchan": 23,
   "samokat": 53,
-  "lavka": 55,
+  "lavka": 34,
   "vkusvill": 67,
   "real": {
    "lenta": {
@@ -5099,7 +5922,10 @@
     "date": "2026-10-30"
    }
   },
-  "est": {}
+  "est": {
+   "auchan": "lenta-index",
+   "lavka": "lenta-index"
+  }
  },
  "coriander": {
   "base": 46.25,
@@ -5112,9 +5938,9 @@
   "magnit": 45,
   "perek": 49,
   "lenta": 35,
-  "auchan": 43,
+  "auchan": 35,
   "samokat": 53,
-  "lavka": 55,
+  "lavka": 52,
   "vkusvill": 80,
   "real": {
    "lenta": {
@@ -5144,7 +5970,10 @@
     "date": "2026-10-30"
    }
   },
-  "est": {}
+  "est": {
+   "auchan": "lenta-index",
+   "lavka": "lenta-index"
+  }
  },
  "paprika": {
   "base": 55.5,
@@ -5157,9 +5986,9 @@
   "magnit": 54,
   "perek": 58,
   "lenta": 25,
-  "auchan": 51,
+  "auchan": 25,
   "samokat": 63,
-  "lavka": 65,
+  "lavka": 37,
   "vkusvill": 94,
   "real": {
    "lenta": {
@@ -5189,7 +6018,10 @@
     "date": "2026-10-30"
    }
   },
-  "est": {}
+  "est": {
+   "auchan": "lenta-index",
+   "lavka": "lenta-index"
+  }
  },
  "cumin": {
   "base": 74.0,
@@ -5202,9 +6034,9 @@
   "magnit": 72,
   "perek": 78,
   "lenta": 49,
-  "auchan": 68,
+  "auchan": 48,
   "samokat": 84,
-  "lavka": 87,
+  "lavka": 73,
   "vkusvill": 76,
   "real": {
    "lenta": {
@@ -5234,7 +6066,10 @@
     "date": "2026-10-30"
    }
   },
-  "est": {}
+  "est": {
+   "auchan": "lenta-index",
+   "lavka": "lenta-index"
+  }
  },
  "curry": {
   "base": 55.5,
@@ -5247,9 +6082,9 @@
   "magnit": 54,
   "perek": 58,
   "lenta": 92,
-  "auchan": 51,
+  "auchan": 91,
   "samokat": 63,
-  "lavka": 65,
+  "lavka": 138,
   "vkusvill": 67,
   "real": {
    "lenta": {
@@ -5266,7 +6101,10 @@
     "date": "2026-10-30"
    }
   },
-  "est": {}
+  "est": {
+   "auchan": "lenta-index",
+   "lavka": "lenta-index"
+  }
  },
  "olives": {
   "base": 170,
@@ -5277,9 +6115,9 @@
   "magnit": 165,
   "perek": 178,
   "lenta": 126,
-  "auchan": 156,
+  "auchan": 124,
   "samokat": 194,
-  "lavka": 201,
+  "lavka": 189,
   "vkusvill": 265,
   "real": {
    "lenta": {
@@ -5309,7 +6147,10 @@
     "date": "2026-10-30"
    }
   },
-  "est": {}
+  "est": {
+   "auchan": "lenta-index",
+   "lavka": "lenta-index"
+  }
  },
  "_meta": {
   "updated": "2026-10-30",
@@ -5332,15 +6173,15 @@
    "rosstat_derived": 41,
    "demo": 21,
    "real_pct": 84.0,
-   "store_direct_pct": 21.1,
+   "store_direct_pct": 25.7,
    "store_pct": {
     "p5": 0.0,
     "magnit": 0.0,
     "perek": 0.0,
     "lenta": 83.3,
-    "auchan": 0.0,
+    "auchan": 18.2,
     "samokat": 0.0,
-    "lavka": 0.0,
+    "lavka": 18.2,
     "vkusvill": 85.6
    },
    "store_pct_with_index": {
@@ -5348,10 +6189,10 @@
     "magnit": 0.0,
     "perek": 0.0,
     "lenta": 83.3,
-    "auchan": 0.0,
+    "auchan": 84.1,
     "samokat": 0.0,
-    "lavka": 0.0,
-    "vkusvill": 85.6
+    "lavka": 80.3,
+    "vkusvill": 92.4
    }
   },
   "sources": [
@@ -5369,7 +6210,14 @@
     "pct_with_index": 0.0,
     "date": "",
     "via": [],
-    "index": null
+    "index": {
+     "base": "lenta",
+     "overall": null,
+     "by_cat": {},
+     "pairs": 0,
+     "pairs_by_cat": {},
+     "outliers": []
+    }
    },
    "magnit": {
     "ok": false,
@@ -5381,10 +6229,12 @@
     "date": "",
     "via": [],
     "index": {
+     "base": "lenta",
      "overall": null,
      "by_cat": {},
      "pairs": 0,
-     "pairs_by_cat": {}
+     "pairs_by_cat": {},
+     "outliers": []
     }
    },
    "perek": {
@@ -5397,10 +6247,12 @@
     "date": "",
     "via": [],
     "index": {
+     "base": "lenta",
      "overall": null,
      "by_cat": {},
      "pairs": 0,
-     "pairs_by_cat": {}
+     "pairs_by_cat": {},
+     "outliers": []
     }
    },
    "lenta": {
@@ -5414,28 +6266,42 @@
     "via": [
      "api"
     ],
-    "index": {
-     "overall": null,
-     "by_cat": {},
-     "pairs": 0,
-     "pairs_by_cat": {}
-    },
+    "index": null,
     "source": "Лента — официальный открытый Integration API (lenta.com/llms.txt), ТК124, Москва, 7-я Кожуховская улица, 9 (ТРЦ Мозаика), доставка (lo)"
    },
    "auchan": {
-    "ok": false,
-    "matched": 0,
-    "derived": 0,
+    "ok": true,
+    "matched": 24,
+    "derived": 87,
     "of": 132,
-    "pct": 0.0,
-    "pct_with_index": 0.0,
-    "date": "",
-    "via": [],
+    "pct": 18.2,
+    "pct_with_index": 84.1,
+    "date": "2026-10-30",
+    "via": [
+     "basket"
+    ],
     "index": {
-     "overall": null,
-     "by_cat": {},
-     "pairs": 0,
-     "pairs_by_cat": {}
+     "base": "lenta",
+     "overall": 0.914,
+     "by_cat": {
+      "produce": 0.902,
+      "dairy": 0.888,
+      "grocery": 0.986
+     },
+     "pairs": 18,
+     "pairs_by_cat": {
+      "produce": 6,
+      "meatfish": 2,
+      "dairy": 6,
+      "grocery": 4
+     },
+     "outliers": [
+      "chicken_fillet (другой сорт у базы)",
+      "pork (другой сорт у базы)",
+      "buckwheat (другой сорт у базы)",
+      "pasta (другой сорт у базы)",
+      "sugar (другой сорт у базы)"
+     ]
     }
    },
    "samokat": {
@@ -5448,50 +6314,93 @@
     "date": "",
     "via": [],
     "index": {
+     "base": "lenta",
      "overall": null,
      "by_cat": {},
      "pairs": 0,
-     "pairs_by_cat": {}
+     "pairs_by_cat": {},
+     "outliers": []
     }
    },
    "lavka": {
-    "ok": false,
-    "matched": 0,
-    "derived": 0,
+    "ok": true,
+    "matched": 24,
+    "derived": 82,
     "of": 132,
-    "pct": 0.0,
-    "pct_with_index": 0.0,
-    "date": "",
-    "via": [],
+    "pct": 18.2,
+    "pct_with_index": 80.3,
+    "date": "2026-10-30",
+    "via": [
+     "basket"
+    ],
     "index": {
-     "overall": null,
-     "by_cat": {},
-     "pairs": 0,
-     "pairs_by_cat": {}
+     "base": "lenta",
+     "overall": 1.423,
+     "by_cat": {
+      "produce": 1.701,
+      "dairy": 1.132,
+      "grocery": 1.498
+     },
+     "pairs": 18,
+     "pairs_by_cat": {
+      "produce": 6,
+      "meatfish": 2,
+      "dairy": 6,
+      "grocery": 4
+     },
+     "outliers": [
+      "chicken_fillet (другой сорт у базы)",
+      "buckwheat (другой сорт у базы)",
+      "pasta (другой сорт у базы)",
+      "sugar (другой сорт у базы)"
+     ]
     }
    },
    "vkusvill": {
     "ok": true,
     "matched": 113,
-    "derived": 0,
+    "derived": 9,
     "of": 132,
     "pct": 85.6,
-    "pct_with_index": 85.6,
+    "pct_with_index": 92.4,
     "date": "2026-10-30",
     "via": [
      "api"
     ],
     "index": {
-     "overall": null,
-     "by_cat": {},
-     "pairs": 0,
-     "pairs_by_cat": {}
+     "base": "lenta",
+     "overall": 1.36,
+     "by_cat": {
+      "produce": 1.073,
+      "meatfish": 1.393,
+      "grocery": 1.562,
+      "dairy": 1.21
+     },
+     "pairs": 92,
+     "pairs_by_cat": {
+      "produce": 21,
+      "meatfish": 18,
+      "grocery": 42,
+      "dairy": 11
+     },
+     "outliers": [
+      "chicken_fillet (другой сорт у базы)",
+      "pork (другой сорт у базы)",
+      "buckwheat (другой сорт у базы)",
+      "pasta (другой сорт у базы)",
+      "sugar (другой сорт у базы)",
+      "barley 3.09",
+      "paprika 3.76"
+     ]
     },
     "source": "ВкусВилл — официальный MCP-сервер (mcp.vkusvill.ru), общий каталог"
    }
   },
-  "snapshot_files": [],
-  "method": "цена магазина (снимок/официальный API) → Пятёрочка × индекс сети по категории (корзина 25 продуктов) → Росстат × коэффициент сети; всегда обычная цена без акций и карт лояльности"
+  "snapshot_files": [
+   "basket_2026-10_auchan_lavka.csv"
+  ],
+  "method": "цена магазина (снимок/корзина/официальный API) → Лента × индекс сети по категории (корзина 25 продуктов) → Росстат × коэффициент сети; всегда обычная цена без акций и карт лояльности",
+  "index_base": "lenta"
  },
  "rice_cakes": {
   "base": 95,
@@ -5530,10 +6439,13 @@
   "magnit": 92,
   "perek": 100,
   "lenta": 90,
-  "auchan": 87,
+  "auchan": 89,
   "samokat": 108,
-  "lavka": 112,
+  "lavka": 135,
   "vkusvill": 132,
-  "est": {}
+  "est": {
+   "auchan": "lenta-index",
+   "lavka": "lenta-index"
+  }
  }
 }

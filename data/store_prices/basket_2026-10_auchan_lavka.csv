@@ -1,0 +1,49 @@
+ingredient_id,store,product_name,pack_size,unit,regular_price,url,date
+potato,auchan,Картофель белый вес,1,kg,37.99,https://www.auchan.ru/product/kartofel_belyy_ves/,2026-10-30
+onion,auchan,Лук репчатый вес,1,kg,45.99,https://www.auchan.ru/product/luk_repchatyy_ves_fas/,2026-10-30
+carrot,auchan,Социальный товар Морковь вес,1,kg,26.99,https://www.auchan.ru/product/morkov_ves/,2026-10-30
+cucumber,auchan,Огурцы пупырчатые среднеплодные вес,1,kg,139.99,https://www.auchan.ru/product/ogurec_pupyrchatyy_sredneplodnyy/,2026-10-30
+apple,auchan,Яблоки Гала новый урожай вес,1,kg,99.99,https://www.auchan.ru/product/yabloko_gala_nov_ur/,2026-10-30
+banana,auchan,Бананы вес,1,kg,149.99,https://www.auchan.ru/product/banany_ves/,2026-10-30
+chicken_fillet,auchan,Филе куриное Петелинка без кожи охлажденное,1,kg,599.99,https://www.auchan.ru/product/file_kur1kg_ohlpetelinka/,2026-10-30
+chicken_thigh,auchan,Бедро цыпленка-бройлера с хребтом Каждый день охлажденное,1,kg,259.99,https://www.auchan.ru/product/kdbedro_cb_ohl_lotok/,2026-10-30
+minced_mix,auchan,Фарш из свинины и говядины Мираторг Домашний,500,g,289.99,https://www.auchan.ru/product/farsh-po-domashnemu-ohl-500g/,2026-10-30
+pork,auchan,Мякоть лопатки свинины Каждый день охлажденная,1,kg,379.99,https://www.auchan.ru/product/myakot_lopatki_svininy_vu_1kg/,2026-10-30
+fish_white,auchan,Минтай замороженный Каждый день филе без кожи,600,g,349.99,https://www.auchan.ru/product/kd-mintay-file-bez-kozhi-600-g/,2026-10-30
+milk,auchan,Молоко Лакомо 2.5% ГОСТ БЗМЖ,900,ml,75.99,https://www.auchan.ru/product/lakomo-moloko-2-5-900ml-pet/,2026-10-30
+kefir,auchan,Кефир Лакомо 2.5% ГОСТ БЗМЖ,900,ml,84.99,https://www.auchan.ru/product/lakomo-kefir-2-5-900g-pet-bzm/,2026-10-30
+smetana,auchan,Сметана Каждый день 15% БЗМЖ,300,g,69.98,https://www.auchan.ru/product/kd-smetana-kd-15-300g-bzmzh/,2026-10-30
+tvorog,auchan,Творог зерненый Село зеленое 5% БЗМЖ,200,g,104.99,https://www.auchan.ru/product/tvorog-selo-zelenoe-5-0-2-kg/,2026-10-30
+butter,auchan,Масло сливочное Дмитровский двор 82.5% ГОСТ БЗМЖ,180,g,189.99,https://www.auchan.ru/product/maslo-dmitdvor-82-5-180gr/,2026-10-30
+eggs,auchan,Яйцо куриное Каждый день С1,10,pcs,89.99,https://www.auchan.ru/product/kd-yayco-kurinoe-s1-10-sht-1/,2026-10-30
+buckwheat,auchan,Крупа гречневая Националь ядрица,900,g,134.99,https://www.auchan.ru/product/krupa-grechnevaya-nacional-yadrica-900-g/,2026-10-30
+rice,auchan,Рис круглозерный Мистраль Краснодар,900,g,129.99,https://www.auchan.ru/product/ris-kruglozernyy-mistral-krasnodar-900-g/,2026-10-30
+pasta,auchan,Макаронные изделия Итальянская штучка Рожки,450,g,84.99,https://www.auchan.ru/product/makarony-450gr-rozhki-it-shtuchka/,2026-10-30
+flour,auchan,Мука пшеничная Мелькомбинат №3 экстра высший сорт,1,kg,64.99,https://www.auchan.ru/product/muka-pshenichnaya-melkombinat-3-ekstra-v-c-1-kg/,2026-10-30
+sugar,auchan,Социальный товар Сахарный песок,1,kg,52.99,https://www.auchan.ru/product/saharnyy-pesok-russkiy-sahar-1-kg/,2026-10-30
+oil,auchan,Масло подсолнечное Я люблю готовить рафинированное,1000,ml,139.99,https://www.auchan.ru/product/maslo-podsoln-raf-dez-1l-yalg/,2026-10-30
+bread,auchan,Батон пшеничный АШАН нарезной,400,g,42.99,https://www.auchan.ru/product/batony_nareznye_vs_400g/,2026-10-30
+potato,lavka,Картофель белый ранний 1 кг,1,kg,69,https://lavka.yandex.ru/good/kartofel-belyj-rannij-1-kilogram,2026-10-30
+onion,lavka,Лук репчатый молодой 1 кг,1,kg,79,https://lavka.yandex.ru/good/luk-repchatyj-rossiya-1-kilogram,2026-10-30
+carrot,lavka,Морковь 1 кг,1,kg,69,https://lavka.yandex.ru/good/morkov-1-kilogram-2,2026-10-30
+cucumber,lavka,Огурцы средние гладкие 600 г,600,g,159,https://lavka.yandex.ru/good/ogurcy-srednie-gladkie-600-gram,2026-10-30
+apple,lavka,Яблоки Гала 600 г,600,g,139,https://lavka.yandex.ru/good/yabloki-gala-600-gram,2026-10-30
+banana,lavka,Банан,1,pcs,35,https://lavka.yandex.ru/good/spelyj-banan-1-unit,2026-10-30
+chicken_fillet,lavka,Филе грудки цыплёнка Троекурово,500,g,319,https://lavka.yandex.ru/good/file-grudki-cyplyonka-brojlera-troekurovo-dlya-salata-500-gram,2026-10-30
+chicken_thigh,lavka,Бедро цыплёнка Троекурово охлаждённое,900,g,339,https://lavka.yandex.ru/good/bedro-cyplyonka-brojlera-troekurovo-ohlazhdyonnoe-900-gram,2026-10-30
+minced_mix,lavka,Фарш Домашний Мираторг (свинина+говядина),400,g,249,https://lavka.yandex.ru/good/farsh-domashnij-miratorg-iz-svininy-i-govyadiny-400-gram,2026-10-30
+beef,lavka,Мякоть говяжьей лопатки Из Лавки,400,g,569,https://lavka.yandex.ru/good/myakot-govyazhej-lopatki-iz-lavki-400-gram,2026-10-30
+fish_white,lavka,Минтай филе Из Лавки без кожи замороженный,400,g,449,https://lavka.yandex.ru/good/mintaj-file-iz-lavki-bez-kozhi-zamorozhennyj-400-gram,2026-10-30
+milk,lavka,Молоко 2.5% Домик в деревне пастеризованное,930,ml,99,https://lavka.yandex.ru/good/moloko-25percent-domik-v-derevne-pasterizovannoe-930-millilitre,2026-10-30
+kefir,lavka,Кефир 2.5% Простоквашино,930,ml,115,https://lavka.yandex.ru/good/kefir-25percent-prostokvashino-930-millilitre,2026-10-30
+smetana,lavka,Сметана 15% Домик в деревне,300,g,109,https://lavka.yandex.ru/good/smetana-domik-v-derevne-15percent-300-gram,2026-10-30
+tvorog,lavka,Творог рассыпчатый 5% Из Лавки,200,g,109,https://lavka.yandex.ru/good/tvorog-5percent-iz-lavki-rassypchatyj-200-gram,2026-10-30
+butter,lavka,Масло сливочное 82.5% Из Лавки,180,g,219,https://lavka.yandex.ru/good/maslo-slivochnoe-825percent-iz-lavki-tradicionnoe-180-gram,2026-10-30
+eggs,lavka,Яйцо С1 Из Лавки,10,pcs,125,https://lavka.yandex.ru/good/yajca-kurinye-s1-iz-lavki-10-unit,2026-10-30
+buckwheat,lavka,Крупа гречневая ядрица Из Лавки,900,g,109,https://lavka.yandex.ru/good/krupa-grechnevaya-yadrica-iz-lavki-bystrorazvarivayushayasya-900-gram,2026-10-30
+rice,lavka,Рис круглозёрный Из Лавки,900,g,189,https://lavka.yandex.ru/good/krupa-risovaya-iz-lavki-shlifovannaya-900-gram,2026-10-30
+pasta,lavka,Макароны Рожок полубублик Шебекинские,450,g,109,https://lavka.yandex.ru/good/makarony-shebekinskie-rozhok-polubublik-202-450-gram,2026-10-30
+flour,lavka,Мука пшеничная Makfa высший сорт,1,kg,95,https://lavka.yandex.ru/good/muka-pshenichnaya-makfa-vysshij-sort-1-kilogram,2026-10-30
+sugar,lavka,Сахар-песок Русский,1,kg,99,https://lavka.yandex.ru/good/sahar-pesok-russkij-1-kilogram,2026-10-30
+oil,lavka,Масло подсолнечное Благо рафинированное,1000,ml,159,https://lavka.yandex.ru/good/maslo-podsolnechnoe-blago-rafinirovannoe-1-liter,2026-10-30
+bread,lavka,Батон Нарезной Черёмушки,400,g,95,https://lavka.yandex.ru/good/baton-nareznoj-cheryomushki-narezka-400-gram,2026-10-30
