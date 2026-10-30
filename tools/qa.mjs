@@ -19,7 +19,7 @@ await shot('00-intro');
 await click('[data-act=go]');
 await overflow('q1'); await click('[data-act=store][data-id=p5]'); await shot('01-store'); await textCheck('q1');
 await click('[data-act=next]');
-await click('[data-act=cnt][data-id=kids][data-d="1"]'); await shot('02-who'); await click('[data-act=next]');
+await click('[data-act=cnt][data-id=kids][data-d="1"]'); await shot('02-who'); await click('[data-act=next]'); if(await page.$('[data-act=pskip]')) await click('[data-act=pskip]');
 await click('[data-act=meal][data-id=s]'); await shot('03-meals'); await click('[data-act=next]');
 await shot('04-days'); await click('[data-act=next]');
 await click('[data-act=equip][data-id=multi]'); await shot('05-equip'); await click('[data-act=next]');
@@ -27,7 +27,7 @@ await click('[data-act=cuis][data-id=ru]'); await shot('06-diet'); await click('
 await click('[data-act=style][data-id=batch]'); await click('[data-act=style][data-id=family]'); await shot('07-style'); await click('[data-act=next]');
 await click('[data-act=allergy][data-id=nuts]'); await shot('08-allergy'); await click('[data-act=next]');
 await page.fill('[data-search]','печ'); await page.waitForTimeout(100); await click('[data-act=dislike][data-id=liver]');
-await page.fill('[data-search]',''); await page.dispatchEvent('[data-search]','input'); await click('[data-act=dislike][data-id=cilantro]'); await shot('09-dislikes'); await overflow('q9'); await click('[data-act=next]');
+await page.fill('[data-search]',''); await page.dispatchEvent('[data-search]','input'); await click('[data-act=dislike][data-id=cilantro]'); { const st=await page.evaluate(()=>({liver:!!document.querySelector('[data-act=dislike][data-id=liver].sel'),cil:!!document.querySelector('[data-act=dislike][data-id=cilantro].sel'),A:S.A.dislikes.slice()})); if(!st.liver||!st.cil||!st.A.includes('liver')||!st.A.includes('cilantro')){ errors.push('q9 dislike chips not selected: '+JSON.stringify(st)); console.log('FAIL q9 dislike chips',JSON.stringify(st)); } else console.log('q9 dislike chips OK',st.A.join(',')); } await shot('09-dislikes'); await overflow('q9'); await click('[data-act=next]');
 for(const k of ['eggs','salt','oil','sugar','spices','flour']) await click(`[data-act=pantry][data-id=${k}]`);
 await click('[data-act=ptab][data-id=meat]'); await shot('10-pantry-meat'); await click('[data-act=ptab][data-id=all]');
 await shot('10-pantry'); await overflow('q10'); await click('[data-act=next]');
@@ -41,14 +41,14 @@ await page.waitForSelector('.nav',{timeout:10000}); await page.waitForTimeout(30
 await shot('20-week'); await full('20-week-full'); await textCheck('week'); await overflow('week');
 const weekInfo=await page.evaluate(()=>({h:document.querySelector('.shopcard').innerText, meals:document.querySelectorAll('.meal').length}));
 // swap
-await page.click('.meal .swap'); await page.waitForTimeout(200); await textCheck('swap');
+await page.click('.meal .swap'); await page.waitForTimeout(200); await textCheck('swap'); if(await page.$('.swopt')){ await page.click('.swopt'); await page.waitForTimeout(200); }
 await click('[data-act=tab][data-id=shop]'); await page.waitForTimeout(200); await shot('30-shopping'); await full('30-shopping-full'); await textCheck('shop'); await overflow('shop');
 await page.click('.li .cb'); await page.waitForTimeout(100);
 await click('[data-act=cart]'); await page.waitForTimeout(500); await shot('31-cart-modal'); await page.waitForTimeout(400); await click('#modal [data-act=copylist]'); await page.waitForTimeout(400);
 const listTxt=await page.evaluate(()=>listText());
 await click('[data-act=tab][data-id=week]'); 
 await click('.meal[data-act=open]'); await page.waitForTimeout(500); await shot('40-recipe'); await full('40-recipe-full'); await textCheck('recipe'); await overflow('recipe');
-await click('[data-act=serv][data-d="1"]'); await click('[data-act=serv][data-d="1"]'); await shot('41-recipe-servings');
+await click('[data-act=serv][data-d="0.5"]'); await click('[data-act=serv][data-d="0.5"]'); await shot('41-recipe-servings');
 await click('[data-act=rtab][data-id=steps]'); await page.evaluate(()=>document.querySelector('.seg').scrollIntoView()); await page.waitForTimeout(100); await shot('42-recipe-steps');
 await click('.actions [data-act=fav]'); await click('[data-act=toplan]'); await shot('43-toplan'); await click('#modal .modal > .btn.sec');
 if(MODE==='tg'){ await page.evaluate(()=>window.__tgBack()); await page.waitForTimeout(200);} else await click('[data-act=closerecipe]');

@@ -59,8 +59,8 @@ const STYLES = [
   {id:'light',name:'Лёгкое и свежее',sub:'овощи, салаты, супы',e:'🥗'}
 ];
 const ALLERGENS = [
-  {id:'none',name:'Нет аллергии',e:'✅'},{id:'nuts',name:'Орехи',e:'🌰'},{id:'peanut',name:'Арахис',e:'🥜'},
-  {id:'dairy',name:'Молочное',e:'🥛'},{id:'eggs',name:'Яйца',e:'🥚'},{id:'gluten',name:'Глютен',e:'🌾'},
+  {id:'none',name:'Нет аллергии',e:'✅'},{id:'nuts',name:'Орехи (и арахис)',e:'🌰'},{id:'peanut',name:'Арахис',e:'🥜'},
+  {id:'dairy',name:'Молочное',e:'🥛'},{id:'lactose',name:'Лактоза',e:'🍼'},{id:'eggs',name:'Яйца',e:'🥚'},{id:'gluten',name:'Глютен',e:'🌾'},
   {id:'fish',name:'Рыба',e:'🐟'},{id:'seafood',name:'Морепродукты',e:'🦐'},{id:'soy',name:'Соя',e:'🫘'},
   {id:'sesame',name:'Кунжут',e:'⚪'},{id:'honey',name:'Мёд',e:'🍯'},{id:'mustard',name:'Горчица',e:'🟡'}
 ];
