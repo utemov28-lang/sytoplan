@@ -12,3 +12,12 @@ Steps: [ ] data+recipes  [ ] app refactor/design  [ ] illustrations  [ ] recipe 
 - Telegram: theme, safe areas, BackButton, HapticFeedback, disableVerticalSwipes; works in a normal browser.
 - QA: tools/qa.mjs (browser|tg), screenshots in /workspace/sytoplan-screens/.
 - Next: real prices, then the server.
+
+## Фаза 2 — реальные цены + сытные порции (30.10.2026)
+- Сытность: js/data.js `normalizePortion()` — гарнир/хлеб + масштаб до минимумов (завтрак ≥420, основное ≥560, суп ≥350, салат ≥330 ккал);
+  app.js `topUpKcal()` — авто-перекус, если день < 1700 ккал на взрослого (подсказка «добавлено для сытости»);
+  неделя показывает «ккал на взрослого · на семью». 9 профилей: среднее 1274 → ~1870 ккал/взрослый/день (tools/profiles.mjs).
+- Цены: tools/update_prices.py → data/prices.json (Росстат: еженедельные цены РФ на 26.10.2026 + ежемесячные за 09.2026),
+  × коэффициент сети (STORE_COEF, источники в коде). 96/117 ингредиентов (82%) — от Росстата (66 прямо, 30 производно), 21 — запасные.
+  Сайты сетей (5ka, Перекрёсток, Магнит, Лента, Ашан, Дикси) анонимно не отдают каталоги — прямых цен магазинов нет.
+- Бюджет по умолчанию: медиана стоимости порции по приёму пищи × 1,2 (упаковки), + авто-перекусы.

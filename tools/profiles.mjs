@@ -1,0 +1,26 @@
+// быстрый прогон 9 профилей без скриншотов: node tools/profiles.mjs [url]
+import { chromium } from 'playwright-core';
+const url=process.argv[2]||'http://127.0.0.1:8765/';
+const b=await chromium.launch({executablePath:'/usr/bin/google-chrome',args:['--no-sandbox']});
+const page=await b.newPage({viewport:{width:390,height:844}});
+const errs=[]; page.on('pageerror',e=>errs.push(e.message));
+await page.route('**/telegram-web-app.js',r=>r.fulfill({body:'',contentType:'application/javascript'}));
+await page.goto(url); await page.waitForTimeout(800);
+await page.evaluate(()=>{ S.A=Object.assign(S.A||{}, {adults:2,kids:0,meals:['b','l','d','s'],days:[0,1,2,3,4,5,6],budget:null,styles:[],dislikes:[],pantry:[],allergies:['none'],diets:['none'],cuisines:[],equip:['stove','oven','micro']}); });
+const scen=await page.evaluate(()=>{ const res=[]; const base=JSON.parse(JSON.stringify(S.A));
+ const run=(name,patch)=>{ S.A=Object.assign(JSON.parse(JSON.stringify(base)),patch); if(S.A.budget==null) S.A.budget=defaultBudget(); generatePlan('t'+name); const sh=shopping();
+   const empty=S.plan.slots.filter(s=>!s.r).length; const bad=S.plan.slots.filter(s=>s.r && whyNot(RMAP[s.r])).length;
+   res.push({name,budget:S.A.budget,typical:Math.round(typicalCost()),total:sh.total,slots:S.plan.slots.length,empty,bad,uniq:new Set(S.plan.slots.map(s=>s.r)).size,kcal:Math.round(dayOrder().reduce((a,d)=>a+dayTotals(d).k,0)/dayOrder().length),minDay:Math.min(...dayOrder().map(d=>dayTotals(d).k)),meals:S.A.meals.join('')}); };
+ run('default2ad',{adults:2,kids:0,meals:['b','l','d','s'],budget:null,styles:[],dislikes:[],pantry:[],allergies:['none'],diets:['none'],equip:['stove','oven','micro']});
+ run('tight',{adults:2,kids:0,meals:['b','l','d','s'],budget:4500,styles:[],pantry:[]});
+ run('verytight',{adults:2,kids:0,meals:['b','l','d'],budget:2500});
+ run('lean',{diets:['lean'],budget:null});
+ run('veg+gluten',{diets:['veg'],allergies:['gluten','dairy'],budget:null});
+ run('nostove',{equip:['micro'],budget:null});
+ run('kids',{diets:['kids'],kids:2,budget:null});
+ run('hp+pp',{diets:['hp','pp'],budget:null});
+ run('perek4',{store:'perek',adults:4,kids:2,budget:null});
+ S.A=base; return res; });
+console.table(scen);
+console.table(scen); const avg=Math.round(scen.reduce((s,x)=>s+x.kcal,0)/scen.length); console.log('avg kcal/adult/day',avg,'errors',errs);
+await b.close();

@@ -2,6 +2,7 @@
 /* ====== ПРОИЗВОДНЫЕ ДАННЫЕ ====== */
 const RMAP = {};
 RECIPES.forEach(r=>{
+  if(r.ing.every(i=>ING[i.k])) normalizePortion(r);
   const fl = new Set(); r.ing.forEach(i=>{ if(!ING[i.k]) console.error('Нет ингредиента', i.k, r.id); else ING[i.k].flags.forEach(f=>fl.add(f)); });
   r.meat = fl.has('meat'); r.fish = fl.has('fish')||fl.has('seafood');
   r.al = ['nuts','peanut','dairy','eggs','gluten','fish','seafood','soy','sesame','honey'].filter(a=>fl.has(a));
@@ -98,12 +99,28 @@ function setA(p){ Object.assign(S.A,p); save(); render(); }
 const A = ()=>S.A;
 function store(){ return STORES.find(s=>s.id===S.A.store) || STORES[0]; }
 
+/* ====== ЦЕНЫ ====== data/prices.json: {ингредиент: {p5,magnit,…: ₽ за упаковку, source, date}, _meta} */
+let PRICES_META=null;
+function applyPrices(P){ if(!P||!P._meta) return; Object.keys(P).forEach(k=>{ const g=ING[k], p=P[k]; if(!g||k==='_meta') return;
+  g.sp={}; STORES.forEach(st=>{ if(typeof p[st.id]==='number') g.sp[st.id]=p[st.id]; }); g.psrc=p.source; }); PRICES_META=P._meta; _baseCache={}; }
+function loadPrices(){ const t=new Promise(res=>setTimeout(res,3000));
+  const f=fetch('data/prices.json',{cache:'no-cache'}).then(r=>r.ok?r.json():null).then(applyPrices).catch(()=>{});
+  return Promise.race([f,t]); }
+function priceNote(){ if(!PRICES_META) return 'Цены: примерные запасные данные, ориентировочно';
+  const [y,mo,da]=(PRICES_META.weekly_date||PRICES_META.updated||'').split('-'); const d=`${+da} ${['января','февраля','марта','апреля','мая','июня','июля','августа','сентября','октября','ноября','декабря'][+mo-1]} ${y}`; return `Цены: Росстат/магазин, обновлено ${d}, ориентировочно`; }
+
 /* ====== РАСЧЁТЫ ====== */
 function portions(){ return S.A.adults + S.A.kids*0.5; }
 function mealOrder(){ return MEALS.filter(m=>S.A.meals.includes(m.id)).map(m=>m.id); }
 function dayOrder(){ return S.A.days.slice().sort((a,b)=>a-b); }
 function portionsPerWeek(){ return portions()*S.A.meals.length*S.A.days.length; }
-function typicalCost(){ const perDay=S.A.meals.reduce((s,m)=>s+MEALMAP[m].base,0); return perDay*portions()*S.A.days.length*store().mult; }
+/* Типичная стоимость взрослой порции по приёму пищи = медиана portionCost рецептов этого приёма
+   в выбранном магазине (с новыми сытными порциями и ценами) — бюджет по умолчанию следует за ценами. */
+let _baseCache={};
+function mealBase(m){ const key=S.A.store+'|'+(PRICES_META?PRICES_META.updated:'')+'|'+S.A.dislikes.join(); if(!_baseCache[key]) _baseCache={[key]:{}};
+  const c=_baseCache[key]; if(c[m]==null){ const v=RECIPES.filter(r=>r.m.includes(m)).map(portionCost).sort((a,b)=>a-b); c[m]=v.length?v[Math.floor(v.length/2)]:MEALMAP[m].base; } return c[m]; }
+function typicalCost(){ let perDay=S.A.meals.reduce((s,m)=>s+mealBase(m),0); if(!S.A.meals.includes('s')) perDay+=mealBase('s')*0.5; /* ≈ авто-перекусы для сытости */
+  return perDay*portions()*S.A.days.length*1.2; } /* ×1.2 — покупка целыми упаковками и остатки (по прогону 9 профилей) */
 function budgetRange(){ const t=typicalCost(); return {min:Math.max(500,Math.round(t*0.3/100)*100), max:Math.max(1000,Math.round(t*2/100)*100)}; }
 function defaultBudget(){ return Math.max(500, Math.ceil(typicalCost()*1.2/500)*500); }
 function budgetStatus(b){
@@ -118,7 +135,7 @@ function removedIngs(r){ const dk=dislikedKeys(); return r.ing.filter(i=>ING[i.k
 const DIETCHK = {
   veg:r=>!r.meat&&!r.fish,
   lean:r=>!r.meat&&!r.fish&&!r.al.includes('dairy')&&!r.al.includes('eggs'),
-  pp:r=>r.tags.includes('light')||r.k<=(r.m.includes('s')?300:450),
+  pp:r=>r.tags.includes('light')||(r.f*9/r.k<=0.35 && r.k<=(r.m.includes('s')?300:700)),
   hp:r=>r.tags.includes('highprotein')||r.p*4/r.k>=0.2,
   kids:r=>r.tags.includes('kids')
 };
@@ -135,7 +152,9 @@ function whyNot(r){ // null если рецепт подходит
 }
 function fits(r,m){ return (!m||r.m.includes(m)) && !whyNot(r); }
 function candidates(m){ return RECIPES.filter(r=>fits(r,m)); }
-function portionCost(r){ const st=store(); return recipeIngs(r).reduce((s,i)=>{const g=ING[i.k]; return s+i.q/r.sv/g.pack*g.price;},0)*st.mult; }
+/* Цена упаковки в выбранном магазине: из data/prices.json (Росстат × коэффициент сети), иначе запасная × mult */
+function priceOf(g,st){ st=st||store(); return g.sp&&g.sp[st.id]!=null ? g.sp[st.id] : g.price*st.mult; }
+function portionCost(r){ const st=store(); return recipeIngs(r).reduce((s,i)=>{const g=ING[i.k]; return s+i.q/r.sv/g.pack*priceOf(g,st);},0); }
 function styleMatch(r,st){
   if(st==='fast') return r.tags.includes('fast')||r.prep+r.cook<=25;
   if(st==='light') return r.tags.includes('light')||r.k<=380;
@@ -162,7 +181,7 @@ function shopping(){
   Object.keys(need).forEach(k=>{ const g=ING[k], q=need[k];
     if(S.A.pantry.includes(k)){ home.push({k,g,q}); return; }
     const packs=Math.max(1,Math.ceil(q/g.pack-0.08));
-    const price=Math.round(packs*g.price*st.mult);
+    const price=Math.round(packs*priceOf(g,st));
     total+=price; items.push({k,g,q,packs,price});
   });
   const order=AISLES.map(a=>a.id);
@@ -180,8 +199,8 @@ function shopTotalFor(slots){ const save=S.plan; S.plan=Object.assign({},save||{
 function generatePlan(seed){
   const a=S.A; const days=dayOrder(), meals=mealOrder(); const p=portions();
   const perPortion=a.budget/(Math.max(1,portionsPerWeek()));
-  const baseSum=meals.reduce((s,m)=>s+MEALMAP[m].base,0)/meals.length;
-  const target={}; MEALS.forEach(m=>target[m.id]=perPortion*MEALMAP[m.id].base/baseSum);
+  const baseSum=meals.reduce((s,m)=>s+mealBase(m),0)/meals.length;
+  const target={}; MEALS.forEach(m=>target[m.id]=perPortion*mealBase(m.id)/baseSum);
   S.plan={seed:seed||String(Date.now()),slots:[]};
   const ctx={uses:{},ings:new Set(),target};
   const cands={}; meals.forEach(m=>cands[m]=candidates(m));
@@ -203,7 +222,25 @@ function generatePlan(seed){
     });
   });
   fitBudget(cands);
+  topUpKcal();
+  fitBudget(cands);
   save();
+}
+/* ====== СЫТОСТЬ ======
+   Если в день на взрослого < KCAL_DAY_MIN (например, выбраны не все приёмы пищи) —
+   добавляем перекус (до 2 в день): сытный и недорогой. Помечается auto:true, в плане — подсказка. */
+const KCAL_DAY_MIN=1700;
+function topUpKcal(){
+  const slots=S.plan.slots; const snacks=candidates('s'); if(!snacks.length) return;
+  const used={}; slots.forEach(x=>{ if(x.r) used[x.r]=(used[x.r]||0)+1; });
+  dayOrder().forEach(d=>{
+    for(let n=0;n<2;n++){ const k=dayTotals(d).k; if(k>=KCAL_DAY_MIN) break;
+      const need=KCAL_DAY_MIN-k, inDay=new Set(slots.filter(x=>x.d===d).map(x=>x.r));
+      const pick=snacks.filter(r=>!inDay.has(r.id)&&(used[r.id]||0)<2)
+        .map(r=>({r,sc:Math.min(r.k,need+150)/Math.max(15,portionCost(r))+hash(S.plan.seed+r.id+d)*0.5}))
+        .sort((a,b)=>b.sc-a.sc)[0];
+      if(!pick) break; slots.push({d,m:'s',r:pick.r.id,auto:true}); used[pick.r.id]=(used[pick.r.id]||0)+1; }
+  });
 }
 function fitBudget(cands){
   const slots=S.plan.slots; const maxUse=S.A.styles.includes('batch')?3:2;
@@ -340,7 +377,7 @@ function renderStep(sc){
     <div class="range-l"><span>${rub(rg.min)}</span><span>${rub(rg.max)}</span></div>
     <div id="bstatus"></div>
     <div class="metrics"><div class="metric"><div class="v" id="m1"></div><div class="l">₽ / неделя</div></div><div class="metric"><div class="v" id="m2"></div><div class="l">₽ / порция</div></div><div class="metric"><div class="v" id="m3"></div><div class="l">порций / неделя</div></div></div>
-    <p class="foot">Оценка по примерным демо-ценам, не по актуальным ценам магазина.</p>`,
+    <p class="foot">Оценка: ${priceNote()}.</p>`,
     `<button class="btn" data-act="build">Собрать план</button>`); }
   }
   return '';
@@ -397,19 +434,23 @@ function renderWeek(){
   const sh=shopping(); const plan=S.plan; const n=plan.slots.filter(s=>s.r).length;
   let html=`<h1>Ваша неделя готова!</h1><p class="sub">${n} ${plural(n,'блюдо','блюда','блюд')} · ${store().name} · ${dec(portions())} ${plural(Math.ceil(portions()),'порция','порции','порций')} за приём</p>
   <button class="shopcard" data-act="tab" data-id="shop"><span class="ic">🛒</span><div style="flex:1;min-width:0"><div class="t">Список покупок</div><div class="s">${sh.items.length} ${plural(sh.items.length,'позиция','позиции','позиций')} · ~${rub(sh.total)} из ${rub(S.A.budget)}</div></div>${budgetPill(sh.total)}</button>`;
-  const days=dayOrder();
+  const days=dayOrder(); const pp=portions();
+  const avgK=days.length?days.reduce((a,d)=>a+dayTotals(d).k,0)/days.length:0;
+  html+=`<div class="kcalsum">🔥 В среднем <b>${fmt(Math.round(avgK/10)*10)}${NB}ккал</b> в день на взрослого${pp!==1?` · ${fmt(Math.round(avgK*pp/10)*10)} на семью`:''}${S.A.kids?` <span class="mut">(детская порция — половина)</span>`:''}</div>`;
+  const autoN=plan.slots.filter(s=>s.auto).length;
+  if(autoN) html+=`<div class="note">🍎 Добавили ${autoN} ${plural(autoN,'перекус','перекуса','перекусов')} в дни, где выбранных приёмов пищи меньше ${fmt(KCAL_DAY_MIN)}${NB}ккал на взрослого. Можно заменить или убрать перекусы в профиле — тогда день будет менее сытным.</div>`;
   if(days.length>1) html+=`<div class="daystrip">${days.map(d=>`<button data-act="jumpday" data-id="${d}">${DAYS[d]}<span>${fmt(dayTotals(d).k)}</span></button>`).join('')}</div>`;
   const missing=mealOrder().filter(m=>!candidates(m).length);
   if(missing.length) html+=`<div class="warn">Нет подходящих рецептов для: ${missing.map(m=>MEALMAP[m].name.toLowerCase()).join(', ')}. Ослабьте фильтры в профиле.</div>`;
   if(sh.total>S.A.budget) html+=`<div class="warn">Даже самые экономные подходящие блюда дороже бюджета на ~${rub(sh.total-S.A.budget)}. Попробуйте увеличить бюджет или отметить продукты, которые есть дома.</div>`;
   days.forEach(d=>{ const t=dayTotals(d);
-    html+=`<div class="dayh" id="day${d}"><div class="row"><div class="n">${DAYS_FULL[d]}</div><div class="kc">${fmt(t.k)}${NB}ккал</div></div>${macroBar(t)}</div>`;
+    html+=`<div class="dayh" id="day${d}"><div class="row"><div class="n">${DAYS_FULL[d]}</div><div class="kc">${fmt(Math.round(t.k))}${NB}ккал<span class="kcf">${pp!==1?` · ${fmt(Math.round(t.k*pp))} на семью`:''}</span></div></div>${macroBar(t)}</div>`;
     plan.slots.forEach((s,i)=>{ if(s.d!==d) return; const r=s.r&&RMAP[s.r]; const lbl=MEALMAP[s.m].short;
       if(!r){ html+=`<div class="meal empty-meal"><div class="ph thumb" style="background:var(--bg)">🤷</div><div class="mi"><div class="mlabel">${lbl}</div><div class="mt">Нет подходящих рецептов</div><div class="mm">Ослабьте фильтры в профиле</div></div></div>`; return; }
-      html+=`<div class="meal" data-act="open" data-id="${r.id}">${photo(r,'thumb')}<div class="mi"><div class="mlabel">${lbl}</div><div class="mt">${esc(r.t)}</div><div class="mm">${mealMeta(r)}</div>${s.left?'<span class="lefttag">📦 из остатков ужина</span>':''}</div>
+      html+=`<div class="meal" data-act="open" data-id="${r.id}">${photo(r,'thumb')}<div class="mi"><div class="mlabel">${lbl}</div><div class="mt">${esc(r.t)}</div><div class="mm">${mealMeta(r)}</div>${s.left?'<span class="lefttag">📦 из остатков ужина</span>':''}${s.auto?'<span class="lefttag">🍎 добавлено для сытости</span>':''}</div>
       <button class="swap" data-act="swap" data-i="${i}" aria-label="Заменить">${ICON.swap}Заменить</button></div>`; });
   });
-  html+=`<p class="foot">КБЖУ — на одну взрослую порцию, рассчитаны по таблицам состава продуктов. Цены — примерные демо-данные, не актуальные цены магазинов.</p>`;
+  html+=`<p class="foot">КБЖУ — на одну взрослую порцию (детская — половина), по таблицам состава продуктов. ${priceNote()}</p>`;
   return html;
 }
 function renderShop(){
@@ -427,7 +468,7 @@ function renderShop(){
   if(sh.home.length){ html+=`<div class="aisle">🏠 Есть дома <span class="c">${sh.home.length}</span></div>`;
     sh.home.forEach(x=>{ html+=`<div class="li"><span class="e">${x.g.e}</span><div class="nm"><b>${esc(x.g.name)}</b><span>понадобится ≈ ${fmtAmount(x.q,x.g.unit)}</span></div><span class="homepill">есть дома</span></div>`; }); }
   html+=`<div class="stack" style="margin-top:22px"><button class="btn out sm" data-act="copylist">Скопировать список</button></div>
-  <p class="foot">Количество округлено до реальных упаковок. Цены — примерные демо-данные для ${store().name} (2025–2026), не актуальные цены магазина.</p>`;
+  <p class="foot">Количество округлено до реальных упаковок. ${priceNote()} — для ${store().name}; это ориентир, не цена на полке.</p>`;
   return html;
 }
 function renderRecipes(){
@@ -456,7 +497,7 @@ function renderProfile(){
   return `<h1>Профиль</h1><p class="sub">Ваши ответы. Нажмите на строку, чтобы изменить — план пересоберётся.</p>
   <div class="card" style="padding:4px 16px">${rows.map(r=>`<div class="prow" data-act="${r[2]==='city'?'city':'edit'}" data-id="${r[2]}" style="cursor:pointer"><span class="k">${r[0]}</span><span class="v">${esc(r[1])} <span class="mut">›</span></span></div>`).join('')}</div>
   <div class="stack" style="margin-top:20px"><button class="btn" data-act="regen">${ICON.swap} Пересобрать план</button><button class="btn sec" data-act="edit" data-id="q1">Изменить ответы</button><button class="btn sec" data-act="restart" style="color:#B91C1C">Начать заново</button></div>
-  <p class="foot">${APP_NAME} · прототип. Цены — примерные демо-данные, не актуальные цены магазинов. Интеграции с магазинами пока нет.</p>`;
+  <p class="foot">${APP_NAME} · прототип. ${priceNote()}: средние цены Росстата × уровень цен сети. Интеграции с магазинами пока нет.</p>`;
 }
 /* --- рецепт --- */
 function renderRecipe(){
@@ -480,11 +521,11 @@ function renderRecipe(){
   <div class="times"><div><b>${r.prep} мин</b>подготовка</div><div><b>${r.cook} мин</b>готовка</div><div><b>~${fmt(portionCost(r))} ₽</b>за порцию</div></div>
   <h2>Нужна техника</h2><div class="chips">${r.eq.length?r.eq.map(e=>{const q=EQUIP.find(x=>x.id===e); return `<span class="chip ${S.A.equip.includes(e)?'sel':''}">${q.e} ${q.name}</span>`;}).join(''):'<span class="chip">🙌 Без техники</span>'}</div>
   <div class="seg"><button class="${S.rtab==='ing'?'on':''}" data-act="rtab" data-id="ing">Ингредиенты</button><button class="${S.rtab==='steps'?'on':''}" data-act="rtab" data-id="steps">Приготовление · ${r.steps.length} ${plural(r.steps.length,'шаг','шага','шагов')}</button></div>
-  ${S.rtab==='ing'?`<div class="stepper-card" style="margin-bottom:8px"><div><div class="t">Порции</div><div class="s">количества пересчитаются</div></div><div class="stepper"><button data-act="serv" data-d="-1" ${n<=1?'disabled':''}>−</button><span class="v">${n}</span><button data-act="serv" data-d="1" ${n>=12?'disabled':''}>+</button></div></div>
+  ${S.rtab==='ing'?`<div class="stepper-card" style="margin-bottom:8px"><div><div class="t">Порции</div><div class="s">количества пересчитаются</div></div><div class="stepper"><button data-act="serv" data-d="-1" ${n<=1?'disabled':''}>−</button><span class="v">${n}</span><button data-act="serv" data-d="1" ${n>=12?'disabled':''}>+</button></div></div>${r.side||r.scaled?`<p class="mut small" style="margin:0 0 8px">🍽 Порция рассчитана на сытного взрослого (~${fmt(Math.round(r.k/10)*10)}${NB}ккал)${r.side?`, с гарниром: ${r.side}`:''}.</p>`:''}
    ${recipeIngs(r).map(i=>{const g=ING[i.k]; const home=S.A.pantry.includes(i.k); return `<div class="ing"><span class="e">${g.e}</span><span class="n">${esc(g.name)} ${home?'<span class="homepill">есть дома</span>':''}</span><span class="q">${fmtIngQty(i.k,i.q*n/r.sv,g.unit)}</span></div>`;}).join('')}
    ${rem.length?`<p class="mut small" style="margin-top:10px">Убрали, т.к. вы не любите: ${rem.map(i=>ING[i.k].name.toLowerCase()).join(', ')}</p>`:''}`
   :`<ol class="steps">${r.steps.map(s=>`<li><span>${esc(s)}</span></li>`).join('')}</ol>`}
-  <p class="foot">Стоимость — по примерным демо-ценам для ${store().name}.</p></div>`;
+  <p class="foot">Стоимость — ${priceNote().toLowerCase()}, ${store().name}.</p></div>`;
 }
 /* --- модалки и тосты --- */
 function modal(html){ closeModal(); const d=document.createElement('div'); d.className='mback'; d.id='modal'; d.innerHTML=`<div class="modal">${html}</div>`;
@@ -594,4 +635,4 @@ const _go=go; go=function(sc){ searchQ=''; _go(sc); };
 document.title=APP_NAME+' — план питания на неделю';
 if(inTG){ try{ applyTheme(); TG.onEvent('themeChanged',applyTheme); if(tgv('6.1')) TG.BackButton.onClick(goBack); if(tgv('7.7')&&TG.disableVerticalSwipes) TG.disableVerticalSwipes(); document.documentElement.classList.add('tg'); }catch(e){ console.warn(e); } }
 if(S.screen==='loading') loadingRun=false;
-render();
+loadPrices().then(render);

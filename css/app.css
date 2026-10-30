@@ -268,3 +268,7 @@ html.dark .kb div{filter:brightness(.9)}
 .warn{background:var(--yl);border:2px solid var(--yb);border-radius:18px;padding:12px 14px;font-size:14px;margin:14px 0;line-height:1.4}
 .restart{display:block;margin:26px auto 0;border:0;background:none;color:var(--mut);font-weight:700;font-size:13px;text-decoration:underline}
 @media (min-width:600px){#app{border-left:1px solid var(--bd);border-right:1px solid var(--bd)}}
+.kcalsum{background:#FFF7ED;border-radius:14px;padding:10px 12px;font-size:14px;margin:10px 0 4px;line-height:1.35}
+.kcalsum b{color:#C2410C}
+.note{background:#ECFDF5;color:#065F46;border-radius:14px;padding:10px 12px;font-size:13px;margin:8px 0;line-height:1.35}
+.dayh .kcf{font-weight:600;color:var(--mut,#6B7280);font-size:12px}

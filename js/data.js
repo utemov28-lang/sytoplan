@@ -3,14 +3,19 @@
 const APP_NAME = 'СытоПлан';          // ← название приложения меняется здесь
 const LS_KEY = 'sytoplan_state_v1';
 
-/* Магазины. mult — множитель цен относительно «средней» корзины (демо-допущение). */
+/* Магазины. mult — уровень цен сети относительно средней цены Росстата (ориентировочно).
+   Источники: prosto.ru — корзина из 10 продуктов, Москва, апрель 2026 (Ашан 1276 ₽ … Перекрёсток 1671 ₽);
+   ngnovoros.ru — 13 продуктов, Москва, сентябрь 2025 (Пятёрочка дешевле Магнита и Ленты). Источники расходятся,
+   поэтому отклонение от 1 по prosto.ru уменьшено вдвое. Те же коэффициенты — в tools/update_prices.py (STORE_COEF).
+   Основные цены берутся из data/prices.json (обновляет tools/update_prices.py); mult применяется к ним уже там,
+   а здесь — только к запасным ценам каталога ниже, если prices.json не загрузился. */
 const STORES = [
-  {id:'p5',     name:'Пятёрочка',   loc:'Пятёрочке',   ini:'5', color:'#E31E24', bg:'#FDECEC', mult:0.95, lvl:'₽'},
-  {id:'magnit', name:'Магнит',      loc:'Магните',     ini:'М', color:'#D7262B', bg:'#FFEFF0', mult:0.95, lvl:'₽'},
-  {id:'perek',  name:'Перекрёсток', loc:'Перекрёстке', ini:'П', color:'#0B7A3B', bg:'#E7F5EC', mult:1.12, lvl:'₽₽₽'},
-  {id:'lenta',  name:'Лента',       loc:'Ленте',       ini:'Л', color:'#1C3F94', bg:'#EAF0FB', mult:1.00, lvl:'₽₽'},
-  {id:'dixy',   name:'Дикси',       loc:'Дикси',       ini:'Д', color:'#F37021', bg:'#FEF1E8', mult:0.92, lvl:'₽'},
-  {id:'auchan', name:'Ашан',        loc:'Ашане',       ini:'А', color:'#E2001A', bg:'#FDE8EA', mult:0.98, lvl:'₽₽'}
+  {id:'p5',     name:'Пятёрочка',   loc:'Пятёрочке',   ini:'5', color:'#E31E24', bg:'#FDECEC', mult:1.04, lvl:'₽'},
+  {id:'magnit', name:'Магнит',      loc:'Магните',     ini:'М', color:'#D7262B', bg:'#FFEFF0', mult:0.97, lvl:'₽'},
+  {id:'perek',  name:'Перекрёсток', loc:'Перекрёстке', ini:'П', color:'#0B7A3B', bg:'#E7F5EC', mult:1.05, lvl:'₽₽₽'},
+  {id:'lenta',  name:'Лента',       loc:'Ленте',       ini:'Л', color:'#1C3F94', bg:'#EAF0FB', mult:1.02, lvl:'₽₽'},
+  {id:'dixy',   name:'Дикси',       loc:'Дикси',       ini:'Д', color:'#F37021', bg:'#FEF1E8', mult:1.00, lvl:'₽'},
+  {id:'auchan', name:'Ашан',        loc:'Ашане',       ini:'А', color:'#E2001A', bg:'#FDE8EA', mult:0.92, lvl:'₽₽'}
 ];
 /* base — типичная стоимость одной взрослой порции, ₽ (для оценки бюджета) */
 const MEALS = [
@@ -59,8 +64,10 @@ const AISLES = [
 ];
 
 /* ====== КАТАЛОГ ПРОДУКТОВ ======
-   ВНИМАНИЕ: цены — ПРИМЕРНЫЕ ДЕМО-ДАННЫЕ (ориентир на розницу РФ 2025–2026, «средний» магазин, mult=1.0).
-   Это НЕ актуальные цены магазинов и не данные из их API.
+   Цены здесь — ЗАПАСНЫЕ (ориентир на розницу РФ 2025–2026, «средняя» цена, mult=1.0).
+   Актуальные — в data/prices.json: средние потребительские цены Росстата (еженедельные/ежемесячные, РФ),
+   пересчитанные на упаковку × коэффициент сети. Для ~20 позиций без аналога у Росстата остаётся цена отсюда (source:'demo').
+   Это НЕ цены с полок и не данные из API магазинов.
    Формат: key: [название, отдел, упаковка, ед., цена упаковки ₽, emoji, флаги, [ккал, Б, Ж, У на 100 г/мл], вес 1 шт в г]
    Пищевая ценность — справочные значения на 100 г съедобной части сырого продукта
    (И. М. Скурихин «Химический состав российских пищевых продуктов», при отсутствии — USDA FoodData Central).
@@ -234,3 +241,38 @@ function R(id,t,e,m,c,tags,eq,prep,cook,sv,ing,steps){
 function calcNutrition(r){let k=0,p=0,f=0,c=0;
   r.ing.forEach(x=>{const it=ING[x.k];if(!it)return;const g=ingGrams(x.k,x.q)/100;k+=it.n.k*g;p+=it.n.p*g;f+=it.n.f*g;c+=it.n.c*g;});
   r.k=Math.round(k/r.sv);r.p=Math.round(p/r.sv);r.f=Math.round(f/r.sv);r.cb=Math.round(c/r.sv);}
+
+/* ====== НОРМЫ ПОРЦИЙ ======
+   Взрослая порция должна быть сытной: завтрак ≥420 ккал, основное блюдо обеда/ужина ≥560 ккал
+   (порция 350–450 г вместе с гарниром), суп ≥350 ккал (300–350 мл + хлеб), перекус ≥150 ккал.
+   1) Блюдам без гарнира добавляем гарнир (картофель / гречка / рис / хлеб), супам — хлеб.
+   2) Если всё ещё мало — масштабируем количества (не больше ×1,8; соль и специи не трогаем).
+   Пометка r.side — что добавлено, показывается в рецепте отдельным шагом. */
+const STARCH = new Set(['potato','rice','buckwheat','pasta','spaghetti','noodles','bulgur','millet','barley','semolina','oats','flour',
+  'bread','bread_whole','lavash','tortilla','pelmeni','vareniki','puff_pastry','lentils','chickpeas','split_peas','canned_beans']);
+const KCAL_MIN = {b:420, main:560, soup:350, salad:330, s:150};
+const KCAL_TGT = {b:450, main:600, soup:380, salad:360, s:180};
+const SALAD_RX=/^(тёплый )?салат|винегрет|оливье|под шубой|мимоза|табуле|цезарь|по-корейски|^свёкла с/i;
+const SOUP_RX=/суп|борщ|(^|\s)щи(\s|$)|окрошка|солянка|рассольник|^уха(\s|$)|харчо|шурпа|свекольник|гаспачо|минестроне|бульон/i;
+function mealKind(r){ if(SOUP_RX.test(r.t)) return 'soup'; if(SALAD_RX.test(r.t)&&!r.m.includes('b')) return 'salad'; if(r.m.includes('l')||r.m.includes('d')) return 'main'; return r.m[0]==='b'?'b':'s'; }
+function kcalOf(r){ let k=0; r.ing.forEach(x=>{const it=ING[x.k]; if(it) k+=it.n.k*ingGrams(x.k,x.q)/100;}); return k/r.sv; }
+function normalizePortion(r){
+  const kind=mealKind(r); r.kind=kind; let k=kcalOf(r); if(k>=KCAL_MIN[kind]) return;
+  const has=k2=>r.ing.some(i=>i.k===k2), starch=r.ing.some(i=>STARCH.has(i.k));
+  const stove=r.eq.includes('stove')||r.eq.includes('multi');
+  let side=null;
+  if((kind==='soup'||kind==='salad') && !has('bread') && !starch) side={k:'bread',q:60,name:'хлеб'};
+  else if(kind==='main' && !starch){
+    if(!stove || /салат|винегрет|закуск/i.test(r.t)) side={k:'bread',q:70,name:'хлеб'};
+    else if(r.c==='asia') side={k:'rice',q:70,name:'отварной рис'};
+    else if(r.c==='ru') side={k:'potato',q:250,name:'отварной картофель'};
+    else side={k:'buckwheat',q:70,name:'гречка'};
+  }
+  else if(kind==='b' && !starch && k<KCAL_MIN.b-60) side={k:'bread',q:50,name:'хлеб'};
+  if(kind==='soup' && !side && !has('bread')) side={k:'bread',q:60,name:'хлеб'};
+  if(side){ const ex=r.ing.find(i=>i.k===side.k); if(ex) ex.q+=side.q*r.sv; else r.ing.push({k:side.k,q:side.q*r.sv,side:true}); r.side=side.name; k=kcalOf(r);
+    r.steps=r.steps.concat({potato:'Гарнир: отварите очищенный картофель в подсоленной воде 20 минут, подавайте вместе с блюдом.',buckwheat:'Гарнир: отварите гречку (1 часть крупы на 2 части воды) 15–20 минут, подавайте вместе с блюдом.',rice:'Гарнир: отварите рис 15–18 минут, подавайте вместе с блюдом.',bread:'Подавайте с хлебом — так порция будет сытнее.'}[side.k]); }
+  if(k<KCAL_MIN[kind]){ const f=Math.min(1.8,KCAL_TGT[kind]/k); r.scaled=+f.toFixed(2);
+    r.ing.forEach(i=>{ if(['salt','spices','baking_powder'].includes(i.k)) return; const u=ING[i.k]&&ING[i.k].unit;
+      if(u==='шт') i.q=Math.max(i.q,Math.round(i.q*f)); else { const q=i.q*f; i.q=q>=20?Math.round(q/5)*5:Math.max(1,Math.round(q)); } }); }
+}
