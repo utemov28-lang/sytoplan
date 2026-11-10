@@ -1,0 +1,17 @@
+{
+  "name": "Кастрюлька — план питания на неделю",
+  "short_name": "Кастрюлька",
+  "description": "Меню на неделю под бюджет, список покупок и рецепты с КБЖУ.",
+  "lang": "ru",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "theme_color": "#C9442A",
+  "background_color": "#FFF9EB",
+  "icons": [
+    {"src": "img/i/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any"},
+    {"src": "img/i/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any"},
+    {"src": "img/i/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable"}
+  ]
+}

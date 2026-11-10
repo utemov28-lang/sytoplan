@@ -44,6 +44,11 @@ class FakeYK:
     def tgh(self, req: httpx.Request):
         self.tg.append(json.loads(req.content)); return httpx.Response(200, json={"ok": True})
 
+    mails = None
+
+    async def send(self, to, subject, text):  # мок SMTP
+        self.mails = (self.mails or []) + [(to, subject, text)]; return True
+
     def succeed(self, pid):
         self.payments[pid].update(status="succeeded", paid=True)
 
@@ -53,7 +58,7 @@ def env(tmp_path):
     s = srv.Settings(shop_id="100500", secret_key="test_secret", bot_token=BOT, token_secret="tok_secret",
                      db_path=str(tmp_path / "t.sqlite"), reminders=False)
     fk = FakeYK()
-    app = srv.create_app(s, httpx.MockTransport(fk.yk), httpx.MockTransport(fk.tgh))
+    app = srv.create_app(s, httpx.MockTransport(fk.yk), httpx.MockTransport(fk.tgh), mailer=fk)
     return TestClient(app), fk, app
 
 
@@ -73,7 +78,7 @@ def test_initdata_validation():
 def test_tg_full_flow(env):
     c, fk, app = env
     H = {"Authorization": "tma " + init_data(777)}
-    assert c.get("/api/access", headers=H).json() == {"paid_until": None, "active": False}
+    assert {k: v for k, v in c.get("/api/access", headers=H).json().items() if k not in ("token", "email")} == {"paid_until": None, "active": False}
     r = c.post("/api/pay/create", headers=H, json={"email": "katya@mail.ru", "return_url": "https://utemov28-lang.github.io/sytoplan/?paid=1"})
     assert r.status_code == 200, r.text
     j = r.json(); pid = j["payment_id"]
@@ -96,6 +101,8 @@ def test_tg_full_flow(env):
     # идемпотентность: повторное уведомление не продлевает
     assert hook(c, pid).json()["granted"] is False
     assert c.get("/api/access", headers=H).json()["paid_until"] == a["paid_until"]
+    # токен из /api/access переносит доступ в браузер (Bearer) для того же tg-пользователя
+    tok = a["token"]; assert c.get("/api/access", headers={"Authorization": "Bearer " + tok}).json()["paid_until"] == a["paid_until"]
     assert len(fk.tg) == 1 and fk.tg[0]["chat_id"] == 777 and "открыт до" in fk.tg[0]["text"]
     # второй платёж продлевает от текущей даты окончания
     pid2 = c.post("/api/pay/create", headers=H, json={"email": "katya@mail.ru"}).json()["payment_id"]
@@ -156,3 +163,78 @@ def test_reminders(env):
     assert asyncio.run(srv.run_reminders(app, later)) == 1
     assert fk.tg[0]["chat_id"] == 42 and "заканчивается" in fk.tg[0]["text"]
     assert asyncio.run(srv.run_reminders(app, later + timedelta(hours=5))) == 0  # только один раз
+
+
+import re as _re
+def _link(text): return _re.search(r"[?]login=([\w-]+)", text).group(1)
+
+
+def test_web_account_by_email_and_magic_login(env):
+    c, fk, app = env
+    r = c.post("/api/pay/create", json={"email": "Kate@Mail.ru"}).json()
+    H1 = {"Authorization": "Bearer " + r["access_token"]}
+    assert fk.created[0]["metadata"]["email"] == "kate@mail.ru"
+    # до оплаты аккаунта по почте нет — вход по почте ничего не шлёт, ответ одинаковый
+    assert c.post("/api/login/request", json={"email": "kate@mail.ru"}).json() == {"ok": True} and not fk.mails
+    fk.succeed(r["payment_id"]); hook(c, r["payment_id"])
+    to, subj, text = fk.mails[-1]
+    assert to == "kate@mail.ru" and subj == "Ваш доступ в Кастрюльку" and "?login=" in text
+    a1 = c.get("/api/access", headers=H1).json(); assert a1["active"] and a1["email"] == "kate@mail.ru"
+    # состояние с первого устройства
+    assert c.put("/api/state", headers=H1, json={"state": {"A": {"budget": 5000}}, "updated_at": 100}).json()["saved"]
+    # новое устройство: письмо из оплаты -> одноразовый вход
+    t = _link(text)
+    tok2 = c.post("/api/login/confirm", json={"token": t}).json()["access_token"]
+    assert c.post("/api/login/confirm", json={"token": t}).status_code == 400          # одноразовая
+    H2 = {"Authorization": "Bearer " + tok2}
+    assert c.get("/api/access", headers=H2).json()["paid_until"] == a1["paid_until"]
+    assert c.get("/api/state", headers=H2).json() == {"state": {"A": {"budget": 5000}}, "updated_at": 100}
+    # last-write-wins: старая запись не перетирает новую
+    assert c.put("/api/state", headers=H2, json={"state": {"A": {"budget": 7000}}, "updated_at": 200}).json()["saved"]
+    assert c.put("/api/state", headers=H1, json={"state": {"A": {"budget": 1}}, "updated_at": 150}).json()["saved"] is False
+    assert c.get("/api/state", headers=H1).json()["state"]["A"]["budget"] == 7000
+    # «Войти» по почте: письмо с 15-минутной ссылкой, лимит 1/мин
+    app.state.db.execute("DELETE FROM hits")  # первая попытка до оплаты уже заняла минутный лимит
+    assert c.post("/api/login/request", json={"email": "KATE@mail.ru"}).json()["ok"]
+    assert "15 минут" in fk.mails[-1][2]
+    assert c.post("/api/login/request", json={"email": "kate@mail.ru"}).status_code == 429
+    # просроченная ссылка
+    t3 = srv.otp_new(app.state.db, "login", "email:kate@mail.ru", timedelta(minutes=-1))
+    assert c.post("/api/login/confirm", json={"token": t3}).status_code == 400
+    # повторная оплата с того же аккаунта продлевает его же
+    pid2 = c.post("/api/pay/create", headers=H2, json={"email": "kate@mail.ru"}).json()["payment_id"]
+    assert fk.created[-1]["metadata"]["uid"] == "email:kate@mail.ru"
+    fk.succeed(pid2); hook(c, pid2)
+    u1 = datetime.fromisoformat(a1["paid_until"].replace("Z", "+00:00"))
+    u2 = datetime.fromisoformat(c.get("/api/access", headers=H1).json()["paid_until"].replace("Z", "+00:00"))
+    assert abs((u2 - u1) - timedelta(days=30)) < timedelta(seconds=5)
+
+
+def test_link_telegram(env):
+    c, fk, app = env
+    r = c.post("/api/pay/create", json={"email": "k@m.ru"}).json(); fk.succeed(r["payment_id"]); hook(c, r["payment_id"])
+    HW = {"Authorization": "Bearer " + r["access_token"]}
+    c.put("/api/state", headers=HW, json={"state": {"v": "web"}, "updated_at": 10})
+    link = c.post("/api/link/create", headers=HW).json()
+    assert link["url"].startswith("https://t.me/sytoplan_bot?start=link_")
+    HT = {"Authorization": "tma " + init_data(555)}
+    assert c.get("/api/access", headers=HT).json()["active"] is False
+    assert c.post("/api/link/confirm", headers=HW, json={"token": link["token"]}).status_code == 400  # только из Telegram
+    assert c.post("/api/link/confirm", headers=HT, json={"token": link["token"]}).json() == {"ok": True}
+    assert c.post("/api/link/confirm", headers=HT, json={"token": link["token"]}).status_code == 400  # одноразовая
+    assert c.get("/api/access", headers=HT).json()["active"] is True
+    assert c.get("/api/state", headers=HT).json()["state"] == {"v": "web"}
+    # напоминание теперь уходит в Telegram
+    import asyncio
+    fk.tg.clear(); assert asyncio.run(srv.run_reminders(app, datetime.now(timezone.utc) + timedelta(days=28))) == 1
+    assert fk.tg[0]["chat_id"] == 555
+
+
+def test_tg_state_sync_zero_steps(env):
+    c, fk, _ = env
+    HT = {"Authorization": "tma " + init_data(9)}
+    assert c.get("/api/state", headers=HT).json() == {"state": None, "updated_at": 0}
+    c.put("/api/state", headers=HT, json={"state": {"plan": [1, 2]}, "updated_at": 5})
+    assert c.get("/api/state", headers={"Authorization": "tma " + init_data(9)}).json()["state"] == {"plan": [1, 2]}
+    assert c.get("/api/state").status_code == 401
+    assert c.put("/api/state", headers=HT, json={"state": {"x": "y" * 600_000}, "updated_at": 6}).status_code == 413

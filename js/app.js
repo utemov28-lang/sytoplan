@@ -149,7 +149,7 @@ function fresh(){ return {screen:'intro', city:'Москва',
   plan:null, ticks:{}, favs:[], extras:[], tab:'week', recipe:null, rtab:'ing', serv:2, rfilter:'fit', ptab:'all', fridge:[], rmode:''}; }
 function load(){ try{ const s=JSON.parse(localStorage.getItem(LS_KEY)); if(s&&s.A){ const f=fresh(); const o=Object.assign(f,s); o.A=Object.assign(fresh().A,s.A); if(STORE_ALIAS[o.A.store]) o.A.store=STORE_ALIAS[o.A.store]; if(o.A.store&&!STORES.some(x=>x.id===o.A.store)) o.A.store='p5'; return o; } }catch(e){} return null; }
 let S = load() || fresh();
-function save(){ try{ localStorage.setItem(LS_KEY, JSON.stringify(S)); }catch(e){} }
+function save(){ S._ts=Date.now(); try{ localStorage.setItem(LS_KEY, JSON.stringify(S)); }catch(e){} if(typeof pushState==='function') pushState(); }
 function set(p){ Object.assign(S,p); save(); render(); }
 function setA(p){ Object.assign(S.A,p); save(); render(); }
 const A = ()=>S.A;
@@ -618,29 +618,26 @@ function locked(){ return !hasAccess(); }
 function ddmm(d){ return String(d.getDate()).padStart(2,'0')+'.'+String(d.getMonth()+1).padStart(2,'0'); }
 function previewDay(){ return S.plan?dayOrder()[0]:null; }
 function previewRecipes(){ const d=previewDay(); return new Set(S.plan?S.plan.slots.filter(s=>s.d===d&&s.r&&!s.hidden).map(s=>s.r):[]); }
-function payFeats(){ return [['📅','Меню на неделю'],['🛒','Список покупок и «Где дешевле»'],['🧊','«Из остатков»'],['📖',`Все ${RECIPES.length} рецептов`]]; }
 function perDay(){ return Math.ceil(PAYMENT.price/PAYMENT.days); }
-function payGroups(){ const own=RECIPES.filter(r=>!isReady(r)).length, ff=RECIPES.filter(isFF).length, rd=RECIPES.filter(isReady).length;
-  return [['🍲','Меню',['Новое меню на каждую неделю месяца — пересборка в один клик, без ограничений','Замена любого блюда из подходящих вариантов','КБЖУ под цель каждого едока: похудение, поддержание, набор']],
-   ['🛒','Покупки',['Готовый список по реальным упаковкам и вашему бюджету','«Где дешевле» — сравнение корзины в 8 сетях','Список в Telegram или копией — в один клик']],
-   ['📖','Рецепты',[`${own} домашних рецептов пошагово, с таймерами ⏱ и советами`,`${ff} рецептов домашнего фастфуда — бургеры, шаурма, фри`,'Избранное и поиск по всей базе']],
-   ['⏱','Экономия времени',['«Из остатков» — что приготовить из того, что есть','«Готовим на 2 дня» — ужин сегодня, обед завтра','«Сегодня лень» — день только из быстрых блюд',`Готовое из магазина — ${rd} позиций, когда совсем некогда`]]]; }
-function payBonuses(){ return ['Пересчёт плана в любой момент: поменяли бюджет, цель или состав семьи — меню перестроится','Новые рецепты, которые появятся за эти 30 дней, — сразу ваши',`В боте @${BOT_NAME}: рецепт дня и /cook — что приготовить из того, что есть`,'👎 «Не моё» — блюдо уходит из плана и больше не попадается']; }
+function payNote(){ return 'Разовая оплата, без автосписаний'+(PAYMENT.mode==='test'?' · тестовый режим, деньги не списываются':''); }
 function payTitle(){ const u=paidUntil(); return u?`Доступ закончился ${ddmm(u)}`:'Первый день — бесплатно'; }
-function payNote(){ return (PAYMENT.mode==='test'?'Тестовый режим: деньги не списываются. ':'')+'Разовая оплата, без автосписаний. Карта или СБП через ЮKassa.'; }
-function paywallBody(){
-  return `<div class="pw-top">${payTitle()}</div><h2>Меню на месяц — без вечного «что приготовить?»</h2>
-  <p class="pw-sub">Кастрюлька планирует еду, считает КБЖУ и собирает покупки под ваш бюджет. Вам остаётся готовить по шагам.</p>
-  <div class="pw-price"><b>${rub(PAYMENT.price)}</b> за ${PAYMENT.days} дней <span>меньше ${perDay()}${NB}₽ в день</span></div>
-  <div class="pw-ba"><div class="pw-bah">Что изменится</div>
-   <div><s>Каждый вечер думать, что приготовить</s> → меню на неделю уже готово</div>
-   <div><s>Ходить в магазин без списка</s> → список по упаковкам и бюджету</div>
-   <div><s>Гадать, хватает ли белка</s> → КБЖУ посчитаны для каждого</div></div>
-  <div class="pw-groups">${payGroups().map(g=>`<div class="pw-g"><div class="pw-gh"><span>${g[0]}</span>${g[1]}</div><ul>${g[2].map(x=>`<li>${x}</li>`).join('')}</ul></div>`).join('')}</div>
-  <div class="pw-bonus"><div class="pw-gh"><span>🎁</span>Бонусы</div><ul>${payBonuses().map(x=>`<li>${x}</li>`).join('')}</ul></div>`; }
-function payCta(){ return `<button class="btn" data-act="pay">${paidUntil()?'Продлить доступ':'Открыть доступ'} за ${rub(PAYMENT.price)}</button>`; }
-function paywallCard(){ return `<div class="paywall">${paywallBody()}${payCta()}<p class="pw-note">${payNote()}</p></div>`; }
-function paywallModal(){ modal(`<div class="paywall in-modal">${paywallBody()}</div><div class="pw-sticky">${payCta()}<p class="pw-note">${payNote()}</p><button class="linkbtn pw-later" data-act="closemodal">Не сейчас</button></div>`); }
+function payBenefits(){ const own=RECIPES.filter(r=>!isReady(r)).length;
+  return [['📅','Меню на каждую неделю + замена блюд'],['🛒','Покупки и «Где дешевле» в 8 сетях'],['📖',`${own} рецептов по шагам с таймерами`],['💪','КБЖУ под цель каждого едока'],['🧊','«Из остатков» и «Сегодня лень»'],['🎁','Новые рецепты за месяц — ваши']]; }
+function payCta(){ return `<button class="btn pws-btn" data-act="pay">${paidUntil()?'Продлить':'Оплатить'} ${rub(PAYMENT.price)}</button>`; }
+let pwOpen=true;
+function paywallSheetHTML(){
+  return `<div class="pws-in"><button class="pws-x" data-act="pwclose" aria-label="Не сейчас">${ICON.close}</button>
+  <div class="pws-art">${ilu('hero')?'<img src="img/i/hero.webp" alt="">':''}</div>
+  <div class="pws-top">${payTitle()}</div><h2>Меню на месяц — без «что приготовить?»</h2>
+  <div class="pws-price"><b>${rub(PAYMENT.price)}</b> за ${PAYMENT.days} дней · <span>меньше ${perDay()}${NB}₽ в день</span></div>
+  <ul class="pws-list">${payBenefits().map(b=>`<li><span>${b[0]}</span>${b[1]}</li>`).join('')}</ul>
+  <div class="pws-bot">${payCta()}<p class="pws-note">${payNote()}${PAY_LIVE&&!(inTG&&TG.initData)?' · <button class="linkbtn pws-login" data-act="login">Уже оплачивали? Войти</button>':''}</p></div></div>`; }
+function syncPaywall(){ let el=document.getElementById('pwsheet');
+  const show=pwOpen&&S.screen==='app'&&S.plan&&!S.recipe&&locked();
+  if(!show){ if(el) el.remove(); document.documentElement.classList.remove('pwon'); return; }
+  if(!el){ el=document.createElement('div'); el.id='pwsheet'; el.className='pwsheet'; document.body.appendChild(el); }
+  el.innerHTML=paywallSheetHTML(); document.documentElement.classList.add('pwon'); }
+function paywallModal(){ closeModal(); pwOpen=true; syncPaywall(); }
 function payStart(){
   if(PAYMENT.mode==='test'){ modal(`<div class="pw-test">ТЕСТОВАЯ ОПЛАТА</div><h3>Тестовая оплата · ${rub(PAYMENT.price)}</h3>
     <p>Деньги не списываются. В рабочей версии здесь откроется страница оплаты ЮKassa (карта, СБП), а после оплаты доступ откроется автоматически.</p>
@@ -648,7 +645,49 @@ function payStart(){
   modal(`<h3>Оплата · ${rub(PAYMENT.price)}</h3><p>Полный доступ на ${PAYMENT.days} дней. Укажите почту — пришлём чек (54-ФЗ).</p>
    <input type="email" id="payemail" placeholder="you@mail.ru" value="${esc(ACC.email||'')}" autocomplete="email" inputmode="email">
    <div class="stack"><button class="btn" data-act="paylive">Перейти к оплате</button><button class="btn sec sm" data-act="closemodal">Отмена</button></div><p class="pw-note">Оплата через ЮKassa: карта или СБП. Без автопродления.</p>`); }
-function grantAccess(iso){ ACC.until=iso; ACC.pending=null; saveAcc(); closeModal(); hap('ok'); render(); toast('Доступ открыт до '+ddmm(paidUntil())); }
+function grantAccess(iso){ ACC.until=iso; ACC.pending=null; saveAcc(); closeModal(); hap('ok'); okOpen='success'; render(); }
+/* --- экран «Доступ открыт» + установка на экран телефона --- */
+let okOpen='', instOS=/iPhone|iPad|iPod/i.test(navigator.userAgent)||(/Macintosh/.test(navigator.userAgent)&&navigator.maxTouchPoints>1)?'ios':(/Android/i.test(navigator.userAgent)?'android':'ios'), bip=null;
+window.addEventListener('beforeinstallprompt',e=>{ e.preventDefault(); bip=e; if(okOpen) syncInstall(); });
+window.addEventListener('appinstalled',()=>{ bip=null; if(okOpen){ okOpen=''; syncInstall(); } toast('Кастрюлька добавлена на экран'); });
+function siteURL(){ return location.origin+location.pathname; }
+function isStandalone(){ return (window.matchMedia&&matchMedia('(display-mode: standalone)').matches)||navigator.standalone===true; }
+function installSteps(){ const br=inTG?'':'';
+  return instOS==='ios'?[`Откройте сайт в <b>Safari</b>${inTG?' — кнопка ниже':''}`,'Нажмите «Поделиться» <span class="ishare">□↑</span> внизу экрана','Выберите «<b>На экран «Домой»</b>»','Нажмите «<b>Добавить</b>» — иконка появится на экране']
+   :[`Откройте сайт в <b>Chrome</b>${inTG?' — кнопка ниже':''}`,'Нажмите меню <b>⋮</b> справа вверху','«<b>Добавить на главный экран</b>» или «<b>Установить приложение</b>»','Нажмите «<b>Добавить</b>» — иконка появится на экране']; }
+function installHTML(){ const ok=okOpen==='success', u=paidUntil();
+  return `<div class="pws-in ok"><button class="pws-x" data-act="okclose" aria-label="Закрыть">${ICON.close}</button>
+  <div class="ok-ic">${ok?'✅':'📲'}</div>
+  <h2>${ok&&u?`Доступ открыт до ${ddmm(u)}`:'Кастрюлька на экране телефона'}</h2>
+  <p class="ok-sub">${ok?'Спасибо! Добавьте Кастрюльку на экран телефона — будет открываться как приложение.':'Добавьте иконку — Кастрюлька будет открываться как обычное приложение.'}</p>
+  <div class="seg"><button class="${instOS==='ios'?'on':''}" data-act="instos" data-id="ios">iPhone</button><button class="${instOS==='android'?'on':''}" data-act="instos" data-id="android">Android</button></div>
+  <ol class="ok-steps">${installSteps().map(x=>`<li>${x}</li>`).join('')}</ol>
+  <div class="ok-acts">${bip&&instOS==='android'&&!inTG?'<button class="btn out sm" data-act="bipinstall">📲 Установить</button>':''}${inTG?'<button class="btn out sm" data-act="openbrowser">🌐 Открыть в браузере</button>':''}</div>
+  ${inTG&&PAYMENT.mode==='test'&&!PAY_OFF?'<p class="pws-note">Тест: доступ хранится только здесь — в браузере его нужно открыть заново.</p>':''}
+  <div class="pws-bot"><button class="btn pws-btn" data-act="okclose">Перейти к меню</button></div></div>`; }
+function syncInstall(){ let el=document.getElementById('oksheet');
+  if(!okOpen){ if(el) el.remove(); if(!document.getElementById('pwsheet')) document.documentElement.classList.remove('pwon'); return; }
+  if(!el){ el=document.createElement('div'); el.id='oksheet'; el.className='pwsheet'; document.body.appendChild(el); }
+  el.innerHTML=installHTML(); document.documentElement.classList.add('pwon'); }
+/* --- аккаунт (только live): вход по почте, привязка Telegram, синхронизация состояния --- */
+function canSync(){ return PAY_LIVE&&!!((inTG&&TG.initData)||ACC.token); }
+async function api(path,opt){ const r=await fetch(PAYMENT.apiBase+path,Object.assign({headers:authHdr()},opt||{})); const j=await r.json().catch(()=>({})); if(!r.ok) throw new Error(j.detail||('HTTP '+r.status)); return j; }
+let pushT=null, pulling=false;
+function pushState(){ if(!canSync()||pulling) return; clearTimeout(pushT); pushT=setTimeout(()=>{ api('/api/state',{method:'PUT',body:JSON.stringify({state:S,updated_at:S._ts||Date.now()})}).catch(()=>{}); },2000); }
+async function pullState(){ if(!canSync()) return; try{ const j=await api('/api/state');
+  if(j.state&&j.updated_at>(S._ts||0)){ pulling=true; try{ localStorage.setItem(LS_KEY,JSON.stringify(j.state)); }catch(e){} S=load()||S; S._ts=j.updated_at; pulling=false; render(); }
+  else if(!j.state||j.updated_at<(S._ts||0)) pushState(); }catch(e){ pulling=false; } }
+function loginModal(){ modal(`<h3>Войти</h3><p>Укажите почту, на которую оформляли доступ, — пришлём ссылку для входа. Меню и доступ восстановятся на этом устройстве.</p>
+  <input type="email" id="loginemail" placeholder="you@mail.ru" value="${esc(ACC.email||'')}" autocomplete="email" inputmode="email">
+  <div class="stack"><button class="btn" data-act="loginsend">Прислать ссылку</button><button class="btn sec sm" data-act="closemodal">Отмена</button></div>`); }
+async function initAccount(){ if(!PAY_LIVE) return; const q=new URLSearchParams(location.search); const lt=q.get('login');
+  const sp=(inTG&&TG.initDataUnsafe&&TG.initDataUnsafe.start_param)||''; const lk=q.get('link')||(sp.startsWith('link_')?sp.slice(5):'');
+  if(lt||q.get('link')) try{ history.replaceState(null,'',location.pathname); }catch(e){}
+  if(lt){ try{ const j=await api('/api/login/confirm',{method:'POST',body:JSON.stringify({token:lt})}); ACC.token=j.access_token; saveAcc(); S._ts=0; toast('Вы вошли — восстанавливаем доступ и меню'); }catch(e){ toast(e.message); } }
+  if(lk&&inTG&&TG.initData){ try{ await api('/api/link/confirm',{method:'POST',body:JSON.stringify({token:lk})}); S._ts=0; toast('Telegram привязан к вашему аккаунту'); }catch(e){ toast(e.message); } }
+  await checkAccess().catch(()=>{}); await pullState(); render(); }
+function openInBrowser(){ const url=siteURL()+(PAY_LIVE&&ACC.token?'#t='+encodeURIComponent(ACC.token):'');
+  try{ if(inTG&&TG.openLink){ TG.openLink(url); return; } }catch(e){} window.open(url,'_blank'); }
 function authHdr(){ const h={'Content-Type':'application/json'}; const i=inTG&&TG.initData; if(i) h.Authorization='tma '+i; else if(ACC.token) h.Authorization='Bearer '+ACC.token; return h; }
 async function payLive(email){
   const r=await fetch(PAYMENT.apiBase+'/api/pay/create',{method:'POST',headers:authHdr(),body:JSON.stringify({email,return_url:location.origin+location.pathname+'?paid=1'})});
@@ -657,13 +696,14 @@ async function payLive(email){
   if(inTG&&TG.openLink){ TG.openLink(j.confirmation_url); waitPay(); } else location.href=j.confirmation_url; }
 async function checkAccess(){ if(!PAY_LIVE||!(ACC.token||(inTG&&TG.initData))) return hasAccess();
   const r=await fetch(PAYMENT.apiBase+'/api/access',{headers:authHdr()}); if(!r.ok) return hasAccess(); const j=await r.json();
-  if(j.paid_until){ ACC.until=j.paid_until; saveAcc(); } return hasAccess(); }
+  if(j.paid_until){ ACC.until=j.paid_until; } if(j.token) ACC.token=j.token; saveAcc(); return hasAccess(); }
 let polling=false;
 async function waitPay(){ modal(`<div style="font-size:40px">⏳</div><h3>Проверяем оплату…</h3><p>Как только ЮKassa подтвердит платёж, доступ откроется сам. Обычно это несколько секунд.</p><div class="stack"><button class="btn out" data-act="paycheck">Я оплатил — проверить</button><button class="btn sec sm" data-act="paycancel">Закрыть</button></div>`);
   if(polling) return; polling=true;
   for(let i=0;i<40&&ACC.pending;i++){ try{ if(await checkAccess()){ polling=false; grantAccess(ACC.until); return; } }catch(e){} await new Promise(r=>setTimeout(r,3000)); }
   polling=false; }
 function initPay(){ if(!PAY_LIVE) return; const back=/[?&]paid=1\b/.test(location.search);
+  { const m=location.hash.match(/[#&]t=([^&]+)/); if(m){ ACC.token=decodeURIComponent(m[1]); saveAcc(); try{ history.replaceState(null,'',location.pathname+location.search); }catch(e){} } }
   if(back) try{ history.replaceState(null,'',location.pathname); }catch(e){}
   checkAccess().then(ok=>{ if(ok&&ACC.pending){ grantAccess(ACC.until); return; } render(); if(ACC.pending&&(back||inTG)) waitPay(); }).catch(()=>{}); }
 const LOCK_ACTS=new Set(['swap','regen','regenq','compare','rmode','cart','tglist','copylist','copyleft','sharelist','lazy','dislikedish','rmauto','toplan','toshop','fridge']);
@@ -692,7 +732,7 @@ function render(){ applySides();
   window.scrollTo(0, key===lastKey?y:0); lastKey=key;
   if(sc==='q11' && !S.recipe) updateBudgetUI();
   if(sc==='loading' && !S.recipe) runLoading();
-  syncTG();
+  syncTG(); syncPaywall(); syncInstall();
 }
 function header(o){
   const back=o.back&&!inTG;
@@ -845,7 +885,7 @@ function runLoading(){
   const step=S.quick?230:600; S.quick=false;
   let i=0; const tick=()=>{ const prev=document.getElementById('cl'+(i-1)); if(prev){prev.classList.remove('cur');prev.classList.add('done');}
     const lb=document.getElementById('lbar'); if(lb) lb.style.width=Math.round(i/LSTEPS.length*100)+'%';
-    if(i>=LSTEPS.length){ setTimeout(()=>{ loadingRun=false; S.tab='week'; hap('ok'); set({screen:'app'}); },step===600?450:200); return; }
+    if(i>=LSTEPS.length){ setTimeout(()=>{ loadingRun=false; S.tab='week'; pwOpen=true; hap('ok'); set({screen:'app'}); },step===600?450:200); return; }
     const c=document.getElementById('cl'+i); if(c) c.classList.add('cur'); i++; setTimeout(tick, step); };
   setTimeout(tick,step===600?250:100);
 }
@@ -853,7 +893,7 @@ function runLoading(){
 function renderApp(){
   const tabs=[['week','Неделя',ICON.cal],['shop','Покупки',ICON.cart],['recipes','Рецепты',ICON.book],['profile','Профиль',ICON.user]];
   let body='', action='';
-  if(S.tab==='week'){ body=renderWeek(); if(locked()) action=`<div class="navaction">${payCta()}</div>`; }
+  if(S.tab==='week'){ body=renderWeek(); if(locked()) action=`<div class="navaction"><button class="btn" data-act="paywall">🔒 Открыть всё за ${rub(PAYMENT.price)}</button></div>`; }
   else if(S.tab==='shop'){ body=renderShop(); action=`<div class="navaction"><button class="btn" data-act="cart">${ICON.share} Отправить список покупок</button></div>`; }
   else if(S.tab==='recipes') body=renderRecipes();
   else body=renderProfile();
@@ -888,7 +928,7 @@ function weekPeople(days){ const T=targets(), cov=T.cov, n=Math.max(1,days.lengt
 function renderWeek(){
   const sh=shopping(); const plan=S.plan; const n=plan.slots.filter(s=>s.r).length; const T=targets();
   const LK=locked(), pd=previewDay();
-  let html=LK?`<h1>Ваша неделя готова!</h1><p class="sub">Бесплатно открыт ${DAYS_FULL[pd].toLowerCase()} — остальные дни, покупки и рецепты в полном доступе.</p>${paywallCard()}`:'';
+  let html=LK?`<h1>Ваша неделя готова!</h1><p class="sub">Бесплатно открыт ${DAYS_FULL[pd].toLowerCase()} — остальные дни, покупки и рецепты в полном доступе.</p>`:'';
   html+=LK?'':`<h1>Ваша неделя готова!</h1><p class="sub">${n} ${plural(n,'блюдо','блюда','блюд')} · ${store().name} · ${dec(portions())} ${plural(Math.ceil(portions()),'порция','порции','порций')} за приём</p>
   <button class="shopcard" data-act="tab" data-id="shop"><span class="ic">🛒</span><div style="flex:1;min-width:0"><div class="t">Список покупок</div><div class="s">${sh.items.length} ${plural(sh.items.length,'позиция','позиции','позиций')} · ~${rub(sh.total)} из ${rub(S.A.budget)}</div></div>${budgetPill(sh.total)}</button>`;
   const days=dayOrder(); const pp=portions();
@@ -985,10 +1025,11 @@ function renderProfile(){
    ['Питание',a.diets.includes('none')?'Без ограничений':listNames(a.diets,DIETS),'q6'],['Любимые кухни',listNames(a.cuisines,CUISINES),'q6'],['Формат',listNames(a.styles,STYLES),'q7'],['Готовое из магазина',a.ready===false?'Не покупать':'Иногда, до 1 в день','q7'],['Домашний фастфуд',(FF_OPTS.find(o=>o[0]===(a.ff||'some'))||FF_OPTS[1])[1],'q7'],['Готовим на 2 дня',a.cook2?'Да, ужин → обед завтра':'Нет','q7'],
    ['Аллергии',a.allergies.includes('none')?'Нет':listNames(a.allergies,ALLERGENS),'q8'],['Не любите',a.dislikes.map(id=>DISLIKES.find(d=>d[0]===id)[1]).join(', ')||'—','q9'],
    ['Есть дома',a.pantry.length?a.pantry.map(k=>shortName(ING[k].name).toLowerCase()).join(', '):'—','q10'],['Бюджет',rub(a.budget)+' / неделя','q11']];
-  const u=paidUntil(), acc=PAY_OFF?'':`<div class="card accrow" style="padding:4px 16px;margin-bottom:12px"><div class="prow"${hasAccess()?'':' data-act="pay" style="cursor:pointer"'}><span class="k">Доступ${PAYMENT.mode==='test'?' <span class="pw-test sm">тест</span>':''}</span><span class="v">${hasAccess()?`<b class="acc-ok">до ${ddmm(u)}</b>`:(u?`закончился ${ddmm(u)} · <b class="acc-buy">продлить</b>`:`<b class="acc-buy">открыть за ${rub(PAYMENT.price)}</b>`)}</span></div>${hasAccess()?`<div class="prow" data-act="pay" style="cursor:pointer"><span class="k">Продлить ещё на ${PAYMENT.days} дней</span><span class="v">${rub(PAYMENT.price)} <span class="mut">›</span></span></div>`:''}${PAYMENT.mode==='test'&&u?'<div class="prow" data-act="paytestreset" style="cursor:pointer"><span class="k mut">Сбросить тестовый доступ</span><span class="v mut">›</span></div>':''}</div>`;
+  const u=paidUntil(), acc=PAY_OFF?'':`<div class="card accrow" style="padding:4px 16px;margin-bottom:12px"><div class="prow"${hasAccess()?'':' data-act="pay" style="cursor:pointer"'}><span class="k">Доступ${PAYMENT.mode==='test'?' <span class="pw-test sm">тест</span>':''}</span><span class="v">${hasAccess()?`<b class="acc-ok">до ${ddmm(u)}</b>`:(u?`закончился ${ddmm(u)} · <b class="acc-buy">продлить</b>`:`<b class="acc-buy">открыть за ${rub(PAYMENT.price)}</b>`)}</span></div>${hasAccess()?`<div class="prow" data-act="pay" style="cursor:pointer"><span class="k">Продлить ещё на ${PAYMENT.days} дней</span><span class="v">${rub(PAYMENT.price)} <span class="mut">›</span></span></div>`:''}${PAY_LIVE&&!(inTG&&TG.initData)&&!ACC.token?'<div class="prow" data-act="login" style="cursor:pointer"><span class="k">Уже оплачивали? Войти по почте</span><span class="v mut">›</span></div>':''}${PAY_LIVE&&!inTG&&ACC.token&&hasAccess()?'<div class="prow" data-act="tglink" style="cursor:pointer"><span class="k">Связать с Telegram</span><span class="v mut">›</span></div>':''}${PAYMENT.mode==='test'&&u?'<div class="prow" data-act="paytestreset" style="cursor:pointer"><span class="k mut">Сбросить тестовый доступ</span><span class="v mut">›</span></div>':''}</div>`;
   return `<h1>Профиль</h1><p class="sub">Ваши ответы. Нажмите на строку, измените и нажмите «Сохранить» — план пересоберётся.</p>${acc}
   <div class="card" style="padding:4px 16px">${rows.map(r=>`<div class="prow" data-act="${r[2]==='city'?'city':'edit'}" data-id="${r[2]}" style="cursor:pointer"><span class="k">${r[0]}</span><span class="v">${esc(r[1])} <span class="mut">›</span></span></div>`).join('')}
   <div class="prow" data-act="badlist" style="cursor:pointer"><span class="k">Скрытые блюда 👎</span><span class="v">${(a.bad||[]).length||'—'} <span class="mut">›</span></span></div></div>
+  <button class="shopcard" data-act="install" style="margin-top:14px"><span class="ic">📲</span><div style="flex:1;min-width:0"><div class="t">Добавить на экран</div><div class="s">Открывайте Кастрюльку как приложение — с иконкой на телефоне</div></div><span class="mut">›</span></button>
   <button class="shopcard" data-act="fbsend" data-id="fb_gen" data-l="общий отзыв" style="margin-top:14px"><span class="ic">💬</span><div style="flex:1;min-width:0"><div class="t">Оставить отзыв</div><div class="s">Что понравилось, что улучшить — напишите в бот @${BOT_NAME}</div></div><span class="mut">›</span></button>
   <div class="stack" style="margin-top:20px"><button class="btn" data-act="regen">${ICON.swap} Пересобрать план</button><button class="btn sec" data-act="edit" data-id="q1">Изменить ответы</button><button class="btn sec" data-act="restart" style="color:#B91C1C">Начать заново</button></div>
   <p class="foot">${APP_NAME}. Цены — только из официальных открытых каталогов сетей. Нормы КБЖУ — ориентир, не медицинская рекомендация.</p>`;
@@ -1062,6 +1103,17 @@ document.addEventListener('click',e=>{
   if(isLockedAct(act,el,id)){ e.stopPropagation(); hap('warn'); paywallModal(); return; }
   switch(act){
   case 'paywall': break;
+  case 'pwclose': pwOpen=false; syncPaywall(); break;
+  case 'okclose': okOpen=''; syncInstall(); if(S.screen==='app'){ S.tab='week'; render(); } break;
+  case 'install': okOpen='install'; syncInstall(); break;
+  case 'instos': instOS=id; syncInstall(); break;
+  case 'openbrowser': openInBrowser(); break;
+  case 'login': loginModal(); break;
+  case 'loginsend': { const inp=document.getElementById('loginemail'); const em=(inp&&inp.value||'').trim();
+    if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(em)){ toast('Проверьте почту'); break; } ACC.email=em; saveAcc(); el.disabled=true;
+    api('/api/login/request',{method:'POST',body:JSON.stringify({email:em})}).then(()=>modal(`<div style="font-size:40px">📬</div><h3>Проверьте почту</h3><p>Если на ${esc(em)} оформлен доступ, мы прислали ссылку для входа. Она действует 15 минут.</p><button class="btn" data-act="closemodal">Понятно</button>`)).catch(err=>{ el.disabled=false; toast(err.message); }); break; }
+  case 'tglink': api('/api/link/create',{method:'POST'}).then(j=>window.open(j.url,'_blank')).catch(err=>toast(err.message)); break;
+  case 'bipinstall': if(bip){ bip.prompt(); bip.userChoice.finally(()=>{ bip=null; syncInstall(); }); } break;
   case 'pay': payStart(); break;
   case 'paytest': { const base=hasAccess()?paidUntil().getTime():Date.now(); grantAccess(new Date(base+PAYMENT.days*864e5).toISOString()); break; }
   case 'paytestreset': ACC={}; saveAcc(); render(); toast('Тестовый доступ сброшен'); break;
@@ -1189,4 +1241,4 @@ const _go=go; go=function(sc){ searchQ=''; _go(sc); };
 document.title=APP_NAME+' — план питания на неделю';
 if(inTG){ try{ applyTheme(); TG.onEvent('themeChanged',applyTheme); if(tgv('6.1')) TG.BackButton.onClick(goBack); if(tgv('7.7')&&TG.disableVerticalSwipes) TG.disableVerticalSwipes(); document.documentElement.classList.add('tg'); }catch(e){ console.warn(e); } }
 if(S.screen==='loading') loadingRun=false;
-loadPrices().then(()=>{ render(); initPay(); });
+loadPrices().then(()=>{ render(); initPay(); initAccount(); });
