@@ -85,7 +85,7 @@ const inTG=!!(TG&&TG.initData);
 function tgv(v){ try{ return TG.isVersionAtLeast(v); }catch(e){ return false; } }
 function hap(t){ if(!inTG||!TG.HapticFeedback||!tgv('6.1')) return; try{ if(t==='sel') TG.HapticFeedback.selectionChanged(); else if(t==='ok') TG.HapticFeedback.notificationOccurred('success'); else if(t==='warn') TG.HapticFeedback.notificationOccurred('warning'); else TG.HapticFeedback.impactOccurred(t||'light'); }catch(e){} }
 function applyTheme(){ if(!inTG) return; const dark=TG.colorScheme==='dark'; document.documentElement.classList.toggle('dark',dark);
-  const c=dark?'#17191E':'#FFFFFF'; try{ if(tgv('6.1')){ TG.setHeaderColor(c); TG.setBackgroundColor(c); } if(tgv('7.10')) TG.setBottomBarColor(c); }catch(e){}
+  const c=dark?'#1E1916':'#FFFCF7'; try{ if(tgv('6.1')){ TG.setHeaderColor(c); TG.setBackgroundColor(c); } if(tgv('7.10')) TG.setBottomBarColor(c); }catch(e){}
   const m=document.querySelector('meta[name=theme-color]'); if(m) m.content=c; }
 function canBack(){ return !!(document.getElementById('modal')||S.recipe||STEPS.includes(S.screen)||(S.screen==='app'&&S.tab!=='week')); }
 function syncTG(){ if(!inTG||!tgv('6.1')) return; try{ if(canBack()) TG.BackButton.show(); else TG.BackButton.hide(); }catch(e){} }
@@ -571,7 +571,7 @@ const FB_REASONS=[['t','😝 Невкусно'],['l','⏳ Долго'],['e','�
 function fbCode(t,id,w){ if(t==='g') return 'fb_gen'; const i=RECIPES.findIndex(r=>r.id===id); return ('fb_'+t+(i>=0?i.toString(36):'0')+(w?'_'+w:'')).slice(0,64); }
 function sendFb(code,label){ const link='https://t.me/'+BOT_NAME+'?start='+code; closeModal();
   if(inTG&&TG.openTelegramLink){ try{ TG.openTelegramLink(link); return; }catch(e){} }
-  const text=`Отзыв о ${APP_NAME}: ${label} (код ${code})`;
+  const text=`Отзыв · ${APP_NAME}: ${label} (код ${code})`;
   copyText(text);
   modal(`<h3>Отзыв скопирован</h3><p>Откройте нашего бота @${BOT_NAME} в Telegram и вставьте текст — или просто перейдите по ссылке.</p><textarea readonly>${esc(text)}</textarea><div style="height:10px"></div>
    <div class="stack"><a class="btn" href="${link}" target="_blank" rel="noopener">Открыть @${BOT_NAME}</a><button class="btn sec sm" data-act="closemodal">Закрыть</button></div>`); }
@@ -631,13 +631,13 @@ function render(){ applySides();
 function header(o){
   const back=o.back&&!inTG;
   return `<div class="hdr"><div class="hdr-row">${back?`<button class="icon-btn" data-act="${o.back}" aria-label="Назад">${ICON.back}</button>`:(o.logo?'':'<span style="width:42px"></span>')}
-  <div class="hdr-title ${o.logo?'left':''}">${o.logo?'<span class="lg">🥗</span>':''}${o.title||''}</div><div class="hdr-right">${o.right||''}</div></div>
+  <div class="hdr-title ${o.logo?'left':''}">${o.logo?`<img class="lg" src="${APP_LOGO}" alt="">`:''}${o.title||''}</div><div class="hdr-right">${o.right||''}</div></div>
   ${o.prog!=null?`<div class="prog"><i style="width:${o.prog}%"></i></div>`:''}</div>`;
 }
 function renderIntro(){
   const has=S.A.store||S.plan; const n=RECIPES.length;
   const hero=ilu('hero')?`<img class="heroimg" src="img/i/hero.webp" alt="" fetchpriority="high">`:'<div style="font-size:120px;margin:40px 0">🥗</div>';
-  return `<div class="intro">${hero}<div class="brand"><i>🥗</i>${APP_NAME}</div>
+  return `<div class="intro">${hero}<div class="brand"><img src="${APP_LOGO}" alt="">${APP_NAME}</div>
   <h1>Вкусно, сытно<br>и в рамках бюджета</h1>
   <p class="sub">Меню на неделю под ваш магазин и семью: домашние рецепты с КБЖУ и готовый список покупок.</p>
   <div class="feats"><div class="feat"><span class="e">🛒</span>Корзина по ценам магазина</div><div class="feat"><span class="e">💸</span>Меню под ваш бюджет</div>
@@ -926,7 +926,7 @@ function renderProfile(){
 function renderRecipe(){
   const r=RMAP[S.recipe]; const c=CUISMAP[r.c]; const fav=S.favs.includes(r.id); const n=S.serv; const wn=whyNot(r); const rem=removedIngs(r);
   const btns=(inTG?'':`<button class="icon-btn" style="left:14px" data-act="closerecipe" aria-label="Назад">${ICON.back}</button>`)+
-   `<button class="icon-btn" style="right:14px;color:${fav?'#EF4444':'#111827'}" data-act="fav" aria-label="В избранное">${fav?ICON.heartf:ICON.heart}</button>`;
+   `<button class="icon-btn" style="right:14px;color:${fav?'#D92D20':'#2A1F1A'}" data-act="fav" aria-label="В избранное">${fav?ICON.heartf:ICON.heart}</button>`;
   const tags=[`<span class="rtag g">${CATNAME[rcat(r)]}</span>`].concat(['lean','veg','hp','kids'].filter(x=>DIETCHK[x](r)).map(x=>`<span class="rtag">${({lean:'🌾 Постное',veg:'🥦 Вегетарианское',hp:'💪 Много белка',kids:'🧸 Детям'})[x]}</span>`));
   if(totalTime(r)<=25 && !r.rest) tags.push('<span class="rtag">⚡ Быстро</span>');
   return `${photo(r,'hero',true,btns)}
