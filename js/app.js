@@ -618,16 +618,29 @@ function locked(){ return !hasAccess(); }
 function ddmm(d){ return String(d.getDate()).padStart(2,'0')+'.'+String(d.getMonth()+1).padStart(2,'0'); }
 function previewDay(){ return S.plan?dayOrder()[0]:null; }
 function previewRecipes(){ const d=previewDay(); return new Set(S.plan?S.plan.slots.filter(s=>s.d===d&&s.r&&!s.hidden).map(s=>s.r):[]); }
-function payFeats(){ return [['📅','Меню на всю неделю и пересборка без ограничений'],['🛒','Список покупок и корзина для магазина'],['🏷️','«Где дешевле» — сравнение 8 сетей'],['🧊','«Из остатков» — что приготовить из того, что есть'],['📖',`Все ${RECIPES.length} рецептов с пошаговыми инструкциями`]]; }
-function payTitle(){ const u=paidUntil(); return u?`Доступ закончился ${ddmm(u)}`:'Разовый платёж · без автопродления'; }
-function payNote(){ return PAYMENT.mode==='test'?'Тестовый режим: деньги не списываются.':'Карта или СБП через ЮKassa, чек придёт на почту.'; }
-function paywallCard(){
-  return `<div class="paywall"><div class="pw-top">${payTitle()}</div><h2>Полный доступ на ${PAYMENT.days} дней — ${rub(PAYMENT.price)}</h2>
-  <ul class="pw-list">${payFeats().map(f=>`<li><span>${f[0]}</span>${f[1]}</li>`).join('')}</ul>
-  <button class="btn" data-act="pay">${paidUntil()?'Продлить':'Получить план'} за ${rub(PAYMENT.price)}</button><p class="pw-note">${payNote()}</p></div>`; }
-function paywallModal(){ modal(`<div style="font-size:40px">🔒</div><h3>Это в полном доступе</h3><p>${paidUntil()?payTitle()+'.':'Бесплатно открыт первый день меню.'} Полный доступ на ${PAYMENT.days} дней — ${rub(PAYMENT.price)}:</p>
-  <ul class="pw-list">${payFeats().map(f=>`<li><span>${f[0]}</span>${f[1]}</li>`).join('')}</ul>
-  <div class="stack"><button class="btn" data-act="pay">Открыть за ${rub(PAYMENT.price)}</button><button class="btn sec sm" data-act="closemodal">Не сейчас</button></div><p class="pw-note">${payNote()}</p>`); }
+function payFeats(){ return [['📅','Меню на неделю'],['🛒','Список покупок и «Где дешевле»'],['🧊','«Из остатков»'],['📖',`Все ${RECIPES.length} рецептов`]]; }
+function perDay(){ return Math.ceil(PAYMENT.price/PAYMENT.days); }
+function payGroups(){ const own=RECIPES.filter(r=>!isReady(r)).length, ff=RECIPES.filter(isFF).length, rd=RECIPES.filter(isReady).length;
+  return [['🍲','Меню',['Новое меню на каждую неделю месяца — пересборка в один клик, без ограничений','Замена любого блюда из подходящих вариантов','КБЖУ под цель каждого едока: похудение, поддержание, набор']],
+   ['🛒','Покупки',['Готовый список по реальным упаковкам и вашему бюджету','«Где дешевле» — сравнение корзины в 8 сетях','Список в Telegram или копией — в один клик']],
+   ['📖','Рецепты',[`${own} домашних рецептов пошагово, с таймерами ⏱ и советами`,`${ff} рецептов домашнего фастфуда — бургеры, шаурма, фри`,'Избранное и поиск по всей базе']],
+   ['⏱','Экономия времени',['«Из остатков» — что приготовить из того, что есть','«Готовим на 2 дня» — ужин сегодня, обед завтра','«Сегодня лень» — день только из быстрых блюд',`Готовое из магазина — ${rd} позиций, когда совсем некогда`]]]; }
+function payBonuses(){ return ['Пересчёт плана в любой момент: поменяли бюджет, цель или состав семьи — меню перестроится','Новые рецепты, которые появятся за эти 30 дней, — сразу ваши',`В боте @${BOT_NAME}: рецепт дня и /cook — что приготовить из того, что есть`,'👎 «Не моё» — блюдо уходит из плана и больше не попадается']; }
+function payTitle(){ const u=paidUntil(); return u?`Доступ закончился ${ddmm(u)}`:'Первый день — бесплатно'; }
+function payNote(){ return (PAYMENT.mode==='test'?'Тестовый режим: деньги не списываются. ':'')+'Разовая оплата, без автосписаний. Карта или СБП через ЮKassa.'; }
+function paywallBody(){
+  return `<div class="pw-top">${payTitle()}</div><h2>Меню на месяц — без вечного «что приготовить?»</h2>
+  <p class="pw-sub">Кастрюлька планирует еду, считает КБЖУ и собирает покупки под ваш бюджет. Вам остаётся готовить по шагам.</p>
+  <div class="pw-price"><b>${rub(PAYMENT.price)}</b> за ${PAYMENT.days} дней <span>меньше ${perDay()}${NB}₽ в день</span></div>
+  <div class="pw-ba"><div class="pw-bah">Что изменится</div>
+   <div><s>Каждый вечер думать, что приготовить</s> → меню на неделю уже готово</div>
+   <div><s>Ходить в магазин без списка</s> → список по упаковкам и бюджету</div>
+   <div><s>Гадать, хватает ли белка</s> → КБЖУ посчитаны для каждого</div></div>
+  <div class="pw-groups">${payGroups().map(g=>`<div class="pw-g"><div class="pw-gh"><span>${g[0]}</span>${g[1]}</div><ul>${g[2].map(x=>`<li>${x}</li>`).join('')}</ul></div>`).join('')}</div>
+  <div class="pw-bonus"><div class="pw-gh"><span>🎁</span>Бонусы</div><ul>${payBonuses().map(x=>`<li>${x}</li>`).join('')}</ul></div>`; }
+function payCta(){ return `<button class="btn" data-act="pay">${paidUntil()?'Продлить доступ':'Открыть доступ'} за ${rub(PAYMENT.price)}</button>`; }
+function paywallCard(){ return `<div class="paywall">${paywallBody()}${payCta()}<p class="pw-note">${payNote()}</p></div>`; }
+function paywallModal(){ modal(`<div class="paywall in-modal">${paywallBody()}</div><div class="pw-sticky">${payCta()}<p class="pw-note">${payNote()}</p><button class="linkbtn pw-later" data-act="closemodal">Не сейчас</button></div>`); }
 function payStart(){
   if(PAYMENT.mode==='test'){ modal(`<div class="pw-test">ТЕСТОВАЯ ОПЛАТА</div><h3>Тестовая оплата · ${rub(PAYMENT.price)}</h3>
     <p>Деньги не списываются. В рабочей версии здесь откроется страница оплаты ЮKassa (карта, СБП), а после оплаты доступ откроется автоматически.</p>
@@ -840,7 +853,7 @@ function runLoading(){
 function renderApp(){
   const tabs=[['week','Неделя',ICON.cal],['shop','Покупки',ICON.cart],['recipes','Рецепты',ICON.book],['profile','Профиль',ICON.user]];
   let body='', action='';
-  if(S.tab==='week') body=renderWeek();
+  if(S.tab==='week'){ body=renderWeek(); if(locked()) action=`<div class="navaction">${payCta()}</div>`; }
   else if(S.tab==='shop'){ body=renderShop(); action=`<div class="navaction"><button class="btn" data-act="cart">${ICON.share} Отправить список покупок</button></div>`; }
   else if(S.tab==='recipes') body=renderRecipes();
   else body=renderProfile();

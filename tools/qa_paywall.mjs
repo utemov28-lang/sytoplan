@@ -13,11 +13,14 @@ async function run(w,h,tag){
   const st=await page.evaluate(()=>({pw:!!document.querySelector('.paywall'),lw:!!document.querySelector('.lockwrap'),days:document.querySelectorAll('.dayh').length,free:document.querySelectorAll('.dayh:not(.lockin .dayh)').length,sw:document.documentElement.scrollWidth,cw:document.documentElement.clientWidth,mode:PAYMENT.mode}));
   ok(st.mode==='test','mode test'); ok(st.pw&&st.lw,`${tag} paywall+locked days shown`); ok(st.free===1,`${tag} exactly 1 free day (${st.free}/${st.days})`); ok(st.sw<=st.cw,`${tag} no overflow ${st.sw}/${st.cw}`);
   await page.screenshot({path:`${SD}/paywall_${tag}.png`});
+  if(tag==='360'){ const h=await page.evaluate(()=>{ const p=document.querySelector('.paywall'); return p.getBoundingClientRect().bottom+window.scrollY+20; }); await page.addStyleTag({content:'.nav,.navaction,.hdr{visibility:hidden}'}); await page.screenshot({path:`${SD}/paywall_v2_360.png`,clip:{x:0,y:0,width:360,height:Math.ceil(h)},fullPage:true}); await page.addStyleTag({content:'.nav,.navaction,.hdr{visibility:visible}'}); }
+  ok(!!(await page.$('.navaction [data-act=pay]')),`${tag} sticky CTA`);
+  { const t=await page.evaluate(()=>document.querySelector('.paywall').innerText); ok(/меньше 20/.test(t)&&/Бонусы/.test(t)&&/без автосписаний/.test(t),`${tag} paywall copy`); }
   await page.evaluate(()=>document.querySelector('.lockwrap').scrollIntoView({block:'start'})); await page.evaluate(()=>window.scrollBy(0,-120)); await page.waitForTimeout(200);
   await page.screenshot({path:`${SD}/preview_${tag}.png`});
-  await page.click('.nav [data-id=shop]'); await page.waitForTimeout(200); ok(!!(await page.$('#modal .pw-list')),`${tag} shop tab -> paywall modal`);
+  await page.click('.nav [data-id=shop]'); await page.waitForTimeout(200); ok(!!(await page.$('#modal .pw-groups')),`${tag} shop tab -> paywall modal`); if(tag==='360') await page.screenshot({path:`${SD}/paywall_v2_sheet_360.png`});
   ok(await page.evaluate(()=>S.tab)==='week',`${tag} stays on week`); await page.click('#modal [data-act=closemodal]');
-  await page.click('.lockwrap'); await page.waitForTimeout(150); ok(!!(await page.$('#modal .pw-list')),`${tag} locked day -> paywall`); await page.click('#modal [data-act=closemodal]');
+  await page.click('.lockwrap'); await page.waitForTimeout(150); ok(!!(await page.$('#modal .pw-groups')),`${tag} locked day -> paywall`); await page.click('#modal [data-act=closemodal]');
   await page.click('.paywall [data-act=pay]'); await page.waitForTimeout(150); ok(!!(await page.$('#modal .pw-test')),`${tag} test-payment confirm labeled`);
   if(tag==='360') await page.screenshot({path:`${SD}/testpay_${tag}.png`});
   await page.click('[data-act=paytest]'); await page.waitForTimeout(300);
