@@ -978,7 +978,7 @@ function renderProfile(){
   <div class="prow" data-act="badlist" style="cursor:pointer"><span class="k">Скрытые блюда 👎</span><span class="v">${(a.bad||[]).length||'—'} <span class="mut">›</span></span></div></div>
   <button class="shopcard" data-act="fbsend" data-id="fb_gen" data-l="общий отзыв" style="margin-top:14px"><span class="ic">💬</span><div style="flex:1;min-width:0"><div class="t">Оставить отзыв</div><div class="s">Что понравилось, что улучшить — напишите в бот @${BOT_NAME}</div></div><span class="mut">›</span></button>
   <div class="stack" style="margin-top:20px"><button class="btn" data-act="regen">${ICON.swap} Пересобрать план</button><button class="btn sec" data-act="edit" data-id="q1">Изменить ответы</button><button class="btn sec" data-act="restart" style="color:#B91C1C">Начать заново</button></div>
-  <p class="foot">${APP_NAME} · прототип. ${priceNote()} Реальные цены — только из официальных открытых каталогов сетей (сейчас ВкусВилл и Лента). Нормы КБЖУ — ориентир, не медицинская рекомендация.</p>`;
+  <p class="foot">${APP_NAME}. Цены — только из официальных открытых каталогов сетей. Нормы КБЖУ — ориентир, не медицинская рекомендация.</p>`;
 }
 /* --- рецепт --- */
 function renderRecipe(){
