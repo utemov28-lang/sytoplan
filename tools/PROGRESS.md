@@ -129,3 +129,10 @@ Steps: [ ] data+recipes  [ ] app refactor/design  [ ] illustrations  [ ] recipe 
   с количеством, кнопки ⏱ таймера по «N минут», «Совет:» отдельной плашкой.
 - Порядок по tools/rank.txt (частота в планах). Партии 1–6: готово, все 350 своих рецептов (готовое rd_* не требует). Новые рецепты — дописывать SD() в js/steps_detail.js (node tools/_dump.mjs N M; после 300-й позиции _dump выдаёт неранжированные рецепты, _dump/_chk — локальные утилиты, в .gitignore).
 - Проверка tools/_chk.mjs: техника в шагах ↔ eq рецепта; числа г/мл ↔ количества ингредиентов (вода/части соли — норм).
+
+## Paywall + 30-day access (Nov 2026)
+- `PAYMENT` in js/data.js (`off|test|live`, price 590, days 30, apiBase). Deployed: `test`.
+- Free preview = first plan day; other days blurred (`.lockwrap`), Покупки/Рецепты/Где дешевле/Из остатков/замены/пересборка → paywall modal.
+- Access in localStorage `kastr_access_v1` ({until, token, pending, email}); profile shows «Доступ до DD.MM»; test mode has «Сбросить тестовый доступ».
+- QA: `node tools/qa_paywall.mjs` (360px + desktop). Other QA scripts: pass `?pay=off` in URL (ignored in live mode).
+- Server: server/ (FastAPI+SQLite, YooKassa v3, initData HMAC, webhook re-fetch, TG notices + 3-day reminder). Tests: `server/.venv/bin/python -m pytest -q server/tests` (6 passed). Not deployed.

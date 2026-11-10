@@ -605,12 +605,65 @@ function shareTG(text){ const lim=1400; let t=text;
   if(inTG&&TG.openTelegramLink){ try{ TG.openTelegramLink(link); return; }catch(e){} }
   window.open(link,'_blank'); }
 
+
+/* ====== ДОСТУП / ОПЛАТА (PAYMENT в data.js) ====== */
+const ACC_KEY='kastr_access_v1';
+const PAY_LIVE=PAYMENT.mode==='live'&&!!PAYMENT.apiBase;
+const PAY_OFF=PAYMENT.mode==='off'||(PAYMENT.mode==='live'&&!PAYMENT.apiBase)||(PAYMENT.mode!=='live'&&/[?&]pay=off\b/.test(location.search));
+let ACC=(()=>{ try{ return JSON.parse(localStorage.getItem(ACC_KEY))||{}; }catch(e){ return {}; } })();
+function saveAcc(){ try{ localStorage.setItem(ACC_KEY,JSON.stringify(ACC)); }catch(e){} }
+function paidUntil(){ const d=ACC.until?new Date(ACC.until):null; return d&&!isNaN(d)?d:null; }
+function hasAccess(){ if(PAY_OFF) return true; const u=paidUntil(); return !!u&&u.getTime()>Date.now(); }
+function locked(){ return !hasAccess(); }
+function ddmm(d){ return String(d.getDate()).padStart(2,'0')+'.'+String(d.getMonth()+1).padStart(2,'0'); }
+function previewDay(){ return S.plan?dayOrder()[0]:null; }
+function previewRecipes(){ const d=previewDay(); return new Set(S.plan?S.plan.slots.filter(s=>s.d===d&&s.r&&!s.hidden).map(s=>s.r):[]); }
+function payFeats(){ return [['📅','Меню на всю неделю и пересборка без ограничений'],['🛒','Список покупок и корзина для магазина'],['🏷️','«Где дешевле» — сравнение 8 сетей'],['🧊','«Из остатков» — что приготовить из того, что есть'],['📖',`Все ${RECIPES.length} рецептов с пошаговыми инструкциями`]]; }
+function payTitle(){ const u=paidUntil(); return u?`Доступ закончился ${ddmm(u)}`:'Разовый платёж · без автопродления'; }
+function payNote(){ return PAYMENT.mode==='test'?'Тестовый режим: деньги не списываются.':'Карта или СБП через ЮKassa, чек придёт на почту.'; }
+function paywallCard(){
+  return `<div class="paywall"><div class="pw-top">${payTitle()}</div><h2>Полный доступ на ${PAYMENT.days} дней — ${rub(PAYMENT.price)}</h2>
+  <ul class="pw-list">${payFeats().map(f=>`<li><span>${f[0]}</span>${f[1]}</li>`).join('')}</ul>
+  <button class="btn" data-act="pay">${paidUntil()?'Продлить':'Получить план'} за ${rub(PAYMENT.price)}</button><p class="pw-note">${payNote()}</p></div>`; }
+function paywallModal(){ modal(`<div style="font-size:40px">🔒</div><h3>Это в полном доступе</h3><p>${paidUntil()?payTitle()+'.':'Бесплатно открыт первый день меню.'} Полный доступ на ${PAYMENT.days} дней — ${rub(PAYMENT.price)}:</p>
+  <ul class="pw-list">${payFeats().map(f=>`<li><span>${f[0]}</span>${f[1]}</li>`).join('')}</ul>
+  <div class="stack"><button class="btn" data-act="pay">Открыть за ${rub(PAYMENT.price)}</button><button class="btn sec sm" data-act="closemodal">Не сейчас</button></div><p class="pw-note">${payNote()}</p>`); }
+function payStart(){
+  if(PAYMENT.mode==='test'){ modal(`<div class="pw-test">ТЕСТОВАЯ ОПЛАТА</div><h3>Тестовая оплата · ${rub(PAYMENT.price)}</h3>
+    <p>Деньги не списываются. В рабочей версии здесь откроется страница оплаты ЮKassa (карта, СБП), а после оплаты доступ откроется автоматически.</p>
+    <div class="stack"><button class="btn" data-act="paytest">Подтвердить тестовую оплату</button><button class="btn sec sm" data-act="closemodal">Отмена</button></div>`); return; }
+  modal(`<h3>Оплата · ${rub(PAYMENT.price)}</h3><p>Полный доступ на ${PAYMENT.days} дней. Укажите почту — пришлём чек (54-ФЗ).</p>
+   <input type="email" id="payemail" placeholder="you@mail.ru" value="${esc(ACC.email||'')}" autocomplete="email" inputmode="email">
+   <div class="stack"><button class="btn" data-act="paylive">Перейти к оплате</button><button class="btn sec sm" data-act="closemodal">Отмена</button></div><p class="pw-note">Оплата через ЮKassa: карта или СБП. Без автопродления.</p>`); }
+function grantAccess(iso){ ACC.until=iso; ACC.pending=null; saveAcc(); closeModal(); hap('ok'); render(); toast('Доступ открыт до '+ddmm(paidUntil())); }
+function authHdr(){ const h={'Content-Type':'application/json'}; const i=inTG&&TG.initData; if(i) h.Authorization='tma '+i; else if(ACC.token) h.Authorization='Bearer '+ACC.token; return h; }
+async function payLive(email){
+  const r=await fetch(PAYMENT.apiBase+'/api/pay/create',{method:'POST',headers:authHdr(),body:JSON.stringify({email,return_url:location.origin+location.pathname+'?paid=1'})});
+  const j=await r.json().catch(()=>({})); if(!r.ok||!j.confirmation_url) throw new Error(j.detail||('HTTP '+r.status));
+  if(j.access_token) ACC.token=j.access_token; ACC.pending=j.payment_id; ACC.email=email; saveAcc();
+  if(inTG&&TG.openLink){ TG.openLink(j.confirmation_url); waitPay(); } else location.href=j.confirmation_url; }
+async function checkAccess(){ if(!PAY_LIVE||!(ACC.token||(inTG&&TG.initData))) return hasAccess();
+  const r=await fetch(PAYMENT.apiBase+'/api/access',{headers:authHdr()}); if(!r.ok) return hasAccess(); const j=await r.json();
+  if(j.paid_until){ ACC.until=j.paid_until; saveAcc(); } return hasAccess(); }
+let polling=false;
+async function waitPay(){ modal(`<div style="font-size:40px">⏳</div><h3>Проверяем оплату…</h3><p>Как только ЮKassa подтвердит платёж, доступ откроется сам. Обычно это несколько секунд.</p><div class="stack"><button class="btn out" data-act="paycheck">Я оплатил — проверить</button><button class="btn sec sm" data-act="paycancel">Закрыть</button></div>`);
+  if(polling) return; polling=true;
+  for(let i=0;i<40&&ACC.pending;i++){ try{ if(await checkAccess()){ polling=false; grantAccess(ACC.until); return; } }catch(e){} await new Promise(r=>setTimeout(r,3000)); }
+  polling=false; }
+function initPay(){ if(!PAY_LIVE) return; const back=/[?&]paid=1\b/.test(location.search);
+  if(back) try{ history.replaceState(null,'',location.pathname); }catch(e){}
+  checkAccess().then(ok=>{ if(ok&&ACC.pending){ grantAccess(ACC.until); return; } render(); if(ACC.pending&&(back||inTG)) waitPay(); }).catch(()=>{}); }
+const LOCK_ACTS=new Set(['swap','regen','regenq','compare','rmode','cart','tglist','copylist','copyleft','sharelist','lazy','dislikedish','rmauto','toplan','toshop','fridge']);
+function isLockedAct(act,el,id){ if(!S.plan||!locked()) return false;
+  if(act==='paywall') return true; if(act==='tab') return id==='shop'||id==='recipes';
+  if(act==='open') return !previewRecipes().has(id); return LOCK_ACTS.has(act); }
 /* ====== РЕНДЕР ====== */
 const app=document.getElementById('app');
 let lastKey='', keepToast=false;
 function render(){ applySides();
   const y=window.scrollY; let html='';
   const sc=S.screen;
+  if(S.plan&&locked()){ if(S.recipe&&!previewRecipes().has(S.recipe)) S.recipe=null; if(S.tab==='shop'||S.tab==='recipes') S.tab='week'; }
   if(S.recipe && RMAP[S.recipe]) html=renderRecipe();
   else if(sc==='intro') html=renderIntro();
   else if(STEPS.includes(sc)) html=renderStep(sc);
@@ -792,7 +845,7 @@ function renderApp(){
   else if(S.tab==='recipes') body=renderRecipes();
   else body=renderProfile();
   return header({title:APP_NAME,logo:1,right:`<button class="linkbtn" data-act="city" style="color:var(--mut)">📍 ${esc(S.city)}</button>`})+`<div class="content app">${body}</div>${action}
-  <nav class="nav">${tabs.map(t=>`<button class="${S.tab===t[0]?'on':''}" data-act="tab" data-id="${t[0]}">${t[2]}${t[1]}</button>`).join('')}</nav>`;
+  <nav class="nav">${tabs.map(t=>`<button class="${S.tab===t[0]?'on':''}" data-act="tab" data-id="${t[0]}">${t[2]}${t[1]}${locked()&&(t[0]==='shop'||t[0]==='recipes')?'<i class="lk">🔒</i>':''}</button>`).join('')}</nav>`;
 }
 function budgetPill(total){ const b=S.A.budget; return total<=b?`<span class="pill ok">✓ В бюджете</span>`:`<span class="pill bad">+${rub(total-b)}</span>`; }
 function mealMeta(r){ return `${totalTime(r)}${NB}мин${r.rest?' '+restText(r):''} · ${r.k}${NB}ккал · ${fmt(portionCost(r))}${NB}₽/порц`; }
@@ -821,7 +874,9 @@ function weekPeople(days){ const T=targets(), cov=T.cov, n=Math.max(1,days.lengt
   return T.ad.map((tg,i)=>mk1(one?'Вы':(T.ad.length>1?`Взрослый ${i+1}`:'Взрослый'),tg,tg.factor||1)).concat(T.kd.map((tg,i)=>Object.assign(mk1(T.kd.length>1?`Ребёнок ${i+1}`:'Ребёнок',tg,tg.factor),{est:!(S.A.people&&S.A.people.kd&&S.A.people.kd[i]&&S.A.people.kd[i].age>0)}))); }
 function renderWeek(){
   const sh=shopping(); const plan=S.plan; const n=plan.slots.filter(s=>s.r).length; const T=targets();
-  let html=`<h1>Ваша неделя готова!</h1><p class="sub">${n} ${plural(n,'блюдо','блюда','блюд')} · ${store().name} · ${dec(portions())} ${plural(Math.ceil(portions()),'порция','порции','порций')} за приём</p>
+  const LK=locked(), pd=previewDay();
+  let html=LK?`<h1>Ваша неделя готова!</h1><p class="sub">Бесплатно открыт ${DAYS_FULL[pd].toLowerCase()} — остальные дни, покупки и рецепты в полном доступе.</p>${paywallCard()}`:'';
+  html+=LK?'':`<h1>Ваша неделя готова!</h1><p class="sub">${n} ${plural(n,'блюдо','блюда','блюд')} · ${store().name} · ${dec(portions())} ${plural(Math.ceil(portions()),'порция','порции','порций')} за приём</p>
   <button class="shopcard" data-act="tab" data-id="shop"><span class="ic">🛒</span><div style="flex:1;min-width:0"><div class="t">Список покупок</div><div class="s">${sh.items.length} ${plural(sh.items.length,'позиция','позиции','позиций')} · ~${rub(sh.total)} из ${rub(S.A.budget)}</div></div>${budgetPill(sh.total)}</button>`;
   const days=dayOrder(); const pp=portions();
   const bad=plan.slots.filter(s=>s.r&&whyNot(RMAP[s.r]));
@@ -854,7 +909,8 @@ function renderWeek(){
   if(missing.length) html+=`<div class="warn">Нет подходящих рецептов для: ${missing.map(m=>MEALMAP[m].name.toLowerCase()).join(', ')}. Ослабьте фильтры в профиле.</div>`;
   const few=mealOrder().filter(m=>{ const c=candidates(m).length; return c>0 && c<Math.ceil(days.length/2)+1; });
   if(few.length) html+=`<div class="note">📚 Мало рецептов под ваши ответы для: ${few.map(m=>MEALMAP[m].name.toLowerCase()+' ('+candidates(m).length+')').join(', ')} — блюда будут повторяться. Можно ослабить фильтры в профиле.</div>`;
-  days.forEach(d=>{ const t=dayTotals(d);
+  let lkStart=-1;
+  days.forEach(d=>{ const t=dayTotals(d); if(LK&&d!==pd&&lkStart<0) lkStart=html.length;
     html+=`<div class="dayh" id="day${d}"><div class="row"><div class="n">${DAYS_FULL[d]}</div><div class="kc">${fmt(Math.round(t.k*f1))}${NB}ккал<span class="kcf">${pp!==1&&eaters>1?` · ${fmt(Math.round(t.k*pp))} на семью`:''}</span></div></div>${macroBar(t)}${personRows(t)}
     <div class="dayacts">${plan.lazy&&plan.lazy[d]?`<span class="lefttag lazytag">😴 Лёгкий день: всё быстрое</span>${plan.lazyPrev&&plan.lazyPrev.d===d?`<button class="minibtn" data-act="lazyundo">↩︎ Вернуть</button>`:''}`:`<button class="minibtn" data-act="lazy" data-id="${d}">😴 Сегодня лень</button>`}</div></div>`;
     plan.slots.forEach((s,i)=>{ if(s.d!==d||s.hidden) return; const r=s.r&&RMAP[s.r]; const lbl=MEALMAP[s.m].short;
@@ -862,6 +918,7 @@ function renderWeek(){
       html+=`<div class="meal" data-act="open" data-id="${r.id}"${!s.left&&plan.slots.some(x=>x.src===i)?' data-x="2"':''}>${photo(r,'thumb')}<div class="mi"><div class="mlabel">${lbl}</div><div class="mt">${esc(r.t)}</div><div class="mm">${mealMeta(r)}</div>${s.left?(s.c2?'<span class="lefttag">🍲 вчерашнее — только разогреть</span>':'<span class="lefttag">📦 из остатков ужина</span>'):''}${!s.left&&plan.slots.some(x=>x.src===i)?'<span class="lefttag c2tag">🍲 готовим на 2 дня · ×2 порции</span>':''}${s.auto?`<span class="lefttag">${s.prot?'💪 добавлено для белка':'🍎 добавлено для сытости'}</span>`:''}${!s.left&&S.A.styles.includes('fast')&&!quickOk(r)?`<span class="lefttag">⏱ дольше ${FAST_MAX}${NB}мин</span>`:''}${!s.left&&(s.m==='l'||s.m==='d')&&kidNote(r)?`<span class="lefttag">👶 ${kidNote(r)}</span>`:''}</div>
       <div class="mbtns"><button class="swap" data-act="swap" data-i="${i}" aria-label="Заменить">${ICON.swap}Заменить</button>${s.auto?`<button class="swap rm" data-act="rmauto" data-i="${i}" aria-label="Убрать перекус">${ICON.close}Убрать</button>`:`<button class="swap dl" data-act="dislikedish" data-id="${r.id}" data-i="${i}" aria-label="Не понравилось"><span class="em">👎</span>Не моё</button>`}</div></div>`; });
   });
+  if(lkStart>=0){ const nl=days.length-1; html=html.slice(0,lkStart)+`<div class="lockwrap" data-act="paywall"><div class="lockov"><b>🔒 Ещё ${nl} ${plural(nl,'день','дня','дней')} меню</b><span>в полном доступе на ${PAYMENT.days} дней</span><span class="btn sm">Открыть за ${rub(PAYMENT.price)}</span></div><div class="lockin" aria-hidden="true">`+html.slice(lkStart)+`</div></div>`; }
   html+=`<p class="foot">КБЖУ — на одну взрослую порцию (×N — рекомендуемая порция едока), по таблицам состава продуктов. Нормы — ориентир, не медицинская рекомендация. ${priceNote()}</p>`;
   return html;
 }
@@ -915,7 +972,8 @@ function renderProfile(){
    ['Питание',a.diets.includes('none')?'Без ограничений':listNames(a.diets,DIETS),'q6'],['Любимые кухни',listNames(a.cuisines,CUISINES),'q6'],['Формат',listNames(a.styles,STYLES),'q7'],['Готовое из магазина',a.ready===false?'Не покупать':'Иногда, до 1 в день','q7'],['Домашний фастфуд',(FF_OPTS.find(o=>o[0]===(a.ff||'some'))||FF_OPTS[1])[1],'q7'],['Готовим на 2 дня',a.cook2?'Да, ужин → обед завтра':'Нет','q7'],
    ['Аллергии',a.allergies.includes('none')?'Нет':listNames(a.allergies,ALLERGENS),'q8'],['Не любите',a.dislikes.map(id=>DISLIKES.find(d=>d[0]===id)[1]).join(', ')||'—','q9'],
    ['Есть дома',a.pantry.length?a.pantry.map(k=>shortName(ING[k].name).toLowerCase()).join(', '):'—','q10'],['Бюджет',rub(a.budget)+' / неделя','q11']];
-  return `<h1>Профиль</h1><p class="sub">Ваши ответы. Нажмите на строку, измените и нажмите «Сохранить» — план пересоберётся.</p>
+  const u=paidUntil(), acc=PAY_OFF?'':`<div class="card accrow" style="padding:4px 16px;margin-bottom:12px"><div class="prow"${hasAccess()?'':' data-act="pay" style="cursor:pointer"'}><span class="k">Доступ${PAYMENT.mode==='test'?' <span class="pw-test sm">тест</span>':''}</span><span class="v">${hasAccess()?`<b class="acc-ok">до ${ddmm(u)}</b>`:(u?`закончился ${ddmm(u)} · <b class="acc-buy">продлить</b>`:`<b class="acc-buy">открыть за ${rub(PAYMENT.price)}</b>`)}</span></div>${hasAccess()?`<div class="prow" data-act="pay" style="cursor:pointer"><span class="k">Продлить ещё на ${PAYMENT.days} дней</span><span class="v">${rub(PAYMENT.price)} <span class="mut">›</span></span></div>`:''}${PAYMENT.mode==='test'&&u?'<div class="prow" data-act="paytestreset" style="cursor:pointer"><span class="k mut">Сбросить тестовый доступ</span><span class="v mut">›</span></div>':''}</div>`;
+  return `<h1>Профиль</h1><p class="sub">Ваши ответы. Нажмите на строку, измените и нажмите «Сохранить» — план пересоберётся.</p>${acc}
   <div class="card" style="padding:4px 16px">${rows.map(r=>`<div class="prow" data-act="${r[2]==='city'?'city':'edit'}" data-id="${r[2]}" style="cursor:pointer"><span class="k">${r[0]}</span><span class="v">${esc(r[1])} <span class="mut">›</span></span></div>`).join('')}
   <div class="prow" data-act="badlist" style="cursor:pointer"><span class="k">Скрытые блюда 👎</span><span class="v">${(a.bad||[]).length||'—'} <span class="mut">›</span></span></div></div>
   <button class="shopcard" data-act="fbsend" data-id="fb_gen" data-l="общий отзыв" style="margin-top:14px"><span class="ic">💬</span><div style="flex:1;min-width:0"><div class="t">Оставить отзыв</div><div class="s">Что понравилось, что улучшить — напишите в бот @${BOT_NAME}</div></div><span class="mut">›</span></button>
@@ -988,7 +1046,17 @@ document.addEventListener('click',e=>{
   const el=e.target.closest('[data-act]'); if(!el) return;
   const act=el.dataset.act, id=el.dataset.id, a=S.A;
   if(HAP_SEL.has(act)) hap('sel'); else if(HAP_TAP.has(act)) hap('light');
+  if(isLockedAct(act,el,id)){ e.stopPropagation(); hap('warn'); paywallModal(); return; }
   switch(act){
+  case 'paywall': break;
+  case 'pay': payStart(); break;
+  case 'paytest': { const base=hasAccess()?paidUntil().getTime():Date.now(); grantAccess(new Date(base+PAYMENT.days*864e5).toISOString()); break; }
+  case 'paytestreset': ACC={}; saveAcc(); render(); toast('Тестовый доступ сброшен'); break;
+  case 'paylive': { const inp=document.getElementById('payemail'); const em=(inp&&inp.value||'').trim();
+    if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(em)){ toast('Укажите почту для чека'); if(inp) inp.focus(); break; }
+    el.disabled=true; el.textContent='Создаём платёж…'; payLive(em).catch(err=>{ el.disabled=false; el.textContent='Перейти к оплате'; toast('Не получилось создать платёж: '+err.message); }); break; }
+  case 'paycheck': checkAccess().then(ok=>{ if(ok) grantAccess(ACC.until); else toast('Оплата ещё не подтверждена — подождите немного'); }).catch(()=>toast('Нет связи с сервером')); break;
+  case 'paycancel': closeModal(); break;
   case 'go': go(el.dataset.to); break;
   case 'continue': go(STEPS.includes(S.screen)?S.screen:'q1'); break;
   case 'goapp': set({screen:'app'}); break;
@@ -1108,4 +1176,4 @@ const _go=go; go=function(sc){ searchQ=''; _go(sc); };
 document.title=APP_NAME+' — план питания на неделю';
 if(inTG){ try{ applyTheme(); TG.onEvent('themeChanged',applyTheme); if(tgv('6.1')) TG.BackButton.onClick(goBack); if(tgv('7.7')&&TG.disableVerticalSwipes) TG.disableVerticalSwipes(); document.documentElement.classList.add('tg'); }catch(e){ console.warn(e); } }
 if(S.screen==='loading') loadingRun=false;
-loadPrices().then(render);
+loadPrices().then(()=>{ render(); initPay(); });

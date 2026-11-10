@@ -4,3 +4,7 @@ __pycache__/
 tools/_probe*.mjs
 tools/_dump.mjs
 tools/_chk.mjs
+server/.venv/
+server/*.sqlite*
+server/.env
+.pytest_cache/

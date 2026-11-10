@@ -1,0 +1,14 @@
+[Unit]
+Description=Kastryulka API (YooKassa payments)
+After=network-online.target
+
+[Service]
+User=kastr
+WorkingDirectory=/opt/kastryulka/server
+EnvironmentFile=/opt/kastryulka/server/.env
+ExecStart=/opt/kastryulka/server/.venv/bin/uvicorn app:app --host 127.0.0.1 --port 8090 --proxy-headers
+Restart=always
+RestartSec=3
+
+[Install]
+WantedBy=multi-user.target
